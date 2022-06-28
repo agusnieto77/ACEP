@@ -5,8 +5,6 @@
 #' @examples
 #' diccionarios
 #'
-#'
-#'
 
 dicc_conflictos <- strsplit(readLines("./R/dicc/dicc_conflictos.txt"),
                             split = ', ', fixed=T)[[1]]

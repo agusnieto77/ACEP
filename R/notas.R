@@ -3,8 +3,6 @@
 #' @examples
 #' notas
 #'
-#'
-#'
 
 notas <- readRDS("./R/data/notas_rev_puerto.rds")
 
