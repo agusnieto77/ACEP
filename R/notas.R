@@ -5,8 +5,9 @@
 #'
 #'
 #'
-require(magrittr)
-require(lubridate)
-require(dplyr)
 
-notas <- readRDS(url("https://estudiosmaritimossociales.org/modulo_3/notas_rev_puerto.rds","rb")) %>% mutate(fecha = dmy(fecha)) %>% distinct(link, .keep_all = TRUE)
+notas <- readRDS("./R/data/notas_rev_puerto.rds")
+
+notas <- notas[!duplicated(notas[,c('link')]),]
+
+notas$fecha <- as.Date(notas$fecha, format = '%d/%m/%Y')
