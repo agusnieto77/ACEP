@@ -1,7 +1,7 @@
 #' @title Colección de notas de la Revista Puerto.
 #' @description Función que carga más de 8000 notas sobre cuestiones pesqueras para el período 2009-2021.
 #' @examples
-#' notas
+#' notas <- notas
 #'
 
 notas <- readRDS("./R/data/notas_rev_puerto.rds")

@@ -14,9 +14,7 @@ notas
 Función que carga más de 8000 notas sobre cuestiones pesqueras para el período 2009-2021.
 }
 \examples{
-notas
-
-
+notas <- notas
 
 }
 \keyword{datasets}
