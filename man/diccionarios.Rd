@@ -18,8 +18,8 @@ dicc_conflictos y dicc_violencia fueron extraídos de Albrieu y Palazzo (2020).
 \examples{
 dicc_conflictos <- diccionarios$dicc_conflictos
 dicc_violencia <-diccionarios$dicc_violencia
-
-Bibliografía
-- Albrieu, Ramiro, y Gabriel Palazzo. 2020. «Categorización de conflictos sociales en el ámbito de los recursos naturales: un estudio de las actividades extractivas mediante la minería de textos». Revista CEPAL (131):29-59.
+}
+\references{
+Albrieu, Ramiro, y Gabriel Palazzo. 2020. «Categorización de conflictos sociales en el ámbito de los recursos naturales: un estudio de las actividades extractivas mediante la minería de textos». Revista CEPAL (131):29-59.
 }
 \keyword{datasets}
