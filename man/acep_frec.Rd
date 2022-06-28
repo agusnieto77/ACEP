@@ -17,6 +17,6 @@ acep_frec(x, y, tolower = TRUE)
 Función que cuenta la frecuencia de menciones de palabras que refieren a conflictos en cada una de las notas/textos.
 }
 \examples{
-notas$conflictos <- acep_frec(notas$nota, dicc_violencia)
+notas$conflictos <- acep_frec(notas$nota, diccionarios$dicc_violencia)
 
 }
