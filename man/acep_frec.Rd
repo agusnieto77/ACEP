@@ -2,20 +2,16 @@
 % Please edit documentation in R/acep_frec.R
 \name{acep_frec}
 \alias{acep_frec}
-\title{Frecuencia de menciones de palabras.}
+\title{Frecuencia de palabras totales.}
 \usage{
-acep_frec(x, y, tolower = TRUE)
+acep_frec(x)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la función de conteo de la frecuencia de menciones de palabras del diccionario.}
-
-\item{y}{vector de palabras del diccionario utilizado.}
-
-\item{tolower}{convierte los textos a minúsculas.}
+\item{x}{vector de textos al que se le aplica la función de conteo de la frecuencia de palabras.}
 }
 \description{
-Función que cuenta la frecuencia de menciones de palabras que refieren a conflictos en cada una de las notas/textos.
+Función que cuenta la frecuencia de palabras totales en cada una de las notas/textos.
 }
 \examples{
-rev_puerto$conflictos <- acep_frec(rev_puerto$nota, diccionarios$dicc_violencia)
+rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
 }
