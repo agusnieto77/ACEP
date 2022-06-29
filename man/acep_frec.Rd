@@ -18,5 +18,4 @@ Función que cuenta la frecuencia de menciones de palabras que refieren a confli
 }
 \examples{
 rev_puerto$conflictos <- acep_frec(rev_puerto$nota, diccionarios$dicc_violencia)
-
 }

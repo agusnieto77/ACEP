@@ -5,7 +5,6 @@
 #' @param tolower convierte los textos a minúsculas.
 #' @examples
 #' rev_puerto$conflictos <- acep_frec(rev_puerto$nota, diccionarios$dicc_violencia)
-#'
 
 acep_frec <- function(x,y,tolower = TRUE) {
   dicc = paste0(y, collapse = '|')
@@ -15,3 +14,4 @@ acep_frec <- function(x,y,tolower = TRUE) {
     sapply(gregexpr(dicc, x), function(z) sum(z != -1))
   }
 }
+
