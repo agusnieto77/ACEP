@@ -4,7 +4,7 @@
 #' @param y vector de palabras del diccionario utilizado.
 #' @param tolower convierte los textos a minúsculas.
 #' @examples
-#' notas$conflictos <- acep_frec(notas$nota, diccionarios$dicc_violencia)
+#' rev_puerto$conflictos <- acep_frec(rev_puerto$nota, diccionarios$dicc_violencia)
 #'
 
 acep_frec <- function(x,y,tolower = TRUE) {
