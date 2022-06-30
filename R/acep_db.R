@@ -1,9 +1,9 @@
 #' @title Frecuencia, menciones e intensidad
-#' @description Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
+#' @description Funcion que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: numero de palabras, numero de menciones del diccionario, indice de intensidad.
 #' @param db data frame con los textos a procesar.
 #' @param t columna de data frame que contiene el vector de textos a procesar.
 #' @param d diccionario en formato vector.
-#' @param n cantidad de decimales del índice de intensidad.
+#' @param n cantidad de decimales del indice de intensidad.
 #' @examples
 #' rp_procesada <- acep_db(rev_puerto, rev_puerto$nota, diccionarios$dicc_viol_gp, 4)
 
