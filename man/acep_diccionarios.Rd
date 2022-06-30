@@ -3,7 +3,7 @@
 \docType{data}
 \name{acep_diccionarios}
 \alias{acep_diccionarios}
-\title{Coleccion de diccionarios.}
+\title{Colección de diccionarios.}
 \format{
 An object of class \code{list} of length 2.
 }
@@ -11,13 +11,13 @@ An object of class \code{list} of length 2.
 acep_diccionarios
 }
 \description{
-Coleccion de diccionarios que reune diccionarios de diferentes origenes. Los diccionarios dicc_confl_gp y dicc_viol_gp fueron extraidos de Albrieu y Palazzo (2020).
+Colección de diccionarios que reúne diccionarios de diferentes orígenes. Los diccionarios dicc_confl_gp y dicc_viol_gp fueron extraidos de Albrieu y Palazzo (2020).
 }
 \examples{
 dicc_confl_gp <- acep_diccionarios$dicc_confl_gp
 dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
 }
 \references{
-Albrieu, Ramiro, y Gabriel Palazzo. 2020. «Categorizacion de conflictos sociales en el ambito de los recursos naturales: un estudio de las actividades extractivas mediante la mineria de textos». Revista CEPAL (131):29-59.
+Albrieu, Ramiro, y Gabriel Palazzo 2020 «Categorización de conflictos sociales en el ámbito de los recursos naturales: un estudio de las actividades extractivas mediante la minería de textos». Revista CEPAL (131):29-59.
 }
 \keyword{datasets}

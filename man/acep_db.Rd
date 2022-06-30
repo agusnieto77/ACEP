@@ -13,11 +13,11 @@ acep_db(db, t, d, n)
 
 \item{d}{diccionario en formato vector.}
 
-\item{n}{cantidad de decimales del indice de intensidad.}
+\item{n}{cantidad de decimales del índice de intensidad.}
 }
 \description{
-Funcion que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: numero de palabras, numero de menciones del diccionario, indice de intensidad.
+Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
 }
 \examples{
-rp_procesada <- acep_db(rev_puerto, rev_puerto$nota, diccionarios$dicc_viol_gp, 4)
+rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
 }

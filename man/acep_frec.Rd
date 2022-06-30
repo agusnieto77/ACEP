@@ -7,11 +7,11 @@
 acep_frec(x)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la funcion de conteo de la frecuencia de palabras.}
+\item{x}{vector de textos al que se le aplica la función de conteo de la frecuencia de palabras.}
 }
 \description{
-Funcion que cuenta la frecuencia de palabras totales en cada una de las notas/textos.
+Función que cuenta la frecuencia de palabras totales en cada una de las notas/textos.
 }
 \examples{
-rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
+acep_bases$rev_puerto$n_palabras <- acep_frec(acep_bases$rev_puerto$nota)
 }
