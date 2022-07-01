@@ -11,9 +11,14 @@ devtools::install_github("agusnieto77/ACEP")
 
 ### Funciones
 
-`acep_bases`	       Colección de notas
-`acep_db`	           Frecuencia, menciones e intensidad
+`acep_bases`	       Colección de notas.
+
+`acep_db`	           Frecuencia, menciones e intensidad.
+
 `acep_diccionarios`	 Colección de diccionarios.
+
 `acep_frec`	         Frecuencia de palabras totales.
+
 `acep_int`	         Índice de intensidad.
+
 `acep_men`	         Frecuencia de menciones de palabras.
