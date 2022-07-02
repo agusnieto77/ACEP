@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_rst.R
 \name{acep_rst}
 \alias{acep_rst}
-\title{Serie temporal de índices de conflictividad}
+\title{Serie temporal de índices de conflictividad.}
 \usage{
 acep_rst(datos, fecha, frecp, frecm, st = "mes", d = 4)
 }

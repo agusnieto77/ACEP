@@ -19,6 +19,7 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_frec()`|Frecuencia de palabras totales.|
 |`acep_int()`|Índice de intensidad.|
 |`acep_men()`|Frecuencia de menciones de palabras.|
+|`acep_rst()`|Serie temporal de índices de conflictividad.|
 
 ### Colecciones
 

@@ -1,4 +1,4 @@
-#' @title Serie temporal de índices de conflictividad
+#' @title Serie temporal de índices de conflictividad.
 #' @description Función que devuelve los índices de conflictividad agrupados por segmento de tiempo: día, mes, año.
 #' @param datos data frame con los textos a procesar.
 #' @param fecha columna de data frame que contiene el vector de fechas en formato date.
