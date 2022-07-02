@@ -1,4 +1,4 @@
-#' @title Frecuencia, menciones e intensidad
+#' @title Frecuencia, menciones e intensidad.
 #' @description Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
 #' @param db data frame con los textos a procesar.
 #' @param t columna de data frame que contiene el vector de textos a procesar.

@@ -3,7 +3,7 @@
 \docType{data}
 \name{acep_bases}
 \alias{acep_bases}
-\title{Colección de notas}
+\title{Colección de notas.}
 \format{
 An object of class \code{list} of length 2.
 }

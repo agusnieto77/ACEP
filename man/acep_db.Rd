@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_db.R
 \name{acep_db}
 \alias{acep_db}
-\title{Frecuencia, menciones e intensidad}
+\title{Frecuencia, menciones e intensidad.}
 \usage{
 acep_db(db, t, d, n)
 }

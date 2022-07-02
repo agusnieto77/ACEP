@@ -1,4 +1,4 @@
-#' @title Colección de notas
+#' @title Colección de notas.
 #' @description Contiene colecciones de notas de distintos portales noticiosos. Una colección es de notas de la Revista Puerto de Mar del Plata, Argentina. Es una base de datos en formato tabular con 7816 observaciones y 6 variables: fecha, titulo, bajada, nota, imagen, link.
 #' Una segunda colección es de notas del periódico bahiense La Nueva. Es una base de datos en formato tabular con 3889 observaciones y 7 variables: fecha, seccion, titulo, bajada, nota, link, img_link.
 #' @examples
