@@ -37,7 +37,8 @@ require(ACEP)
 # Cargamos la base de notas de la Revista Puerto
 rev_puerto <- acep_bases$rev_puerto
 
-# Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una nueva columna llamada  n_palabras
+# Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
+# nueva columna llamada  n_palabras
 rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
 
 # Imprimimos en pantalla la base
@@ -58,7 +59,8 @@ rev_puerto
 10 2020-12-21 La flota amarilla cierra el año… Puert… "El … https… http…       1056
 # … with 7,806 more rows
 
-# Ahora con la función acep_men() contamos la frecuencia de menciones de términos del diccionario de conflictividad de SISMOS de cada nota y creamos una nueva columna llamada  conflictos
+# Ahora con la función acep_men() contamos la frecuencia de menciones de términos del
+# diccionario de conflictividad de SISMOS de cada nota y creamos una nueva columna llamada  conflictos
 rev_puerto$conflictos <- acep_men(rev_puerto$nota, acep_diccionarios$dicc_confl_sismos)
 
 # Imprimimos en pantalla la base con la nueva columna de menciones del diccionario de conflictividad
@@ -79,7 +81,8 @@ rev_puerto
 10 2020-12-21 La flota amarilla ci… Puert… "El … https… http…       1056          4
 # … with 7,806 more rows
 
-# Ahora con la función acep_int() calculamos un índice de intensidad de la conflictividad y creamos una nueva columna llamada  intensidad
+# Ahora con la función acep_int() calculamos un índice de intensidad de la conflictividad y creamos una
+# nueva columna llamada  intensidad
 rev_puerto$intensidad <- acep_int(rev_puerto$conflictos, rev_puerto$n_palabras, 3)
 
 # Imprimimos en pantalla la base con la nueva columna de intensidad
