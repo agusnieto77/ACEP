@@ -10,5 +10,5 @@
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
 #' head_la_nueva <- head(acep_bases$la_nueva, 50)
-#' \donttest{head(acep_bases$rev_puerto}
+#' \donttest{acep_bases$rev_puerto |> dplyr::select(fecha,titulo) |> head()}
 "acep_bases"
