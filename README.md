@@ -106,7 +106,7 @@ rev_puerto
 10 2020-12-21 La flota … Puert… "El … https… http…       1056          4      0.004
 # … with 7,806 more rows
 
-# Ahora con la función acep_db() las tres funciones en un solo paso
+# Ahora con la función acep_db() usamos las tres funciones en un solo paso
 rp_procesada <- acep_db(rev_puerto, rev_puerto$nota, dicc_confl_sismos, 3)
 
 # Imprimimos en pantalla la base con las tres columna creadas
@@ -126,6 +126,44 @@ rev_puerto
  9 2020-12-21 El CFP pr… En la… "Ant… https… http…       1434          3      0.002
 10 2020-12-21 La flota … Puert… "El … https… http…       1056          4      0.004
 # … with 7,806 more rows
-```
 
+# Ahora con la función acep_rst() elaboramos un resumen estadístico
+rp_procesada <- acep_rst(rp_procesada, rp_procesada$fecha, rp_procesada$n_palabras, 
+                         rp_procesada$conflictos, st = 'anio', u = 4)
+
+# Imprimimos en pantalla la base con las tres columna creadas
+rp_procesada
+
+# A tibble: 12 × 8
+   st    frecn   csn  frecp frecm intac intensidad int_notas_confl
+   <chr> <int> <dbl>  <int> <int> <dbl>      <dbl>           <dbl>
+ 1 2009    632   215 496110  2688  3.61     0.0054           0.340
+ 2 2010    680   219 492231  2598  3.89     0.0053           0.322
+ 3 2011    601   189 425747  2234  3.29     0.0052           0.314
+ 4 2012    739   301 564270  3710  4.99     0.0066           0.407
+ 5 2013    689   190 525718  2388  3.15     0.0045           0.276
+ 6 2014    631   170 444823  2175  3.20     0.0049           0.269
+ 7 2015    620   151 409791  1977  3.12     0.0048           0.244
+ 8 2016    675   165 454776  2095  3.38     0.0046           0.244
+ 9 2017    637   128 433212  1765  2.76     0.0041           0.201
+10 2018    639   157 422204  2136  3.55     0.0051           0.246
+11 2019    637   122 426511  1628  2.69     0.0038           0.192
+12 2020    636   150 427276  1926  2.98     0.0045           0.236
+
+# Ahora con la función acep_plot_st() elaboramos un gráfico de barras 
+# con el índice de intensidad acumulada
+acep_plot_st(rp_procesada$st, rp_procesada$int_notas_confl,
+             t = 'Evolución de la conflictividad en el sector pesquero argentino',
+             ejex = 'Años analizados',
+             ejey = 'Menciones de términos del diccionario de conflictos',
+             etiquetax = 'horizontal')
+```
+<img src="man/figures/intensidad.png" align='center' width='100%'/>
+
+``` r
+# Ahora con la función acep_plot_rst() elaboramos una visualización resumen
+# con cuatro gráficos de barras 
+acep_plot_rst(rp_procesada, tagx = 'vertical')
+```
+<img src="man/figures/resumen.png" align='center' width='100%'/>
 
