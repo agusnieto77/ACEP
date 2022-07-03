@@ -8,7 +8,7 @@
 #' @source \href{https://revistapuerto.com.ar/}{Revista Puerto}
 #' @source \href{https://www.lanueva.com/}{La Nueva}
 #' @examples
-#' rev_puerto <- acep_bases$rev_puerto
-#' head_la_nueva <- head(acep_bases$la_nueva, 50)
+#' la_nueva <- acep_bases$la_nueva
+#' head(la_nueva[,c(1,3)], 10)
 #' \donttest{acep_bases$rev_puerto |> dplyr::select(fecha,titulo) |> head()}
 "acep_bases"

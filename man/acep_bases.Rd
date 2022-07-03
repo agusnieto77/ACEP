@@ -20,8 +20,8 @@ Contiene colecciones de notas de distintos portales noticiosos. Una colección e
 Una segunda colección es de notas del periódico bahiense La Nueva. Es una base de datos en formato tabular con 3889 observaciones y 7 variables: fecha, seccion, titulo, bajada, nota, link, img_link.
 }
 \examples{
-rev_puerto <- acep_bases$rev_puerto
-head_la_nueva <- head(acep_bases$la_nueva, 50)
+la_nueva <- acep_bases$la_nueva
+head(la_nueva[,c(1,3)], 10)
 \donttest{acep_bases$rev_puerto |> dplyr::select(fecha,titulo) |> head()}
 }
 \references{
