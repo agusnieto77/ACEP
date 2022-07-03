@@ -151,14 +151,14 @@ rp_procesada
 12 2020    636   150 427276  1926  2.98     0.0045           0.236
 
 # Ahora con la función acep_plot_st() elaboramos un gráfico de barras 
-# con el índice de intensidad acumulada
-acep_plot_st(rp_procesada$st, rp_procesada$int_notas_confl,
+# con menciones del diccionario de conflictividad
+acep_plot_st(rp_procesada$st, rp_procesada$frecm,
              t = 'Evolución de la conflictividad en el sector pesquero argentino',
              ejex = 'Años analizados',
              ejey = 'Menciones de términos del diccionario de conflictos',
              etiquetax = 'horizontal')
 ```
-<img src="man/figures/intensidad.png" align='center' width='100%'/>
+<img src="man/figures/indicadores.png" align='center' width='100%'/>
 
 ``` r
 # Ahora con la función acep_plot_rst() elaboramos una visualización resumen
