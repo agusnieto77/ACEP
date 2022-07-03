@@ -1,5 +1,5 @@
-#' @title Serie temporal de índices de conflictividad.
-#' @description Función que devuelve los índices de conflictividad agrupados por segmento de tiempo: día, mes, año.
+#' @title Gráfico de barras de la serie temporal de índices de conflictividad.
+#' @description Función que devuelve un gráfico de barras con la serie temporal de índices de conflictividad por día, mes o año.
 #' @param x vector de valores del eje x (por ejemplo, fechas).
 #' @param y vector de valores numéricos del eje y (por ejemplo, menciones).
 #' @param t titulo del gráfico.

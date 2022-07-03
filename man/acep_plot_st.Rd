@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_plot_st.R
 \name{acep_plot_st}
 \alias{acep_plot_st}
-\title{Serie temporal de índices de conflictividad.}
+\title{Gráfico de barras de la serie temporal de índices de conflictividad.}
 \usage{
 acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 }
@@ -20,7 +20,7 @@ acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 \item{etiquetax}{orientación de las etiquetas del eje x ('horizontal' | 'vertical').}
 }
 \description{
-Función que devuelve los índices de conflictividad agrupados por segmento de tiempo: día, mes, año.
+Función que devuelve un gráfico de barras con la serie temporal de índices de conflictividad por día, mes o año.
 }
 \examples{
 datos <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
