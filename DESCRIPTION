@@ -3,10 +3,10 @@ Type: Package
 Title: Análisis Computacional de Eventos de Protesta (ACEP).
 Version: 0.0.1
 Author: Agustin Nieto
-Maintainer: Agustin Nieto <agustin.nieto77@gmail.com>
-Description: La libreria ACEP contiene funciones especificas para desarrollar analisis computacional de eventos de protesta. Asimismo, contiene base de datos con colecciones de notas sobre protestas y diccionarios de palabras conflictivas. Coleccion de diccionarios que reune diccionarios de diferentes origenes. Los diccionarios dicc_confl_gp y dicc_viol_gp fueron extraidos de Albrieu y Palazzo (2020) «Categorizacion de conflictos sociales en el ambito de los recursos naturales: un estudio de las actividades extractivas mediante la mineria de textos». Revista CEPAL (131):29-59.
-License: Creative Commons Zero v1.0 Universal
+Description: La librería ACEP contiene funciones específicas para desarrollar análisis computacional de eventos de protesta. Asimismo, contiene base de datos con colecciones de notas sobre protestas y diccionarios de palabras conflictivas. Colección de diccionarios que reune diccionarios de diferentes origenes.
+License: MIT + file LICENSE
 Encoding: UTF-8
+Language: es
 LazyData: true
 RoxygenNote: 7.2.0
 URL: https://github.com/agusnieto77/ACEP
