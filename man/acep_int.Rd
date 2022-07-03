@@ -17,5 +17,11 @@ acep_int(pc, pt, decimales = 4)
 Función que elabora un indice de intensidad en base a la relación entre palabras totales y palabras del diccionario presentes en el texto.
 }
 \examples{
-acep_bases$rev_puerto$intensidad <- acep_int(acep_bases$rev_puerto$conflictos, acep_bases$rev_puerto$n_palabras, 3)
+rev_puerto <- acep_bases$rev_puerto
+dicc_violencia <- acep_diccionarios$dicc_viol_gp
+rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
+rev_puerto$conflictos <- acep_men(rev_puerto$nota, dicc_violencia)
+rev_puerto$intensidad <- acep_int(rev_puerto$conflictos, rev_puerto$n_palabras, 3)
+rev_puerto |> head()
 }
+\keyword{indicadores}

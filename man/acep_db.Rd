@@ -20,4 +20,6 @@ Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tab
 }
 \examples{
 rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
+rp_procesada |> head()
 }
+\keyword{indicadores}

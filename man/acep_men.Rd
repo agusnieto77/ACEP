@@ -17,5 +17,9 @@ acep_men(x, y, tolower = TRUE)
 Función que cuenta la frecuencia de menciones de palabras que refieren a conflictos en cada una de las notas/textos.
 }
 \examples{
-acep_bases$rev_puerto$conflictos <- acep_men(acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp)
+rev_puerto <- acep_bases$rev_puerto
+dicc_violencia <- acep_diccionarios$dicc_viol_gp
+rev_puerto$conflictos <- acep_men(rev_puerto$nota, dicc_violencia)
+rev_puerto |> head()
 }
+\keyword{indicadores}

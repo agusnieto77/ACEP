@@ -28,4 +28,4 @@ head(la_nueva[,c(1,3)], 10)
 Nieto, Agustín 2020 «Intersecciones entre historia digital e historia social: un ejercicio de lectura distante sobre la conflictividad marítima en la historia argentina reciente». Drassana: revista del Museu Maritim (28):122-42.
 (\href{https://revistadrassana.cat/index.php/Drassana/article/view/650/765}{Revista Drassana})
 }
-\keyword{datasets}
+\keyword{datos}

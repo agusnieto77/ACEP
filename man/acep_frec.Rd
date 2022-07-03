@@ -13,5 +13,8 @@ acep_frec(x)
 Función que cuenta la frecuencia de palabras totales en cada una de las notas/textos.
 }
 \examples{
-acep_bases$rev_puerto$n_palabras <- acep_frec(acep_bases$rev_puerto$nota)
+rev_puerto <- acep_bases$rev_puerto
+rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
+rev_puerto |> head()
 }
+\keyword{indicadores}

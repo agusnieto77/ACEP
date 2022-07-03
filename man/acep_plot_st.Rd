@@ -23,7 +23,9 @@ acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 Función que devuelve un gráfico de barras con la serie temporal de índices de conflictividad por día, mes o año.
 }
 \examples{
-datos <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
+rev_puerto <- acep_bases$rev_puerto
+dicc_violencia <- acep_diccionarios$dicc_viol_gp
+datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
 datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'anio')
 acep_plot_st(datos_procesados_anio$st, datos_procesados_anio$frecm,
              t = 'Evolución de la conflictividad en el sector pesquero argentino',
@@ -31,3 +33,4 @@ acep_plot_st(datos_procesados_anio$st, datos_procesados_anio$frecm,
              ejey = 'Menciones de términos del diccionario de conflictos',
              etiquetax = 'horizontal')
 }
+\keyword{visualización}

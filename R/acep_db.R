@@ -4,8 +4,10 @@
 #' @param t columna de data frame que contiene el vector de textos a procesar.
 #' @param d diccionario en formato vector.
 #' @param n cantidad de decimales del índice de intensidad.
+#' @keywords indicadores
 #' @examples
 #' rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
+#' rp_procesada |> head()
 
 acep_db <- function(db, t, d, n){
   db = db

@@ -6,8 +6,11 @@
 #' @param ejex nombre del eje x.
 #' @param ejey nombre del eje y.
 #' @param etiquetax orientación de las etiquetas del eje x ('horizontal' | 'vertical').
+#' @keywords visualización
 #' @examples
-#' datos <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
+#' rev_puerto <- acep_bases$rev_puerto
+#' dicc_violencia <- acep_diccionarios$dicc_viol_gp
+#' datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
 #' datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'anio')
 #' acep_plot_st(datos_procesados_anio$st, datos_procesados_anio$frecm,
 #'              t = 'Evolución de la conflictividad en el sector pesquero argentino',

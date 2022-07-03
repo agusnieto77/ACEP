@@ -3,8 +3,12 @@
 #' @param x vector de textos al que se le aplica la función de conteo de la frecuencia de menciones de palabras del diccionario.
 #' @param y vector de palabras del diccionario utilizado.
 #' @param tolower convierte los textos a minúsculas.
+#' @keywords indicadores
 #' @examples
-#' acep_bases$rev_puerto$conflictos <- acep_men(acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp)
+#' rev_puerto <- acep_bases$rev_puerto
+#' dicc_violencia <- acep_diccionarios$dicc_viol_gp
+#' rev_puerto$conflictos <- acep_men(rev_puerto$nota, dicc_violencia)
+#' rev_puerto |> head()
 
 acep_men <- function(x,y,tolower = TRUE) {
   dicc = paste0(y, collapse = '|')

@@ -7,6 +7,7 @@
 #' (\href{https://revistadrassana.cat/index.php/Drassana/article/view/650/765}{Revista Drassana})
 #' @source \href{https://revistapuerto.com.ar/}{Revista Puerto}
 #' @source \href{https://www.lanueva.com/}{La Nueva}
+#' @keywords datos
 #' @examples
 #' la_nueva <- acep_bases$la_nueva
 #' head(la_nueva[,c(1,3)], 10)

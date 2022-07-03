@@ -7,11 +7,17 @@
 #' @param st parámetro para establecer el segmento temporal a ser agrupado: anio, mes, dia.
 #' @param u umbral de menciones para contabilizar una nota como nota que refiere a un conflicto.
 #' @param d cantidad de decimales, por defecto tiene 4 pero se puede modificar.
+#' @keywords resumen
 #' @examples
-#' datos <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
+#' rev_puerto <- acep_bases$rev_puerto
+#' dicc_violencia <- acep_diccionarios$dicc_viol_gp
+#' datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
 #' datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'anio', u = 4)
 #' datos_procesados_mes <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos)
 #' datos_procesados_dia <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'dia', d = 3)
+#' datos_procesados_anio |> head()
+#' datos_procesados_mes |> head()
+#' datos_procesados_dia |> head()
 
 acep_rst <- function(datos, fecha, frecp, frecm, st = 'mes', u = 2, d = 4) {
   datos = datos
