@@ -8,3 +8,4 @@
 #' rev_puerto |> head()
 
 acep_frec <- function(x){sapply(strsplit(x, ' '), length)}
+
