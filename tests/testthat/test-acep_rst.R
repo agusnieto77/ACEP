@@ -1,6 +1,6 @@
 context("test-acep_rst")
 
-test_that("ACEP RST", {
+test_that("ACEP RST ANIO", {
   skip_if_offline()
   skip_on_cran()
   rev_puerto <- acep_bases$rev_puerto
@@ -11,3 +11,13 @@ test_that("ACEP RST", {
   expect_equal(dimensiones, 12)
 })
 
+test_that("ACEP RST MES", {
+  skip_if_offline()
+  skip_on_cran()
+  rev_puerto <- acep_bases$rev_puerto
+  dicc_violencia <- acep_diccionarios$dicc_viol_gp
+  datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
+  datos_procesados_mes <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos)
+  dimensiones <- length(datos_procesados_mes$st)
+  expect_equal(dimensiones, 142)
+})
