@@ -3,6 +3,7 @@
 #' @param db data frame con datos procesados.
 #' @param tagx orientación de las etiquetas del eje x ('horizontal' | 'vertical').
 #' @export acep_plot_rst
+#' @importFrom graphics par
 #' @keywords visualización
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
@@ -14,7 +15,7 @@
 
 acep_plot_rst <- function(db, tagx = 'horizontal') {
   db = db
-  par(mfrow = c(2, 2))
+  graphics::par(mfrow = c(2, 2))
   acep_plot_st(db$st, db$int_notas_confl, t = 'Eventos de protesta', etiquetax = tagx)
   acep_plot_st(db$st, db$frecm, t = 'Acciones de protesta', etiquetax = tagx)
   acep_plot_st(db$st, db$intensidad, t = 'Intensidad de la protesta', etiquetax = tagx)

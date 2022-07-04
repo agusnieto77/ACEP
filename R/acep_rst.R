@@ -8,6 +8,7 @@
 #' @param u umbral de menciones para contabilizar una nota como nota que refiere a un conflicto.
 #' @param d cantidad de decimales, por defecto tiene 4 pero se puede modificar.
 #' @export acep_rst
+#' @importFrom stats aggregate
 #' @keywords resumen
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
@@ -27,12 +28,12 @@ acep_rst <- function(datos, fecha, frecp, frecm, st = 'mes', u = 2, d = 4) {
   datos$dia <- fecha
   datos$csn <- ifelse(datos$conflictos > u, 1, 0)
   st = if(st == 'anio') {st = datos$anio} else if(st == 'mes') {st = datos$mes} else if(st == 'dia') {st = datos$dia}
-  frec_notas <- aggregate(st, by = list(st), FUN = length)
+  frec_notas <- stats::aggregate(st, by = list(st), FUN = length)
   colnames(frec_notas) <- c('st','frecn')
-  frec_notas_conf <- aggregate(csn ~ st, datos, function(x) c(frec_notas_conf = sum(x)))
-  frec_palabras <- aggregate(frecp ~ st, datos, function(x) c(frec_palabras = sum(x)))
-  frec_conflict <- aggregate(frecm ~ st, datos, function(x) c(frec_conflict = sum(x)))
-  frec_int_acum <- aggregate(intensidad ~ st, datos, function(x) c(frec_int_acum = sum(x)))
+  frec_notas_conf <- stats::aggregate(csn ~ st, datos, function(x) c(frec_notas_conf = sum(x)))
+  frec_palabras <- stats::aggregate(frecp ~ st, datos, function(x) c(frec_palabras = sum(x)))
+  frec_conflict <- stats::aggregate(frecm ~ st, datos, function(x) c(frec_conflict = sum(x)))
+  frec_int_acum <- stats::aggregate(intensidad ~ st, datos, function(x) c(frec_int_acum = sum(x)))
   colnames(frec_int_acum) <- c('st','intac')
   frec_pal_con <- merge(frec_notas, merge(frec_notas_conf, merge(frec_palabras, merge(frec_conflict,frec_int_acum))))
   frec_pal_con$intensidad <- acep_int(frec_pal_con$frecm, frec_pal_con$frecp, decimales = d)

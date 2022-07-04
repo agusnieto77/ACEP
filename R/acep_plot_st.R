@@ -7,6 +7,7 @@
 #' @param ejey nombre del eje y.
 #' @param etiquetax orientación de las etiquetas del eje x ('horizontal' | 'vertical').
 #' @export acep_plot_st
+#' @importFrom graphics title barplot
 #' @keywords visualización
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
@@ -31,6 +32,6 @@ acep_plot_st <- function(x, y, t = '', ejex = '', ejey = '', etiquetax = 'horizo
                      col = "pink",
                      density = 70,
                      las = etiquetax)
-  title(xlab = ejex, line=-0.1, cex.lab = 1.0)
-  title(ylab = ejey, line=-1.0, cex.lab = 1.0)
+  graphics::title(xlab = ejex, line=-0.1, cex.lab = 1.0)
+  graphics::title(ylab = ejey, line=-1.0, cex.lab = 1.0)
 }
