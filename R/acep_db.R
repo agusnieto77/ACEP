@@ -7,8 +7,10 @@
 #' @keywords indicadores
 #' @export acep_db
 #' @examples
-#' rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
-#' rp_procesada |> head()
+#' rev_puerto <- acep_bases$rev_puerto
+#' dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
+#' rpp <- acep_db(rev_puerto, rev_puerto$nota, dicc_viol_gp, 4)
+#' rpp |> head()
 
 acep_db <- function(db, t, d, n){
   db = db

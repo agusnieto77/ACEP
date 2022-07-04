@@ -9,7 +9,10 @@
 #' rev_puerto <- acep_bases$rev_puerto
 #' dicc_violencia <- acep_diccionarios$dicc_viol_gp
 #' datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
-#' datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'anio')
+#' fecha <- datos$fecha
+#' n_palabras <- datos$n_palabras
+#' conflictos <- datos$conflictos
+#' datos_procesados_anio <- acep_rst(datos, fecha, n_palabras, conflictos, st = 'anio')
 #' acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 
 

@@ -19,7 +19,9 @@ acep_db(db, t, d, n)
 Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
 }
 \examples{
-rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
-rp_procesada |> head()
+rev_puerto <- acep_bases$rev_puerto
+dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
+rpp <- acep_db(rev_puerto, rev_puerto$nota, dicc_viol_gp, 4)
+rpp |> head()
 }
 \keyword{indicadores}
