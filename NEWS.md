@@ -1,3 +1,3 @@
 # ACEP 0.0.1
 
-* Added a `NEWS.md` file to track changes to the package.
+* Se ha añadido un archivo `NEWS.md` para seguir los cambios en el paquete.

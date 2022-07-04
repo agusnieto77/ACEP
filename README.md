@@ -1,5 +1,9 @@
 ## ACEP: Análisis Computacional de Eventos de Protesta<img src="man/figures/logo.png" align="right" height="139"/>
 
+  <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
+  <!-- badges: end -->
+
 ### Visión general
 
 ACEP es un paquete de funciones en lenguaje R útiles para la detección y el análisis de eventos de protesta en corpus de textos periodísticos.
@@ -166,4 +170,3 @@ acep_plot_st(rp_procesada$st, rp_procesada$frecm,
 acep_plot_rst(rp_procesada, tagx = 'vertical')
 ```
 <img src="man/figures/resumen.png" align='center' width='100%'/>
-
