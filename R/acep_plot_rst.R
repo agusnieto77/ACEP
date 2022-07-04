@@ -2,6 +2,7 @@
 #' @description Función que devuelve un panel visual de cuatro gráficos de barras con variables proxy de los índices de conflictividad agrupados por segmento de tiempo.
 #' @param db data frame con datos procesados.
 #' @param tagx orientación de las etiquetas del eje x ('horizontal' | 'vertical').
+#' @export acep_plot_rst
 #' @keywords visualización
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto

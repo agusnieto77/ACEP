@@ -3,6 +3,7 @@
 #' @param pc vector numérico con la frecuencia de palabras conflictivas presentes en cada texto.
 #' @param pt vector de palabras totales en cada texto.
 #' @param decimales cantidad de decimales, por defecto tiene 4 pero se puede modificar.
+#' @export acep_int
 #' @keywords indicadores
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto

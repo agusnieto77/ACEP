@@ -6,6 +6,7 @@
 #' @param ejex nombre del eje x.
 #' @param ejey nombre del eje y.
 #' @param etiquetax orientación de las etiquetas del eje x ('horizontal' | 'vertical').
+#' @export acep_plot_st
 #' @keywords visualización
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto

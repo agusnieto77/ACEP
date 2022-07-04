@@ -3,6 +3,7 @@
 #' @param x vector de textos al que se le aplica la función de conteo de la frecuencia de menciones de palabras del diccionario.
 #' @param y vector de palabras del diccionario utilizado.
 #' @param tolower convierte los textos a minúsculas.
+#' @export acep_men
 #' @keywords indicadores
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto

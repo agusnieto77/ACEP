@@ -7,6 +7,7 @@
 #' @param st parámetro para establecer el segmento temporal a ser agrupado: anio, mes, dia.
 #' @param u umbral de menciones para contabilizar una nota como nota que refiere a un conflicto.
 #' @param d cantidad de decimales, por defecto tiene 4 pero se puede modificar.
+#' @export acep_rst
 #' @keywords resumen
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto

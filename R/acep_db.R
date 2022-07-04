@@ -5,6 +5,7 @@
 #' @param d diccionario en formato vector.
 #' @param n cantidad de decimales del índice de intensidad.
 #' @keywords indicadores
+#' @export acep_db
 #' @examples
 #' rp_procesada <- acep_db(acep_bases$rev_puerto, acep_bases$rev_puerto$nota, acep_diccionarios$dicc_viol_gp, 4)
 #' rp_procesada |> head()
