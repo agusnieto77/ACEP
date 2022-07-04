@@ -2,8 +2,6 @@
 
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
-  <!-- badges: end -->
-  <!-- badges: start -->
   [![R-CMD-check](https://github.com/agusnieto77/ACEP/workflows/R-CMD-check/badge.svg)](https://github.com/agusnieto77/ACEP/actions)
   <!-- badges: end -->
 
