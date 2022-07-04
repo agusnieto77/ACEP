@@ -22,7 +22,6 @@ Una segunda colección es de notas del periódico bahiense La Nueva. Es una base
 \examples{
 la_nueva <- acep_bases$la_nueva
 head(la_nueva[,c(1,3)], 10)
-\donttest{acep_bases$rev_puerto |> dplyr::select(fecha,titulo) |> head()}
 }
 \references{
 Nieto, Agustín 2020 «Intersecciones entre historia digital e historia social: un ejercicio de lectura distante sobre la conflictividad marítima en la historia argentina reciente». Drassana: revista del Museu Maritim (28):122-42.
