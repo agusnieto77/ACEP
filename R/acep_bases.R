@@ -11,4 +11,5 @@
 #' @examples
 #' la_nueva <- acep_bases$la_nueva
 #' head(la_nueva[,c(1,3)], 10)
+
 "acep_bases"
