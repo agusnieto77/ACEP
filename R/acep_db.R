@@ -7,7 +7,7 @@
 #' @keywords indicadores
 #' @export acep_db
 #' @examples
-#' rev_puerto <- acep_load_base('rp_mdp')
+#' rev_puerto <- acep_bases$rev_puerto
 #' dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
 #' rpp <- acep_db(rev_puerto, rev_puerto$nota, dicc_viol_gp, 4)
 #' rpp |> head()

@@ -6,7 +6,7 @@
 #' @export acep_men
 #' @keywords indicadores
 #' @examples
-#' rev_puerto <- acep_load_base('rp_mdp')
+#' rev_puerto <- acep_bases$rev_puerto
 #' dicc_violencia <- acep_diccionarios$dicc_viol_gp
 #' rev_puerto$conflictos <- acep_men(rev_puerto$nota, dicc_violencia)
 #' rev_puerto |> head()

@@ -13,6 +13,6 @@ acep_load_base(tag)
 Función para cargar bases de datos disponibles online. Por ahora están disponibles las siguientes bases: Revista Puerto 'rp_mdp'; La Nueva 'ln_bb'
 }
 \examples{
-acep_load_base('rp_mdp') |> head()
+\dontrun{acep_load_base('rp_mdp') |> head()}
 }
 \keyword{datos}

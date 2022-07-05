@@ -4,8 +4,11 @@
 #' @keywords datos
 #' @export acep_load_base
 #' @examples
-#' acep_load_base('rp_mdp') |> head()
+#' \dontrun{acep_load_base('rp_mdp') |> head()}
 
 acep_load_base <- function(tag){
   return(readRDS(url(paste0("https://zenodo.org/record/6795998/files/", tag,".rds"),"rb")))
-}
+  }
+
+
+

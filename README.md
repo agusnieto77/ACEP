@@ -23,6 +23,7 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_db()`	|Frecuencia, menciones e intensidad.|
 |`acep_frec()`|Frecuencia de palabras totales.|
 |`acep_int()`|Índice de intensidad.|
+|`acep_load_base()`|Carga bases de datos creadas por el Observatorio.|
 |`acep_men()`|Frecuencia de menciones de palabras.|
 |`acep_post_rst()`|Resumen visual de la serie temporal de los índices de conflictividad.|
 |`acep_post_st()`|Gráfico de barras de la serie temporal de índices de conflictividad.|
@@ -43,7 +44,7 @@ devtools::install_github("agusnieto77/ACEP")
 require(ACEP)
 
 # Cargamos la base de notas de la Revista Puerto
-rev_puerto <- acep_bases$rev_puerto
+rev_puerto <- acep_load_base('rp_mdp')
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
 # nueva columna llamada  n_palabras
