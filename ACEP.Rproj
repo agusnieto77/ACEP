@@ -18,5 +18,5 @@ StripTrailingWhitespace: Yes
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
-PackageBuildArgs: R CMD build --resave-data
+PackageBuildArgs: --resave-data
 PackageRoxygenize: rd,collate,namespace,vignette

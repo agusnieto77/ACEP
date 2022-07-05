@@ -3,6 +3,7 @@
 export(acep_db)
 export(acep_frec)
 export(acep_int)
+export(acep_load_base)
 export(acep_men)
 export(acep_plot_rst)
 export(acep_plot_st)

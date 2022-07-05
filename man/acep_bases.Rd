@@ -5,7 +5,7 @@
 \alias{acep_bases}
 \title{Colección de notas.}
 \format{
-An object of class \code{list} of length 2.
+An object of class \code{list} of length 3.
 }
 \source{
 \href{https://revistapuerto.com.ar/}{Revista Puerto}
@@ -16,12 +16,12 @@ An object of class \code{list} of length 2.
 data(acep_bases)
 }
 \description{
-Contiene colecciones de notas de distintos portales noticiosos. Una colección es de notas de la Revista Puerto de Mar del Plata, Argentina. Es una base de datos en formato tabular con 7816 observaciones y 6 variables: fecha, titulo, bajada, nota, imagen, link.
-Una segunda colección es de notas del periódico bahiense La Nueva. Es una base de datos en formato tabular con 3889 observaciones y 7 variables: fecha, seccion, titulo, bajada, nota, link, img_link.
+Contiene colecciones de notas de distintos portales noticiosos (una muestra pequeña). Una segunda colección es de notas del periódico bahiense La Nueva.
+También tiene resúmenes estadísticos de las bases completas para el desarrollo de los ejemplos de las funciones.
 }
 \examples{
 la_nueva <- acep_bases$la_nueva
-head(la_nueva[,c(1,3)], 10)
+head(la_nueva, 10)
 }
 \references{
 Nieto, Agustín 2020 «Intersecciones entre historia digital e historia social: un ejercicio de lectura distante sobre la conflictividad marítima en la historia argentina reciente». Drassana: revista del Museu Maritim (28):122-42.

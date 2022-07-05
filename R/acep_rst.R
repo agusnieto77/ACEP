@@ -11,9 +11,7 @@
 #' @importFrom stats aggregate
 #' @keywords resumen
 #' @examples
-#' rev_puerto <- acep_bases$rev_puerto
-#' dicc_violencia <- acep_diccionarios$dicc_viol_gp
-#' datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
+#' datos <- acep_bases$rp_procesada
 #' fecha <- datos$fecha
 #' n_palabras <- datos$n_palabras
 #' conflictos <- datos$conflictos

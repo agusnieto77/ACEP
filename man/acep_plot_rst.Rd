@@ -15,9 +15,7 @@ acep_plot_rst(db, tagx = "horizontal")
 Función que devuelve un panel visual de cuatro gráficos de barras con variables proxy de los índices de conflictividad agrupados por segmento de tiempo.
 }
 \examples{
-rev_puerto <- acep_bases$rev_puerto
-dicc_violencia <- acep_diccionarios$dicc_viol_gp
-datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
+datos <- acep_bases$rp_procesada
 fecha <- datos$fecha
 n_palabras <- datos$n_palabras
 conflictos <- datos$conflictos
