@@ -60,15 +60,21 @@ devtools::install_github("agusnieto77/ACEP")
 # Cargamos la librería
 require(ACEP)
 
+# Cargamos la etiqueta de la base a descargar
+rp_mdp <- acep_bases$rp_mdp
+
 # Cargamos la base de notas de la Revista Puerto
-rev_puerto <- acep_load_base(acep_bases$rp_mdp)
+revista_puerto <- acep_load_base(rp_mdp)
+
+# Cargamos el diccionario de conflictos de SISMOS
+dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
 # nueva columna llamada  n_palabras
-rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
+revista_puerto$n_palabras <- acep_frec(revista_puerto$nota)
 
-# Imprimimos en pantalla la base
-rev_puerto
+# Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
+revista_puerto
 
 # A tibble: 7,816 × 7
    fecha      titulo                           bajada nota  imagen link  n_palabras
@@ -87,10 +93,10 @@ rev_puerto
 
 # Ahora con la función acep_men() contamos la frecuencia de menciones de términos del
 # diccionario de conflictividad de SISMOS de cada nota y creamos una nueva columna llamada  conflictos
-rev_puerto$conflictos <- acep_men(rev_puerto$nota, acep_diccionarios$dicc_confl_sismos)
+revista_puerto$conflictos <- acep_men(revista_puerto$nota, dicc_confl_sismos)
 
 # Imprimimos en pantalla la base con la nueva columna de menciones del diccionario de conflictividad
-rev_puerto
+revista_puerto
 
 # A tibble: 7,816 × 8
    fecha      titulo                bajada nota  imagen link  n_palabras conflictos
@@ -109,10 +115,10 @@ rev_puerto
 
 # Ahora con la función acep_int() calculamos un índice de intensidad de la conflictividad y creamos una
 # nueva columna llamada  intensidad
-rev_puerto$intensidad <- acep_int(rev_puerto$conflictos, rev_puerto$n_palabras, 3)
+revista_puerto$intensidad <- acep_int(revista_puerto$conflictos, revista_puerto$n_palabras, 3)
 
 # Imprimimos en pantalla la base con la nueva columna de intensidad
-rev_puerto
+revista_puerto
 
 # A tibble: 7,816 × 9
    fecha      titulo     bajada nota  imagen link  n_palabras conflictos intensidad
@@ -129,11 +135,14 @@ rev_puerto
 10 2020-12-21 La flota … Puert… "El … https… http…       1056          4      0.004
 # … with 7,806 more rows
 
-# Ahora con la función acep_db() usamos las tres funciones en un solo paso
-rp_procesada <- acep_db(rev_puerto, rev_puerto$nota, dicc_confl_sismos, 3)
+# Volvemos a cargar la base de notas de la Revista Puerto sin procesar
+revista_puerto <- acep_load_base(rp_mdp)
+
+# Ahora con la función acep_db() aplicamos las tres funciones en un solo paso
+rp_procesada <- acep_db(revista_puerto, revista_puerto$nota, dicc_confl_sismos, 3)
 
 # Imprimimos en pantalla la base con las tres columna creadas
-rev_puerto
+rp_procesada
 
 # A tibble: 7,816 × 9
    fecha      titulo     bajada nota  imagen link  n_palabras conflictos intensidad
