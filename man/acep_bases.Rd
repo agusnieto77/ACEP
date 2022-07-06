@@ -5,7 +5,7 @@
 \alias{acep_bases}
 \title{Colección de notas.}
 \format{
-An object of class \code{list} of length 7.
+An object of class \code{list} of length 8.
 }
 \source{
 \href{https://revistapuerto.com.ar/}{Revista Puerto}

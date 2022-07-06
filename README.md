@@ -3,6 +3,7 @@
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
   [![R-CMD-check](https://github.com/agusnieto77/ACEP/workflows/R-CMD-check/badge.svg)](https://github.com/agusnieto77/ACEP/actions)
+  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800706.svg)](https://doi.org/10.5281/zenodo.6800706)
   <!-- badges: end -->
 
 ### Visión general
@@ -35,6 +36,22 @@ devtools::install_github("agusnieto77/ACEP")
 |:---|:------|
 |`acep_bases`|Colección de notas.|
 |`acep_diccionarios`|Colección de diccionarios.|
+
+### Bases de datos
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg)](https://doi.org/10.5281/zenodo.6800663) Colección de notas del diario ***La Nación***
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800765.svg)](https://doi.org/10.5281/zenodo.6800765) Subset de notas del diario ***La Nación***
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800617.svg)](https://doi.org/10.5281/zenodo.6800617) Colección de notas del ***Ecos Diarios***
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800637.svg)](https://doi.org/10.5281/zenodo.6800637) Colección de notas de la ***Revista Puerto***
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800650.svg)](https://doi.org/10.5281/zenodo.6800650) Colección de notas del diario ***La Nueva***
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg)](https://doi.org/10.5281/zenodo.6800660) Colección de notas del diario ***La Capital***
+
+
 
 ### Uso de las funciones
 
