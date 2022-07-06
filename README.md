@@ -61,7 +61,7 @@ devtools::install_github("agusnieto77/ACEP")
 require(ACEP)
 
 # Cargamos la base de notas de la Revista Puerto
-rev_puerto <- acep_load_base('rp_mdp')
+rev_puerto <- acep_load_base(acep_bases$rp_mdp)
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
 # nueva columna llamada  n_palabras
