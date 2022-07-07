@@ -88,10 +88,7 @@ devtools::install_github("agusnieto77/ACEP")
 
 [MGP](https://datos.mardelplata.gob.ar/): Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires, Argentina.
 
-
-
 ### Uso de las funciones del paquete ACEP: un ejemplo.
-
 
 ``` r
 # Cargamos la librería
