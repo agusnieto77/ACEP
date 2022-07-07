@@ -4,6 +4,15 @@
   [![Codecov test coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
   [![R-CMD-check](https://github.com/agusnieto77/ACEP/workflows/R-CMD-check/badge.svg)](https://github.com/agusnieto77/ACEP/actions)
   [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800706.svg)](https://doi.org/10.5281/zenodo.6800706)
+  [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+  [![](https://img.shields.io/badge/devel%20version-0.0.1.9000-blue.svg)](https://github.com/agusnieto77/ACEP)
+  
+  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
+  [![](https://img.shields.io/github/languages/code-size/agusnieto77/ACEP.svg)](https://github.com/agusnieto77/ACEP)
+  [![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+  [![](https://img.shields.io/badge/Build%20with-R%20&%20RStudio-blue?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
+  [![](https://img.shields.io/badge/ACEP-ready%20to%20use-color:%20#39c?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
+  [![](https://img.shields.io/badge/Developed%20by-SISMOS-darkred?style=plastic=appveyor)](https://observatoriodeconflictividad.org/el-pulso-de-la-conflictividad-en-tiempo-real/)
   <!-- badges: end -->
 
 ### Visión general
@@ -37,7 +46,7 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_bases`|Colección de notas.|
 |`acep_diccionarios`|Colección de diccionarios.|
 
-### Bases de datos
+### Corpus
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg)](https://doi.org/10.5281/zenodo.6800663) Colección de notas del diario ***La Nación***
 
@@ -51,16 +60,45 @@ devtools::install_github("agusnieto77/ACEP")
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg)](https://doi.org/10.5281/zenodo.6800660) Colección de notas del diario ***La Capital***
 
+### Bases de datos de Eventos de protesta disponibles online
+
+[ACLED](https://acleddata.com/#/dashboard): Armed Conflict Location & Event Data Project.
+
+[GDELT](https://www.gdeltproject.org/): The GDELT Project About. 
+
+[GPT](https://carnegieendowment.org/publications/interactive/protest-tracker#): Global Protest Tracker.
+
+[MMPD](https://dataverse.harvard.edu/dataverse/MMdata): Mass Mobilization Protest Data Project.
+
+[NAVCO](https://dataverse.harvard.edu/dataverse/navco): Nonviolent and Violent Campaigns and Outcomes data project. 
+
+[NVCO](https://nvdatabase.swarthmore.edu/): Global Nonviolent Action Database. 
+
+[SCAD](https://www.strausscenter.org/ccaps-research-areas/social-conflict/database/): Social Conflict Analysis Database.
+
+[SPEED](https://clinecenter.illinois.edu/project/human-loop-event-data-projects/SPEED): The Social, Political and Economic Event Database Project.
+
+[UCDP](https://www.pcr.uu.se/research/ucdp/): Uppsala Conflict Data Program. 
 
 
-### Uso de las funciones
+### Bases de datos de interés general
+
+[BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco Mundial.
+
+[DARG](https://www.datos.gob.ar/): Datos abiertos de Argentina.
+
+[MGP](https://datos.mardelplata.gob.ar/): Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires, Argentina.
+
+
+
+### Uso de las funciones del paquete ACEP: un ejemplo.
 
 
 ``` r
 # Cargamos la librería
 require(ACEP)
 
-# Cargamos la base de notas de la Revista Puerto
+# Cargamos la base de notas de la Revista Puerto con la función acep_load_base()
 rev_puerto <- acep_load_base(acep_bases$rp_mdp)
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
