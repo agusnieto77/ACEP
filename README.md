@@ -80,7 +80,6 @@ devtools::install_github("agusnieto77/ACEP")
 
 [UCDP](https://www.pcr.uu.se/research/ucdp/): Uppsala Conflict Data Program. 
 
-
 ### Bases de datos de interés general
 
 [BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco Mundial.
