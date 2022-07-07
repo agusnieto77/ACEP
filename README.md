@@ -84,6 +84,8 @@ devtools::install_github("agusnieto77/ACEP")
 
 [BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco Mundial.
 
+[CEPAL](https://www.cepal.org/es/datos-y-estadisticas): Datos y estadísticas.
+
 [DARG](https://www.datos.gob.ar/): Datos abiertos de Argentina.
 
 [MGP](https://datos.mardelplata.gob.ar/): Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires, Argentina.
