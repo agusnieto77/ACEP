@@ -99,10 +99,9 @@ devtools::install_github("agusnieto77/ACEP")
 # Cargamos la librería
 require(ACEP)
 
-<<<<<<< HEAD
 # Cargamos la base de notas de la Revista Puerto con la función acep_load_base()
 rev_puerto <- acep_load_base(acep_bases$rp_mdp)
-=======
+
 # Cargamos la etiqueta de la base a descargar
 rp_mdp <- acep_bases$rp_mdp
 
@@ -111,7 +110,6 @@ revista_puerto <- acep_load_base(rp_mdp)
 
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
->>>>>>> a300cf071ca0e775acb508d9f85f35129129f8de
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
 # nueva columna llamada  n_palabras
