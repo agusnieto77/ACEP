@@ -81,7 +81,11 @@ devtools::install_github("agusnieto77/ACEP")
 
 ### Bases de datos de interés general
 
+[FMI](https://data.imf.org/?sk=388dfa60-1d26-4ade-b505-a05a558d9a42): FMI Data.
+
 [BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco Mundial.
+
+[OIT](https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm): Estadísticas y bases de datos.
 
 [CEPAL](https://www.cepal.org/es/datos-y-estadisticas): Datos y estadísticas.
 
