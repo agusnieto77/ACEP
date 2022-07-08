@@ -3,7 +3,8 @@ Type: Package
 Title: Análisis Computacional de Eventos de Protesta
 Version: 0.0.1
 Authors@R: person("Agustín", "Nieto", email = "agustin.nieto77@gmail.com", role = c("aut", "cre"))
-Description: La librería ACEP contiene funciones específicas para desarrollar análisis computacional de eventos de protesta. Asimismo, contiene base de datos con colecciones de notas sobre protestas y diccionarios de palabras conflictivas. Colección de diccionarios que reune diccionarios de diferentes origenes.
+Description: La librería 'ACEP' contiene funciones específicas para desarrollar análisis computacional de eventos de protesta. Asimismo, contiene base de datos con colecciones de notas sobre protestas y diccionarios de palabras conflictivas. Colección de diccionarios que reune diccionarios de diferentes origenes.
+             The 'ACEP' library contains specific functions to perform computational analysis of protest events. It also contains a database with collections of notes on protests and dictionaries of conflicting words. Collection of dictionaries that brings together dictionaries from different sources.
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -12,7 +13,7 @@ LazyData: true
 RoxygenNote: 7.2.0
 URL: https://github.com/agusnieto77/ACEP
 BugReports: https://github.com/agusnieto77/ACEP/issues
-Import:
+Imports:
     graphics,
     stats
 Suggests: 

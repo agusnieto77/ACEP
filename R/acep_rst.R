@@ -9,6 +9,7 @@
 #' @param d cantidad de decimales, por defecto tiene 4 pero se puede modificar.
 #' @export acep_rst
 #' @importFrom stats aggregate
+#' @return Si todas las entradas son correctas, la salida será una base de datos en formato tabular con nuevas variables.
 #' @keywords resumen
 #' @examples
 #' datos <- acep_bases$rp_procesada
@@ -21,7 +22,7 @@
 #' datos_procesados_anio |> head()
 #' datos_procesados_mes |> head()
 #' datos_procesados_dia |> head()
-
+#' @export
 acep_rst <- function(datos, fecha, frecp, frecm, st = 'mes', u = 2, d = 4) {
   datos = datos
   datos$anio <- format(fecha,"%Y")

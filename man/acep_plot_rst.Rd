@@ -11,6 +11,9 @@ acep_plot_rst(db, tagx = "horizontal")
 
 \item{tagx}{orientación de las etiquetas del eje x ('horizontal' | 'vertical').}
 }
+\value{
+Si todas las entradas son correctas, la salida será una imagen de cuatro paneles.
+}
 \description{
 Función que devuelve un panel visual de cuatro gráficos de barras con variables proxy de los índices de conflictividad agrupados por segmento de tiempo.
 }

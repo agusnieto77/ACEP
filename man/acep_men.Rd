@@ -13,6 +13,9 @@ acep_men(x, y, tolower = TRUE)
 
 \item{tolower}{convierte los textos a minúsculas.}
 }
+\value{
+Si todas las entradas son correctas, la salida será un vector con una frecuencia de palabras de un diccionario.
+}
 \description{
 Función que cuenta la frecuencia de menciones de palabras que refieren a conflictos en cada una de las notas/textos.
 }

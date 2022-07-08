@@ -13,6 +13,9 @@ acep_int(pc, pt, decimales = 4)
 
 \item{decimales}{cantidad de decimales, por defecto tiene 4 pero se puede modificar.}
 }
+\value{
+Si todas las entradas son correctas, la salida será un vector numérico.
+}
 \description{
 Función que elabora un indice de intensidad en base a la relación entre palabras totales y palabras del diccionario presentes en el texto.
 }

@@ -9,6 +9,9 @@ acep_frec(x)
 \arguments{
 \item{x}{vector de textos al que se le aplica la función de conteo de la frecuencia de palabras.}
 }
+\value{
+Si todas las entradas son correctas, la salida será un vector con una frecuencia de palabras.
+}
 \description{
 Función que cuenta la frecuencia de palabras totales en cada una de las notas/textos.
 }

@@ -15,6 +15,9 @@ acep_db(db, t, d, n)
 
 \item{n}{cantidad de decimales del índice de intensidad.}
 }
+\value{
+Si todas las entradas son correctas, la salida será una base de datos en formato tabular con tres nuevas variables.
+}
 \description{
 Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
 }

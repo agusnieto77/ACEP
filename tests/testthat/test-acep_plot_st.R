@@ -3,13 +3,11 @@ context("test-acep_plot_st")
 test_that("ACEP Plot ST", {
   skip_if_offline()
   skip_on_cran()
-  rev_puerto <- acep_load_base(acep_bases$rp_mdp)
-  dicc_violencia <- acep_diccionarios$dicc_viol_gp
-  datos <- acep_db(rev_puerto, rev_puerto$nota, dicc_violencia, 4)
-  datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'anio')
+  datos <- acep_bases$rp_procesada[1:2000,]
+  datos_procesados_anio <- acep_rst(datos, datos$fecha, datos$n_palabras, datos$conflictos, st = 'mes')
   pst <- acep_plot_st(datos_procesados_anio$st, datos_procesados_anio$frecm,
                 t = 'Evolución de la conflictividad en el sector pesquero argentino',
-                ejex = 'Años analizados',
+                ejex = 'Meses analizados',
                 ejey = 'Menciones de términos del diccionario de conflictos',
                 etiquetax = 'horizontal')
   dimensiones <- length(pst)

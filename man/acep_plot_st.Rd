@@ -19,6 +19,9 @@ acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 
 \item{etiquetax}{orientación de las etiquetas del eje x ('horizontal' | 'vertical').}
 }
+\value{
+Si todas las entradas son correctas, la salida será una imagen de un panel.
+}
 \description{
 Función que devuelve un gráfico de barras con la serie temporal de índices de conflictividad por día, mes o año.
 }

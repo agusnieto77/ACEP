@@ -4,6 +4,7 @@
 #' @param pt vector de palabras totales en cada texto.
 #' @param decimales cantidad de decimales, por defecto tiene 4 pero se puede modificar.
 #' @export acep_int
+#' @return Si todas las entradas son correctas, la salida será un vector numérico.
 #' @keywords indicadores
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
@@ -12,5 +13,5 @@
 #' rev_puerto$conflictos <- acep_men(rev_puerto$nota, dicc_violencia)
 #' rev_puerto$intensidad <- acep_int(rev_puerto$conflictos, rev_puerto$n_palabras, 3)
 #' rev_puerto |> head()
-
+#' @export
 acep_int <- function(pc, pt, decimales = 4){round(pc/pt, decimales)}

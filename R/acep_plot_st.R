@@ -9,6 +9,7 @@
 #' @export acep_plot_st
 #' @importFrom graphics title barplot
 #' @keywords visualización
+#' @return Si todas las entradas son correctas, la salida será una imagen de un panel.
 #' @examples
 #' datos <- acep_bases$rp_procesada
 #' fecha <- datos$fecha
@@ -20,8 +21,7 @@
 #'              ejex = 'Años analizados',
 #'              ejey = 'Menciones de términos del diccionario de conflictos',
 #'              etiquetax = 'horizontal')
-
-
+#' @export
 acep_plot_st <- function(x, y, t = '', ejex = '', ejey = '', etiquetax = 'horizontal') {
   etiquetax = if(etiquetax == 'horizontal') {etiquetax = 0} else if(etiquetax == 'vertical') {etiquetax = 2}
   graphics::barplot (y ~ x,

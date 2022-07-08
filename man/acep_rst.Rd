@@ -21,6 +21,9 @@ acep_rst(datos, fecha, frecp, frecm, st = "mes", u = 2, d = 4)
 
 \item{d}{cantidad de decimales, por defecto tiene 4 pero se puede modificar.}
 }
+\value{
+Si todas las entradas son correctas, la salida será una base de datos en formato tabular con nuevas variables.
+}
 \description{
 Función que devuelve los índices de conflictividad agrupados por segmento de tiempo: día, mes, año.
 }

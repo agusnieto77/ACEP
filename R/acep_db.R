@@ -4,6 +4,7 @@
 #' @param t columna de data frame que contiene el vector de textos a procesar.
 #' @param d diccionario en formato vector.
 #' @param n cantidad de decimales del índice de intensidad.
+#' @return Si todas las entradas son correctas, la salida será una base de datos en formato tabular con tres nuevas variables.
 #' @keywords indicadores
 #' @export acep_db
 #' @examples
@@ -11,7 +12,7 @@
 #' dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
 #' rpp <- acep_db(rev_puerto, rev_puerto$nota, dicc_viol_gp, 4)
 #' rpp |> head()
-
+#' @export
 acep_db <- function(db, t, d, n){
   db = db
   db$n_palabras <- acep_frec(t)

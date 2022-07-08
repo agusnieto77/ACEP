@@ -9,6 +9,9 @@ acep_load_base(tag)
 \arguments{
 \item{tag}{etiqueta identificatoria del data frame a cargar: acep_bases$rp_mdp, acep_bases$ln_bb, acep_bases$lc_mdp, acep_bases$ed_neco, acep_bases$ln_arg}
 }
+\value{
+Si todas las entradas son correctas, la salida será una base de datos en formato tabular con un corpus de notas.
+}
 \description{
 Función para cargar bases de datos disponibles online. Por ahora están disponibles las siguientes bases: Revista Puerto 'rp_mdp'; La Nueva 'ln_bb', La Capital 'lc_mdp', Ecos Diarios 'ed_neco', La Nación 'ln_arg'
 }

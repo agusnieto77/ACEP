@@ -3,7 +3,8 @@
 #' @param tag etiqueta identificatoria del data frame a cargar: acep_bases$rp_mdp, acep_bases$ln_bb, acep_bases$lc_mdp, acep_bases$ed_neco, acep_bases$ln_arg
 #' @keywords datos
 #' @export acep_load_base
+#' @return Si todas las entradas son correctas, la salida será una base de datos en formato tabular con un corpus de notas.
 #' @examples
 #' \dontrun{acep_load_base(tag = acep_bases$rp_mdp) |> head()}
-
+#' @export
 acep_load_base <- function(tag){return(readRDS(url(tag,"rb")))}

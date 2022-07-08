@@ -5,7 +5,12 @@
 \alias{acep_diccionarios}
 \title{Colección de diccionarios.}
 \format{
-An object of class \code{list} of length 3.
+Es un objeto de clase 'list' con 3 componentes.
+\describe{
+\item{dicc_confl_gp}{es un  vector con palabras de un diciconario de términos que refeiren a conflictos}
+\item{dicc_viol_gp}{es un  vector con palabras de un diciconario de términos que refeiren a violencia}
+\item{dicc_confl_sismos}{es un  vector con palabras de un diciconario de términos que refeiren a conflictos}
+}
 }
 \source{
 \href{https://revistapuerto.com.ar/}{Revista Puerto}

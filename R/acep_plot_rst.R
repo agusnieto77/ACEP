@@ -4,6 +4,7 @@
 #' @param tagx orientación de las etiquetas del eje x ('horizontal' | 'vertical').
 #' @export acep_plot_rst
 #' @importFrom graphics par
+#' @return Si todas las entradas son correctas, la salida será una imagen de cuatro paneles.
 #' @keywords visualización
 #' @examples
 #' datos <- acep_bases$rp_procesada
@@ -12,11 +13,12 @@
 #' conflictos <- datos$conflictos
 #' datos_procesados_anio <- acep_rst(datos, fecha, n_palabras, conflictos, st = 'anio')
 #' acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
-
-
+#' @export
 acep_plot_rst <- function(db, tagx = 'horizontal') {
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
   db = db
-  graphics::par(mfrow = c(2, 2))
+  par(mfrow = c(2, 2))
   acep_plot_st(db$st, db$int_notas_confl, t = 'Eventos de protesta', etiquetax = tagx)
   acep_plot_st(db$st, db$frecm, t = 'Acciones de protesta', etiquetax = tagx)
   acep_plot_st(db$st, db$intensidad, t = 'Intensidad de la protesta', etiquetax = tagx)
