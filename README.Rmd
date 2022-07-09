@@ -113,3 +113,26 @@ devtools::install_github("agusnieto77/ACEP")
 [MGP](https://datos.mardelplata.gob.ar/): Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires, Argentina.
 
 ### Uso de las funciones del paquete ACEP: un ejemplo.
+
+
+```{r ejemplo1}
+
+# Cargamos la librería
+require(ACEP)
+
+# Cargamos la base de notas de La Nueva
+la_nueva <- acep_bases$la_nueva
+
+# Imprimimos las primeras 10 filas
+head(la_nueva, 10)
+
+# Cargamos el diccionario de conflictos de SISMOS
+dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
+
+# Con la función acep_frec() contamos la frecuencia de palabras de cada nota y creamos una
+# nueva columna llamada  n_palabras
+la_nueva$n_palabras <- acep_frec(la_nueva$nota)
+
+# Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
+la_nueva
+```
