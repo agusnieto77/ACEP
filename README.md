@@ -28,8 +28,8 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.
 ACEP es un paquete de funciones en lenguaje R útiles para la detección y
 el análisis de eventos de protesta en corpus de textos periodísticos.
 Contiene también base de datos con colecciones de notas sobre protestas
-y diccionarios de palabras conflictivas. Colección de diccionarios que
-reúne diccionarios de diferentes orígenes.
+y una colección de diccionarios de palabras conflictivas y otros tópicos
+referidos a otros aspectos del análisis de eventos protesta.
 
 ### Instalación de la versión en desarrollo
 
