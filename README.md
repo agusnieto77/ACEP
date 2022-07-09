@@ -288,4 +288,100 @@ revista_puerto |> head()
 #> 4 2020-12-24 Los obreros navales despiden … En Ma… "El … https… http…        483
 #> 5 2020-12-23 El incumplimiento del régimen… Se ll… "Las… https… http…        525
 #> 6 2020-12-23 Otro fallo ratifica cautelar … La Cá… "La … https… http…        462
+
+# Ahora con la función acep_men() contamos la frecuencia de menciones de términos del
+# diccionario de conflictividad de SISMOS de cada nota y creamos una nueva columna llamada  conflictos
+revista_puerto <- revista_puerto[1:100,] # elaboramos un corpus más pequeño para el ejemplo
+revista_puerto$conflictos <- acep_men(revista_puerto$nota, dicc_confl_sismos)
+
+# Imprimimos en pantalla la base con la nueva columna de menciones del diccionario de conflictividad
+revista_puerto  |> head()
+#> # A tibble: 6 × 8
+#>   fecha      titulo              bajada nota  imagen link  n_palabras conflictos
+#>   <date>     <chr>               <chr>  <chr> <chr>  <chr>      <int>      <int>
+#> 1 2020-12-29 ¡Feliz Año 2021 pa… Con m… "Con… https… http…         31          0
+#> 2 2020-12-28 Mapa del trabajo e… Un re… "El … https… http…       1128          4
+#> 3 2020-12-24 Plantas piden tene… En Ch… "El … https… http…        530          3
+#> 4 2020-12-24 Los obreros navale… En Ma… "El … https… http…        483          8
+#> 5 2020-12-23 El incumplimiento … Se ll… "Las… https… http…        525          4
+#> 6 2020-12-23 Otro fallo ratific… La Cá… "La … https… http…        462          6
+
+# Ahora con la función acep_int() calculamos un índice de intensidad de la conflictividad y creamos una
+# nueva columna llamada  intensidad
+revista_puerto$intensidad <- acep_int(revista_puerto$conflictos, revista_puerto$n_palabras, 3)
+
+# Imprimimos en pantalla la base con la nueva columna de intensidad
+revista_puerto  |> head()
+#> # A tibble: 6 × 9
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0      0    
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          4      0.004
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          3      0.006
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          8      0.017
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          4      0.008
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          6      0.013
 ```
+
+``` r
+# Volvemos a cargar la base de notas de la Revista Puerto sin procesar
+revista_puerto <- acep_load_base(rp_mdp)
+
+# Creamos un subset
+subset_rp <- revista_puerto[1:100,]
+
+# Cargamos el diccionario de conflictos de SISMOS
+dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
+
+# Ahora con la función acep_db() aplicamos las tres funciones en un solo paso
+rp_procesada <- acep_db(subset_rp, subset_rp$nota, dicc_confl_sismos, 3)
+
+# Imprimimos en pantalla la base con las tres columna creadas
+rp_procesada |> head()
+#> # A tibble: 6 × 9
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0      0    
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          4      0.004
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          3      0.006
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          8      0.017
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          4      0.008
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          6      0.013
+```
+
+``` r
+# Cargamos los datos procesados
+rp_procesada <- acep_bases$rp_procesada
+
+# Ahora con la función acep_rst() elaboramos un resumen estadístico
+rp_procesada <- acep_rst(rp_procesada, rp_procesada$fecha, rp_procesada$n_palabras, 
+                         rp_procesada$conflictos, st = 'anio', u = 4)
+
+# Imprimimos en pantalla la base con las métricas de conflictividad
+rp_procesada |> head()
+#>     st frecn csn  frecp frecm  intac intensidad int_notas_confl
+#> 1 2009   632  58 496110  1025 1.2735     0.0021          0.0918
+#> 2 2010   680  67 492231  1129 1.6273     0.0023          0.0985
+#> 3 2011   601  40 425747   882 1.2204     0.0021          0.0666
+#> 4 2012   739  67 564270  1242 1.6841     0.0022          0.0907
+#> 5 2013   689  24 525718   758 1.0559     0.0014          0.0348
+#> 6 2014   631  30 444823   802 1.2112     0.0018          0.0475
+
+# Ahora con la función acep_plot_st() elaboramos un gráfico de barras 
+# con menciones del diccionario de conflictividad
+acep_plot_st(rp_procesada$st, rp_procesada$frecm,
+             t = 'Evolución de la conflictividad en el sector pesquero argentino',
+             ejex = 'Años analizados',
+             ejey = 'Menciones de términos del diccionario de conflictos',
+             etiquetax = 'horizontal')
+```
+
+<img src="man/figures/README-ejemplo3-1.png" width="100%" />
+
+``` r
+# Ahora con la función acep_plot_rst() elaboramos una visualización resumen
+# con cuatro gráficos de barras 
+acep_plot_rst(rp_procesada, tagx = 'vertical')
+```
+
+<img src="man/figures/README-ejemplo3-2.png" width="100%" />
