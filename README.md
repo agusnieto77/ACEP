@@ -139,12 +139,31 @@ require(ACEP)
 la_nueva <- acep_bases$la_nueva
 
 # Imprimimos las primeras 10 filas
-head(la_nueva, 20) |> DT::datatable()
-```
+head(la_nueva, 20) |> tibble::as_tibble()
+#> # A tibble: 20 × 3
+#>    fecha      titulo                                                       nota 
+#>    <date>     <chr>                                                        <chr>
+#>  1 2022-01-15 "Llevan 36 horas sin energía por un cable suelto y EDES cal… "Vec…
+#>  2 2022-01-15 "Explotó un generador que EDES colocó en el centro de la ci… "Mom…
+#>  3 2022-01-15 "Amenazaron a trabajadores de ABSA en el barrio Stella Mari… "Tra…
+#>  4 2022-01-15 "Intenso calor y falta de lluvia, el combo ideal para los i… "Las…
+#>  5 2022-01-15 "Investigan un incendio que destruyó un automóvil"           "La …
+#>  6 2022-01-15 "Con la ola de contagios, ¿cuándo vuelven las clases?"       "Por…
+#>  7 2022-01-15 "Pavimento que estalla: ¿a qué se deben las roturas?"        "Aud…
+#>  8 2022-01-15 "¿Cuánto falta para que la pandemia llegue a su fin y pase … "Aud…
+#>  9 2022-01-14 "Vecinos del barrio Patagonia piden que avance una obra en … "La …
+#> 10 2022-01-14 "Otra renuncia en el Municipio: se va Karina Mahon"          "La …
+#> 11 2022-01-14 "Bomberos tuvieron que apagar un incendio en un balcón"      "Bom…
+#> 12 2022-01-14 "Romera: \"Dichiara se equivoca, no es lo mismo ser intende… "El …
+#> 13 2022-01-14 "Los 43,6 grados no alcanzaron para el récord, pero la marc… "Mar…
+#> 14 2022-01-14 "Cortaron 20 metros de un cableado de teléfonos: los detuvi… "Est…
+#> 15 2022-01-14 "Hospitalizaron a un nene de 4 años que tomó aguarrás por e… "Est…
+#> 16 2022-01-14 "Arrestaron a un hombre tras robar una moto estacionada en … "Un …
+#> 17 2022-01-14 "Atropellaron a un hombre que se manifestaba por los cortes… "Un …
+#> 18 2022-01-14 "Pérdidas totales en el incendio de una casa en Spurr"       "Una…
+#> 19 2022-01-14 "Caluroso, pero no tanto como ayer: así estará el tiempo es… "Des…
+#> 20 2022-01-13 "Se prendió fuego una subestación de EDES en pleno centro"   "Una…
 
-<img src="man/figures/README-ejemplo1-1.png" width="100%" />
-
-``` r
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 
@@ -153,7 +172,28 @@ dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 la_nueva$n_palabras <- acep_frec(la_nueva$nota)
 
 # Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
-head(la_nueva, 20) |> DT::datatable()
+head(la_nueva, 20) |> tibble::as_tibble()
+#> # A tibble: 20 × 4
+#>    fecha      titulo                                            nota  n_palabras
+#>    <date>     <chr>                                             <chr>      <int>
+#>  1 2022-01-15 "Llevan 36 horas sin energía por un cable suelto… "Vec…        208
+#>  2 2022-01-15 "Explotó un generador que EDES colocó en el cent… "Mom…         97
+#>  3 2022-01-15 "Amenazaron a trabajadores de ABSA en el barrio … "Tra…        176
+#>  4 2022-01-15 "Intenso calor y falta de lluvia, el combo ideal… "Las…        815
+#>  5 2022-01-15 "Investigan un incendio que destruyó un automóvi… "La …        115
+#>  6 2022-01-15 "Con la ola de contagios, ¿cuándo vuelven las cl… "Por…        742
+#>  7 2022-01-15 "Pavimento que estalla: ¿a qué se deben las rotu… "Aud…        810
+#>  8 2022-01-15 "¿Cuánto falta para que la pandemia llegue a su … "Aud…       1029
+#>  9 2022-01-14 "Vecinos del barrio Patagonia piden que avance u… "La …        274
+#> 10 2022-01-14 "Otra renuncia en el Municipio: se va Karina Mah… "La …        112
+#> 11 2022-01-14 "Bomberos tuvieron que apagar un incendio en un … "Bom…         73
+#> 12 2022-01-14 "Romera: \"Dichiara se equivoca, no es lo mismo … "El …        428
+#> 13 2022-01-14 "Los 43,6 grados no alcanzaron para el récord, p… "Mar…        689
+#> 14 2022-01-14 "Cortaron 20 metros de un cableado de teléfonos:… "Est…        146
+#> 15 2022-01-14 "Hospitalizaron a un nene de 4 años que tomó agu… "Est…        109
+#> 16 2022-01-14 "Arrestaron a un hombre tras robar una moto esta… "Un …        121
+#> 17 2022-01-14 "Atropellaron a un hombre que se manifestaba por… "Un …        208
+#> 18 2022-01-14 "Pérdidas totales en el incendio de una casa en … "Una…        123
+#> 19 2022-01-14 "Caluroso, pero no tanto como ayer: así estará e… "Des…        167
+#> 20 2022-01-13 "Se prendió fuego una subestación de EDES en ple… "Una…         67
 ```
-
-<img src="man/figures/README-ejemplo1-2.png" width="100%" />

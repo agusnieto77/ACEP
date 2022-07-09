@@ -124,7 +124,7 @@ require(ACEP)
 la_nueva <- acep_bases$la_nueva
 
 # Imprimimos las primeras 10 filas
-head(la_nueva, 20) |> DT::datatable()
+head(la_nueva, 20) |> tibble::as_tibble()
 
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
@@ -134,6 +134,6 @@ dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 la_nueva$n_palabras <- acep_frec(la_nueva$nota)
 
 # Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
-head(la_nueva, 20) |> DT::datatable()
+head(la_nueva, 20) |> tibble::as_tibble()
 
 ```
