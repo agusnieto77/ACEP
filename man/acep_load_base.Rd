@@ -16,6 +16,7 @@ Si todas las entradas son correctas, la salida será una base de datos en format
 Función para cargar bases de datos disponibles online. Por ahora están disponibles las siguientes bases: Revista Puerto 'rp_mdp'; La Nueva 'ln_bb', La Capital 'lc_mdp', Ecos Diarios 'ed_neco', La Nación 'ln_arg'
 }
 \examples{
-\dontrun{acep_load_base(tag = acep_bases$rp_mdp) |> head()}
+bd_sismos <- 'https://zenodo.org/record/6835713/files/bd_sismos_mdp.rds?download=1'
+acep_load_base(tag = bd_sismos) |> head()
 }
 \keyword{datos}

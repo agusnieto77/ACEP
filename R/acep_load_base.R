@@ -3,8 +3,16 @@
 #' @param tag etiqueta identificatoria del data frame a cargar: acep_bases$rp_mdp, acep_bases$ln_bb, acep_bases$lc_mdp, acep_bases$ed_neco, acep_bases$ln_arg
 #' @keywords datos
 #' @export acep_load_base
+#' @importFrom utils download.file
 #' @return Si todas las entradas son correctas, la salida será una base de datos en formato tabular con un corpus de notas.
 #' @examples
-#' \dontrun{acep_load_base(tag = acep_bases$rp_mdp) |> head()}
+#' bd_sismos <- 'https://zenodo.org/record/6835713/files/bd_sismos_mdp.rds?download=1'
+#' acep_load_base(tag = bd_sismos) |> head()
 #' @export
-acep_load_base <- function(tag){return(readRDS(url(tag,"rb")))}
+acep_load_base <- function(tag){
+  url <- gsub('\\?download=1','',tag)
+  nombre <- gsub('^http.*files/','',url)
+  destfile <- file.path(tempdir(), nombre)
+  download.file(url, destfile)
+  readRDS(destfile)
+}
