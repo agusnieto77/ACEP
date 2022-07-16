@@ -1,11 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## ACEP: Análisis Computacional de Eventos de Protesta<img src="man/figures/logo.svg" align="right" height="139"/>
+# ACEP: Análisis Computacional de Eventos de Protesta<img src="man/figures/logo.svg" align="right" height="139"/>
 
-<!-- badges: start -->
-
-[![Codecov test
+<!-- badges: start --> [![Codecov test
 coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
 [![R-CMD-check](https://github.com/agusnieto77/ACEP/workflows/R-CMD-check/badge.svg)](https://github.com/agusnieto77/ACEP/actions)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800706.svg)](https://doi.org/10.5281/zenodo.6800706)
@@ -20,7 +18,6 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.
 [![](https://img.shields.io/badge/Build%20with-R%20&%20RStudio-blue?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
 [![](https://img.shields.io/badge/ACEP-ready%20to%20use-color:%20#39c?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
 [![](https://img.shields.io/badge/Developed%20by-SISMOS-darkred?style=plastic=appveyor)](https://observatoriodeconflictividad.org/el-pulso-de-la-conflictividad-en-tiempo-real/)
-
 <!-- badges: end -->
 
 ### Visión general
