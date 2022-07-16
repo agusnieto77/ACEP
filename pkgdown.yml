@@ -2,8 +2,5 @@ pandoc: 2.14.2
 pkgdown: 2.0.5
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-07-16T14:50Z
-urls:
-  reference: https://agusnieto77.github.io/ACEP/reference
-  article: https://agusnieto77.github.io/ACEP/articles
+last_built: 2022-07-16T14:54Z
 
