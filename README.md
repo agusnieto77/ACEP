@@ -3,13 +3,16 @@
 
 # ACEP: Análisis Computacional de Eventos de Protesta<img src="man/figures/logo.svg" align="right" height="139"/>
 
-<!-- badges: start --> [![Codecov test
+<!-- badges: start -->
+
+[![Codecov test
 coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agusnieto77/ACEP?branch=master)
 [![R-CMD-check](https://github.com/agusnieto77/ACEP/workflows/R-CMD-check/badge.svg)](https://github.com/agusnieto77/ACEP/actions)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800706.svg)](https://doi.org/10.5281/zenodo.6800706)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![](https://www.r-pkg.org/badges/version/ACEP)](https://cran.r-project.org/package=ACEP)
 [![](https://img.shields.io/badge/devel%20version-0.0.1.9000-blue.svg)](https://github.com/agusnieto77/ACEP)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
@@ -30,10 +33,19 @@ sobre protestas y una colección de diccionarios de palabras conflictivas
 y otros tópicos referidos a diferentes aspectos del análisis de eventos
 protesta.
 
+### Instalación de la versión estable
+
+Puedes instalar la versión estable de ACEP desde
+[CRAN](https://cran.r-project.org/web/packages/ACEP/index.html) con:
+
+``` r
+install.packages("ACEP")
+```
+
 ### Instalación de la versión en desarrollo
 
 Puedes instalar la versión de desarrollo de ACEP desde
-[GitHub](https://github.com/) con:
+[GitHub](https://github.com/agusnieto77/ACEP) con:
 
 ``` r
 # install.packages("devtools")
