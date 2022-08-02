@@ -21,6 +21,7 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.
 [![](https://img.shields.io/badge/Build%20with-R%20&%20RStudio-blue?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
 [![](https://img.shields.io/badge/ACEP-ready%20to%20use-color:%20#39c?style=plastic=appveyor)](https://github.com/agusnieto77/ACEP)
 [![](https://img.shields.io/badge/Developed%20by-SISMOS-darkred?style=plastic=appveyor)](https://observatoriodeconflictividad.org/el-pulso-de-la-conflictividad-en-tiempo-real/)
+[![](http://cranlogs.r-pkg.org/badges/last-month/ACEP)](https://cran.r-project.org/package=ACEP)
 <!-- badges: end -->
 
 ### Visión general
@@ -142,6 +143,7 @@ de Gral. Pueyrredon, Buenos Aires, Argentina.
 ### Uso de las funciones del paquete ACEP: un ejemplo.
 
 ``` r
+
 # Cargamos la librería
 require(ACEP)
 #> Loading required package: ACEP
@@ -264,6 +266,7 @@ acep_plot_st(rp_procesada$st, rp_procesada$frecm,
 <img src="man/figures/README-ejemplo3-1.png" width="100%" />
 
 ``` r
+
 # Ahora con la función acep_plot_rst() elaboramos una visualización resumen
 # con cuatro gráficos de barras 
 acep_plot_rst(rp_procesada, tagx = 'vertical')
