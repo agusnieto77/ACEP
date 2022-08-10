@@ -32,7 +32,7 @@ Sus funciones son aplicables a cualquier corpus de textos. Además de las
 funciones, ACEP contiene también bases de datos con colecciones de notas
 sobre protestas y una colección de diccionarios de palabras conflictivas
 y otros tópicos referidos a diferentes aspectos del análisis de eventos
-protesta.
+de protesta.
 
 ### Instalación de la versión estable
 
