@@ -15,9 +15,9 @@
 acep_men <- function(x,y,tolower = TRUE) {
   dicc = paste0(y, collapse = '|')
   if(tolower == TRUE){
-    sapply(gregexpr(dicc, tolower(x)), function(z) sum(z != -1))
+    sapply(gregexpr(dicc, tolower(x), perl=TRUE), function(z) sum(z != -1))
   } else {
-    sapply(gregexpr(dicc, x), function(z) sum(z != -1))
+    sapply(gregexpr(dicc, x, perl=TRUE), function(z) sum(z != -1))
   }
 }
 
