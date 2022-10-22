@@ -1,3 +1,7 @@
+# ACEP 0.0.2.9000 (versión en desarrollo)
+
+* se agregaron nuevas funciones.
+
 # ACEP 0.0.1.9000 (versión en desarrollo)
 
 * se agregaron nuevas funciones.
