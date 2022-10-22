@@ -201,8 +201,8 @@ acep_plot_st(rp_procesada$st, rp_procesada$frecm,
              ejey = 'Menciones del diccionario de conflictos',
              etiquetax = 'horizontal')
 
-# Ahora con la función acep_plot_rst() elaboramos una visualización resumen
-# con cuatro gráficos de barras 
+# Ahora con la función acep_plot_rst() elaboramos una visualización resumen.
+# con cuatro gráficos de barras
 acep_plot_rst(rp_procesada, tagx = 'vertical')
 ```
 
