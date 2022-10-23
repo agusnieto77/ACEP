@@ -7,11 +7,15 @@
 acep_clean(
   x,
   tolower = TRUE,
+  rm_cesp = TRUE,
+  rm_emoji = TRUE,
   rm_hashtag = TRUE,
   rm_users = TRUE,
   rm_punt = TRUE,
   rm_num = TRUE,
   rm_url = TRUE,
+  rm_meses = TRUE,
+  rm_dias = TRUE,
   rm_stopwords = TRUE,
   rm_shortwords = TRUE,
   rm_newline = TRUE,
@@ -24,6 +28,10 @@ acep_clean(
 
 \item{tolower}{convierte los textos a minúsculas.}
 
+\item{rm_cesp}{remueve caracteres especiales.}
+
+\item{rm_emoji}{remueve los emojis.}
+
 \item{rm_hashtag}{remueve los hashtags.}
 
 \item{rm_users}{remueve las menciones de usuarixs de redes sociales.}
@@ -33,6 +41,10 @@ acep_clean(
 \item{rm_num}{remueve números.}
 
 \item{rm_url}{remueve las url.}
+
+\item{rm_meses}{remueve los meses del año.}
+
+\item{rm_dias}{remueve los días de la semana.}
 
 \item{rm_stopwords}{remueve palabras vacías.}
 
