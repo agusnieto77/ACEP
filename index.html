@@ -224,14 +224,15 @@
 <span><span class="co"># Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras</span></span>
 <span><span class="va">revista_puerto</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span><span class="co">#&gt;   fecha      titulo                         bajada nota  imagen link  n_palabras</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                          &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 para todos nu… Con m… "Con… https… http…         31</span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo esclavo en a… Un re… "El … https… http…       1128</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tener garantiza… En Ch… "El … https… http…        530</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obreros navales despiden … En Ma… "El … https… http…        483</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento del régimen… Se ll… "Las… https… http…        525</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica cautelar … La Cá… "La … https… http…        462</span></span>
+<span><span class="co">#&gt;   fecha      titulo                            bajada nota  imagen link  n_pal…¹</span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 para todos nuest… Con m… "Con… https… http…      31</span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo esclavo en agua… Un re… "El … https… http…    1128</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tener garantizada … En Ch… "El … https… http…     530</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros navales despiden el … En Ma… "El … https… http…     483</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento del régimen de… Se ll… "Las… https… http…     525</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica cautelar con… La Cá… "La … https… http…     462</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable name ¹​n_palabras</span></span>
 <span></span>
 <span><span class="co"># Ahora con la función acep_men() contamos la frecuencia de menciones de términos del</span></span>
 <span><span class="co"># diccionario de conflictividad de SISMOS de cada nota y creamos una nueva columna llamada  conflictos</span></span>
@@ -241,14 +242,15 @@
 <span><span class="co"># Imprimimos en pantalla la base con la nueva columna de menciones del diccionario de conflictividad</span></span>
 <span><span class="va">revista_puerto</span>  <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 8</span></span>
-<span><span class="co">#&gt;   fecha      titulo              bajada nota  imagen link  n_palabras conflictos</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;               &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;      &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 pa… Con m… "Con… https… http…         31          0</span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo e… Un re… "El … https… http…       1128          4</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tene… En Ch… "El … https… http…        530          3</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obreros navale… En Ma… "El … https… http…        483          8</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento … Se ll… "Las… https… http…        525          4</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratific… La Cá… "La … https… http…        462          6</span></span>
+<span><span class="co">#&gt;   fecha      titulo                    bajada nota  imagen link  n_pal…¹ confl…²</span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 para tod… Con m… "Con… https… http…      31       0</span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo esclavo… Un re… "El … https… http…    1128       4</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tener gara… En Ch… "El … https… http…     530       3</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros navales desp… En Ma… "El … https… http…     483       8</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento del ré… Se ll… "Las… https… http…     525       4</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica caut… La Cá… "La … https… http…     462       6</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos</span></span>
 <span></span>
 <span><span class="co"># Ahora con la función acep_int() calculamos un índice de intensidad de la conflictividad y creamos una</span></span>
 <span><span class="co"># nueva columna llamada  intensidad</span></span>
@@ -257,14 +259,15 @@
 <span><span class="co"># Imprimimos en pantalla la base con la nueva columna de intensidad</span></span>
 <span><span class="va">revista_puerto</span>  <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
-<span><span class="co">#&gt;   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;      &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0      0    </span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          4      0.004</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          3      0.006</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          8      0.017</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          4      0.008</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          6      0.013</span></span></code></pre></div>
+<span><span class="co">#&gt;   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³</span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0   0    </span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       4   0.004</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       3   0.006</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       8   0.017</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       4   0.008</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       6   0.013</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Volvemos a cargar la base de notas de la Revista Puerto sin procesar</span></span>
 <span><span class="va">revista_puerto</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">rp_mdp</span><span class="op">)</span></span>
@@ -281,14 +284,15 @@
 <span><span class="co"># Imprimimos en pantalla la base con las tres columna creadas</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
-<span><span class="co">#&gt;   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;      &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0      0    </span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          4      0.004</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          3      0.006</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          8      0.017</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          4      0.008</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          6      0.013</span></span></code></pre></div>
+<span><span class="co">#&gt;   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³</span></span>
+<span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0   0    </span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       4   0.004</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       3   0.006</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       8   0.017</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       4   0.008</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       6   0.013</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cargamos los datos procesados</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rp_procesada</span></span>
@@ -317,8 +321,8 @@
 <p><img src="reference/figures/README-ejemplo3-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># Ahora con la función acep_plot_rst() elaboramos una visualización resumen</span></span>
-<span><span class="co"># con cuatro gráficos de barras </span></span>
+<span><span class="co"># Ahora con la función acep_plot_rst() elaboramos una visualización resumen.</span></span>
+<span><span class="co"># con cuatro gráficos de barras</span></span>
 <span><span class="fu"><a href="reference/acep_plot_rst.html">acep_plot_rst</a></span><span class="op">(</span><span class="va">rp_procesada</span>, tagx <span class="op">=</span> <span class="st">'vertical'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-ejemplo3-2.png" width="100%"></p>
 </div>
