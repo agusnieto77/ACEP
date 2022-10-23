@@ -57,7 +57,7 @@ devtools::install_github("agusnieto77/ACEP")
 
 | Nombre | Descripción |
 |:---|:------|
-|`acep_clean()`	|Frecuencia, menciones e intensidad.|
+|`acep_clean()`	|Limpieza de texto.|
 |`acep_db()`	|Frecuencia, menciones e intensidad.|
 |`acep_detect()`	|Detección de menciones de palabras.|
 |`acep_frec()`|Frecuencia de palabras totales.|
