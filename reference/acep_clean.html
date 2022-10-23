@@ -54,15 +54,11 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">acep_clean</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  tolower <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rm_cesp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rm_emoji <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_hashtag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_users <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_punt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_num <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_url <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rm_meses <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rm_dias <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_stopwords <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_shortwords <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_newline <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -79,14 +75,6 @@
 
 <dt>tolower</dt>
 <dd><p>convierte los textos a minúsculas.</p></dd>
-
-
-<dt>rm_cesp</dt>
-<dd><p>remueve caracteres especiales.</p></dd>
-
-
-<dt>rm_emoji</dt>
-<dd><p>remueve los emojis.</p></dd>
 
 
 <dt>rm_hashtag</dt>
@@ -107,14 +95,6 @@
 
 <dt>rm_url</dt>
 <dd><p>remueve las url.</p></dd>
-
-
-<dt>rm_meses</dt>
-<dd><p>remueve los meses del año.</p></dd>
-
-
-<dt>rm_dias</dt>
-<dd><p>remueve los días de la semana.</p></dd>
 
 
 <dt>rm_stopwords</dt>
@@ -146,12 +126,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   fecha      titulo                                                nota  confl…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2019-03-29 Astillero Contessi botó al Luca Santino, un fresquer… <span style="color: #949494;">"</span>Tra… tras a…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2019-03-29 Astillero Contessi botó al Luca Santino, un fresquer… <span style="color: #949494;">"</span>Tra… tras u…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2019-03-29 Di Leva despidió a trabajadores de El Marisco y Seba… <span style="color: #949494;">"</span>Tra… trabaj…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2019-03-29 El Consejo aprobó la apertura al norte para el calam… <span style="color: #949494;">"</span>En … reunio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2019-03-29 El Consejo aprobó la apertura al norte para el calam… <span style="color: #949494;">"</span>En … en la …</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2019-03-28 “Todos los empresarios me dicen que tendrían que ach… <span style="color: #949494;">"</span>Cri… cristi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2019-03-28 En el Puerto de Montevideo siguen bajando un muerto … <span style="color: #949494;">"</span>La … organi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2019-03-28 Habilitan el muelle Piedra Buena para descarga de co… <span style="color: #949494;">"</span>La … admini…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2019-03-28 En el Puerto de Montevideo siguen bajando un muerto … <span style="color: #949494;">"</span>La … la org…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2019-03-28 Habilitan el muelle Piedra Buena para descarga de co… <span style="color: #949494;">"</span>La … la adm…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​conflictos</span></span>
 </code></pre></div>
     </div>
