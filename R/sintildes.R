@@ -9,4 +9,3 @@
 #' @keywords expresiones regulares
 #' @examples
 #' print(sintildes)
-"sintildes"

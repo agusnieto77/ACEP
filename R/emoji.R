@@ -9,4 +9,3 @@
 #' @keywords expresiones regulares
 #' @examples
 #' print(emoji)
-"emoji"
