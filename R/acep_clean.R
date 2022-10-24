@@ -52,9 +52,9 @@ acep_clean <- function(x,
   if(tolower == TRUE){
     x <- tolower(x)}
   if(rm_cesp == TRUE){
-    x <- chartr(ACEP::tildes, ACEP::sintildes, x)}
+    x <- chartr(ACEP::acep_rs$tildes, ACEP::acep_rs$sintildes, x)}
   if(rm_emoji == TRUE){
-    x <- gsub(ACEP::emoji, " ", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$emoji, " ", x, perl = TRUE)}
   if(rm_hashtag == TRUE){
     x <- gsub(hashtag, "", x, perl = TRUE)}
   if(rm_users == TRUE){
@@ -66,11 +66,11 @@ acep_clean <- function(x,
   if(rm_url == TRUE){
     x <- gsub(url, "", x, perl = TRUE)}
   if(rm_meses == TRUE){
-    x <- gsub(ACEP::meses, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$meses, "", x, perl = TRUE)}
   if(rm_dias == TRUE){
-    x <- gsub(ACEP::dias, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$dias, "", x, perl = TRUE)}
   if(rm_stopwords == TRUE){
-    x <- gsub(ACEP::stopwords, " ", x, perl = FALSE)}
+    x <- gsub(ACEP::acep_rs$stopwords, " ", x, perl = FALSE)}
   if(rm_shortwords == TRUE){
     x <- gsub(shortwords, " ", x, perl = FALSE)}
   if(rm_newline == TRUE){
