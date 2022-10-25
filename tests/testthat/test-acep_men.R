@@ -1,4 +1,3 @@
-context("test-acep_men")
 
 test_that("ACEP Men Tolower T", {
   skip_if_offline()

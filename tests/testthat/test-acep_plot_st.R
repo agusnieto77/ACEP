@@ -1,4 +1,3 @@
-context("test-acep_plot_st")
 
 test_that("ACEP Plot ST", {
   skip_if_offline()

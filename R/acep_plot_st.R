@@ -29,9 +29,8 @@ acep_plot_st <- function(x, y, t = '', ejex = '', ejey = '', etiquetax = 'horizo
                      ylab = '',
                      xlab = '',
                      cex.names=1.0,
-                     border = "skyblue",
-                     col = "pink",
-                     density = 70,
+                     border = "grey",
+                     col=grDevices::hcl.colors(length(y), "Pastel 1"),
                      las = etiquetax)
   graphics::title(xlab = ejex, line=-0.1, cex.lab = 1.0)
   graphics::title(ylab = ejey, line=-1.0, cex.lab = 1.0)

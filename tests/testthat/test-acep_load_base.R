@@ -1,4 +1,3 @@
-context("test-acep_load_base")
 
 test_that("ACEP LOAD", {
   skip_if_offline()

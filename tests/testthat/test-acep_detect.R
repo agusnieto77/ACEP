@@ -1,4 +1,3 @@
-context("test-acep_detect")
 
 test_that("ACEP DETECT", {
   skip_if_offline()

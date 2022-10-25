@@ -23,7 +23,7 @@ acep_token <- function(x, tolower = TRUE) {
   }
   df <- merge(data.frame(texto = texto, id_token = id_token,token = token),id)
   df <- df[order(df$id_token, decreasing = FALSE),]
-  df$id_token_doc <-unlist(aggregate(df$token ~ df$id_doc, FUN=function(x) 1:length(x))[,2])
+  df$id_token_doc <- as.vector(unlist(aggregate(df$token ~ df$id_doc, FUN=function(x) 1:length(x))[,2]))
   df <- data.frame(id_doc = df$id_doc, texto = df$texto, id_token = df$id_token, id_token_doc = df$id_token_doc, token = df$token)
   return(df)
 }

@@ -1,4 +1,3 @@
-context("test-acep_int")
 
 test_that("ACEP INT", {
   skip_if_offline()

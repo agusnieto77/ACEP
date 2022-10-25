@@ -1,4 +1,3 @@
-context("test-acep_frec")
 
 test_that("ACEP TOKEN", {
   skip_if_offline()

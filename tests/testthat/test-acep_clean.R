@@ -1,4 +1,3 @@
-context("test-acep_clean")
 
 test_that("ACEP CLEAN", {
   skip_if_offline()

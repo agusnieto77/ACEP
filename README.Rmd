@@ -68,6 +68,8 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_post_st()`|Gráfico de barras de la serie temporal de índices de conflictividad.|
 |`acep_rst()`|Serie temporal de índices de conflictividad.|
 |`acep_token()`	|Función para tokenizar.|
+|`acep_token_plot()`	|Gráfico de barras de palabras más recurrentes en un corpus.|
+|`acep_token_table()`	|Tabla de frecuencia de palabras tokenizadas.|
 
 ### Colecciones
 
@@ -75,6 +77,7 @@ devtools::install_github("agusnieto77/ACEP")
 |:---|:------|
 |`acep_bases`|Colección de notas.|
 |`acep_diccionarios`|Colección de diccionarios.|
+|`acep_rs`|Cadenas de caracteres para limpiar y normalizar textos.|
 
 ### Corpus
 

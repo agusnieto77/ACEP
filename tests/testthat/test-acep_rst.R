@@ -1,4 +1,3 @@
-context("test-acep_rst")
 
 test_that("ACEP RST ANIO", {
   skip_if_offline()

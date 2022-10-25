@@ -1,4 +1,3 @@
-context("test-acep_db")
 
 test_that("ACEP DB", {
   skip_if_offline()
