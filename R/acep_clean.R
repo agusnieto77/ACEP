@@ -40,7 +40,8 @@ acep_clean <- function(x,
                        rm_whitespace = TRUE,
                        u = 1) {
 
-  punt = '[[:punct:]]*'
+  punt = '\\b[[:punct:]]*\\b'
+  punt2 = '[[:punct:]]*'
   num = '[[:digit:]]*'
   hashtag = '#\\S+'
   espacios = "^ *|(?<= ) | *$"
@@ -53,6 +54,8 @@ acep_clean <- function(x,
     x <- tolower(x)}
   if(rm_cesp == TRUE){
     x <- chartr(ACEP::acep_rs$tildes, ACEP::acep_rs$sintildes, x)}
+  if(rm_url == TRUE){
+    x <- gsub(url, "", x, perl = TRUE)}
   if(rm_emoji == TRUE){
     x <- gsub(ACEP::acep_rs$emoji, " ", x, perl = TRUE)}
   if(rm_hashtag == TRUE){
@@ -60,11 +63,9 @@ acep_clean <- function(x,
   if(rm_users == TRUE){
     x <- gsub(users, "", x, perl = TRUE)}
   if(rm_punt == TRUE){
-    x <- gsub(punt, "", x, perl = TRUE)}
+    x <- gsub(punt, " ", x, perl = TRUE)}
   if(rm_num == TRUE){
     x <- gsub(num, "", x, perl = TRUE)}
-  if(rm_url == TRUE){
-    x <- gsub(url, "", x, perl = TRUE)}
   if(rm_meses == TRUE){
     x <- gsub(ACEP::acep_rs$meses, "", x, perl = TRUE)}
   if(rm_dias == TRUE){
@@ -73,6 +74,8 @@ acep_clean <- function(x,
     x <- gsub(ACEP::acep_rs$stopwords, " ", x, perl = FALSE)}
   if(rm_shortwords == TRUE){
     x <- gsub(shortwords, " ", x, perl = FALSE)}
+  if(rm_punt == TRUE){
+    x <- gsub(punt2, "", x, perl = TRUE)}
   if(rm_newline == TRUE){
     x <- gsub(saltos, " ", x, perl = TRUE)}
   if(rm_whitespace == TRUE){
