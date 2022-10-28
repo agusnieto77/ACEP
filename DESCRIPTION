@@ -1,7 +1,7 @@
 Package: ACEP
 Type: Package
 Title: Análisis Computacional de Eventos de Protesta
-Version: 0.0.2.9000
+Version: 0.0.2
 Authors@R: person("Agustín", "Nieto", email = "agustin.nieto77@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4467-873X"))
 Description: La librería 'ACEP' contiene funciones específicas para desarrollar análisis computacional de eventos de protesta. Asimismo, contiene base de datos con colecciones de notas sobre protestas y diccionarios de palabras conflictivas. Colección de diccionarios que reúne diccionarios de diferentes orígenes.

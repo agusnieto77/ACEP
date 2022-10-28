@@ -11,7 +11,7 @@
 #' @export
 acep_load_base <- function(tag){
   url <- gsub('\\?download=1','',tag)
-  nombre <- gsub('^http.*files/','',url)
+  nombre <- basename(url)
   destfile <- file.path(tempdir(), nombre)
   download.file(url, destfile)
   readRDS(destfile)
