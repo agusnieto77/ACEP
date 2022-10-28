@@ -14,12 +14,13 @@
 #' @param rm_shortwords remueve las palabras cortas.
 #' @param rm_url remueve las url.
 #' @param rm_users remueve las menciones de usuarixs de redes sociales.
+#' @param other_sw su valor por defecto es NULL, sirve para ampliar el listado de stopwords con un nuevo vector de palabras.
 #' @param u umbral de caracteres para la función rm_shortwords.
 #' @param tolower convierte los textos a minúsculas.
 #' @keywords normalización
 #' @examples
 #' rev_puerto <- acep_bases$rev_puerto
-#' rev_puerto$conflictos <- acep_clean(rev_puerto$nota)
+#' rev_puerto$nota_limpia <- acep_clean(rev_puerto$nota)
 #' rev_puerto |> head()
 #' @export
 
@@ -38,6 +39,7 @@ acep_clean <- function(x,
                        rm_shortwords = TRUE,
                        rm_newline = TRUE,
                        rm_whitespace = TRUE,
+                       other_sw = NULL,
                        u = 1) {
 
   if(tolower == TRUE){
@@ -63,7 +65,13 @@ acep_clean <- function(x,
   if(rm_dias == TRUE){
     x <- gsub(ACEP::acep_rs$dias, '', x, perl = TRUE)}
   if(rm_stopwords == TRUE){
-    x <- gsub(ACEP::acep_rs$stopwords, ' ', x, perl = FALSE)}
+    if(is.null(other_sw)){
+      x <- gsub(ACEP::acep_rs$stopwords, " ", x, perl = FALSE)
+    } else {
+      othersw <- paste0('|\\b',other_sw,'\\b', collapse = '')
+      x <- gsub(paste0(ACEP::acep_rs$stopwords,othersw), " ", x, perl = FALSE)
+    }
+  }
   if(rm_shortwords == TRUE){
     x <- gsub(paste0('\\b[[:alpha:]]{1,',u,'}\\b'), ' ', x, perl = FALSE)}
   if(rm_punt == TRUE){

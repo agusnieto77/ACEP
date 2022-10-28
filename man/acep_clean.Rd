@@ -20,6 +20,7 @@ acep_clean(
   rm_shortwords = TRUE,
   rm_newline = TRUE,
   rm_whitespace = TRUE,
+  other_sw = NULL,
   u = 1
 )
 }
@@ -54,6 +55,8 @@ acep_clean(
 
 \item{rm_whitespace}{remueve los espacios en blanco.}
 
+\item{other_sw}{su valor por defecto es NULL, sirve para ampliar el listado de stopwords con un nuevo vector de palabras.}
+
 \item{u}{umbral de caracteres para la función rm_shortwords.}
 }
 \description{
@@ -61,7 +64,7 @@ Función que limpia y normaliza las notas/textos.
 }
 \examples{
 rev_puerto <- acep_bases$rev_puerto
-rev_puerto$conflictos <- acep_clean(rev_puerto$nota)
+rev_puerto$nota_limpia <- acep_clean(rev_puerto$nota)
 rev_puerto |> head()
 }
 \keyword{normalización}
