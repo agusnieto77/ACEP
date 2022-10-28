@@ -40,46 +40,38 @@ acep_clean <- function(x,
                        rm_whitespace = TRUE,
                        u = 1) {
 
-  punt1 = paste0('[^[:alnum:][:blank:]',ACEP::acep_rs$tildes,']')
-  punt2 = paste0('\\b',punt1,'\\b')
-  num = '[[:digit:]]*'
-  hashtag = '#\\S+'
-  espacios = "^ *|(?<= ) | *$"
-  saltos = '[ \t\r\n]'
-  shortwords = paste0('\\b[[:alpha:]]{1,',u,'}\\b')
-  url = paste0('http\\S+|ftp\\S+|Http\\S+|Ftp\\S+', '|', toupper('http\\S+|ftp\\S+'))
-  users = '@\\S+'
-
   if(tolower == TRUE){
-    x <- tolower(x)}
+    x <- gsub(pattern = '([[:upper:]])', perl = TRUE, replacement = '\\L\\1', x)}
+  if(tolower == TRUE){
+    x <- chartr(ACEP::acep_rs$tildes, tolower(ACEP::acep_rs$tildes), x)}
   if(rm_cesp == TRUE){
     x <- chartr(ACEP::acep_rs$tildes, ACEP::acep_rs$sintildes, x)}
   if(rm_url == TRUE){
-    x <- gsub(url, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$url, '', x, perl = TRUE)}
   if(rm_emoji == TRUE){
-    x <- gsub(ACEP::acep_rs$emoji, " ", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$emojis, ' ', x, perl = TRUE)}
   if(rm_hashtag == TRUE){
-    x <- gsub(hashtag, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$hashtag, '', x, perl = TRUE)}
   if(rm_users == TRUE){
-    x <- gsub(users, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$users, '', x, perl = TRUE)}
   if(rm_punt == TRUE){
-    x <- gsub(punt1, " ", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$punt1, ' ', x, perl = TRUE)}
   if(rm_num == TRUE){
-    x <- gsub(num, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$num, '', x, perl = TRUE)}
   if(rm_meses == TRUE){
-    x <- gsub(ACEP::acep_rs$meses, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$meses, '', x, perl = TRUE)}
   if(rm_dias == TRUE){
-    x <- gsub(ACEP::acep_rs$dias, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$dias, '', x, perl = TRUE)}
   if(rm_stopwords == TRUE){
-    x <- gsub(ACEP::acep_rs$stopwords, " ", x, perl = FALSE)}
+    x <- gsub(ACEP::acep_rs$stopwords, ' ', x, perl = FALSE)}
   if(rm_shortwords == TRUE){
-    x <- gsub(shortwords, " ", x, perl = FALSE)}
+    x <- gsub(paste0('\\b[[:alpha:]]{1,',u,'}\\b'), ' ', x, perl = FALSE)}
   if(rm_punt == TRUE){
-    x <- gsub(punt2, "", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$punt2, '', x, perl = TRUE)}
   if(rm_newline == TRUE){
-    x <- gsub(saltos, " ", x, perl = TRUE)}
+    x <- gsub(ACEP::acep_rs$saltos, ' ', x, perl = TRUE)}
   if(rm_whitespace == TRUE){
-    gsub(espacios, "", x, perl = TRUE)
+    gsub(ACEP::acep_rs$espacios, '', x, perl = TRUE)
   } else {
     x
   }
