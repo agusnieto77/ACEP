@@ -16,7 +16,7 @@ Función que tokeniza las notas/textos.
 }
 \examples{
 rev_puerto <- acep_bases$rev_puerto
-rev_puerto_token <- acep_token(rev_puerto$nota)
+rev_puerto_token <- acep_token(rev_puerto$titulo)
 rev_puerto_token |> head()
 }
 \keyword{tokenizar}

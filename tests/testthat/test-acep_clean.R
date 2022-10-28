@@ -111,7 +111,10 @@ test_that("ACEP CLEAN RMSTWTN", {
   skip_if_offline()
   skip_on_cran()
   rev_puerto <- acep_bases$rev_puerto[1:10, ]
-  rev_puerto$titulo_clean <- acep_clean(rev_puerto$titulo, other_sw = c('mar','plata','puerto'))
+  rev_puerto$titulo_clean <- acep_clean(
+    rev_puerto$titulo,
+    other_sw = c("mar", "plata", "puerto")
+    )
   dimensiones <- length(rev_puerto$titulo)
   expect_equal(dimensiones, length(rev_puerto$fecha))
 })
@@ -120,7 +123,9 @@ test_that("ACEP CLEAN RMSHWF", {
   skip_if_offline()
   skip_on_cran()
   rev_puerto <- acep_bases$rev_puerto[1:10, ]
-  rev_puerto$titulo_clean <- acep_clean(rev_puerto$titulo, rm_shortwords = FALSE)
+  rev_puerto$titulo_clean <- acep_clean(
+    rev_puerto$titulo,
+    rm_shortwords = FALSE)
   dimensiones <- length(rev_puerto$titulo)
   expect_equal(dimensiones, length(rev_puerto$fecha))
 })
@@ -129,7 +134,9 @@ test_that("ACEP CLEAN RMNLF", {
   skip_if_offline()
   skip_on_cran()
   rev_puerto <- acep_bases$rev_puerto[1:10, ]
-  rev_puerto$titulo_clean <- acep_clean(rev_puerto$titulo, rm_newline = FALSE)
+  rev_puerto$titulo_clean <- acep_clean(
+    rev_puerto$titulo,
+    rm_newline = FALSE)
   dimensiones <- length(rev_puerto$titulo)
   expect_equal(dimensiones, length(rev_puerto$fecha))
 })
@@ -138,7 +145,9 @@ test_that("ACEP CLEAN RMWSF", {
   skip_if_offline()
   skip_on_cran()
   rev_puerto <- acep_bases$rev_puerto[1:10, ]
-  rev_puerto$titulo_clean <- acep_clean(rev_puerto$titulo, rm_whitespace = FALSE)
+  rev_puerto$titulo_clean <- acep_clean(
+    rev_puerto$titulo,
+    rm_whitespace = FALSE)
   dimensiones <- length(rev_puerto$titulo)
   expect_equal(dimensiones, length(rev_puerto$fecha))
 })

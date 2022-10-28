@@ -25,7 +25,8 @@ acep_clean(
 )
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la función de limpieza de texto.}
+\item{x}{vector de textos al que se le aplica la
+función de limpieza de texto.}
 
 \item{tolower}{convierte los textos a minúsculas.}
 
@@ -55,7 +56,8 @@ acep_clean(
 
 \item{rm_whitespace}{remueve los espacios en blanco.}
 
-\item{other_sw}{su valor por defecto es NULL, sirve para ampliar el listado de stopwords con un nuevo vector de palabras.}
+\item{other_sw}{su valor por defecto es NULL, sirve para ampliar el
+listado de stopwords con un nuevo vector de palabras.}
 
 \item{u}{umbral de caracteres para la función rm_shortwords.}
 }
@@ -64,7 +66,7 @@ Función que limpia y normaliza las notas/textos.
 }
 \examples{
 rev_puerto <- acep_bases$rev_puerto
-rev_puerto$nota_limpia <- acep_clean(rev_puerto$nota)
+rev_puerto$titulo_limpio <- acep_clean(rev_puerto$titulo)
 rev_puerto |> head()
 }
 \keyword{normalización}

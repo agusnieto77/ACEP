@@ -1,5 +1,6 @@
 #' @title Cadenas de caracteres para limpiar y normalizar textos.
-#' @description Cadenas de caracteres y expresiones regulares para limpiar y normalizar textos.
+#' @description Cadenas de caracteres y expresiones regulares
+#' para limpiar y normalizar textos.
 #' @format Son cadenas de caracteres.
 #'\describe{
 #' \item{stopwords}{es un string de palabras vacías.}

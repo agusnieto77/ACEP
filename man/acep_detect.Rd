@@ -7,21 +7,25 @@
 acep_detect(x, y, u = 1, tolower = TRUE)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la función de detección de menciones de palabras del diccionario.}
+\item{x}{vector de textos al que se le aplica la función de
+detección de menciones de palabras del diccionario.}
 
 \item{y}{vector de palabras del diccionario utilizado.}
 
-\item{u}{umbral para atribuir valor positivo a la detección de las menciones.}
+\item{u}{umbral para atribuir valor positivo a la
+detección de las menciones.}
 
 \item{tolower}{convierte los textos a minúsculas.}
 }
 \description{
-Función que detecta de menciones de palabras que refieren a conflictos en cada una de las notas/textos.
+Función que detecta de menciones de palabras que
+refieren a conflictos en cada una de las notas/textos.
 }
 \examples{
 rev_puerto <- acep_bases$rev_puerto
 dicc_violencia <- acep_diccionarios$dicc_viol_gp
-rev_puerto$conflictos_detect <- acep_detect(rev_puerto$nota, dicc_violencia)
+rev_puerto$conflictos_detect <- acep_detect(rev_puerto$nota,
+dicc_violencia)
 rev_puerto |> head()
 }
 \keyword{indicadores}

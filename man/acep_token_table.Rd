@@ -12,7 +12,9 @@ acep_token_table(x, u = 10)
 \item{u}{numero de corte para el top de palabras más frecuentes.}
 }
 \value{
-Si todas las entradas son correctas, la salida será una tabla con la frecuencia relativa y absoluta de palabras tokenizadas.
+Si todas las entradas son correctas,
+la salida será una tabla con la frecuencia relativa y
+absoluta de palabras tokenizadas.
 }
 \description{
 Función que cuenta la frecuencia de palabras tokenizadas.

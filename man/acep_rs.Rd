@@ -19,7 +19,8 @@ Son cadenas de caracteres.
 data(acep_rs)
 }
 \description{
-Cadenas de caracteres y expresiones regulares para limpiar y normalizar textos.
+Cadenas de caracteres y expresiones regulares
+para limpiar y normalizar textos.
 }
 \examples{
 print(acep_rs)

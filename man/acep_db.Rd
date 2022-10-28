@@ -9,17 +9,21 @@ acep_db(db, t, d, n)
 \arguments{
 \item{db}{data frame con los textos a procesar.}
 
-\item{t}{columna de data frame que contiene el vector de textos a procesar.}
+\item{t}{columna de data frame que contiene el vector
+de textos a procesar.}
 
 \item{d}{diccionario en formato vector.}
 
 \item{n}{cantidad de decimales del índice de intensidad.}
 }
 \value{
-Si todas las entradas son correctas, la salida será una base de datos en formato tabular con tres nuevas variables.
+Si todas las entradas son correctas, la salida será una
+base de datos en formato tabular con tres nuevas variables.
 }
 \description{
-Función que usa las funciones acep_frec, acep_men y acep_int y devuelve una tabla con tres columnas nuevas: número de palabras, número de menciones del diccionario, índice de intensidad.
+Función que usa las funciones acep_frec, acep_men y acep_int y
+devuelve una tabla con tres columnas nuevas: número de palabras,
+número de menciones del diccionario, índice de intensidad.
 }
 \examples{
 rev_puerto <- acep_bases$rev_puerto

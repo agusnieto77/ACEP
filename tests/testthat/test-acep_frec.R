@@ -7,5 +7,3 @@ test_that("ACEP Frec", {
   dimensiones <- length(rev_puerto$nota)
   expect_equal(dimensiones, length(rev_puerto$n_palabras))
 })
-
-

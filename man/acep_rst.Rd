@@ -9,32 +9,44 @@ acep_rst(datos, fecha, frecp, frecm, st = "mes", u = 2, d = 4)
 \arguments{
 \item{datos}{data frame con los textos a procesar.}
 
-\item{fecha}{columna de data frame que contiene el vector de fechas en formato date.}
+\item{fecha}{columna de data frame que contiene el
+vector de fechas en formato date.}
 
-\item{frecp}{columna de data frame que contiene el vector de frecuencia de palabras por texto.}
+\item{frecp}{columna de data frame que contiene el
+vector de frecuencia de palabras por texto.}
 
-\item{frecm}{columna de data frame que contiene el vector de menciones del diccionario por texto.}
+\item{frecm}{columna de data frame que contiene el
+vector de menciones del diccionario por texto.}
 
-\item{st}{parámetro para establecer el segmento temporal a ser agrupado: anio, mes, dia.}
+\item{st}{parámetro para establecer el segmento temporal
+a ser agrupado: anio, mes, dia.}
 
-\item{u}{umbral de menciones para contabilizar una nota como nota que refiere a un conflicto.}
+\item{u}{umbral de menciones para contabilizar una nota
+como nota que refiere a un conflicto.}
 
-\item{d}{cantidad de decimales, por defecto tiene 4 pero se puede modificar.}
+\item{d}{cantidad de decimales, por defecto tiene 4 pero
+se puede modificar.}
 }
 \value{
-Si todas las entradas son correctas, la salida será una base de datos en formato tabular con nuevas variables.
+Si todas las entradas son correctas,
+la salida será una base de datos en formato tabular
+con nuevas variables.
 }
 \description{
-Función que devuelve los índices de conflictividad agrupados por segmento de tiempo: día, mes, año.
+Función que devuelve los índices de conflictividad
+agrupados por segmento de tiempo: día, mes, año.
 }
 \examples{
 datos <- acep_bases$rp_procesada
 fecha <- datos$fecha
 n_palabras <- datos$n_palabras
 conflictos <- datos$conflictos
-datos_procesados_anio <- acep_rst(datos, fecha, n_palabras, conflictos, st = 'anio', u = 4)
-datos_procesados_mes <- acep_rst(datos, fecha, n_palabras, conflictos)
-datos_procesados_dia <- acep_rst(datos, fecha, n_palabras, conflictos, st = 'dia', d = 3)
+datos_procesados_anio <- acep_rst(datos,
+fecha, n_palabras, conflictos, st = 'anio', u = 4)
+datos_procesados_mes <- acep_rst(datos,
+fecha, n_palabras, conflictos)
+datos_procesados_dia <- acep_rst(datos,
+fecha, n_palabras, conflictos, st = 'dia', d = 3)
 datos_procesados_anio |> head()
 datos_procesados_mes |> head()
 datos_procesados_dia |> head()

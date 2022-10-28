@@ -17,24 +17,29 @@ acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 
 \item{ejey}{nombre del eje y.}
 
-\item{etiquetax}{orientación de las etiquetas del eje x ('horizontal' | 'vertical').}
+\item{etiquetax}{orientación de las etiquetas del
+eje x ('horizontal' | 'vertical').}
 }
 \value{
-Si todas las entradas son correctas, la salida será una imagen de un panel.
+Si todas las entradas son correctas,
+la salida será una imagen de un panel.
 }
 \description{
-Función que devuelve un gráfico de barras con la serie temporal de índices de conflictividad por día, mes o año.
+Función que devuelve un gráfico de barras con la serie
+temporal de índices de conflictividad por día, mes o año.
 }
 \examples{
 datos <- acep_bases$rp_procesada
 fecha <- datos$fecha
 n_palabras <- datos$n_palabras
 conflictos <- datos$conflictos
-dpa <- acep_rst(datos, fecha, n_palabras, conflictos, st = 'anio')
-acep_plot_st(dpa$st, dpa$frecm,
-             t = 'Evolución de la conflictividad en el sector pesquero argentino',
-             ejex = 'Años analizados',
-             ejey = 'Menciones de términos del diccionario de conflictos',
-             etiquetax = 'horizontal')
+dpa <- acep_rst(datos,
+fecha, n_palabras, conflictos, st = 'anio')
+acep_plot_st(
+dpa$st, dpa$frecm,
+t = 'Evolución de la conflictividad en el sector pesquero argentino',
+ejex = 'Años analizados',
+ejey = 'Menciones de términos del diccionario de conflictos',
+etiquetax = 'horizontal')
 }
 \keyword{visualización}

@@ -11,13 +11,16 @@ acep_token_plot(x, u = 10, frec = TRUE)
 
 \item{u}{numero de corte para el top de palabras más frecuentes.}
 
-\item{frec}{parámetro para determinar si los valores se visualizarán como frecuencia absoluta o relativa.}
+\item{frec}{parámetro para determinar si los valores se visualizarán
+como frecuencia absoluta o relativa.}
 }
 \value{
-Si todas las entradas son correctas, la salida será un gráfico de barras.
+Si todas las entradas son correctas,
+la salida será un gráfico de barras.
 }
 \description{
-Función que devuelve un gráfico de barras con las palabras más recurrentes en un corpus textual.
+Función que devuelve un gráfico de barras con las palabras
+más recurrentes en un corpus textual.
 }
 \examples{
 rev_puerto <- acep_clean(acep_bases$rev_puerto$titulo)
