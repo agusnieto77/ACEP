@@ -107,6 +107,15 @@ test_that("ACEP CLEAN RMSTWF", {
   expect_equal(dimensiones, length(rev_puerto$fecha))
 })
 
+test_that("ACEP CLEAN RMSTWTN", {
+  skip_if_offline()
+  skip_on_cran()
+  rev_puerto <- acep_bases$rev_puerto
+  rev_puerto$nota_clean <- acep_clean(rev_puerto$nota, other_sw = c('mar','plata','puerto'))
+  dimensiones <- length(rev_puerto$nota)
+  expect_equal(dimensiones, length(rev_puerto$fecha))
+})
+
 test_that("ACEP CLEAN RMSHWF", {
   skip_if_offline()
   skip_on_cran()
