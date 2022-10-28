@@ -27,7 +27,7 @@
 #' historia social: un ejercicio de lectura distante sobre la
 #' conflictividad marítima en la historia argentina reciente».
 #' Drassana: revista del Museu Maritim (28):122-42.
-#' (\href{t.ly/dODh}{Revista Drassana})
+#' (\href{https://doi.org/10.51829/Drassana.28.650}{Revista Drassana})
 #' @source \href{https://revistapuerto.com.ar/}{Revista Puerto}
 #' @source \href{https://www.lanueva.com/}{La Nueva}
 #' @keywords datos

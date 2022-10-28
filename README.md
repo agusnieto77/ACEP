@@ -38,7 +38,7 @@ de protesta.
 ### Instalación de la versión estable
 
 Puedes instalar la versión estable de ACEP desde
-[CRAN](https://cran.r-project.org/web/packages/ACEP/index.html) con:
+[CRAN](https://CRAN.R-project.org/package=ACEP) con:
 
 ``` r
 install.packages("ACEP")
