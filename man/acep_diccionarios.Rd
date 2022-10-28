@@ -41,7 +41,7 @@ Albrieu, Ramiro y Gabriel Palazzo 2020 «Categorización de
 conflictos sociales en el ámbito de los recursos naturales: un estudio
 de las actividades extractivas mediante la minería de textos».
 Revista CEPAL (131):29-59.
-(\href{t.ly/iRKu5}{Revista de la CEPAL})
+(\href{https://observatoriodeconflictividad.org/RVE131_AP.pdf}{Revista CEPAL})
 
 Laitano, Guillermina y Agustín Nieto
 «Análisis computacional de la conflictividad laboral en Mar del Plata
