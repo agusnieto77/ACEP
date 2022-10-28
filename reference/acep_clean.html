@@ -67,6 +67,7 @@
 <span>  rm_shortwords <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_newline <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rm_whitespace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  other_sw <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  u <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -133,6 +134,10 @@
 <dd><p>remueve los espacios en blanco.</p></dd>
 
 
+<dt>other_sw</dt>
+<dd><p>su valor por defecto es NULL, sirve para ampliar el listado de stopwords con un nuevo vector de palabras.</p></dd>
+
+
 <dt>u</dt>
 <dd><p>umbral de caracteres para la función rm_shortwords.</p></dd>
 
@@ -141,10 +146,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">rev_puerto</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rev_puerto</span></span></span>
-<span class="r-in"><span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">conflictos</span> <span class="op">&lt;-</span> <span class="fu">acep_clean</span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota_limpia</span> <span class="op">&lt;-</span> <span class="fu">acep_clean</span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">rev_puerto</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   fecha      titulo                                                nota  confl…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   fecha      titulo                                                nota  nota_…¹</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2019-03-29 Astillero Contessi botó al Luca Santino, un fresquer… <span style="color: #949494;">"</span>Tra… tras a…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2019-03-29 Di Leva despidió a trabajadores de El Marisco y Seba… <span style="color: #949494;">"</span>Tra… trabaj…</span>
@@ -152,7 +157,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2019-03-28 “Todos los empresarios me dicen que tendrían que ach… <span style="color: #949494;">"</span>Cri… cristi…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2019-03-28 En el Puerto de Montevideo siguen bajando un muerto … <span style="color: #949494;">"</span>La … organi…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2019-03-28 Habilitan el muelle Piedra Buena para descarga de co… <span style="color: #949494;">"</span>La … admini…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​conflictos</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​nota_limpia</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
