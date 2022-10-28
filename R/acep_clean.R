@@ -40,8 +40,8 @@ acep_clean <- function(x,
                        rm_whitespace = TRUE,
                        u = 1) {
 
-  punt = '\\b[[:punct:]]*\\b'
-  punt2 = '[[:punct:]]*'
+  punt1 = paste0('[^[:alnum:][:blank:]',ACEP::acep_rs$tildes,']')
+  punt2 = paste0('\\b',punt1,'\\b')
   num = '[[:digit:]]*'
   hashtag = '#\\S+'
   espacios = "^ *|(?<= ) | *$"
@@ -63,7 +63,7 @@ acep_clean <- function(x,
   if(rm_users == TRUE){
     x <- gsub(users, "", x, perl = TRUE)}
   if(rm_punt == TRUE){
-    x <- gsub(punt, " ", x, perl = TRUE)}
+    x <- gsub(punt1, " ", x, perl = TRUE)}
   if(rm_num == TRUE){
     x <- gsub(num, "", x, perl = TRUE)}
   if(rm_meses == TRUE){
