@@ -84,7 +84,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\\bdomingo\\b|\\blunes\\b|\\bmartes\\b|\\bmiércoles\\b|\\bjueves\\b|\\bviernes\\b|\\bsábado\\b|\\bDomingo\\b|\\bLunes\\b|\\bMartes\\b|\\bMiércoles\\b|\\bJueves\\b|\\bViernes\\b|\\bSábado\\b|\\bMiercoles\\b|\\bmiercoles\\b|\\bMIERCOLES\\b|\\bSABADO\\b|\\bSabado\\b|\\bsabado\\b|\\bDOMINGO\\b|\\bLUNES\\b|\\bMARTES\\b|\\bMIÉRCOLES\\b|\\bJUEVES\\b|\\bVIERNES\\b|\\bSÁBADO\\b"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $emojis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[^ñáéíóúüçÇÜÁÉÍÓÚÑ\001-\177]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[^ñáéíóúüç…ÇÜÁÉÍÓÚÑ\001-\177]"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $meses</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\\benero\\b|\\bfebrero\\b|\\bmarzo\\b|\\babril\\b|\\bmayo\\b|\\bjunio\\b|\\bjulio\\b|\\bagosto\\b|\\bseptiembre\\b|\\boctubre\\b|\\bnoviembre\\b|\\bdiciembre\\b|\\bEnero\\b|\\bFebrero\\b|\\bMarzo\\b|\\bAbril\\b|\\bMayo\\b|\\bJunio\\b|\\bJulio\\b|\\bAgosto\\b|\\bSeptiembre\\b|\\bOctubre\\b|\\bNoviembre\\b|\\bDiciembre\\b|\\bENERO\\b|\\bFEBRERO\\b|\\bMARZO\\b|\\bABRIL\\b|\\bMAYO\\b|\\bJUNIO\\b|\\bJULIO\\b|\\bAGOSTO\\b|\\bSEPTIEMBRE\\b|\\bOCTUBRE\\b|\\bNOVIEMBRE\\b|\\bDICIEMBRE\\b"</span>
@@ -97,6 +97,30 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $tildes</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ŠŽšžŸÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðñòóôõöùúûüýÿ"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $url</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http\\S+|ftp\\S+|Http\\S+|Ftp\\S+|HTTP\\S+|FTP\\S+"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $users</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "@\\S+"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $saltos</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[ \t\r\n]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $espacios</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "^ *|(?&lt;= ) | *$"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $hashtag</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#\\S+"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $num</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[[:digit:]]*"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $punt1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[^[:alnum:][:digit:][:blank:]\\p{So}|\\p{Cn}#@ŠŽšžŸÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðñòóôõöùúûüýÿ]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $punt2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "\\b[^[:alnum:][:digit:][:blank:]\\p{So}|\\p{Cn}#@ŠŽšžŸÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðñòóôõöùúûüýÿ]\\b"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
