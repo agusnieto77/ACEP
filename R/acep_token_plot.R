@@ -1,20 +1,27 @@
-#' @title Gráfico de barras de palabras más recurrentes en un corpus.
-#' @description Función que devuelve un gráfico de barras con las palabras
-#' más recurrentes en un corpus textual.
+#' @title Grafico de barras de palabras mas recurrentes en un corpus.
+#' @description Funcion que devuelve un grafico de barras con las palabras
+#' mas recurrentes en un corpus textual.
 #' @param x vector de palabras tokenizadas.
-#' @param u numero de corte para el top de palabras más frecuentes.
-#' @param frec parámetro para determinar si los valores se visualizarán
+#' @param u numero de corte para el top de palabras mas frecuentes.
+#' @param frec parametro para determinar si los valores se visualizaran
 #' como frecuencia absoluta o relativa.
 #' @export acep_token_plot
 #' @return Si todas las entradas son correctas,
-#' la salida será un gráfico de barras.
-#' @keywords visualización
+#' la salida sera un grafico de barras.
+#' @keywords visualizacion
 #' @examples
-#' rev_puerto <- acep_clean(acep_bases$rev_puerto$titulo)
-#' rev_puerto_token <- acep_token(rev_puerto)
-#' acep_token_plot(rev_puerto_token$token)
+#' tokens <- c(rep("paro",15), rep("piquete",25), rep("corte",20), rep("manifestacion",10),
+#' rep("bloqueo",5), rep("alerta",16), rep("ciudad",12), rep("sindicato",11), rep("paritaria",14),
+#' rep("huelga",14), rep("escrache",15))
+#' acep_token_plot(tokens)
 #' @export
 acep_token_plot <- function(x, u = 10, frec = TRUE) {
+  if(is.vector(x) != TRUE){
+    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
+    return(message(mensaje))
+  } else {
+    if(is.vector(x) == TRUE) {
+      tryCatch({
   if (frec == TRUE) {
     tabla_token <- base::table(x) |> as.data.frame()
     tabla_token$x <- as.character(tabla_token$x)
@@ -66,5 +73,8 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
       cex.axis = 0.8
     )
   }
-
-}
+        }
+        )
+      }
+    }
+  }

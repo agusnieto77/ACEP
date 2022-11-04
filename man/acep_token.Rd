@@ -7,16 +7,14 @@
 acep_token(x, tolower = TRUE)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la función de tokenización.}
+\item{x}{vector de textos al que se le aplica la funcion de tokenizacion.}
 
-\item{tolower}{convierte los textos a minúsculas.}
+\item{tolower}{convierte los textos a minusculas.}
 }
 \description{
-Función que tokeniza las notas/textos.
+Funcion que tokeniza las notas/textos.
 }
 \examples{
-rev_puerto <- acep_bases$rev_puerto
-rev_puerto_token <- acep_token(rev_puerto$titulo)
-rev_puerto_token |> head()
+acep_token("Huelga de obreros del pescado en el puerto")
 }
 \keyword{tokenizar}

@@ -1,29 +1,44 @@
 #' @title Frecuencia de menciones de palabras.
-#' @description Función que cuenta la frecuencia de menciones de
+#' @description Funcion que cuenta la frecuencia de menciones de
 #' palabras que refieren a conflictos en cada una de las notas/textos.
-#' @param x vector de textos al que se le aplica la función de conteo
+#' @param x vector de textos al que se le aplica la funcion de conteo
 #' de la frecuencia de menciones de palabras del diccionario.
 #' @param y vector de palabras del diccionario utilizado.
-#' @param tolower convierte los textos a minúsculas.
+#' @param tolower convierte los textos a minusculas.
 #' @export acep_men
 #' @return Si todas las entradas son correctas,
-#' la salida será un vector con una frecuencia
+#' la salida sera un vector con una frecuencia
 #' de palabras de un diccionario.
 #' @keywords indicadores
 #' @examples
-#' rev_puerto <- acep_bases$rev_puerto
-#' dicc_violencia <- acep_diccionarios$dicc_viol_gp
-#' rev_puerto$conflictos <- acep_men(rev_puerto$nota,
-#' dicc_violencia)
-#' rev_puerto |> head()
+#' df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+#' "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+#' diccionario <- c("paro", "lucha", "piquetes")
+#' df$detect <- acep_men(df$texto, diccionario)
+#' df
 #' @export
 acep_men <- function(x, y, tolower = TRUE) {
-  dicc <- paste0(y, collapse = "|")
-  if (tolower == TRUE) {
-    vapply(gregexpr(dicc, tolower(x), perl = TRUE),
-           function(z) sum(z != -1), c(frec = 0))
+  if(is.vector(x) != TRUE){
+    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
+    return(message(mensaje))
+  }
+  if(is.vector(y) != TRUE){
+    mensaje <- "No ingresaste un vector en el parametro y. Vuelve a intentarlo ingresando un vector!"
+    return(message(mensaje))
   } else {
-    vapply(gregexpr(dicc, x, perl = TRUE),
-           function(z) sum(z != -1), c(frec = 0))
+    if(is.vector(x) == TRUE) {
+      out <- tryCatch({
+        dicc <- paste0(y, collapse = "|")
+        if (tolower == TRUE) {
+          vapply(gregexpr(dicc, tolower(x), perl = TRUE),
+                 function(z) sum(z != -1), c(frec = 0))
+        } else {
+          vapply(gregexpr(dicc, x, perl = TRUE),
+                 function(z) sum(z != -1), c(frec = 0))
+        }
+      }
+      )
+    }
+    return(out)
   }
 }

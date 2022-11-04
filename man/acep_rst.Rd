@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_rst.R
 \name{acep_rst}
 \alias{acep_rst}
-\title{Serie temporal de índices de conflictividad.}
+\title{Serie temporal de indices de conflictividad.}
 \usage{
 acep_rst(datos, fecha, frecp, frecm, st = "mes", u = 2, d = 4)
 }
@@ -18,7 +18,7 @@ vector de frecuencia de palabras por texto.}
 \item{frecm}{columna de data frame que contiene el
 vector de menciones del diccionario por texto.}
 
-\item{st}{parámetro para establecer el segmento temporal
+\item{st}{parametro para establecer el segmento temporal
 a ser agrupado: anio, mes, dia.}
 
 \item{u}{umbral de menciones para contabilizar una nota
@@ -29,12 +29,12 @@ se puede modificar.}
 }
 \value{
 Si todas las entradas son correctas,
-la salida será una base de datos en formato tabular
+la salida sera una base de datos en formato tabular
 con nuevas variables.
 }
 \description{
-Función que devuelve los índices de conflictividad
-agrupados por segmento de tiempo: día, mes, año.
+Funcion que devuelve los indices de conflictividad
+agrupados por segmento de tiempo: dia, mes, anio.
 }
 \examples{
 datos <- acep_bases$rp_procesada

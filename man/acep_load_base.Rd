@@ -13,17 +13,16 @@ acep_bases$ed_neco, acep_bases$ln_arg}
 }
 \value{
 Si todas las entradas son correctas,
-la salida será una base de datos en formato tabular con un corpus de notas.
+la salida sera una base de datos en formato tabular con un corpus de notas.
 }
 \description{
-Función para cargar bases de datos disponibles online.
-Por ahora están disponibles las siguientes bases: Revista Puerto 'rp_mdp';
+Funcion para cargar bases de datos disponibles online.
+Por ahora estan disponibles las siguientes bases: Revista Puerto 'rp_mdp';
 La Nueva 'ln_bb', La Capital 'lc_mdp', Ecos Diarios 'ed_neco',
-La Nación 'ln_arg'
+La Nacion 'ln_arg'
 }
 \examples{
-bd_sismos <-
-'https://zenodo.org/record/6835713/files/bd_sismos_mdp.rds?download=1'
+bd_sismos <- acep_bases$rev_puerto
 acep_load_base(tag = bd_sismos) |> head()
 }
 \keyword{datos}

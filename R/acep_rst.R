@@ -1,6 +1,6 @@
-#' @title Serie temporal de índices de conflictividad.
-#' @description Función que devuelve los índices de conflictividad
-#' agrupados por segmento de tiempo: día, mes, año.
+#' @title Serie temporal de indices de conflictividad.
+#' @description Funcion que devuelve los indices de conflictividad
+#' agrupados por segmento de tiempo: dia, mes, anio.
 #' @param datos data frame con los textos a procesar.
 #' @param fecha columna de data frame que contiene el
 #' vector de fechas en formato date.
@@ -8,7 +8,7 @@
 #' vector de frecuencia de palabras por texto.
 #' @param frecm columna de data frame que contiene el
 #' vector de menciones del diccionario por texto.
-#' @param st parámetro para establecer el segmento temporal
+#' @param st parametro para establecer el segmento temporal
 #' a ser agrupado: anio, mes, dia.
 #' @param u umbral de menciones para contabilizar una nota
 #' como nota que refiere a un conflicto.
@@ -17,7 +17,7 @@
 #' @export acep_rst
 #' @importFrom stats aggregate
 #' @return Si todas las entradas son correctas,
-#' la salida será una base de datos en formato tabular
+#' la salida sera una base de datos en formato tabular
 #' con nuevas variables.
 #' @keywords resumen
 #' @examples
@@ -37,6 +37,36 @@
 #' @export
 acep_rst <- function(datos, fecha, frecp, frecm,
                      st = "mes", u = 2, d = 4) {
+  if(is.data.frame(datos) != TRUE){
+    mensaje <- "No ingresaste un marco de datos en el parametro datos. Vuelve a intentarlo ingresando un marco de datos!"
+    return(message(mensaje))
+  }
+  if((paste(names(datos),collapse = '') != "fechan_palabrasconflictosintensidad")){
+    mensaje <- "No ingresaste un marco de datos adecuado en el parametro datos. Vuelve a intentarlo ingresando un marco de datos adecuado!"
+    return(message(mensaje))
+  }
+  if(is.data.frame(fecha) == TRUE){
+    mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
+    return(message(mensaje))
+  }
+  if(all(is.na(as.Date(as.character(fecha),format="%d/%m/%Y"))) != TRUE){
+    mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
+    return(message(mensaje))
+  }
+  if(is.numeric(fecha) == TRUE){
+    mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
+    return(message(mensaje))
+  }
+  if(!is.numeric(frecp)){
+    mensaje <- "No ingresaste un vector numerico en el parametro frecp. Vuelve a intentarlo ingresando un vector numerico!"
+    return(message(mensaje))
+  }
+  if(!is.numeric(frecm)){
+    mensaje <- "No ingresaste un vector numerico en el parametro frecm. Vuelve a intentarlo ingresando un vector numerico!"
+    return(message(mensaje))
+  } else {
+    if((paste(names(datos),collapse = '') == "fechan_palabrasconflictosintensidad") && is.data.frame(datos) == TRUE) {
+      tryCatch({
   datos <- datos
   datos$anio <- format(fecha, "%Y")
   datos$mes <- paste0(datos$anio, "-", format(fecha, "%m"))
@@ -72,4 +102,8 @@ acep_rst <- function(datos, fecha, frecp, frecm,
                                            frec_pal_con$frecn,
                                            decimales = d)
   return(frec_pal_con)
+      }
+      )
+    }
+  }
 }

@@ -2,31 +2,31 @@
 % Please edit documentation in R/acep_plot_st.R
 \name{acep_plot_st}
 \alias{acep_plot_st}
-\title{Gráfico de barras de la serie temporal de índices de conflictividad.}
+\title{Grafico de barras de la serie temporal de indices de conflictividad.}
 \usage{
 acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
 }
 \arguments{
 \item{x}{vector de valores del eje x (por ejemplo, fechas).}
 
-\item{y}{vector de valores numéricos del eje y (por ejemplo, menciones).}
+\item{y}{vector de valores numericos del eje y (por ejemplo, menciones).}
 
-\item{t}{titulo del gráfico.}
+\item{t}{titulo del grafico.}
 
 \item{ejex}{nombre del eje x.}
 
 \item{ejey}{nombre del eje y.}
 
-\item{etiquetax}{orientación de las etiquetas del
+\item{etiquetax}{orientacion de las etiquetas del
 eje x ('horizontal' | 'vertical').}
 }
 \value{
 Si todas las entradas son correctas,
-la salida será una imagen de un panel.
+la salida sera una imagen de un panel.
 }
 \description{
-Función que devuelve un gráfico de barras con la serie
-temporal de índices de conflictividad por día, mes o año.
+Funcion que devuelve un grafico de barras con la serie
+temporal de indices de conflictividad por dia, mes o anio.
 }
 \examples{
 datos <- acep_bases$rp_procesada
@@ -37,9 +37,9 @@ dpa <- acep_rst(datos,
 fecha, n_palabras, conflictos, st = 'anio')
 acep_plot_st(
 dpa$st, dpa$frecm,
-t = 'Evolución de la conflictividad en el sector pesquero argentino',
-ejex = 'Años analizados',
-ejey = 'Menciones de términos del diccionario de conflictos',
+t = 'Evolucion de la conflictividad en el sector pesquero argentino',
+ejex = 'Anios analizados',
+ejey = 'Menciones de terminos del diccionario de conflictos',
 etiquetax = 'horizontal')
 }
-\keyword{visualización}
+\keyword{visualizacion}

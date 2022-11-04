@@ -14,21 +14,21 @@ de textos a procesar.}
 
 \item{d}{diccionario en formato vector.}
 
-\item{n}{cantidad de decimales del índice de intensidad.}
+\item{n}{cantidad de decimales del indice de intensidad.}
 }
 \value{
-Si todas las entradas son correctas, la salida será una
+Si todas las entradas son correctas, la salida sera una
 base de datos en formato tabular con tres nuevas variables.
 }
 \description{
-Función que usa las funciones acep_frec, acep_men y acep_int y
-devuelve una tabla con tres columnas nuevas: número de palabras,
-número de menciones del diccionario, índice de intensidad.
+Funcion que usa las funciones acep_frec, acep_men y acep_int y
+devuelve una tabla con tres columnas nuevas: numero de palabras,
+numero de menciones del diccionario, indice de intensidad.
 }
 \examples{
-rev_puerto <- acep_bases$rev_puerto
-dicc_viol_gp <- acep_diccionarios$dicc_viol_gp
-rpp <- acep_db(rev_puerto, rev_puerto$nota, dicc_viol_gp, 4)
-rpp |> head()
+df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+"El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+diccionario <- c("paro", "lucha", "piquetes")
+acep_db(df, df$texto, diccionario, 4)
 }
 \keyword{indicadores}

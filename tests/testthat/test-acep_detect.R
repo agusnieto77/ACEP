@@ -2,22 +2,21 @@
 test_that("ACEP DETECT", {
   skip_if_offline()
   skip_on_cran()
-  rev_puerto <- acep_bases$rev_puerto
-  dicc_violencia <- acep_diccionarios$dicc_viol_gp
-  rev_puerto$conflictos_detect <- acep_detect(rev_puerto$nota,
-                                              dicc_violencia)
-  dimensiones <- length(rev_puerto$nota)
-  expect_equal(dimensiones, length(rev_puerto$conflictos_detect))
+  df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+  "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+  diccionario <- c("paro", "lucha", "piquetes")
+  detect <- acep_detect(df$texto, diccionario)
+  dimensiones <- length(detect)
+  expect_equal(dimensiones, length(detect))
 })
 
 test_that("ACEP DETECT F", {
   skip_if_offline()
   skip_on_cran()
-  rev_puerto <- acep_bases$rev_puerto
-  dicc_violencia <- acep_diccionarios$dicc_viol_gp
-  rev_puerto$conflictos_detect <- acep_detect(rev_puerto$nota,
-                                              dicc_violencia,
-                                              tolower = FALSE)
-  dimensiones <- length(rev_puerto$nota)
-  expect_equal(dimensiones, length(rev_puerto$conflictos_detect))
+  df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+                             "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+  diccionario <- c("paro", "lucha", "piquetes")
+  detect <- acep_detect(df$texto, diccionario, tolower = FALSE)
+  dimensiones <- length(detect)
+  expect_equal(dimensiones, length(detect))
 })

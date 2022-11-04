@@ -2,29 +2,30 @@
 % Please edit documentation in R/acep_token_plot.R
 \name{acep_token_plot}
 \alias{acep_token_plot}
-\title{Gráfico de barras de palabras más recurrentes en un corpus.}
+\title{Grafico de barras de palabras mas recurrentes en un corpus.}
 \usage{
 acep_token_plot(x, u = 10, frec = TRUE)
 }
 \arguments{
 \item{x}{vector de palabras tokenizadas.}
 
-\item{u}{numero de corte para el top de palabras más frecuentes.}
+\item{u}{numero de corte para el top de palabras mas frecuentes.}
 
-\item{frec}{parámetro para determinar si los valores se visualizarán
+\item{frec}{parametro para determinar si los valores se visualizaran
 como frecuencia absoluta o relativa.}
 }
 \value{
 Si todas las entradas son correctas,
-la salida será un gráfico de barras.
+la salida sera un grafico de barras.
 }
 \description{
-Función que devuelve un gráfico de barras con las palabras
-más recurrentes en un corpus textual.
+Funcion que devuelve un grafico de barras con las palabras
+mas recurrentes en un corpus textual.
 }
 \examples{
-rev_puerto <- acep_clean(acep_bases$rev_puerto$titulo)
-rev_puerto_token <- acep_token(rev_puerto)
-acep_token_plot(rev_puerto_token$token)
+tokens <- c(rep("paro",15), rep("piquete",25), rep("corte",20), rep("manifestacion",10),
+rep("bloqueo",5), rep("alerta",16), rep("ciudad",12), rep("sindicato",11), rep("paritaria",14),
+rep("huelga",14), rep("escrache",15))
+acep_token_plot(tokens)
 }
-\keyword{visualización}
+\keyword{visualizacion}

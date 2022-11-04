@@ -7,20 +7,18 @@
 acep_frec(x)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la función de conteo
+\item{x}{vector de textos al que se le aplica la funcion de conteo
 de la frecuencia de palabras.}
 }
 \value{
-Si todas las entradas son correctas, la salida será un vector
+Si todas las entradas son correctas, la salida sera un vector
 con una frecuencia de palabras.
 }
 \description{
-Función que cuenta la frecuencia de palabras totales
+Funcion que cuenta la frecuencia de palabras totales
 en cada una de las notas/textos.
 }
 \examples{
-rev_puerto <- rev_puerto <- acep_bases$rev_puerto
-rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
-rev_puerto |> head()
+acep_frec("El SUTEBA fue al paro. Reclaman mejoras salariales.")
 }
 \keyword{indicadores}

@@ -2,10 +2,8 @@
 test_that("ACEP LOAD", {
   skip_if_offline()
   skip_on_cran()
-  tag <- paste0("https://github.com/HDyCSC/datos/raw/",
-                "67100a9b73c3fc9053c9dc9227a113bc2d317dae/",
-                "bd_sismos_mdp.rds")
-  oc <- acep_load_base(tag = tag)
-  dimensiones <- length(oc$id)
-  expect_equal(dimensiones, 5132)
+  bd_sismos <- acep_bases$rev_puerto
+  base <- acep_load_base(tag = bd_sismos) |> head()
+  dimensiones <- length(base)
+  expect_equal(dimensiones, length(base))
 })

@@ -26,9 +26,9 @@ acep_clean(
 }
 \arguments{
 \item{x}{vector de textos al que se le aplica la
-función de limpieza de texto.}
+funcion de limpieza de texto.}
 
-\item{tolower}{convierte los textos a minúsculas.}
+\item{tolower}{convierte los textos a minusculas.}
 
 \item{rm_cesp}{remueve caracteres especiales.}
 
@@ -38,35 +38,33 @@ función de limpieza de texto.}
 
 \item{rm_users}{remueve las menciones de usuarixs de redes sociales.}
 
-\item{rm_punt}{remueve la puntuación.}
+\item{rm_punt}{remueve la puntuacion.}
 
-\item{rm_num}{remueve números.}
+\item{rm_num}{remueve numeros.}
 
 \item{rm_url}{remueve las url.}
 
-\item{rm_meses}{remueve los meses del año.}
+\item{rm_meses}{remueve los meses del anio.}
 
-\item{rm_dias}{remueve los días de la semana.}
+\item{rm_dias}{remueve los dias de la semana.}
 
-\item{rm_stopwords}{remueve palabras vacías.}
+\item{rm_stopwords}{remueve palabras vacias.}
 
 \item{rm_shortwords}{remueve las palabras cortas.}
 
-\item{rm_newline}{remueve los saltos de línea.}
+\item{rm_newline}{remueve los saltos de linea.}
 
 \item{rm_whitespace}{remueve los espacios en blanco.}
 
 \item{other_sw}{su valor por defecto es NULL, sirve para ampliar el
 listado de stopwords con un nuevo vector de palabras.}
 
-\item{u}{umbral de caracteres para la función rm_shortwords.}
+\item{u}{umbral de caracteres para la funcion rm_shortwords.}
 }
 \description{
-Función que limpia y normaliza las notas/textos.
+Funcion que limpia y normaliza las notas/textos.
 }
 \examples{
-rev_puerto <- acep_bases$rev_puerto
-rev_puerto$titulo_limpio <- acep_clean(rev_puerto$titulo)
-rev_puerto |> head()
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.")
 }
-\keyword{normalización}
+\keyword{normalizacion}

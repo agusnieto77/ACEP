@@ -7,8 +7,8 @@
 \format{
 Son cadenas de caracteres.
 \describe{
-\item{stopwords}{es un string de palabras vacías.}
-\item{dias}{es un string de días.}
+\item{stopwords}{es un string de palabras vacias.}
+\item{dias}{es un string de dias.}
 \item{meses}{es un string de meses.}
 \item{emoji}{es un string con expresiones regulares para emojis.}
 \item{sintildes}{es un string de letras sin tildes.}

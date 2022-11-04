@@ -2,11 +2,10 @@
 test_that("ACEP DB", {
   skip_if_offline()
   skip_on_cran()
-  rev_puerto <- acep_bases$rev_puerto
-  rp_procesada <- acep_db(rev_puerto,
-                          rev_puerto$nota,
-                          acep_diccionarios$dicc_viol_gp,
-                          4)
-  dimensiones <- length(rev_puerto$nota)
-  expect_equal(dimensiones, length(rev_puerto$fecha))
+  df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+                             "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+  diccionario <- c("paro", "lucha", "piquetes")
+  db <- acep_db(df, df$texto, diccionario, 4)
+  dimensiones <- length(df)
+  expect_equal(dimensiones, length(df))
 })

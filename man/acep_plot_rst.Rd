@@ -2,23 +2,23 @@
 % Please edit documentation in R/acep_plot_rst.R
 \name{acep_plot_rst}
 \alias{acep_plot_rst}
-\title{Resumen visual de la serie temporal de los índices de conflictividad.}
+\title{Resumen visual de la serie temporal de los indices de conflictividad.}
 \usage{
 acep_plot_rst(db, tagx = "horizontal")
 }
 \arguments{
 \item{db}{data frame con datos procesados.}
 
-\item{tagx}{orientación de las etiquetas del
+\item{tagx}{orientacion de las etiquetas del
 eje x ('horizontal' | 'vertical').}
 }
 \value{
 Si todas las entradas son correctas,
-la salida será una imagen de cuatro paneles.
+la salida sera una imagen de cuatro paneles.
 }
 \description{
-Función que devuelve un panel visual de cuatro gráficos
-de barras con variables proxy de los índices de conflictividad agrupados
+Funcion que devuelve un panel visual de cuatro graficos
+de barras con variables proxy de los indices de conflictividad agrupados
 por segmento de tiempo.
 }
 \examples{
@@ -30,4 +30,4 @@ datos_procesados_anio <- acep_rst(datos,
 fecha, n_palabras, conflictos, st = 'anio')
 acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 }
-\keyword{visualización}
+\keyword{visualizacion}

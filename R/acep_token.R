@@ -1,15 +1,19 @@
 #' @title Tokenizador.
-#' @description Función que tokeniza las notas/textos.
-#' @param x vector de textos al que se le aplica la función de tokenización.
-#' @param tolower convierte los textos a minúsculas.
+#' @description Funcion que tokeniza las notas/textos.
+#' @param x vector de textos al que se le aplica la funcion de tokenizacion.
+#' @param tolower convierte los textos a minusculas.
 #' @keywords tokenizar
 #' @examples
-#' rev_puerto <- acep_bases$rev_puerto
-#' rev_puerto_token <- acep_token(rev_puerto$titulo)
-#' rev_puerto_token |> head()
+#' acep_token("Huelga de obreros del pescado en el puerto")
 #' @export
 
 acep_token <- function(x, tolower = TRUE) {
+  if(is.vector(x) != TRUE){
+    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
+    return(message(mensaje))
+  } else {
+    if(is.vector(x) == TRUE) {
+      tryCatch({
   if (tolower == TRUE) {
     id <- data.frame(id_doc = seq_len(length(x)), texto = x)
     id_token <- seq_len(length(unlist(strsplit(tolower(x), " "))))
@@ -34,4 +38,9 @@ acep_token <- function(x, tolower = TRUE) {
     id_token_doc = df$id_token_doc,
     token = df$token)
   return(df)
+      }
+      )
+    }
+  }
 }
+
