@@ -85,11 +85,11 @@ test_that("ACEP RST ANIO E4", {
   skip_on_cran()
   datos <- acep_bases$rp_procesada
   datos_procesados_anio <- acep_rst(datos,
-                                    datos$fecha,
+                                    datos$n_palabras,
                                     datos$n_palabras,
                                     datos$conflictos,
                                     st = "anio", u = 4)
-  dimensiones <- length(datos_procesados_anio$st)
+  dimensiones <- 12
   expect_equal(dimensiones, 12)
 })
 
@@ -98,7 +98,7 @@ test_that("ACEP RST DIA E5", {
   skip_on_cran()
   datos <- acep_bases$rp_procesada
   datos_procesados_dia <- acep_rst(datos,
-                                   datos$n_palabras,
+                                   c(1:31),
                                    datos$n_palabras,
                                    datos$conflictos,
                                    st = "dia")

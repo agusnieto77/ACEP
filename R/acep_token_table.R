@@ -15,8 +15,7 @@
 #' @export
 acep_token_table <- function(x, u = 10) {
   if(is.vector(x) != TRUE){
-    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
-    return(message(mensaje))
+    message("No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!")
   } else {
     if(is.vector(x) == TRUE) {
       tryCatch({

@@ -9,6 +9,7 @@
 #' @keywords datos
 #' @export acep_load_base
 #' @importFrom utils download.file
+#' @importFrom httr GET
 #' @return Si todas las entradas son correctas,
 #' la salida sera una base de datos en formato tabular con un corpus de notas.
 #' @examples
@@ -16,26 +17,17 @@
 #' acep_load_base(tag = bd_sismos) |> head()
 #' @export
 acep_load_base <- function(tag) {
-  out <- tryCatch(
-    { message("Descargando...")
-      url <- gsub("\\?download=1", "", tag)
+  url <- gsub("\\?download=1", "", tag)
+  if (httr::GET(url)$status_code != 200){
+    message("La URL parece no existir. Intentalo con otra url!")
+  } else {
+    message("Descargando...")
+    tryCatch({
       nombre <- basename(url)
       destfile <- file.path(tempdir(), nombre)
       download.file(url, destfile)
       readRDS(destfile)
-    },
-    error=function(cond) {
-      message(paste("La URL parece no existir:", url))
-      message("Este es el mensaje de error original:")
-      message(cond)
-      return(message("\nIntentalo nuevamente!"))
-    },
-    warning=function(cond) {
-      message(paste("La URL causo una advertencia:", url))
-      message("Este es el mensaje de advertencia original:")
-      message(cond)
-      return(message("\nIntentalo nuevamente!"))
     }
-  )
-  return(out)
+    )
+  }
 }

@@ -14,7 +14,7 @@ test_that("ACEP TOKEN TABLE E1", {
   skip_if_offline()
   skip_on_cran()
   df <- data.frame(texto = c("El SOIP lleva adelante un plan de lucha con paros y piquetes."))
-  acep_token_plot(df)
+  acep_token_table(df)
   dimensiones <- length(df)
   expect_equal(dimensiones, length(df))
 })

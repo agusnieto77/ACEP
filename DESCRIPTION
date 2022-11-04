@@ -22,7 +22,8 @@ Depends:
     R (>= 3.5.0)
 Imports:
     graphics,
-    stats
+    stats,
+    httr
 Suggests: 
     covr,
     testthat (>= 3.0.0)
