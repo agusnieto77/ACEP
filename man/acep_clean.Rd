@@ -65,6 +65,6 @@ listado de stopwords con un nuevo vector de palabras.}
 Funcion que limpia y normaliza las notas/textos.
 }
 \examples{
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.")
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_cesp = FALSE)
 }
 \keyword{normalizacion}

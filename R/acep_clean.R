@@ -53,12 +53,12 @@ acep_clean <- function(x,
                   replacement = "\\L\\1", x)
         }
       if (tolower == TRUE) {
-        tildes <- names(utils::read.delim('https://raw.githubusercontent.com/HDyCSC/datos/main/tildes.txt'))
+        tildes <- readRDS(url("https://observatoriodeconflictividad.org/basesdatos/tildes.rds"))
         x <- chartr(tildes, tolower(tildes), x)
         }
       if (rm_cesp == TRUE) {
-        tildes <- names(utils::read.delim('https://raw.githubusercontent.com/HDyCSC/datos/main/tildes.txt'))
-        sintildes <- names(utils::read.delim('https://raw.githubusercontent.com/HDyCSC/datos/main/sintildes.txt'))
+        tildes <- readRDS(url("https://observatoriodeconflictividad.org/basesdatos/tildes.rds"))
+        sintildes <- readRDS(url("https://observatoriodeconflictividad.org/basesdatos/sintildes.rds"))
         x <- chartr(tildes, sintildes, x)
         }
       if (rm_url == TRUE) {

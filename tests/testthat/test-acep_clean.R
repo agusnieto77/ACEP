@@ -131,3 +131,12 @@ test_that("ACEP CLEAN RMWSF", {
   dimensiones <- length(clean)
   expect_equal(dimensiones, length(clean))
 })
+
+test_that("ACEP CLEAN ERROR", {
+  skip_if_offline()
+  skip_on_cran()
+  df <- data.frame(V1=c(1:10), V2=c(letters[1:10]))
+  clean <- acep_clean(df)
+  dimensiones <- length(clean)
+  expect_equal(dimensiones, length(clean))
+})

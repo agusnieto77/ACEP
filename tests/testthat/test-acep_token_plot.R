@@ -20,3 +20,12 @@ test_that("ACEP TOKEN PLOT F", {
   dimensiones <- length(tokens)
   expect_equal(dimensiones, length(tokens))
 })
+
+test_that("ACEP TOKEN PLOT T E1", {
+  skip_if_offline()
+  skip_on_cran()
+  df <- data.frame(texto = c("El SOIP lleva adelante un plan de lucha con paros y piquetes."))
+  acep_token_plot(df)
+  dimensiones <- length(df)
+  expect_equal(dimensiones, length(df))
+})

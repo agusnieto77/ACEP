@@ -2,7 +2,7 @@
 #' @description Funcion que devuelve un panel visual de cuatro graficos
 #' de barras con variables proxy de los indices de conflictividad agrupados
 #' por segmento de tiempo.
-#' @param db data frame con datos procesados.
+#' @param datos data frame con datos procesados.
 #' @param tagx orientacion de las etiquetas del
 #' eje x ('horizontal' | 'vertical').
 #' @export acep_plot_rst
@@ -19,36 +19,25 @@
 #' fecha, n_palabras, conflictos, st = 'anio')
 #' acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 #' @export
-acep_plot_rst <- function(db, tagx = "horizontal") {
-    if(is.data.frame(db) != TRUE){
-      mensaje <- "No ingresaste un marco de datos en el parametro db. Vuelve a intentarlo ingresando un marco de datos!"
-      return(message(mensaje))
-  }
-  if((paste(names(db),collapse = '') != "stfrecncsnfrecpfrecmintacintensidadint_notas_confl")){
-    mensaje <- "No ingresaste un marco de datos adecuado en el parametro db. Vuelve a intentarlo ingresando un marco de datos adecuado!"
-    return(message(mensaje))
-  } else {
-    if((paste(names(db),collapse = '') == "stfrecncsnfrecpfrecmintacintensidadint_notas_confl") && is.data.frame(db) == TRUE) {
+acep_plot_rst <- function(datos, tagx = "horizontal") {
       tryCatch({
       oldpar <- par(no.readonly = TRUE)
       on.exit(par(oldpar))
-      db <- db
+      datos <- datos
       par(mfrow = c(2, 2))
-      acep_plot_st(db$st, db$int_notas_confl,
+      acep_plot_st(datos$st, datos$int_notas_confl,
                    t = "Eventos de protesta",
                    etiquetax = tagx)
-      acep_plot_st(db$st, db$frecm,
+      acep_plot_st(datos$st, datos$frecm,
                    t = "Acciones de protesta",
                    etiquetax = tagx)
-      acep_plot_st(db$st, db$intensidad,
+      acep_plot_st(datos$st, datos$intensidad,
                    t = "Intensidad de la protesta",
                    etiquetax = tagx)
-      acep_plot_st(db$st, db$intac,
+      acep_plot_st(datos$st, datos$intac,
                    t = "Intensidad acumulada de la protesta",
                    etiquetax = tagx)
       par(mfrow = c(1, 1))
 }
     )
   }
-}
-}

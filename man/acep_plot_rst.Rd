@@ -4,10 +4,10 @@
 \alias{acep_plot_rst}
 \title{Resumen visual de la serie temporal de los indices de conflictividad.}
 \usage{
-acep_plot_rst(db, tagx = "horizontal")
+acep_plot_rst(datos, tagx = "horizontal")
 }
 \arguments{
-\item{db}{data frame con datos procesados.}
+\item{datos}{data frame con datos procesados.}
 
 \item{tagx}{orientacion de las etiquetas del
 eje x ('horizontal' | 'vertical').}
