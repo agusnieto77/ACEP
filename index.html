@@ -5,16 +5,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="La librería ACEP contiene funciones específicas para
-    desarrollar análisis computacional de eventos de protesta. Asimismo,
+<meta name="description" content="La libreria ACEP contiene funciones especificas para
+    desarrollar analisis computacional de eventos de protesta. Asimismo,
     contiene base de datos con colecciones de notas sobre protestas y
-    diccionarios de palabras conflictivas. Colección de diccionarios que
-    reúne diccionarios de diferentes orígenes.  The ACEP library
+    diccionarios de palabras conflictivas. Coleccion de diccionarios que
+    reune diccionarios de diferentes origenes.  The ACEP library
     contains specific functions to perform computational analysis of
     protest events. It also contains a database with collections of notes
     on protests and dictionaries of conflicting words. Collection of
     dictionaries that brings together dictionaries from different sources.">
-<title>Análisis Computacional de Eventos de Protesta • ACEP</title>
+<title>Analisis Computacional de Eventos de Protesta • ACEP</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -25,12 +25,12 @@
 <link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Análisis Computacional de Eventos de Protesta">
-<meta property="og:description" content="La librería ACEP contiene funciones específicas para
-    desarrollar análisis computacional de eventos de protesta. Asimismo,
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Analisis Computacional de Eventos de Protesta">
+<meta property="og:description" content="La libreria ACEP contiene funciones especificas para
+    desarrollar analisis computacional de eventos de protesta. Asimismo,
     contiene base de datos con colecciones de notas sobre protestas y
-    diccionarios de palabras conflictivas. Colección de diccionarios que
-    reúne diccionarios de diferentes orígenes.  The ACEP library
+    diccionarios de palabras conflictivas. Coleccion de diccionarios que
+    reune diccionarios de diferentes origenes.  The ACEP library
     contains specific functions to perform computational analysis of
     protest events. It also contains a database with collections of notes
     on protests and dictionaries of conflicting words. Collection of
@@ -49,7 +49,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,27 +85,27 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.svg" class="logo" alt=""><h1 id="acep-análisis-computacional-de-eventos-de-protesta">ACEP: Análisis Computacional de Eventos de Protesta<a class="anchor" aria-label="anchor" href="#acep-an%C3%A1lisis-computacional-de-eventos-de-protesta"></a>
+<img src="logo.svg" class="logo" alt=""><h1 id="acep-analisis-computacional-de-eventos-de-protesta">ACEP: Analisis Computacional de Eventos de Protesta<a class="anchor" aria-label="anchor" href="#acep-analisis-computacional-de-eventos-de-protesta"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
 <div class="section level3">
-<h3 id="visión-general">Visión general<a class="anchor" aria-label="anchor" href="#visi%C3%B3n-general"></a>
+<h3 id="vision-general">Vision general<a class="anchor" aria-label="anchor" href="#vision-general"></a>
 </h3>
-<p>ACEP es un paquete de funciones en lenguaje R útiles para la detección y el análisis de eventos de protesta en corpus de textos periodísticos. Sus funciones son aplicables a cualquier corpus de textos. Además de las funciones, ACEP contiene también bases de datos con colecciones de notas sobre protestas y una colección de diccionarios de palabras conflictivas y otros tópicos referidos a diferentes aspectos del análisis de eventos de protesta.</p>
+<p>ACEP es un paquete de funciones en lenguaje R utiles para la deteccion y el analisis de eventos de protesta en corpus de textos periodisticos. Sus funciones son aplicables a cualquier corpus de textos. Ademas de las funciones, ACEP contiene tambien bases de datos con colecciones de notas sobre protestas y una coleccion de diccionarios de palabras conflictivas y otros topicos referidos a diferentes aspectos del analisis de eventos de protesta.</p>
 </div>
 <div class="section level3">
-<h3 id="instalación-de-la-versión-estable">Instalación de la versión estable<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n-de-la-versi%C3%B3n-estable"></a>
+<h3 id="instalacion-de-la-version-estable">Instalacion de la version estable<a class="anchor" aria-label="anchor" href="#instalacion-de-la-version-estable"></a>
 </h3>
-<p>Puedes instalar la versión estable de ACEP desde <a href="https://CRAN.R-project.org/package=ACEP" class="external-link">CRAN</a> con:</p>
+<p>Puedes instalar la version estable de ACEP desde <a href="https://CRAN.R-project.org/package=ACEP" class="external-link">CRAN</a> con:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ACEP"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="instalación-de-la-versión-en-desarrollo">Instalación de la versión en desarrollo<a class="anchor" aria-label="anchor" href="#instalaci%C3%B3n-de-la-versi%C3%B3n-en-desarrollo"></a>
+<h3 id="instalacion-de-la-version-en-desarrollo">Instalacion de la version en desarrollo<a class="anchor" aria-label="anchor" href="#instalacion-de-la-version-en-desarrollo"></a>
 </h3>
-<p>Puedes instalar la versión de desarrollo de ACEP desde <a href="https://github.com/agusnieto77/ACEP" class="external-link">GitHub</a> con:</p>
+<p>Puedes instalar la version de desarrollo de ACEP desde <a href="https://github.com/agusnieto77/ACEP" class="external-link">GitHub</a> con:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"agusnieto77/ACEP"</span><span class="op">)</span></span></code></pre></div>
@@ -120,7 +120,7 @@
 </colgroup>
 <thead><tr class="header">
 <th align="left">Nombre</th>
-<th align="left">Descripción</th>
+<th align="left">Descripcion</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -133,7 +133,7 @@
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="reference/acep_detect.html">acep_detect()</a></code></td>
-<td align="left">Detección de menciones de palabras.</td>
+<td align="left">Deteccion de menciones de palabras.</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/acep_frec.html">acep_frec()</a></code></td>
@@ -141,7 +141,7 @@
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="reference/acep_int.html">acep_int()</a></code></td>
-<td align="left">Índice de intensidad.</td>
+<td align="left">indice de intensidad.</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/acep_load_base.html">acep_load_base()</a></code></td>
@@ -153,23 +153,23 @@
 </tr>
 <tr class="even">
 <td align="left"><code>acep_post_rst()</code></td>
-<td align="left">Resumen visual de la serie temporal de los índices de conflictividad.</td>
+<td align="left">Resumen visual de la serie temporal de los indices de conflictividad.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>acep_post_st()</code></td>
-<td align="left">Gráfico de barras de la serie temporal de índices de conflictividad.</td>
+<td align="left">Grafico de barras de la serie temporal de indices de conflictividad.</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/acep_rst.html">acep_rst()</a></code></td>
-<td align="left">Serie temporal de índices de conflictividad.</td>
+<td align="left">Serie temporal de indices de conflictividad.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="reference/acep_token.html">acep_token()</a></code></td>
-<td align="left">Función para tokenizar.</td>
+<td align="left">Funcion para tokenizar.</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/acep_token_plot.html">acep_token_plot()</a></code></td>
-<td align="left">Gráfico de barras de palabras más recurrentes en un corpus.</td>
+<td align="left">Grafico de barras de palabras mas recurrentes en un corpus.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="reference/acep_token_table.html">acep_token_table()</a></code></td>
@@ -188,16 +188,16 @@
 </colgroup>
 <thead><tr class="header">
 <th align="left">Nombre</th>
-<th align="left">Descripción</th>
+<th align="left">Descripcion</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left"><code>acep_bases</code></td>
-<td align="left">Colección de notas.</td>
+<td align="left">Coleccion de notas.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>acep_diccionarios</code></td>
-<td align="left">Colección de diccionarios.</td>
+<td align="left">Coleccion de diccionarios.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>acep_rs</code></td>
@@ -209,12 +209,12 @@
 <div class="section level3">
 <h3 id="corpus">Corpus<a class="anchor" aria-label="anchor" href="#corpus"></a>
 </h3>
-<p><a href="https://doi.org/10.5281/zenodo.6800663" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg" alt="DOI"></a> Colección de notas del diario <strong><em>La Nación</em></strong></p>
-<p><a href="https://doi.org/10.5281/zenodo.6800765" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800765.svg" alt="DOI"></a> Subset de notas del diario <strong><em>La Nación</em></strong></p>
-<p><a href="https://doi.org/10.5281/zenodo.6800617" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800617.svg" alt="DOI"></a> Colección de notas del <strong><em>Ecos Diarios</em></strong></p>
-<p><a href="https://doi.org/10.5281/zenodo.6800637" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800637.svg" alt="DOI"></a> Colección de notas de la <strong><em>Revista Puerto</em></strong></p>
-<p><a href="https://doi.org/10.5281/zenodo.6800650" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800650.svg" alt="DOI"></a> Colección de notas del diario <strong><em>La Nueva</em></strong></p>
-<p><a href="https://doi.org/10.5281/zenodo.6800660" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg" alt="DOI"></a> Colección de notas del diario <strong><em>La Capital</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800663" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg" alt="DOI"></a> Coleccion de notas del diario <strong><em>La Nacion</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800765" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800765.svg" alt="DOI"></a> Subset de notas del diario <strong><em>La Nacion</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800617" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800617.svg" alt="DOI"></a> Coleccion de notas del <strong><em>Ecos Diarios</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800637" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800637.svg" alt="DOI"></a> Coleccion de notas de la <strong><em>Revista Puerto</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800650" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800650.svg" alt="DOI"></a> Coleccion de notas del diario <strong><em>La Nueva</em></strong></p>
+<p><a href="https://doi.org/10.5281/zenodo.6800660" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg" alt="DOI"></a> Coleccion de notas del diario <strong><em>La Capital</em></strong></p>
 </div>
 <div class="section level3">
 <h3 id="bases-de-datos-de-eventos-de-protesta-disponibles-online">Bases de datos de Eventos de protesta disponibles online<a class="anchor" aria-label="anchor" href="#bases-de-datos-de-eventos-de-protesta-disponibles-online"></a>
@@ -230,12 +230,12 @@
 <p><a href="https://www.pcr.uu.se/research/ucdp/" class="external-link">UCDP</a>: Uppsala Conflict Data Program.</p>
 </div>
 <div class="section level3">
-<h3 id="bases-de-datos-de-interés-general">Bases de datos de interés general<a class="anchor" aria-label="anchor" href="#bases-de-datos-de-inter%C3%A9s-general"></a>
+<h3 id="bases-de-datos-de-interes-general">Bases de datos de interes general<a class="anchor" aria-label="anchor" href="#bases-de-datos-de-interes-general"></a>
 </h3>
 <p><a href="https://data.imf.org/?sk=388dfa60-1d26-4ade-b505-a05a558d9a42" class="external-link">FMI</a>: FMI Data.</p>
 <p><a href="https://datos.bancomundial.org/" class="external-link">BM</a>: Datos de libre acceso del Banco Mundial.</p>
-<p><a href="https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm" class="external-link">OIT</a>: Estadísticas y bases de datos.</p>
-<p><a href="https://www.cepal.org/es/datos-y-estadisticas" class="external-link">CEPAL</a>: Datos y estadísticas.</p>
+<p><a href="https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm" class="external-link">OIT</a>: Estadisticas y bases de datos.</p>
+<p><a href="https://www.cepal.org/es/datos-y-estadisticas" class="external-link">CEPAL</a>: Datos y estadisticas.</p>
 <p><a href="https://www.datos.gob.ar/" class="external-link">DARG</a>: Datos abiertos de Argentina.</p>
 <p><a href="https://datos.mardelplata.gob.ar/" class="external-link">MGP</a>: Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires, Argentina.</p>
 </div>
@@ -244,23 +244,25 @@
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># Cargamos la librería</span></span>
+<span><span class="co"># Cargamos la libreria</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agusnieto77/ACEP" class="external-link">ACEP</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: ACEP</span></span>
 <span></span>
-<span><span class="co"># Cargamos la base de notas de la Revista Puerto con la función acep_load_base()</span></span>
+<span><span class="co"># Cargamos la base de notas de la Revista Puerto con la funcion acep_load_base()</span></span>
 <span><span class="va">rev_puerto</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">acep_bases</span><span class="op">$</span><span class="va">rp_mdp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Cargamos la etiqueta de la base a descargar</span></span>
 <span><span class="va">rp_mdp</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rp_mdp</span></span>
 <span></span>
 <span><span class="co"># Cargamos la base de notas de la Revista Puerto</span></span>
 <span><span class="va">revista_puerto</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">rp_mdp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Cargamos el diccionario de conflictos de SISMOS</span></span>
 <span><span class="va">dicc_confl_sismos</span> <span class="op">&lt;-</span> <span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_confl_sismos</span></span>
 <span></span>
-<span><span class="co"># Con la función acep_frec() contamos la frecuencia de palabras de cada nota</span></span>
+<span><span class="co"># Con la funcion acep_frec() contamos la frecuencia de palabras de cada nota</span></span>
 <span><span class="co"># y creamos una nueva columna llamada  n_palabras</span></span>
 <span><span class="va">revista_puerto</span><span class="op">$</span><span class="va">n_palabras</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_frec.html">acep_frec</a></span><span class="op">(</span><span class="va">revista_puerto</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span>
 <span></span>
@@ -277,10 +279,10 @@
 <span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica cautelar con… La Cá… "La … https… http…     462</span></span>
 <span><span class="co">#&gt; # … with abbreviated variable name ¹​n_palabras</span></span>
 <span></span>
-<span><span class="co"># Ahora con la función acep_men() contamos la frecuencia de menciones de</span></span>
-<span><span class="co"># términos del diccionario de conflictividad de SISMOS de cada nota y</span></span>
+<span><span class="co"># Ahora con la funcion acep_men() contamos la frecuencia de menciones de</span></span>
+<span><span class="co"># terminos del diccionario de conflictividad de SISMOS de cada nota y</span></span>
 <span><span class="co"># creamos una nueva columna llamada  conflictos.</span></span>
-<span><span class="co"># Elaboramos un corpus más pequeño para el ejemplo</span></span>
+<span><span class="co"># Elaboramos un corpus acotado para el ejemplo</span></span>
 <span><span class="va">revista_puerto</span> <span class="op">&lt;-</span> <span class="va">revista_puerto</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="op">]</span></span>
 <span><span class="va">revista_puerto</span><span class="op">$</span><span class="va">conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">revista_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_confl_sismos</span><span class="op">)</span></span>
 <span></span>
@@ -291,14 +293,14 @@
 <span><span class="co">#&gt;   fecha      titulo                    bajada nota  imagen link  n_pal…¹ confl…²</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;                     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 para tod… Con m… "Con… https… http…      31       0</span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo esclavo… Un re… "El … https… http…    1128       4</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tener gara… En Ch… "El … https… http…     530       3</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obreros navales desp… En Ma… "El … https… http…     483       8</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento del ré… Se ll… "Las… https… http…     525       4</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica caut… La Cá… "La … https… http…     462       6</span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo esclavo… Un re… "El … https… http…    1128       0</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden tener gara… En Ch… "El … https… http…     530       0</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros navales desp… En Ma… "El … https… http…     483       0</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimiento del ré… Se ll… "Las… https… http…     525       0</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratifica caut… La Cá… "La … https… http…     462       0</span></span>
 <span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos</span></span>
 <span></span>
-<span><span class="co"># Ahora con la función acep_int() calculamos un índice de intensidad de</span></span>
+<span><span class="co"># Ahora con la funcion acep_int() calculamos un indice de intensidad de</span></span>
 <span><span class="co"># la conflictividad y creamos una nueva columna llamada  intensidad</span></span>
 <span><span class="va">revista_puerto</span><span class="op">$</span><span class="va">intensidad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_int.html">acep_int</a></span><span class="op">(</span></span>
 <span>  <span class="va">revista_puerto</span><span class="op">$</span><span class="va">conflictos</span>,</span>
@@ -310,16 +312,17 @@
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0   0    </span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       4   0.004</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       3   0.006</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       8   0.017</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       4   0.008</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       6   0.013</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0       0</span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       0       0</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       0       0</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       0       0</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       0       0</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       0       0</span></span>
 <span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Volvemos a cargar la base de notas de la Revista Puerto sin procesar</span></span>
 <span><span class="va">revista_puerto</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">rp_mdp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Creamos un subset</span></span>
 <span><span class="va">subset_rp</span> <span class="op">&lt;-</span> <span class="va">revista_puerto</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="op">]</span></span>
@@ -327,7 +330,7 @@
 <span><span class="co"># Cargamos el diccionario de conflictos de SISMOS</span></span>
 <span><span class="va">dicc_confl_sismos</span> <span class="op">&lt;-</span> <span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_confl_sismos</span></span>
 <span></span>
-<span><span class="co"># Ahora con la función acep_db() aplicamos las tres funciones en un solo paso</span></span>
+<span><span class="co"># Ahora con la funcion acep_db() aplicamos las tres funciones en un solo paso</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_db.html">acep_db</a></span><span class="op">(</span><span class="va">subset_rp</span>, <span class="va">subset_rp</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_confl_sismos</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos en pantalla la base con las tres columna creadas</span></span>
@@ -335,23 +338,23 @@
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0   0    </span></span>
-<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       4   0.004</span></span>
-<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       3   0.006</span></span>
-<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       8   0.017</span></span>
-<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       4   0.008</span></span>
-<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       6   0.013</span></span>
+<span><span class="co">#&gt; 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0       0</span></span>
+<span><span class="co">#&gt; 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       0       0</span></span>
+<span><span class="co">#&gt; 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       0       0</span></span>
+<span><span class="co">#&gt; 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       0       0</span></span>
+<span><span class="co">#&gt; 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       0       0</span></span>
+<span><span class="co">#&gt; 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       0       0</span></span>
 <span><span class="co">#&gt; # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cargamos los datos procesados</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rp_procesada</span></span>
 <span></span>
-<span><span class="co"># Ahora con la función acep_rst() elaboramos un resumen estadístico</span></span>
+<span><span class="co"># Ahora con la funcion acep_rst() elaboramos un resumen estadistico</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/acep_rst.html">acep_rst</a></span><span class="op">(</span></span>
 <span>  <span class="va">rp_procesada</span>, <span class="va">rp_procesada</span><span class="op">$</span><span class="va">fecha</span>, <span class="va">rp_procesada</span><span class="op">$</span><span class="va">n_palabras</span>,</span>
 <span>  <span class="va">rp_procesada</span><span class="op">$</span><span class="va">conflictos</span>, st <span class="op">=</span> <span class="st">"anio"</span>, u <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Imprimimos en pantalla la base con las métricas de conflictividad</span></span>
+<span><span class="co"># Imprimimos en pantalla la base con las metricas de conflictividad</span></span>
 <span><span class="va">rp_procesada</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     st frecn csn  frecp frecm  intac intensidad int_notas_confl</span></span>
 <span><span class="co">#&gt; 1 2009   632  58 496110  1025 1.2735     0.0021          0.0918</span></span>
@@ -361,18 +364,18 @@
 <span><span class="co">#&gt; 5 2013   689  24 525718   758 1.0559     0.0014          0.0348</span></span>
 <span><span class="co">#&gt; 6 2014   631  30 444823   802 1.2112     0.0018          0.0475</span></span>
 <span></span>
-<span><span class="co"># Ahora con la función acep_plot_st() elaboramos un gráfico de barras</span></span>
+<span><span class="co"># Ahora con la funcion acep_plot_st() elaboramos un grafico de barras</span></span>
 <span><span class="co"># con menciones del diccionario de conflictividad</span></span>
 <span><span class="fu"><a href="reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span><span class="va">rp_procesada</span><span class="op">$</span><span class="va">st</span>, <span class="va">rp_procesada</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span> t <span class="op">=</span> <span class="st">"Evolución de la conflictividad en el sector pesquero argentino"</span>,</span>
-<span> ejex <span class="op">=</span> <span class="st">"Años analizados"</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Evolucion de la conflictividad en el sector pesquero argentino"</span>,</span>
+<span> ejex <span class="op">=</span> <span class="st">"Anios analizados"</span>,</span>
 <span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario de conflictos"</span>,</span>
 <span> etiquetax <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-ejemplo3-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># Ahora con la función acep_plot_rst() elaboramos una visualización resumen.</span></span>
-<span><span class="co"># con cuatro gráficos de barras</span></span>
+<span><span class="co"># Ahora con la funcion acep_plot_rst() elaboramos una visualizacion resumen.</span></span>
+<span><span class="co"># con cuatro graficos de barras</span></span>
 <span><span class="fu"><a href="reference/acep_plot_rst.html">acep_plot_rst</a></span><span class="op">(</span><span class="va">rp_procesada</span>, tagx <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-ejemplo3-2.png" width="100%"></p>
 </div>
@@ -405,7 +408,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Agustín Nieto <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4467-873X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Agustin Nieto <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4467-873X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -435,7 +438,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Agustín Nieto.</p>
+<p>Developed by Agustin Nieto.</p>
 </div>
 
 <div class="pkgdown-footer-right">
