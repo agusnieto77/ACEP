@@ -53,10 +53,6 @@ acep_rst <- function(datos, fecha, frecp, frecm,
     mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
     return(message(mensaje))
   }
-  if(is.numeric(fecha) == TRUE){
-    mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
-    return(message(mensaje))
-  }
   if(!is.numeric(frecp)){
     mensaje <- "No ingresaste un vector numerico en el parametro frecp. Vuelve a intentarlo ingresando un vector numerico!"
     return(message(mensaje))
