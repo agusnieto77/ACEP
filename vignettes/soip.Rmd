@@ -1,0 +1,23 @@
+---
+title: "Conflictividad laboral en la pesca"
+date: "`r Sys.Date()`"
+author: "Agustín Nieto"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{soip}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ACEP)
+```
+
+En desarrollo...
