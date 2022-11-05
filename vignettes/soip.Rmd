@@ -27,6 +27,9 @@ library(ACEP)
 # Cargamos la librería tibble
 library(tibble)
 
+# Cargamos la librería dplyr
+library(dplyr)
+
 # Definimos la url
 url <- acep_bases$rp_mdp
 
@@ -40,9 +43,6 @@ rev_puerto
 Una vez descargada la base de notas vamos a crear un nueva variable que contenga la frecuencia de palabras de cada nota.
 
 ```{r diccionarios}
-# Cargamos la librería dplyr
-library(dplyr)
-
 # Creamos la variable con al frecuencia de palabras por nota
 rev_puerto <- rev_puerto |> mutate(frec_palabras = acep_frec(rev_puerto$nota))
 
