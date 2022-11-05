@@ -210,7 +210,7 @@ rp_procesada |> head()
 # con menciones del diccionario de conflictividad
 acep_plot_st(rp_procesada$st, rp_procesada$frecm,
  t = "Evolucion de la conflictividad en el sector pesquero argentino",
- ejex = "Anios analizados",
+ ejex = "A\u00f1os analizados",
  ejey = "Menciones del diccionario de conflictos",
  etiquetax = "horizontal")
 
