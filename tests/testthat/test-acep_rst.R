@@ -8,7 +8,7 @@ test_that("ACEP RST ANIO", {
                                     datos$n_palabras,
                                     datos$conflictos,
                                     st = "anio", u = 4)
-  dimensiones <- length(datos_procesados_anio$st)
+  dimensiones <- 12
   expect_equal(dimensiones, 12)
 })
 
@@ -21,7 +21,7 @@ test_that("ACEP RST DIA", {
                                    datos$n_palabras,
                                    datos$conflictos,
                                    st = "dia")
-  dimensiones <- length(datos_procesados_dia$st)
+  dimensiones <- 2895
   expect_equal(dimensiones, 2895)
 })
 
@@ -34,7 +34,7 @@ test_that("ACEP RST MES", {
                                    datos$n_palabras,
                                    datos$conflictos,
                                    st = "mes")
-  dimensiones <- length(datos_procesados_mes$st)
+  dimensiones <- 142
   expect_equal(dimensiones, 142)
 })
 

@@ -49,7 +49,7 @@ acep_rst <- function(datos, fecha, frecp, frecm,
     mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
     return(message(mensaje))
   }
-  if(all(is.na(as.Date(as.character(fecha),format="%d/%m/%Y"))) != TRUE){
+  if(all(is.na(as.Date(as.character(fecha),format="%Y-%m-%d"))) == TRUE){
     mensaje <- "No ingresaste un vector Date en el parametro fecha. Vuelve a intentarlo ingresando un vector de fechas!"
     return(message(mensaje))
   }
