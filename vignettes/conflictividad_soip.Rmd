@@ -4,11 +4,11 @@ date: "`r Sys.Date()`"
 author: "Agust\u00edn Nieto"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{soip}
+  %\VignetteIndexEntry{conflictividad_soip}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
+  
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -43,7 +43,7 @@ Una vez descargada la base de notas vamos a crear un nueva variable que contenga
 
 ```{r diccionarios}
 # Creamos la variable con al frecuencia de palabras por nota
-rev_puerto <- rev_puerto |> mutate(frec_palabras = acep_frec(rev_puerto$nota))
+rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
 
 # Cargamos el diccionario de palabras que refieren a conflictividad
 dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
@@ -77,3 +77,4 @@ rev_puerto
 
 
 En desarrollo...
+
