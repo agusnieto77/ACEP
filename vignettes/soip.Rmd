@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+#options(rmarkdown.html_vignette.check_title = FALSE) 
 library(ACEP)
 library(tibble)
 library(dplyr)
@@ -22,6 +23,8 @@ library(dplyr)
 ## Introducción
 
 En este artículo desarrollaremos un análisis de la conflictividad laboral en la industria pesquera argentina con un enfoque de diccionario en base a las funciones del paquete ACEP. También avanzaremos en un procesamiento elemental del corpus de notas en base a la función `acep_token()`. En esta oportunidad pondremos el foco en la conflictividad laboral protagonizada por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata entre los años 2009 y 2020.
+
+## El corpus de notas
 
 ```{r setup}
 # Cargamos la librería ACEP
