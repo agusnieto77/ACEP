@@ -106,19 +106,6 @@ test_that("ACEP RST DIA E5", {
   expect_equal(dimensiones, 2895)
 })
 
-test_that("ACEP RST DIA E5b", {
-  skip_if_offline()
-  skip_on_cran()
-  datos <- acep_bases$rp_procesada
-  datos_procesados_dia <- acep_rst(datos,
-                                   c(1:31),
-                                   datos$n_palabras,
-                                   datos$conflictos,
-                                   st = "dia")
-  dimensiones <- 2895
-  expect_equal(dimensiones, 2895)
-})
-
 test_that("ACEP RST MES E6", {
   skip_if_offline()
   skip_on_cran()
