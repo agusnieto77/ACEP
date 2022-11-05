@@ -18,11 +18,63 @@ knitr::opts_chunk$set(
 
 ## Introducción
 
-En este artículo desarrollaremos un análisis de la conflictividad laboral en la industria pesquera argentina con un enfoque de diccionario en base a las funciones del paquete ACEP. También avanzaremos en un procesamiento elemental del corpus de notas en base a la función `acep_token()`. En esta oportunidad pondremos el foco en la conflictividad laboral protagonizada por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad de mar del Plata ente los años 2009 y 2021.
+En este artículo desarrollaremos un análisis de la conflictividad laboral en la industria pesquera argentina con un enfoque de diccionario en base a las funciones del paquete ACEP. También avanzaremos en un procesamiento elemental del corpus de notas en base a la función `acep_token()`. En esta oportunidad pondremos el foco en la conflictividad laboral protagonizada por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata entre los años 2009 y 2020.
 
 ```{r setup}
 # Cargamos la librería ACEP
 library(ACEP)
+
+# Cargamos la librería tibble
+library(tibble)
+
+# Definimos la url
+url <- acep_bases$rp_mdp
+
+# Descargamos el corpus de notas de la Revista Puerto
+rev_puerto <- acep_load_base(url) |> as_tibble()
+
+# Imprimimos la base en consola
+rev_puerto
 ```
+
+Una vez descargada la base de notas vamos a crear un nueva variable que contenga la frecuencia de palabras de cada nota.
+
+```{r}
+# Cargamos la librería dplyr
+library(dplyr)
+
+# Creamos la variable con al frecuencia de palabras por nota
+rev_puerto <- rev_puerto |> mutate(frec_palabras = acep_frec(rev_puerto$nota))
+
+# Cargamos el diccionario de palabras que refieren a conflictividad
+dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
+
+# Creamos la variable con al frecuencia de palabras que refieren a conflictividad
+rev_puerto <- rev_puerto |> mutate(frec_conflictos = acep_men(rev_puerto$nota, dicc_conflictos))
+
+# Creamos el diccionario de palabras que refieren a huelgas
+dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
+                  "paro de actividades", "conciliación obligatoria", "un paro", 
+                  "paro total", "paro parcial", "trabajo a reglamento", 
+                  "el paro", "de brazos caídos")
+
+# Creamos la variable con al frecuencia de palabras que refieren a huelgas
+rev_puerto <- rev_puerto |> mutate(frec_huelgas = acep_men(rev_puerto$nota, dicc_huelgas))
+
+# Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
+dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
+               "sindicato de la industria del pescado", "huelguistas", 
+               "obreras de la industria del pescado", "obreras del pescado",
+               "obreros de la industria del pescado", "obreros del pescado",
+               "fileteros", "fileteras", "obreros del filet", "obreras del filet")
+
+# Creamos la variable con al frecuencia de palabras que refieren a lxs obrerxs del pescado
+rev_puerto <- rev_puerto |> mutate(frec_soip = acep_men(rev_puerto$nota, dicc_soip))
+
+# Imprimimos la base en consola
+rev_puerto
+
+```
+
 
 En desarrollo...
