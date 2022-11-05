@@ -10,6 +10,12 @@
     <loc>https://agusnieto77.github.io/ACEP/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/articles/soip.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/authors.html</loc>
   </url>
   <url>
@@ -22,7 +28,13 @@
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_bases.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_clean.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_db.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_detect.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_diccionarios.html</loc>
@@ -46,7 +58,19 @@
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_st.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_rs.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_rst.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token_table.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/index.html</loc>
