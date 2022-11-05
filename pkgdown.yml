@@ -2,8 +2,8 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
-  soip: soip.html
-last_built: 2022-11-05T05:02Z
+  conflictividad_soip: conflictividad_soip.html
+last_built: 2022-11-05T19:02Z
 urls:
   reference: https://agusnieto77.github.io/ACEP/reference
   article: https://agusnieto77.github.io/ACEP/articles
