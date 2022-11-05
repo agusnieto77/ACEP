@@ -85,7 +85,7 @@ test_that("ACEP RST ANIO E4", {
   skip_on_cran()
   datos <- acep_bases$rp_procesada
   datos_procesados_anio <- acep_rst(datos,
-                                    datos$n_palabras,
+                                    c(1:31),
                                     datos$n_palabras,
                                     datos$conflictos,
                                     st = "anio", u = 4)

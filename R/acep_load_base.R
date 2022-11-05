@@ -17,15 +17,14 @@
 #' acep_load_base(tag = bd_sismos) |> head()
 #' @export
 acep_load_base <- function(tag) {
-  url <- gsub("\\?download=1", "", tag)
-  if (httr::GET(url)$status_code != 200){
+  if (httr::GET(tag)$status_code != 200){
     message("La URL parece no existir. Intentalo con otra url!")
   } else {
     message("Descargando...")
     tryCatch({
-      nombre <- basename(url)
+      nombre <- basename(tag)
       destfile <- file.path(tempdir(), nombre)
-      download.file(url, destfile)
+      download.file(tag, destfile)
       readRDS(destfile)
     }
     )
