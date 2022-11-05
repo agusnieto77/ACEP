@@ -39,7 +39,7 @@ rev_puerto
 
 Una vez descargada la base de notas vamos a crear un nueva variable que contenga la frecuencia de palabras de cada nota.
 
-```{r}
+```{r diccionarios}
 # Cargamos la librería dplyr
 library(dplyr)
 
