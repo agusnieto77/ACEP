@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-#options(rmarkdown.html_vignette.check_title = FALSE) 
-library(ACEP)
-library(tibble)
-library(dplyr)
 ```
 
 ## Introducción
@@ -32,9 +28,6 @@ library(ACEP)
 
 # Cargamos la librería tibble
 library(tibble)
-
-# Cargamos la librería dplyr
-library(dplyr)
 
 # Definimos la url
 url <- acep_bases$rp_mdp
@@ -56,7 +49,7 @@ rev_puerto <- rev_puerto |> mutate(frec_palabras = acep_frec(rev_puerto$nota))
 dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
 
 # Creamos la variable con al frecuencia de palabras que refieren a conflictividad
-rev_puerto <- rev_puerto |> mutate(frec_conflictos = acep_men(rev_puerto$nota, dicc_conflictos))
+rev_puerto$frec_conflictos <- acep_men(rev_puerto$nota, dicc_conflictos)
 
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
@@ -65,7 +58,7 @@ dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "el paro", "de brazos caídos")
 
 # Creamos la variable con al frecuencia de palabras que refieren a huelgas
-rev_puerto <- rev_puerto |> mutate(frec_huelgas = acep_men(rev_puerto$nota, dicc_huelgas))
+rev_puerto$frec_huelgas <- acep_men(rev_puerto$nota, dicc_huelgas)
 
 # Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
 dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
@@ -75,7 +68,7 @@ dicc_soip <- c("soip", "sindicato obrero de la industria del pescado",
                "fileteros", "fileteras", "obreros del filet", "obreras del filet")
 
 # Creamos la variable con al frecuencia de palabras que refieren a lxs obrerxs del pescado
-rev_puerto <- rev_puerto |> mutate(frec_soip = acep_men(rev_puerto$nota, dicc_soip))
+rev_puerto$frec_soip <- acep_men(rev_puerto$nota, dicc_soip)
 
 # Imprimimos la base en consola
 rev_puerto
