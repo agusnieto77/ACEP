@@ -1,6 +1,10 @@
 # ACEP 0.0.2.9000 (versión en desarrollo)
 
-* se agregaron nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
+* Se agregaron nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
+
+# ACEP 0.0.2
+
+* Se agregaron nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
 
 # ACEP 0.0.1.9000 (versión en desarrollo)
 
