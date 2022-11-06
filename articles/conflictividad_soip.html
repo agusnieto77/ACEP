@@ -95,12 +95,10 @@ Nieto</h4>
 </h2>
 <p>En este artículo desarrollaremos un análisis de la conflictividad
 laboral en la industria pesquera argentina con un enfoque de diccionario
-en base a las funciones del paquete ACEP. También avanzaremos en un
-procesamiento elemental del corpus de notas en base a la función
-<code><a href="../reference/acep_token.html">acep_token()</a></code>. En esta oportunidad pondremos el foco en la
-conflictividad laboral protagonizada por el Sindicato Obrero de la
-Industria del Pescado (SOIP) en la ciudad de Mar del Plata entre los
-años 2009 y 2020.</p>
+en base a las funciones del paquete ACEP. En esta oportunidad pondremos
+el foco en la conflictividad laboral protagonizada por el Sindicato
+Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata
+entre los años 2009 y 2020.</p>
 </div>
 <div class="section level2">
 <h2 id="el-corpus-de-notas">El corpus de notas<a class="anchor" aria-label="anchor" href="#el-corpus-de-notas"></a>
@@ -158,14 +156,14 @@ que refieran a huelgas; 2) identificar las notas que refieran a lxs
 trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar
 del Plata.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Creamos la variable con al frecuencia de palabras por nota</span></span>
+<code class="sourceCode R"><span><span class="co"># Creamos la variable con la frecuencia de palabras por nota</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_frec.html">acep_frec</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Cargamos el diccionario de palabras que refieren a conflictividad</span></span>
 <span><span class="va">dicc_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_confl_sismos</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
-<span><span class="co"># Creamos la variable con al frecuencia de palabras que refieren a conflictividad</span></span>
+<span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a conflictividad</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a huelgas</span></span>
@@ -174,7 +172,7 @@ del Plata.</p>
 <span>                  <span class="st">"paro total"</span>, <span class="st">"paro parcial"</span>, <span class="st">"trabajo a reglamento"</span>, </span>
 <span>                  <span class="st">"el paro"</span>, <span class="st">"de brazos caídos"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Creamos la variable con al frecuencia de palabras que refieren a huelgas</span></span>
+<span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a huelgas</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado</span></span>
@@ -184,7 +182,8 @@ del Plata.</p>
 <span>               <span class="st">"obreros de la industria del pescado"</span>, <span class="st">"obreros del pescado"</span>,</span>
 <span>               <span class="st">"fileteros"</span>, <span class="st">"fileteras"</span>, <span class="st">"obreros del filet"</span>, <span class="st">"obreras del filet"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Creamos la variable con al frecuencia de palabras que refieren a lxs obrerxs del pescado</span></span>
+<span><span class="co"># Creamos la variable con la frecuencia de palabras que </span></span>
+<span><span class="co"># refieren a lxs obrerxs del pescado</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
@@ -210,19 +209,23 @@ del Plata.</p>
 </h2>
 <p>Ya construidas las variables de frecuencia de palabras y menciones
 nos ocuparemos de elaborar nuevas variables con índices de intensidad en
-base el ratio entre las frecuencias de palabras totales y menciones de
-los diccionarios sobre trabajadorxs del pescado, conflictos y huelgas.
-Para la elaboración de estos índices haremos uso de la función
+base al ratio entre las frecuencias de palabras totales y las menciones
+de los diccionarios sobre trabajadorxs del pescado, conflictos y
+huelgas. Para la elaboración de estos índices haremos uso de la función
 <code><a href="../reference/acep_int.html">acep_int()</a></code> del paquete ACEP.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Creamos la variable con el índice de conflictividad general</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_conf_gral</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span>, <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_conf_gral</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span>, </span>
+<span>                                   <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Creamos la variable con el índice de incidencia de lxs trabajadorxs del pescado</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span>, <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span><span class="op">)</span></span>
+<span><span class="co"># Creamos la variable con el índice de incidencia </span></span>
+<span><span class="co"># de lxs trabajadorxs del pescado</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span>, </span>
+<span>                              <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con el índice de huelgas</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span>, <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_int.html">acep_int</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span>, </span>
+<span>                                 <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Filtramos para quedarnos con los índices mayores a 0 </span></span>
 <span><span class="co"># en la variable del índice de conflictividad general</span></span>
@@ -252,7 +255,7 @@ Para la elaboración de estos índices haremos uso de la función
 <span><span class="co">#&gt; <span style="color: #949494;">#   ²​frec_conflictos, ³​frec_huelgas, ⁴​frec_soip</span></span></span></code></pre></div>
 <p>Al realizar los filtros la base se redujo a 888 notas que presentan
 al menos una mención de una palabra que refiere a conflicto y al menos
-una palabra que refiere a lxs trabajadorxs del pescado.</p>
+un término que refiere a lxs trabajadorxs del pescado.</p>
 </div>
 <div class="section level2">
 <h2 id="serie-temporal-de-índices">Serie temporal de índices<a class="anchor" aria-label="anchor" href="#serie-temporal-de-%C3%ADndices"></a>
@@ -263,7 +266,12 @@ serie de tiempo para la conflictividad general.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice anual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
-<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()</span></span>
+<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
+<span><span class="co"># por la función acep_rst()</span></span>
+<span><span class="co"># Estos pasos previos se deben realizar porque en este ejemplo no hicimos uso </span></span>
+<span><span class="co"># de la función acep_db() que calcula frecuencia, menciones e intensidad y</span></span>
+<span><span class="co"># deja el marco de datos resultante en un formato adecuado para ser usado</span></span>
+<span><span class="co"># con la función acep_rst()</span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -283,7 +291,7 @@ serie de tiempo para la conflictividad general.</p>
 <span>                      <span class="va">conflictos</span>,</span>
 <span>                      st <span class="op">=</span> <span class="st">"anio"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Imprimimos en consola</span></span>
+<span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">conf_gral_anio</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     st frecn csn  frecp frecm  intac intensidad int_notas_confl</span></span>
 <span><span class="co">#&gt; 1 2009    51  36  41178   251 0.3315     0.0061          0.7059</span></span>
@@ -295,7 +303,8 @@ serie de tiempo para la conflictividad general.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice mensual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
-<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()</span></span>
+<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
+<span><span class="co"># por la función acep_rst()</span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -303,7 +312,7 @@ serie de tiempo para la conflictividad general.</p>
 <span>  intensidad <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_conf_gral</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Construimos un subset de datos </span></span>
+<span><span class="co"># Nos quedamos con los datos del año 2012 </span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span>  <span class="va">datos</span><span class="op">[</span><span class="va">datos</span><span class="op">$</span><span class="va">fecha</span> <span class="op">&lt;</span> <span class="st">"2013-01-01"</span>, <span class="op">]</span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span>  <span class="va">datos</span><span class="op">[</span><span class="va">datos</span><span class="op">$</span><span class="va">fecha</span> <span class="op">&gt;</span> <span class="st">"2011-12-31"</span>, <span class="op">]</span></span>
 <span></span>
@@ -318,7 +327,7 @@ serie de tiempo para la conflictividad general.</p>
 <span>                      <span class="va">n_palabras</span>,</span>
 <span>                      <span class="va">conflictos</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Imprimimos en consola</span></span>
+<span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">conf_gral</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
 <span><span class="co">#&gt; 1 2012-01    14  12 10930    78 0.1180     0.0071          0.8571</span></span>
@@ -327,12 +336,13 @@ serie de tiempo para la conflictividad general.</p>
 <span><span class="co">#&gt; 4 2012-04    11  11  8615    89 0.1206     0.0103          1.0000</span></span>
 <span><span class="co">#&gt; 5 2012-05    12  11 10194   133 0.1641     0.0130          0.9167</span></span>
 <span><span class="co">#&gt; 6 2012-06    17  15 14001   163 0.1961     0.0116          0.8824</span></span></code></pre></div>
-<p>En la siguiente parte dle códico construimos la serie de tiempo para
+<p>En la siguiente parte del código construimos la serie de tiempo para
 la conflictividad huelguística.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice mensual de conflictividad huelguística en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
-<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()</span></span>
+<span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
+<span><span class="co"># por la función acep_rst()</span></span>
 <span><span class="va">datosh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -340,7 +350,7 @@ la conflictividad huelguística.</p>
 <span>  intensidad <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">i_huelgas</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Construimos un subset de datos </span></span>
+<span><span class="co"># Nos quedamos con los datos del año 2012  </span></span>
 <span><span class="va">datosh</span> <span class="op">&lt;-</span>  <span class="va">datosh</span><span class="op">[</span><span class="va">datosh</span><span class="op">$</span><span class="va">fecha</span> <span class="op">&lt;</span> <span class="st">"2013-01-01"</span>, <span class="op">]</span></span>
 <span><span class="va">datosh</span> <span class="op">&lt;-</span>  <span class="va">datosh</span><span class="op">[</span><span class="va">datosh</span><span class="op">$</span><span class="va">fecha</span> <span class="op">&gt;</span> <span class="st">"2011-12-31"</span>, <span class="op">]</span></span>
 <span></span>
@@ -355,7 +365,7 @@ la conflictividad huelguística.</p>
 <span>                    <span class="va">n_palabrash</span>,</span>
 <span>                    <span class="va">conflictosh</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Imprimimos en consola</span></span>
+<span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">huelgas</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
 <span><span class="co">#&gt; 1 2012-01    14   0 10930     0 0.0000     0.0000          0.0000</span></span>
@@ -370,36 +380,52 @@ la conflictividad huelguística.</p>
 </h2>
 <p>En este último apartado haremos uso de las funciones
 <code><a href="../reference/acep_plot_st.html">acep_plot_st()</a></code> y <code><a href="../reference/acep_plot_rst.html">acep_plot_rst()</a></code> para
-visualizar la variación mensual de la conflictividad general y
-huelguística protagonizada por lxs trabajadorxs del pescado entre marzo
-de 2009 y diciembre de 2020.</p>
+visualizar la variación anual de la conflictividad general protagonizada
+por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de
+2020. También visualizaremos la variación mensual durante al año 2012,
+el más conflictivo de período bajo análisis.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad general agrupado por año para el paríodo 2009-2020</span></span>
-<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span><span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">st</span>,</span>
-<span>             <span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span>             t <span class="op">=</span> <span class="st">"Índice anual de conflictividad en la industria del pescado (MdP, 2012)"</span>,</span>
-<span>             ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
-<span>             etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
+<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad general </span></span>
+<span><span class="co"># agrupado por año para el período 2009-2020</span></span>
+<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
+<span> <span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">st</span>,</span>
+<span> <span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">frecm</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice anual de conflictividad en la industria del pescado (MdP)"</span>,</span>
+<span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
+<span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
 <p><img src="conflictividad_soip_files/figure-html/plot00-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad general agrupado por mes para el 2012</span></span>
-<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span><span class="va">conf_gral</span><span class="op">$</span><span class="va">st</span>,</span>
-<span>             <span class="va">conf_gral</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span>             t <span class="op">=</span> <span class="st">"Índice mensual de conflictividad en la industria del pescado (MdP, 2012)"</span>,</span>
-<span>             ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
-<span>             etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
+<pre><code><span><span class="co"># Visualizaremos el índice de conflictividad general </span></span>
+<span><span class="co"># agrupado por año para el período 2009-2020</span></span>
+<span><span class="fu"><a href="../reference/acep_plot_rst.html">acep_plot_rst</a></span><span class="op">(</span><span class="va">conf_gral_anio</span>, tagx <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></code></pre>
+<p><img src="plot_vignette.png"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad general </span></span>
+<span><span class="co"># agrupado por mes para el 2012</span></span>
+<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
+<span> <span class="va">conf_gral</span><span class="op">$</span><span class="va">st</span>,</span>
+<span> <span class="va">conf_gral</span><span class="op">$</span><span class="va">frecm</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice mensual de conflictividad en la industria del pescado (MdP)"</span>,</span>
+<span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
+<span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
 <p><img src="conflictividad_soip_files/figure-html/plot01-1.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad huelguística agrupado por mes para el 2012</span></span>
-<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span><span class="va">huelgas</span><span class="op">$</span><span class="va">st</span>,</span>
-<span>             <span class="va">huelgas</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span>             t <span class="op">=</span> <span class="st">"Índice mensual de huelgas en la industria del pescado (MdP, 2012)"</span>,</span>
-<span>             ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
-<span>             etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad huelguística </span></span>
+<span><span class="co"># agrupado por mes para el 2012</span></span>
+<span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
+<span> <span class="va">huelgas</span><span class="op">$</span><span class="va">st</span>,</span>
+<span> <span class="va">huelgas</span><span class="op">$</span><span class="va">frecm</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice mensual de huelgas en la industria del pescado (MdP)"</span>,</span>
+<span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
+<span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
 <p><img src="conflictividad_soip_files/figure-html/plot02-1.png" width="700"></p>
+<p>Las distintas métricas nos ayudan a identificar al año 2012 como el
+más conflictivo del período en el ámbito de la industria de procesado en
+tierra en al ciudad de Mar del Plata, con epicentro en los meses de
+junio, julio y agosto para la conflictividad general y durante los meses
+de mayo, junio y julio para los movimientos huelguísticos.</p>
 </div>
 <div class="section level2">
 <h2 id="comentarios-finales">Comentarios finales<a class="anchor" aria-label="anchor" href="#comentarios-finales"></a>
