@@ -22,6 +22,8 @@ En este artículo desarrollaremos un análisis de la conflictividad laboral en l
 
 ## El corpus de notas
 
+Las notas que componen el corpus utilizado en este ejercicio fueron raspadas del sitio  [revistapuerto.com.ar](https://revistapuerto.com.ar) con las funciones del paquete `rvest`. Se compone de `r nrow(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` notas y `r length(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` variables: `r paste0(names(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp)), collapse = ', ')`. El corpus de notas cubre desde el 2 de marzo de 2009 hasta el 29 de diciembre de 2020. Para cargar todas las notas haremos uso de la función `acep_load_base()`.
+
 ```{r setup}
 # Cargamos la librería ACEP
 library(ACEP)
@@ -37,9 +39,12 @@ rev_puerto <- acep_load_base(url) |> as_tibble()
 
 # Imprimimos la base en consola
 rev_puerto
+
 ```
 
-Una vez descargada la base de notas vamos a crear un nueva variable que contenga la frecuencia de palabras de cada nota.
+##  Los diccionarios
+
+Una vez descargada la base de notas vamos a crear variables numéricas que contenga las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_frec()`, `acep_men()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en la función `acep_men()` con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
 ```{r diccionarios}
 # Creamos la variable con al frecuencia de palabras por nota
@@ -75,6 +80,169 @@ rev_puerto
 
 ```
 
+## Los índices
 
-En desarrollo...
+Ya construidas las variables de frecuencia de palabras y menciones nos ocuparemos de elaborar nuevas variables con índices de intensidad en base el ratio entre las frecuencias de palabras totales y menciones de los diccionarios sobre trabajadorxs del pescado, conflictos y huelgas. Para la elaboración de estos índices haremos uso de la función `acep_int()` del paquete ACEP.
 
+```{r ratio}
+# Creamos la variable con el índice de conflictividad general
+rev_puerto$i_conf_gral <- acep_int(rev_puerto$frec_conflictos, rev_puerto$frec_palabras)
+
+# Creamos la variable con el índice de incidencia de lxs trabajadorxs del pescado
+rev_puerto$i_soip <- acep_int(rev_puerto$frec_soip, rev_puerto$frec_palabras)
+
+# Creamos la variable con el índice de huelgas
+rev_puerto$i_huelgas <- acep_int(rev_puerto$frec_huelgas, rev_puerto$frec_conflictos)
+
+# Filtramos para quedarnos con los índices mayores a 0 
+# en la variable del índice de conflictividad general
+rev_puerto <- rev_puerto[rev_puerto$i_conf_gral > 0, ]
+
+# Filtramos para quedarnos con los índices mayores a 0
+# en el índice de incidencia de lxs trabajadorxs del pescado
+rev_puerto <- rev_puerto[rev_puerto$i_soip > 0, ]
+
+# Imprimimos la base en consola
+rev_puerto
+
+```
+
+Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que presentan al menos una mención de una palabra que refiere a conflicto y al menos una palabra que refiere a lxs trabajadorxs del pescado.
+
+## Serie temporal de índices
+
+En esta parte del código usaremos la función `acep_rst()` para calcular los índices agrupados por mes. Primero construimos la serie de tiempo para la conflictividad general.
+
+```{r temporal0}
+# Calculamos el índice anual de conflictividad general en el
+# ámbito de la industrial del procesado de pescado en tierra
+# Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()
+datos <- data.frame(
+  fecha = rev_puerto$fecha,
+  n_palabras = rev_puerto$frec_palabras,
+  conflictos = rev_puerto$frec_conflictos,
+  intensidad = rev_puerto$i_conf_gral
+)
+
+# Luego construimos los vectores
+fecha <- datos$fecha
+n_palabras <- datos$n_palabras
+conflictos <- datos$conflictos
+
+# Ahora agrupamos por mes la conflictividad general del sector
+conf_gral_anio <- acep_rst(datos, 
+                      fecha, 
+                      n_palabras,
+                      conflictos,
+                      st = "anio")
+
+# Imprimimos en consola
+conf_gral_anio |> head()
+```
+
+
+```{r temporal}
+# Calculamos el índice mensual de conflictividad general en el
+# ámbito de la industrial del procesado de pescado en tierra
+# Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()
+datos <- data.frame(
+  fecha = rev_puerto$fecha,
+  n_palabras = rev_puerto$frec_palabras,
+  conflictos = rev_puerto$frec_conflictos,
+  intensidad = rev_puerto$i_conf_gral
+)
+
+# Construimos un subset de datos 
+datos <-  datos[datos$fecha < "2013-01-01", ]
+datos <-  datos[datos$fecha > "2011-12-31", ]
+
+# Luego construimos los vectores
+fecha <- datos$fecha
+n_palabras <- datos$n_palabras
+conflictos <- datos$conflictos
+
+# Ahora agrupamos por mes la conflictividad general del sector
+conf_gral <- acep_rst(datos, 
+                      fecha, 
+                      n_palabras,
+                      conflictos)
+
+# Imprimimos en consola
+conf_gral |> head()
+
+```
+
+En la siguiente parte dle códico construimos la serie de tiempo para la conflictividad huelguística.
+
+```{r temporal_huelgas}
+# Calculamos el índice mensual de conflictividad huelguística en el
+# ámbito de la industrial del procesado de pescado en tierra
+# Pero primero preparamos el marcos de datos para ser procesado por la función acep_rst()
+datosh <- data.frame(
+  fecha = rev_puerto$fecha,
+  n_palabras = rev_puerto$frec_palabras,
+  conflictos = rev_puerto$frec_huelgas,
+  intensidad = rev_puerto$i_huelgas
+)
+
+# Construimos un subset de datos 
+datosh <-  datosh[datosh$fecha < "2013-01-01", ]
+datosh <-  datosh[datosh$fecha > "2011-12-31", ]
+
+# Luego construimos los vectores
+fechah <- datosh$fecha
+n_palabrash <- datosh$n_palabras
+conflictosh <- datosh$conflictos
+
+# Ahora agrupamos por mes la conflictividad huelguística del sector
+huelgas <- acep_rst(datosh, 
+                    fechah, 
+                    n_palabrash,
+                    conflictosh)
+
+# Imprimimos en consola
+huelgas |> head()
+
+```
+
+## Las visualizaciones
+
+En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación mensual de la conflictividad general y huelguística protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de 2020.
+
+```{r plot00}
+# Visualizaremos el índice de conflictividad general agrupado por año para el paríodo 2009-2020
+acep_plot_st(conf_gral_anio$st,
+             conf_gral_anio$frecm,
+             t = "Índice anual de conflictividad en la industria del pescado (MdP, 2012)",
+             ejey = "Menciones del diccionario",
+             etiquetax = "vertical"
+             )
+
+```
+
+```{r plot01}
+# Visualizaremos el índice de conflictividad general agrupado por mes para el 2012
+acep_plot_st(conf_gral$st,
+             conf_gral$frecm,
+             t = "Índice mensual de conflictividad en la industria del pescado (MdP, 2012)",
+             ejey = "Menciones del diccionario",
+             etiquetax = "vertical"
+             )
+
+```
+
+
+```{r plot02}
+# Visualizaremos el índice de conflictividad huelguística agrupado por mes para el 2012
+acep_plot_st(huelgas$st,
+             huelgas$frecm,
+             t = "Índice mensual de huelgas en la industria del pescado (MdP, 2012)",
+             ejey = "Menciones del diccionario",
+             etiquetax = "vertical"
+             )
+
+```
+
+## Comentarios finales
+
+A lo largo de este breve tutorial sobre algunas de las funciones del paquete ACEP buscamos ejemplificar de qué modo se puede adoptar un enfoque de diccionario para realizar un primer análisis exploratorio de un corpus de notas periodísticas. Los resultados son alentadores, con la combinación de distintos diccionarios se pudo identificar la temporalidad de la conflictividad protagonizada por lxs obrerxs del pescado en la ciudad de Mar del Plata. En próximos artículos avanzaremos con otras funciones del paquete ACEP. 
