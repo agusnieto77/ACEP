@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2022-11-06</h4>
+            <h4 data-toc-skip class="date">2022-11-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/conflictividad_soip.Rmd" class="external-link"><code>vignettes/conflictividad_soip.Rmd</code></a></small>
       <div class="d-none name"><code>conflictividad_soip.Rmd</code></div>
@@ -93,12 +93,12 @@ Nieto</h4>
 <div class="section level2">
 <h2 id="introducción">Introducción<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n"></a>
 </h2>
-<p>En este artículo desarrollaremos un análisis de la conflictividad
-laboral en la industria pesquera argentina con un enfoque de diccionario
-en base a las funciones del paquete ACEP. En esta oportunidad pondremos
-el foco en la conflictividad laboral protagonizada por el Sindicato
-Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata
-entre los años 2009 y 2020.</p>
+<p>En este artículo desarrollaremos una introducción al análisis de la
+conflictividad laboral en la industria pesquera argentina con un enfoque
+de diccionario en base a las funciones del paquete ACEP. En esta
+oportunidad pondremos el foco en la conflictividad laboral protagonizada
+por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad
+de Mar del Plata entre los años 2009 y 2020.</p>
 </div>
 <div class="section level2">
 <h2 id="el-corpus-de-notas">El corpus de notas<a class="anchor" aria-label="anchor" href="#el-corpus-de-notas"></a>
@@ -261,8 +261,8 @@ un término que refiere a lxs trabajadorxs del pescado.</p>
 <h2 id="serie-temporal-de-índices">Serie temporal de índices<a class="anchor" aria-label="anchor" href="#serie-temporal-de-%C3%ADndices"></a>
 </h2>
 <p>En esta parte del código usaremos la función <code><a href="../reference/acep_rst.html">acep_rst()</a></code>
-para calcular los índices agrupados por mes. Primero construimos la
-serie de tiempo para la conflictividad general.</p>
+para calcular los índices agrupados por año y mes. Primero construimos
+la serie de tiempo para la conflictividad general.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice anual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
@@ -382,7 +382,7 @@ la conflictividad huelguística.</p>
 <code><a href="../reference/acep_plot_st.html">acep_plot_st()</a></code> y <code><a href="../reference/acep_plot_rst.html">acep_plot_rst()</a></code> para
 visualizar la variación anual de la conflictividad general protagonizada
 por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de
-2020. También visualizaremos la variación mensual durante al año 2012,
+2020. También visualizaremos la variación mensual durante el año 2012,
 el más conflictivo de período bajo análisis.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Visualizaremos el índice de conflictividad general </span></span>
@@ -390,7 +390,7 @@ el más conflictivo de período bajo análisis.</p>
 <span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
 <span> <span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">st</span>,</span>
 <span> <span class="va">conf_gral_anio</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span> t <span class="op">=</span> <span class="st">"Indice anual de conflictividad en la industria del pescado (MdP)"</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice anual de conflictividad en la industria pesquera (MdP)"</span>,</span>
 <span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
 <span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
@@ -405,7 +405,7 @@ el más conflictivo de período bajo análisis.</p>
 <span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
 <span> <span class="va">conf_gral</span><span class="op">$</span><span class="va">st</span>,</span>
 <span> <span class="va">conf_gral</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span> t <span class="op">=</span> <span class="st">"Indice mensual de conflictividad en la industria del pescado (MdP)"</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice mensual de conflictividad en la industria pesquera (MdP)"</span>,</span>
 <span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
 <span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
@@ -416,16 +416,17 @@ el más conflictivo de período bajo análisis.</p>
 <span><span class="fu"><a href="../reference/acep_plot_st.html">acep_plot_st</a></span><span class="op">(</span></span>
 <span> <span class="va">huelgas</span><span class="op">$</span><span class="va">st</span>,</span>
 <span> <span class="va">huelgas</span><span class="op">$</span><span class="va">frecm</span>,</span>
-<span> t <span class="op">=</span> <span class="st">"Indice mensual de huelgas en la industria del pescado (MdP)"</span>,</span>
+<span> t <span class="op">=</span> <span class="st">"Indice mensual de huelgas en la industria pesquera (MdP)"</span>,</span>
 <span> ejey <span class="op">=</span> <span class="st">"Menciones del diccionario"</span>,</span>
 <span> etiquetax <span class="op">=</span> <span class="st">"vertical"</span></span>
 <span>             <span class="op">)</span></span></code></pre></div>
 <p><img src="conflictividad_soip_files/figure-html/plot02-1.png" width="700"></p>
 <p>Las distintas métricas nos ayudan a identificar al año 2012 como el
-más conflictivo del período en el ámbito de la industria de procesado en
-tierra en al ciudad de Mar del Plata, con epicentro en los meses de
-junio, julio y agosto para la conflictividad general y durante los meses
-de mayo, junio y julio para los movimientos huelguísticos.</p>
+más conflictivo del período en el ámbito de la industria pesquera de
+procesado en tierra en la ciudad de Mar del Plata, con epicentro en los
+meses de junio, julio y agosto para la conflictividad general y con
+epicentro en los meses de mayo, junio y julio para los movimientos
+huelguísticos.</p>
 </div>
 <div class="section level2">
 <h2 id="comentarios-finales">Comentarios finales<a class="anchor" aria-label="anchor" href="#comentarios-finales"></a>
@@ -433,11 +434,12 @@ de mayo, junio y julio para los movimientos huelguísticos.</p>
 <p>A lo largo de este breve tutorial sobre algunas de las funciones del
 paquete ACEP buscamos ejemplificar de qué modo se puede adoptar un
 enfoque de diccionario para realizar un primer análisis exploratorio de
-un corpus de notas periodísticas. Los resultados son alentadores, con la
+un corpus de notas periodísticas. Los resultados son alentadores. Con la
 combinación de distintos diccionarios se pudo identificar la
 temporalidad de la conflictividad protagonizada por lxs obrerxs del
 pescado en la ciudad de Mar del Plata. En próximos artículos avanzaremos
-con otras funciones del paquete ACEP.</p>
+con otras funciones del paquete ACEP para el análisis computacional de
+la conflictividad en la industria pesquera argentina.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
