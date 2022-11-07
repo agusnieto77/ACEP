@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introducción
 
-En este artículo desarrollaremos un análisis de la conflictividad laboral en la industria pesquera argentina con un enfoque de diccionario en base a las funciones del paquete ACEP. En esta oportunidad pondremos el foco en la conflictividad laboral protagonizada por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata entre los años 2009 y 2020.
+En este artículo desarrollaremos una introducción al análisis de la conflictividad laboral en la industria pesquera argentina con un enfoque de diccionario en base a las funciones del paquete ACEP. En esta oportunidad pondremos el foco en la conflictividad laboral protagonizada por el Sindicato Obrero de la Industria del Pescado (SOIP) en la ciudad de Mar del Plata entre los años 2009 y 2020.
 
 ## El corpus de notas
 
@@ -116,7 +116,7 @@ Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que prese
 
 ## Serie temporal de índices
 
-En esta parte del código usaremos la función `acep_rst()` para calcular los índices agrupados por mes. Primero construimos la serie de tiempo para la conflictividad general.
+En esta parte del código usaremos la función `acep_rst()` para calcular los índices agrupados por año y mes. Primero construimos la serie de tiempo para la conflictividad general.
 
 ```{r temporal0}
 # Calculamos el índice anual de conflictividad general en el
@@ -219,7 +219,7 @@ huelgas |> head()
 
 ## Las visualizaciones
 
-En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación anual de la conflictividad general protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de 2020. También visualizaremos la variación mensual durante al año 2012, el más conflictivo de período bajo análisis. 
+En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación anual de la conflictividad general protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de 2020. También visualizaremos la variación mensual durante el año 2012, el más conflictivo de período bajo análisis. 
 
 ```{r plot00}
 # Visualizaremos el índice de conflictividad general 
@@ -227,7 +227,7 @@ En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_p
 acep_plot_st(
  conf_gral_anio$st,
  conf_gral_anio$frecm,
- t = "Indice anual de conflictividad en la industria del pescado (MdP)",
+ t = "Indice anual de conflictividad en la industria pesquera (MdP)",
  ejey = "Menciones del diccionario",
  etiquetax = "vertical"
              )
@@ -248,7 +248,7 @@ acep_plot_rst(conf_gral_anio, tagx = "vertical")
 acep_plot_st(
  conf_gral$st,
  conf_gral$frecm,
- t = "Indice mensual de conflictividad en la industria del pescado (MdP)",
+ t = "Indice mensual de conflictividad en la industria pesquera (MdP)",
  ejey = "Menciones del diccionario",
  etiquetax = "vertical"
              )
@@ -262,15 +262,15 @@ acep_plot_st(
 acep_plot_st(
  huelgas$st,
  huelgas$frecm,
- t = "Indice mensual de huelgas en la industria del pescado (MdP)",
+ t = "Indice mensual de huelgas en la industria pesquera (MdP)",
  ejey = "Menciones del diccionario",
  etiquetax = "vertical"
              )
 
 ```
 
-Las distintas métricas nos ayudan a identificar al año 2012 como el más conflictivo del período en el ámbito de la industria de procesado en tierra en al ciudad de Mar del Plata, con epicentro en los meses de junio, julio y agosto para la conflictividad general y durante los meses de mayo, junio y julio para los movimientos huelguísticos. 
+Las distintas métricas nos ayudan a identificar al año 2012 como el más conflictivo del período en el ámbito de la industria pesquera de procesado en tierra en la ciudad de Mar del Plata, con epicentro en los meses de junio, julio y agosto para la conflictividad general y con epicentro en los meses de mayo, junio y julio para los movimientos huelguísticos. 
 
 ## Comentarios finales
 
-A lo largo de este breve tutorial sobre algunas de las funciones del paquete ACEP buscamos ejemplificar de qué modo se puede adoptar un enfoque de diccionario para realizar un primer análisis exploratorio de un corpus de notas periodísticas. Los resultados son alentadores, con la combinación de distintos diccionarios se pudo identificar la temporalidad de la conflictividad protagonizada por lxs obrerxs del pescado en la ciudad de Mar del Plata. En próximos artículos avanzaremos con otras funciones del paquete ACEP.
+A lo largo de este breve tutorial sobre algunas de las funciones del paquete ACEP buscamos ejemplificar de qué modo se puede adoptar un enfoque de diccionario para realizar un primer análisis exploratorio de un corpus de notas periodísticas. Los resultados son alentadores. Con la combinación de distintos diccionarios se pudo identificar la temporalidad de la conflictividad protagonizada por lxs obrerxs del pescado en la ciudad de Mar del Plata. En próximos artículos avanzaremos con otras funciones del paquete ACEP para el análisis computacional de la conflictividad en la industria pesquera argentina.
