@@ -248,7 +248,7 @@ acep_plot_rst(conf_gral_anio, tagx = "vertical")
 acep_plot_st(
  conf_gral$st,
  conf_gral$frecm,
- t = "Indice mensual de conflictividad en la industria pesquera (MdP)",
+ t = "Indice mensual de conflictos en la industria pesquera (MdP)",
  ejey = "Menciones del diccionario",
  etiquetax = "vertical"
              )
