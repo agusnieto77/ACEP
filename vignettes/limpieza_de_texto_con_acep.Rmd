@@ -1,5 +1,5 @@
 ---
-title: "Limpieza de texto con acep"
+title: "Limpieza de texto con ACEP"
 date: "`r Sys.Date()`"
 author: "Diego Pacheco"
 output: rmarkdown::html_vignette
