@@ -106,7 +106,7 @@ la salida sera una lista con tres bases de datos en formato tabular.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">texto</span> <span class="op">&lt;-</span> <span class="st">"El SOIP para por aumento de salarios"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">texto</span> <span class="op">&lt;-</span> <span class="st">"El SOIP declara la huelga en demanda de aumento salarial."</span></span></span>
 <span class="r-in"><span><span class="va">texto_svo</span> <span class="op">&lt;-</span> <span class="fu">acep_svo</span><span class="op">(</span><span class="va">texto</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading udpipe model from https://raw.githubusercontent.com/jwijffels/udpipe.models.ud.2.5/master/inst/udpipe-ud-2.5-191206/spanish-gsd-ud-2.5-191206.udpipe to /home/runner/work/ACEP/ACEP/docs/reference/spanish-gsd-ud-2.5-191206.udpipe</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  - This model has been trained on version 2.5 of data from https://universaldependencies.org</span>
@@ -116,48 +116,78 @@ la salida sera una lista con tres bases de datos en formato tabular.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading finished, model stored at '/home/runner/work/ACEP/ACEP/docs/reference/spanish-gsd-ud-2.5-191206.udpipe'</span>
 <span class="r-in"><span><span class="va">texto_svo</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $acep_annotate_svo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    doc_id paragraph_id sentence start end term_id token_id    token   lemma</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   doc1            1        1     1   2       1        1       El      el</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   doc1            1        1     4   7       2        2     SOIP    SOIP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   doc1            1        1     9  12       3        3     para    para</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   doc1            1        1    14  16       4        4      por     por</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:   doc1            1        1    18  24       5        5  aumento aumento</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:   doc1            1        1    26  27       6        6       de      de</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:   doc1            1        1    29  36       7        7 salarios salario</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     upos xpos                                             feats parent relation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   DET &lt;NA&gt; Definite=Def|Gender=Masc|Number=Sing|PronType=Art      2      det</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: PROPN &lt;NA&gt;                                              &lt;NA&gt;     NA     ROOT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   ADP &lt;NA&gt;                                              &lt;NA&gt;      5     case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   ADP &lt;NA&gt;                                              &lt;NA&gt;      5     case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:  NOUN &lt;NA&gt;                           Gender=Masc|Number=Sing      2     nmod</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:   ADP &lt;NA&gt;                                              &lt;NA&gt;      7     case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:  NOUN &lt;NA&gt;                           Gender=Masc|Number=Plur      5     nmod</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    deps            misc                         sentence_txt clause clause_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt;            &lt;NA&gt; El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; SpacesAfter=\\n El SOIP para por aumento de salarios   &lt;NA&gt;      &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    clause_fill</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     doc_id paragraph_id sentence start end term_id token_id    token    lemma</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   doc1            1        1     1   2       1        1       El       el</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:   doc1            1        1     4   7       2        2     SOIP     SOIP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:   doc1            1        1     9  15       3        3  declara declarar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:   doc1            1        1    17  18       4        4       la       el</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:   doc1            1        1    20  25       5        5   huelga   huelga</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:   doc1            1        1    27  28       6        6       en       en</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:   doc1            1        1    30  36       7        7  demanda  demanda</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   doc1            1        1    38  39       8        8       de       de</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:   doc1            1        1    41  47       9        9  aumento  aumento</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   doc1            1        1    49  56      10       10 salarial salarial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:   doc1            1        1    57  57      11       11        .        .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      upos xpos                                                 feats parent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:   DET &lt;NA&gt;     Definite=Def|Gender=Masc|Number=Sing|PronType=Art      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: PROPN &lt;NA&gt;                                                  &lt;NA&gt;      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:  VERB &lt;NA&gt; Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin     NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:   DET &lt;NA&gt;      Definite=Def|Gender=Fem|Number=Sing|PronType=Art      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:  NOUN &lt;NA&gt;                                Gender=Fem|Number=Sing      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:   ADP &lt;NA&gt;                                                  &lt;NA&gt;      7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:  NOUN &lt;NA&gt;                                Gender=Fem|Number=Sing      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:   ADP &lt;NA&gt;                                                  &lt;NA&gt;      9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:  NOUN &lt;NA&gt;                               Gender=Masc|Number=Sing      7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:   ADJ &lt;NA&gt;                                           Number=Sing      9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: PUNCT &lt;NA&gt;                                                  &lt;NA&gt;      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     relation deps            misc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:      det &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:    nsubj &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:     ROOT &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:      det &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:      obj &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:     case &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:      obl &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:     case &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:     nmod &lt;NA&gt;            &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:     amod &lt;NA&gt;   SpaceAfter=No</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:    punct &lt;NA&gt; SpacesAfter=\\n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  sentence_txt  clause clause_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: El SOIP declara la huelga en demanda de aumento salarial. subject  doc1.1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: El SOIP declara la huelga en demanda de aumento salarial.    verb  doc1.1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: El SOIP declara la huelga en demanda de aumento salarial.  object  doc1.1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: El SOIP declara la huelga en demanda de aumento salarial.  object  doc1.1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: El SOIP declara la huelga en demanda de aumento salarial.    &lt;NA&gt;      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     clause_fill</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3:           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:          NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:          NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $acep_list_svo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 variables: doc_id &lt;chr&gt;, paragraph_id &lt;int&gt;, sentence &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eventos &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   doc_id paragraph_id sentence eventos                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> doc1              1        1 SOIP -&gt; declara -&gt; huelga -&gt; demanda</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $acep_sp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 7 variables: doc_id &lt;chr&gt;, paragraph_id &lt;int&gt;, sentence &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sujeto &lt;chr&gt;, verbo &lt;chr&gt;, objeto &lt;chr&gt;, predicado &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   doc_id paragraph_id sentence sujeto verbo   objeto         predicado          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> doc1              1        1 SOIP   declara huelga demanda declara huelga dem…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
