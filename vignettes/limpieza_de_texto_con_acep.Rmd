@@ -38,7 +38,7 @@ library(ACEP)
 
 url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
 
-base <- acep_load_base(url)[ , c("text")] |> as.vector()
+base <- acep_load_base(url)[ , c("text")]$text
 
 ```
 
