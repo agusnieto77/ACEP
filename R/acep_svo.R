@@ -16,7 +16,7 @@
 #' la salida sera una lista con tres bases de datos en formato tabular.
 #' @keywords sintaxis
 #' @examples
-#' texto <- "El SOIP para por aumento de salarios"
+#' texto <- "El SOIP declara la huelga en demanda de aumento salarial."
 #' texto_svo <- acep_svo(texto)
 #' texto_svo
 #' @export
