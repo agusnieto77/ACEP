@@ -14,10 +14,10 @@
 #' acep_token_table(tokens)
 #' @export
 acep_token_table <- function(x, u = 10) {
-  if(is.vector(x) != TRUE){
+  if(is.vector(x) != TRUE | is.list(x) == TRUE){
     message("No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!")
   } else {
-    if(is.vector(x) == TRUE) {
+    if(is.vector(x) == TRUE & is.list(x) != TRUE) {
       tryCatch({
   tabla_token <- base::table(x) |> as.data.frame()
   tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]

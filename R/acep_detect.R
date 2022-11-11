@@ -17,7 +17,7 @@
 #' @export
 
 acep_detect <- function(x, y, u = 1, tolower = TRUE) {
-  if(is.vector(x) == TRUE){
+  if(is.vector(x) == TRUE  & is.list(x) != TRUE){
   out <- tryCatch({
     dicc  <- paste0(y, collapse = "|")
     if (tolower == TRUE) {

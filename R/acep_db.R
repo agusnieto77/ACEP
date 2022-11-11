@@ -22,11 +22,11 @@ acep_db <- function(db, t, d, n) {
     mensaje <- "No ingresaste un marco de datos en el parametro db. Vuelve a intentarlo ingresando un marco de datos!"
     return(message(mensaje))
   }
-  if(is.vector(t) != TRUE){
+  if(is.vector(t) != TRUE | is.list(t) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro t. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   }
-  if(is.vector(d) != TRUE){
+  if(is.vector(d) != TRUE | is.list(d) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro d. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {

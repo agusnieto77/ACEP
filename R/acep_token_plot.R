@@ -16,11 +16,11 @@
 #' acep_token_plot(tokens)
 #' @export
 acep_token_plot <- function(x, u = 10, frec = TRUE) {
-  if(is.vector(x) != TRUE){
+  if(is.vector(x) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {
-    if(is.vector(x) == TRUE) {
+    if(is.vector(x) == TRUE & is.list(x) != TRUE) {
       tryCatch({
   if (frec == TRUE) {
     tabla_token <- base::table(x) |> as.data.frame()

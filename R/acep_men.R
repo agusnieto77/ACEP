@@ -18,15 +18,15 @@
 #' df
 #' @export
 acep_men <- function(x, y, tolower = TRUE) {
-  if(is.vector(x) != TRUE){
+  if(is.vector(x) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   }
-  if(is.vector(y) != TRUE){
+  if(is.vector(y) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro y. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {
-    if(is.vector(x) == TRUE) {
+    if(is.vector(x) == TRUE & is.list(x) != TRUE) {
       out <- tryCatch({
         dicc <- paste0(y, collapse = "|")
         if (tolower == TRUE) {

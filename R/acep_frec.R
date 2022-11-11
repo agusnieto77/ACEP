@@ -11,7 +11,7 @@
 #' acep_frec("El SUTEBA fue al paro. Reclaman mejoras salariales.")
 #' @export
 acep_frec <- function(x) {
-  if(is.vector(x) == TRUE){
+  if(is.vector(x) == TRUE  & is.list(x) != TRUE){
     out <- tryCatch({
       vapply(strsplit(x, " "), length, c(frec = 0))
     }

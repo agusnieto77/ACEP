@@ -34,7 +34,7 @@ acep_plot_st <- function(x, y, t = "", ejex = "",
   } else if (etiquetax == "vertical") {
     etiquetax <- 2
   }
-    if(is.vector(x) != TRUE){
+    if(is.vector(x) != TRUE | is.list(x) == TRUE){
       mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
       return(message(mensaje))
     }
@@ -42,7 +42,7 @@ acep_plot_st <- function(x, y, t = "", ejex = "",
       mensaje <- "No ingresaste un vector numerico en el parametro y. Vuelve a intentarlo ingresando un vector numerico!"
       return(message(mensaje))
     } else {
-      if(is.vector(x) == TRUE) {
+      if(is.vector(x) == TRUE & is.list(x) != TRUE) {
         tryCatch({
   graphics::barplot(y ~ x,
                    main = t,

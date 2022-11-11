@@ -8,7 +8,7 @@
 #' @export
 
 acep_token <- function(x, tolower = TRUE) {
-  if(is.vector(x) != TRUE){
+  if(is.vector(x) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {

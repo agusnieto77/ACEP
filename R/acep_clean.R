@@ -24,7 +24,6 @@
 #' @examples
 #' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_cesp = FALSE)
 #' @export
-
 acep_clean <- function(x,
                        tolower = TRUE,
                        rm_cesp = TRUE,
@@ -42,11 +41,11 @@ acep_clean <- function(x,
                        rm_whitespace = TRUE,
                        other_sw = NULL,
                        u = 1) {
-  if(is.vector(x) != TRUE){
+  if(is.vector(x) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {
-    if(is.vector(x) == TRUE) {
+    if(is.vector(x) == TRUE & is.list(x) != TRUE) {
       out <- tryCatch({
       if (tolower == TRUE) {
         x <- gsub(pattern = "([[:upper:]])", perl = TRUE,
