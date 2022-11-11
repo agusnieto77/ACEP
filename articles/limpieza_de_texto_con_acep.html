@@ -122,15 +122,14 @@ FALSE a excepción del que queremos probar.</p>
 <span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"</span></span>
 <span></span>
-<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
 <p>Seleccionemos ahora tan sólo un tweet:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">primer_tweet</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">primer_tweet</span></span>
-<span><span class="co">#&gt; $&lt;NA&gt;</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes\nhttps://t.co/644Ak0HZ7I"</span></span></code></pre></div>
 <p>Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro
 tolower de la función acep_clean() y verificamos el resultado.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -151,15 +150,16 @@ tolower de la función acep_clean() y verificamos el resultado.</p>
 <span>               rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>               rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>               other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN tolower****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN tolower****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON tolower****\n"</span>, <span class="va">minus</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON tolower****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; 👉protesta/la fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644ak0hz7i****</span></span></code></pre></div>
 <p>Efectivamente, los caracteres en mayúscula pasan a minúscula.</p>
 </div>
 <div class="section level2">
@@ -189,15 +189,16 @@ rm_cesp.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_cesp****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_cesp****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_cesp****\n"</span>, <span class="va">cesp</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_cesp****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliacion obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
 <p>En este caso hay sólo una tilde en “conciliación” y fue removida.</p>
 </div>
 <div class="section level2">
@@ -224,15 +225,16 @@ rm_emoji.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_emoji****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"***\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_emoji****</span></span>
-<span><span class="co">#&gt; NULL***</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I***</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_emoji****\n"</span>, <span class="va">emoji</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_emoji****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt;  PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="hashtag">Hashtag<a class="anchor" aria-label="anchor" href="#hashtag"></a>
@@ -260,15 +262,16 @@ Utilizamos otro tweet de la base que contiene #hashtag</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_hashtag****\n"</span>, <span class="va">con_hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_hashtag****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; #Transporte | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.</span></span>
+<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_hashtag****\n"</span>, <span class="va">hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_hashtag****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt;  | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.</span></span>
+<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span></code></pre></div>
 <p>NOTA: se elimina todo el #hashtags, no sólo el símbolo
 (#Transporte)</p>
 </div>
@@ -297,15 +300,14 @@ queremos remover. Para esto utilizamos el parámetro rm_users</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_users****\n"</span>, <span class="va">con_user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_users****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; @TrenesArg Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_users****\n"</span>, <span class="va">user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_users****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt;  Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span></code></pre></div>
 <p>NOTA: Igual que con el #hashtag, quita todo, no sólo el símbolo @</p>
 </div>
 <div class="section level2">
@@ -333,15 +335,20 @@ rm_punt.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_punt****\n"</span>, <span class="va">punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_punt****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Sociedad: Paro de trenes: La Fraternidad no acató la conciliación y no habrá servicio en el país</span></span>
+<span><span class="co">#&gt; ✍️por Agostina Carlesso </span></span>
+<span><span class="co">#&gt; 👉https://t.co/WI6mzHYM1i</span></span>
+<span><span class="co">#&gt; #InformacionEsPoder****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_punt****\n"</span>, <span class="va">s_punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_punt****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Sociedad  Paro de trenes  La Fraternidad no acató la conciliación y no habrá servicio en el país</span></span>
+<span><span class="co">#&gt; ✍ por Agostina Carlesso </span></span>
+<span><span class="co">#&gt; 👉https   t co WI6mzHYM1i</span></span>
+<span><span class="co">#&gt; #InformacionEsPoder****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="números">Números<a class="anchor" aria-label="anchor" href="#n%C3%BAmeros"></a>
@@ -370,15 +377,26 @@ Se remueve con el parámetro rm_num.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_num****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_num****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_num****\n"</span>, <span class="va">num_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_num****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Del  al  de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZjih </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkNnYFo****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="urls">URLs<a class="anchor" aria-label="anchor" href="#urls"></a>
@@ -403,15 +421,26 @@ urls. Para removerlas usamos el parámetro rm_url</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_url****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_url****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_url****\n"</span>, <span class="va">num_s</span>,  <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_url****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! ****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="meses">Meses<a class="anchor" aria-label="anchor" href="#meses"></a>
@@ -437,15 +466,26 @@ parámetro rm_meses. En este caso, el tweet tiene la palabra
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_mes****\n"</span>, <span class="va">meses</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_mes****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_mes****\n"</span>, <span class="va">meses_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_mes****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Del 14 al 20 de  celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="días">Días<a class="anchor" aria-label="anchor" href="#d%C3%ADas"></a>
@@ -471,15 +511,14 @@ parámetro rm_dias. En este caso, el tweet tiene la palabra “martes”</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_dias****\n"</span>, <span class="va">dia</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_dias****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_dias****\n"</span>, <span class="va">dia_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_dias****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este  no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="stop-words">Stop words<a class="anchor" aria-label="anchor" href="#stop-words"></a>
@@ -511,15 +550,14 @@ en el siguiente link: stopwords &lt;- readRDS(url(“<a href="https://github.com
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_stopwords****\n"</span>, <span class="va">stopw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_stopwords****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_stopwords****\n"</span>, <span class="va">stopw_w</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_stopwords****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; Paro   trenes:   sindicato     Fraternidad   acatará   conciliación obligatoria   dictó   ministerio   Trabajo     martes     servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="short-words">Short words<a class="anchor" aria-label="anchor" href="#short-words"></a>
@@ -545,15 +583,14 @@ tengan contenido útil, lo hacemos con el parámetro rm_shortwords.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_shortwords****\n"</span>, <span class="va">short</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_shortwords****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad y x primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo a los JUBILADOS.para q le den un bono a fin de año...jamás nadie se acordó de apoyar a los jubilados x primera vez un gremio rompe un pacto con la CGT..ya q no querían .****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_shortwords****\n"</span>, <span class="va">short_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_shortwords****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad     primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo   los JUBILADOS.para   le den un bono   fin de año...jamás nadie se acordó de apoyar   los jubilados   primera vez un gremio rompe un pacto con la CGT..ya   no querían .****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="new-line">New line<a class="anchor" aria-label="anchor" href="#new-line"></a>
@@ -579,15 +616,15 @@ del final del tweet.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_newline****\n"</span>,<span class="va">newl</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_newline****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_newline****\n"</span>,<span class="va">newl_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_newline****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="whitespace">Whitespace<a class="anchor" aria-label="anchor" href="#whitespace"></a>
@@ -615,15 +652,18 @@ los espacios en blanco.</p>
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_whitespace****\n"</span>, <span class="va">white</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN rm_whitespace****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en  nuestro país. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_whitespace****\n"</span>, <span class="va">white_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON rm_whitespace****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en nuestro país. </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-stop-words">Other Stop words<a class="anchor" aria-label="anchor" href="#other-stop-words"></a>
@@ -656,15 +696,16 @@ coma. En este caso se agregan las palabras “conciliación” y
 <span>                     rm_newline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"conciliación"</span>, <span class="st">"Fraternidad"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN other_sw****\n"</span>, <span class="va">osw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****SIN other_sw****</span></span>
-<span><span class="co">#&gt; NULL****</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON other_sw****\n"</span>, <span class="va">osw_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ****CON other_sw****</span></span>
-<span><span class="co">#&gt; ****</span></span></code></pre></div>
+<span><span class="co">#&gt; 👉PROTESTA/La   desoye   obligatoria   mantiene paralizados   trenes</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
