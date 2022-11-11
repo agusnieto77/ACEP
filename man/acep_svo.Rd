@@ -33,7 +33,7 @@ etiquetado POS y relaciones sintacticas que permiten reconstruir
 estructuras sintacticas como SVO y Sujeto-Predicado
 }
 \examples{
-texto <- "El SOIP para por aumento de salarios"
+texto <- "El SOIP declara la huelga en demanda de aumento salarial."
 texto_svo <- acep_svo(texto)
 texto_svo
 }
