@@ -1,5 +1,5 @@
 
-test_that("ACEP SVO", {
+test_that("ACEP svo", {
   skip_if_offline()
   skip_on_cran()
   texto <- acep_svo("El SUTEBA fue al paro por mejoras salariales.")
