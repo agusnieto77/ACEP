@@ -56,22 +56,22 @@ devtools::install_github("agusnieto77/ACEP")
 ### Funciones
 
 | Nombre | Ciclo | Descripcion |
-|:---|:---|:------|
-|`acep_clean()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Limpieza de texto.|
-|`acep_context()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Funcion para extraer contexto de palabras o frases.|
-|`acep_db()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Frecuencia, menciones e intensidad.|
-|`acep_detect()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Deteccion de menciones de palabras.|
-|`acep_frec()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Frecuencia de palabras totales.|
-|`acep_int()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|indice de intensidad.|
-|`acep_load_base()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Carga bases de datos creadas por el Observatorio.|
-|`acep_men()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Frecuencia de menciones de palabras.|
-|`acep_post_rst()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Resumen visual de la serie temporal de los indices de conflictividad.|
-|`acep_post_st()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Grafico de barras de la serie temporal de indices de conflictividad.|
-|`acep_rst()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)]|Serie temporal de indices de conflictividad.|
-|`acep_svo()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).|
-|`acep_token()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Funcion para tokenizar.|
-|`acep_token_plot()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Grafico de barras de palabras mas recurrentes en un corpus.|
-|`acep_token_table()`|[![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)]|Tabla de frecuencia de palabras tokenizadas.|
+|:--|:--|:-----|
+|`acep_clean()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Limpieza de texto.|
+|`acep_context()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer contexto de palabras o frases.|
+|`acep_db()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia, menciones e intensidad.|
+|`acep_detect()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Deteccion de menciones de palabras.|
+|`acep_frec()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de palabras totales.|
+|`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|indice de intensidad.|
+|`acep_load_base()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Carga bases de datos creadas por el Observatorio.|
+|`acep_men()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de menciones de palabras.|
+|`acep_post_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los indices de conflictividad.|
+|`acep_post_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Grafico de barras de la serie temporal de indices de conflictividad.|
+|`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
+|`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).|
+|`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para tokenizar.|
+|`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Grafico de barras de palabras mas recurrentes en un corpus.|
+|`acep_token_table()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Tabla de frecuencia de palabras tokenizadas.|
 
 ### Colecciones
 
