@@ -1,7 +1,10 @@
 #' @title Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).
-#' @description Funcion que devuelve cuatro objetos data.frame con
-#' etiquetado POS y relaciones sintacticas que permiten reconstruir
-#' estructuras sintacticas como SVO y Sujeto-Predicado.
+#' @description Funcion que devuelve cinco objetos data.frame con
+#' etiquetado POS (modelo udpipe) y relaciones sintacticas
+#' (modelo rsyntax) que permiten reconstruir estructuras
+#' sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
+#' las notas periodisticas referidas a conflictos, esta función permite
+#' extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.
 #' @param texto vector con los textos a procesar.
 #' @param modelo idioma del modelo de etiquetado POS del paquete {udpipe}.
 #' @param prof_s profundidad de relaciones sintacticas para el sujeto.
