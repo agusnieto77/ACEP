@@ -46,8 +46,6 @@ Si todas las entradas son correctas,
 la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-`r lifecycle::badge("experimental")`
-
 Funcion que devuelve cuatro objetos data.frame con
 etiquetado POS y relaciones sintacticas que permiten reconstruir
 estructuras sintacticas como SVO y Sujeto-Predicado.

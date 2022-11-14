@@ -1,8 +1,5 @@
 #' @title Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' Funcion que devuelve cuatro objetos data.frame con
+#' @description Funcion que devuelve cuatro objetos data.frame con
 #' etiquetado POS y relaciones sintacticas que permiten reconstruir
 #' estructuras sintacticas como SVO y Sujeto-Predicado.
 #' @param texto vector con los textos a procesar.
