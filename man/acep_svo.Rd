@@ -6,35 +6,55 @@
 \usage{
 acep_svo(
   texto,
-  prof_s = 1,
-  prof_o = 1,
+  modelo = "spanish",
+  prof_s = 2,
+  prof_o = 2,
+  relaciones = c("flat", "fixed", "compount"),
+  conexiones = FALSE,
   rel_s = c("nsubj", "conj"),
-  rel_o = c("obj", "obl", "nmod")
+  rel_o = c("obj", "obl", "nmod"),
+  rel_evs = "nsubj",
+  rel_evp = "obj",
+  u = 1
 )
 }
 \arguments{
 \item{texto}{vector con los textos a procesar.}
 
+\item{modelo}{idioma del modelo de etiquetado POS del paquete {udpipe}.}
+
 \item{prof_s}{profundidad de relaciones sintacticas para el sujeto.}
 
 \item{prof_o}{profundidad de relaciones sintacticas para el objeto.}
 
+\item{relaciones}{vector con las relaciones de analisis sintactico del paquete {rsyntax}.}
+
+\item{conexiones}{parametro logico (TRUE/FALSE) para la reconstruccion de las conexiones sintacticas.}
+
 \item{rel_s}{vector de etiquetas de relaciones sintacticas en el sujeto.}
 
 \item{rel_o}{vector de etiquetas de relaciones sintacticas en el objeto.}
+
+\item{rel_evs}{etiqueta de relaciones a ser agregada en la reconstruccion del sujeto.}
+
+\item{rel_evp}{etiqueta de relaciones a ser agregada en la reconstruccion del objeto.}
+
+\item{u}{numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.}
 }
 \value{
 Si todas las entradas son correctas,
 la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-Funcion que devuelve tres objetos data.frame con
+`r lifecycle::badge("experimental")`
+
+Funcion que devuelve cuatro objetos data.frame con
 etiquetado POS y relaciones sintacticas que permiten reconstruir
-estructuras sintacticas como SVO y Sujeto-Predicado
+estructuras sintacticas como SVO y Sujeto-Predicado.
 }
 \examples{
 texto <- "El SOIP declara la huelga en demanda de aumento salarial."
 texto_svo <- acep_svo(texto)
-texto_svo
+texto_svo$acep_list_svo
 }
 \keyword{sintaxis}
