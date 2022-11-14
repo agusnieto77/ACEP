@@ -46,9 +46,12 @@ Si todas las entradas son correctas,
 la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-Funcion que devuelve cuatro objetos data.frame con
-etiquetado POS y relaciones sintacticas que permiten reconstruir
-estructuras sintacticas como SVO y Sujeto-Predicado.
+Funcion que devuelve cinco objetos data.frame con
+etiquetado POS (modelo udpipe) y relaciones sintacticas
+(modelo rsyntax) que permiten reconstruir estructuras
+sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
+las notas periodisticas referidas a conflictos, esta función permite
+extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.
 }
 \examples{
 texto <- "El SOIP declara la huelga en demanda de aumento salarial."
