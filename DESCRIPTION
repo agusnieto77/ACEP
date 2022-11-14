@@ -27,7 +27,8 @@ Imports:
     udpipe,
     rsyntax,
     dplyr,
-    stringr
+    stringr,
+    lifecycle
 Suggests: 
     covr,
     knitr,

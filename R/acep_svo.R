@@ -17,6 +17,7 @@
 #' @param rel_evp etiqueta de relaciones a ser agregada en la reconstruccion del objeto.
 #' @param u numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.
 #' @export acep_svo
+#' @importFrom lifecycle badge
 #' @importFrom stats na.omit
 #' @importFrom udpipe udpipe
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
