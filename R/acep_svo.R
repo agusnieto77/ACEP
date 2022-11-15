@@ -122,7 +122,7 @@ acep_svo <- function(texto,
       sentence_txt = unique(sentence_txt),
       sujetos = paste0(ifelse(s_p == "sujeto" & relation == "nsubj" | relation == rel_evs, token, ""), collapse = " "),
       verbos = paste0(ifelse(relation == "ROOT" , token, ""), collapse = " "),
-      predicados = stats::na.omit(ifelse(relation == "obj" | relation == rel_evp, token, NA))[u],
+      predicados = paste0(stats::na.omit(ifelse(relation == "obj" | relation == rel_evp, token, NA))[1:u], collapse = " "),
       eventos = paste0(sujetos, " -> ", verbos, " -> ", predicados),
       sujeto = paste0(ifelse(s_p == "sujeto" & s_v_o == "sujeto", token, ""), collapse = " ") |> stringr::str_trim(),
       predicado = paste0(ifelse(s_p == "predicado", token, ""), collapse = " ") |> stringr::str_trim(),
@@ -136,6 +136,8 @@ acep_svo <- function(texto,
   acep_return$eventos <- gsub(" -> $", "", acep_return$eventos)
   acep_return$eventos <- gsub("^\\s*", "", acep_return$eventos)
   acep_return$eventos <- gsub("*\\s$", "", acep_return$eventos)
+  acep_return$eventos <- gsub("^-> ", "NA -> ", acep_return$eventos)
+  acep_return$eventos <- gsub("-> ->", "-> NA ->", acep_return$eventos)
   acep_return <- acep_return |> dplyr::left_join(sust_pred, by = "sentence_txt")
   acep_return <- acep_return |> dplyr::rename(parrafo_id = paragraph_id,
                                               oracion_id = sentence,
