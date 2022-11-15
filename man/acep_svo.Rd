@@ -23,27 +23,34 @@ acep_svo(
 
 \item{modelo}{idioma del modelo de etiquetado POS del paquete {udpipe}.}
 
-\item{prof_s}{profundidad de relaciones sintacticas para el sujeto.}
+\item{prof_s}{es un numero entero positivo que determina la profundidad a la que se
+buscan las relaciones dentro del sujeto. Este parametro se hereda del la funcion children()
+del paquete {rsyntax}. Se recomienda no superar el valor 2.}
 
-\item{prof_o}{profundidad de relaciones sintacticas para el objeto.}
+\item{prof_o}{es un numero entero positivo que determina la profundidad a la que se
+buscan las relaciones dentro del objeto. Este parametro se hereda del la funcion children()
+del paquete {rsyntax}. Se recomienda no superar el valor 2.}
 
-\item{relaciones}{vector con las relaciones de analisis sintactico del paquete {rsyntax}.}
+\item{relaciones}{vector con las etiquetas de relaciones que se usaran en la funcion de relleno.
+Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.}
 
-\item{conexiones}{es un parámetro heredado del paquete {rsyntax} que controla
+\item{conexiones}{es un parametro heredado del paquete {rsyntax} que controla
 el comportamiento si la profundidad es > 1 y se utilizan filtros.
 Si es FALSE, se recuperan todos los padres/hijos hasta la profundidad dada, y luego se filtran.
 De esta manera, los nietos que satisfacen las condiciones del filtro se recuperan incluso si
 sus padres no satisfacen las condiciones. Si es TRUE, el filtro se aplica en cada nivel de
-profundidad, de modo que sólo se recuperan las ramas totalmente conectadas de los nodos que
-satisfacen las condiciones.}
+profundidad, de modo que solo se recuperan las ramas totalmente conectadas de los nodos que
+satisfacen las condiciones. Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.}
 
-\item{rel_s}{vector de etiquetas de relaciones sintacticas en el sujeto.}
+\item{rel_s}{vector de etiquetas de relaciones sintacticas en el sujeto.
+Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 
-\item{rel_o}{vector de etiquetas de relaciones sintacticas en el objeto.}
+\item{rel_o}{vector de etiquetas de relaciones sintacticas en el objeto.
+Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 
 \item{rel_evs}{etiqueta de relaciones a ser agregada en la reconstruccion del sujeto.}
 
-\item{rel_evp}{etiqueta de relaciones a ser agregada en la reconstruccion del objeto.}
+\item{rel_evp}{etiqueta de relaciones a ser agregada en la reconstruccion del predicado.}
 
 \item{u}{numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.}
 }
@@ -56,12 +63,17 @@ Funcion que devuelve cinco objetos data.frame con
 etiquetado POS (modelo udpipe) y relaciones sintacticas
 (modelo rsyntax) que permiten reconstruir estructuras
 sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
-las notas periodisticas referidas a conflictos, esta función permite
-extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.
+las notas periodisticas referidas a conflictos, esta funcion permite
+extraer sujetos de la protesta, accion realizada y objeto(s) de la accion.
 }
 \examples{
 texto <- "El SOIP declara la huelga en demanda de aumento salarial."
 texto_svo <- acep_svo(texto)
 texto_svo$acep_list_svo
+}
+\references{
+Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. (2021). Extracting semantic relations using syntax:
+An R package for querying and reshaping dependency trees. Computational Communication Research, 3(2), 1-16.
+(\href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{link al articulo})
 }
 \keyword{sintaxis}
