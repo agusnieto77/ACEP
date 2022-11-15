@@ -29,7 +29,13 @@ acep_svo(
 
 \item{relaciones}{vector con las relaciones de analisis sintactico del paquete {rsyntax}.}
 
-\item{conexiones}{parametro logico (TRUE/FALSE) para la reconstruccion de las conexiones sintacticas.}
+\item{conexiones}{es un parámetro heredado del paquete {rsyntax} que controla
+el comportamiento si la profundidad es > 1 y se utilizan filtros.
+Si es FALSE, se recuperan todos los padres/hijos hasta la profundidad dada, y luego se filtran.
+De esta manera, los nietos que satisfacen las condiciones del filtro se recuperan incluso si
+sus padres no satisfacen las condiciones. Si es TRUE, el filtro se aplica en cada nivel de
+profundidad, de modo que sólo se recuperan las ramas totalmente conectadas de los nodos que
+satisfacen las condiciones.}
 
 \item{rel_s}{vector de etiquetas de relaciones sintacticas en el sujeto.}
 
