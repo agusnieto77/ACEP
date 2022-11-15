@@ -27,6 +27,7 @@ Imports:
     udpipe,
     rsyntax,
     dplyr,
+    tidyr,
     stringr
 Suggests: 
     covr,

@@ -28,6 +28,7 @@
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
 #' @importFrom dplyr filter mutate group_by summarise ungroup rename distinct select left_join case_when
 #' @importFrom stringr str_trim str_replace_all str_detect
+#' @importFrom tidyr separate
 #' @return Si todas las entradas son correctas,
 #' la salida sera una lista con tres bases de datos en formato tabular.
 #' @keywords sintaxis
@@ -139,7 +140,8 @@ acep_svo <- function(texto,
   acep_return <- acep_return |> dplyr::rename(parrafo_id = paragraph_id,
                                               oracion_id = sentence,
                                               oracion = sentence_txt)
-  acep_ret <- acep_return[ , c(1:3, 8)]
+  acep_ret <- acep_return[ , c(1:3, 8)] |>
+    tidyr::separate(eventos, c("sujeto", "verbo", "objeto"), sep = " -> ", remove = FALSE)
   acep_sp <- acep_return[ , c(1:3, 9:14)]
   acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:22)],
                         acep_pro_svo = acep_return[ , c(1:4, 8:14)],
