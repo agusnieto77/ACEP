@@ -55,10 +55,10 @@ Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 \item{u}{numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.}
 }
 \value{
-Si todas las entradas son correctas,
-la salida sera una lista con tres bases de datos en formato tabular.
+Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
+\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}\figure{https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg}
 Funcion que devuelve cinco objetos data.frame con
 etiquetado POS (modelo udpipe) y relaciones sintacticas
 (modelo rsyntax) que permiten reconstruir estructuras
@@ -72,8 +72,7 @@ texto_svo <- acep_svo(texto)
 texto_svo$acep_list_svo
 }
 \references{
-Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. (2021). Extracting semantic relations using syntax:
-An R package for querying and reshaping dependency trees. Computational Communication Research, 3(2), 1-16.
-(\href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{link al articulo})
+Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
+\href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
 }
 \keyword{sintaxis}
