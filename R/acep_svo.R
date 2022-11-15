@@ -1,6 +1,5 @@
 #' @title Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).
 #' @description
-#' \href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg}}
 #' Funcion que devuelve cinco objetos data.frame con
 #' etiquetado POS (modelo udpipe) y relaciones sintacticas
 #' (modelo rsyntax) que permiten reconstruir estructuras

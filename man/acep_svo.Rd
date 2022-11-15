@@ -58,7 +58,6 @@ Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg}}
 Funcion que devuelve cinco objetos data.frame con
 etiquetado POS (modelo udpipe) y relaciones sintacticas
 (modelo rsyntax) que permiten reconstruir estructuras
