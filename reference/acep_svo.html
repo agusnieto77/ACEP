@@ -112,7 +112,13 @@ extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.</p>
 
 
 <dt>conexiones</dt>
-<dd><p>parametro logico (TRUE/FALSE) para la reconstruccion de las conexiones sintacticas.</p></dd>
+<dd><p>es un parámetro heredado del paquete rsyntax que controla
+el comportamiento si la profundidad es &gt; 1 y se utilizan filtros.
+Si es FALSE, se recuperan todos los padres/hijos hasta la profundidad dada, y luego se filtran.
+De esta manera, los nietos que satisfacen las condiciones del filtro se recuperan incluso si
+sus padres no satisfacen las condiciones. Si es TRUE, el filtro se aplica en cada nivel de
+profundidad, de modo que sólo se recuperan las ramas totalmente conectadas de los nodos que
+satisfacen las condiciones.</p></dd>
 
 
 <dt>rel_s</dt>
