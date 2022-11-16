@@ -34,12 +34,14 @@
 #' @importFrom stats na.omit
 #' @importFrom udpipe udpipe
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
-#' @importFrom dplyr filter mutate group_by summarise ungroup rename distinct select left_join case_when
+#' @importFrom dplyr filter mutate group_by summarise ungroup rename distinct select left_join case_when arrange desc count
 #' @importFrom stringr str_trim str_replace_all str_detect
 #' @importFrom tidyr separate
 #' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 #' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
+#' @source \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
+#' @source \href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modleo UDPipe}
 #' @keywords sintaxis
 #' @examples
 #' texto <- "El SOIP declara la huelga en demanda de aumento salarial."
@@ -50,10 +52,10 @@ acep_svo <- function(texto,
                      modelo = "spanish",
                      prof_s = 2,
                      prof_o = 2,
-                     relaciones = c("flat","fixed","compount"),
+                     relaciones = c("flat","fixed","appos"),
                      conexiones = FALSE,
-                     rel_s = c("nsubj", "conj"),
-                     rel_o = c("obj","obl","nmod"),
+                     rel_s = c("nsubj", "conj", "nmod"),
+                     rel_o = c("obj","obl","amod"),
                      rel_evs = "nsubj",
                      rel_evp = "obj",
                      u = 1
@@ -129,7 +131,7 @@ acep_svo <- function(texto,
     dplyr::group_by(doc_id, paragraph_id, sentence, sentence_txt) |>
     dplyr::summarise(
       sentence_txt = unique(sentence_txt),
-      sujetos = paste0(ifelse(s_p == "sujeto" & relation == "nsubj" | relation == rel_evs, token, ""), collapse = " "),
+      sujetos = paste0(ifelse(s_p == "sujeto" & relation == "nsubj" | s_p == "sujeto" & relation == rel_evs, token, ""), collapse = " "),
       verbos = paste0(ifelse(relation == "ROOT" , token, ""), collapse = " "),
       predicados = paste0(stats::na.omit(ifelse(relation == "obj" | relation == rel_evp, token, NA))[1:u], collapse = " "),
       eventos = paste0(sujetos, " -> ", verbos, " -> ", predicados),
@@ -138,8 +140,24 @@ acep_svo <- function(texto,
       verbo = paste0(ifelse(relation == "ROOT", token, ""), collapse = " ") |> stringr::str_trim(),
       lemma_verb = paste0(ifelse(relation == "ROOT", lemma, ""), collapse = " ") |> stringr::str_trim(),
       conjugaciones = paste0(ifelse(s_v_o == "verbo", conjugaciones, ""), collapse = " ") |> stringr::str_trim(),
+      aux_verbos = paste0(ifelse(upos == "VERB" , token, ""), collapse = " ") |> stringr::str_trim(),
+      entidades = paste0(ifelse(upos == "PROPN" , token, ""), collapse = " ") |> stringr::str_trim(),
       .groups = "drop"
     )
+  acep_return$entidades <- gsub("\\s[a-z]+\\s+", "  ", acep_return$entidades)
+  acep_return$entidades <- gsub("\\s\\s+", "  ", acep_return$entidades)
+  acep_return$entidades <- gsub("\\s\\s+", " | ", acep_return$entidades)
+  acep_return$entidades <- gsub("(\\b[A-Z]+\\b)", "| \\1 |", acep_return$entidades)
+  acep_return$entidades <- gsub("\\| \\|", "|", acep_return$entidades)
+  acep_return$entidades <- gsub("\\s+", " ", acep_return$entidades)
+  acep_return$entidades <- paste0("| ", acep_return$entidades, " |", sep = "")
+  acep_return$entidades <- gsub("\\| \\|", "|", acep_return$entidades)
+  acep_return$entidades <- gsub("\\|  \\|", "", acep_return$entidades)
+  acep_return$aux_verbos <- gsub("\\s+", " | ", acep_return$aux_verbos)
+  acep_return$aux_verbos <- gsub("\\s+", " ", acep_return$aux_verbos)
+  acep_return$aux_verbos <- paste0("| ", acep_return$aux_verbos, " |", sep = "")
+  acep_return$aux_verbos <- gsub("\\| \\|", "|", acep_return$aux_verbos)
+  acep_return$aux_verbos <- gsub("\\|  \\|", "", acep_return$aux_verbos)
   acep_return$conjugaciones <- gsub("(^[a-zA-Z]+)\\s.+", "\\1", acep_return$conjugaciones)
   acep_return$eventos <- gsub("\\s+", " ", acep_return$eventos)
   acep_return$eventos <- gsub(" -> $", "", acep_return$eventos)
@@ -153,11 +171,17 @@ acep_svo <- function(texto,
                                               oracion = sentence_txt)
   acep_ret <- acep_return[ , c(1:3, 8)] |>
     tidyr::separate(eventos, c("sujeto", "verbo", "objeto"), sep = " -> ", remove = FALSE)
-  acep_sp <- acep_return[ , c(1:3, 9:14)]
+  acep_sp <- acep_return[ , c(1:3, 9:16)]
+  acep_lista_lemmas <- acep_annotate_o |> dplyr::filter(nchar(token) > 1) |>
+    dplyr::filter(upos != "NUM", upos != "PUNCT", upos != "X", upos != "DET",
+                  upos != "ADP", upos != "ADV", upos != "CCONJ", upos != "INTJ",
+                  upos != "PRON", upos != "SCONJ", upos != "SYM") |>
+    dplyr::count(token,lemma) |> dplyr::arrange(dplyr::desc(n))
   acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:22)],
-                        acep_pro_svo = acep_return[ , c(1:4, 8:14)],
+                        acep_pro_svo = acep_return[ , c(1:4, 8:16)],
                         acep_list_svo = acep_ret,
                         acep_sp = acep_sp,
-                        no_procesadas = no_procesadas)
+                        acep_lista_lemmas = acep_lista_lemmas,
+                        acep_no_procesadas = no_procesadas)
   return(acep_svo_list)
 }

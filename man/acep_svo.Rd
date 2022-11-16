@@ -3,16 +3,21 @@
 \name{acep_svo}
 \alias{acep_svo}
 \title{Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).}
+\source{
+\href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
+
+\href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modleo UDPipe}
+}
 \usage{
 acep_svo(
   texto,
   modelo = "spanish",
   prof_s = 2,
   prof_o = 2,
-  relaciones = c("flat", "fixed", "compount"),
+  relaciones = c("flat", "fixed", "appos"),
   conexiones = FALSE,
-  rel_s = c("nsubj", "conj"),
-  rel_o = c("obj", "obl", "nmod"),
+  rel_s = c("nsubj", "conj", "nmod"),
+  rel_o = c("obj", "obl", "amod"),
   rel_evs = "nsubj",
   rel_evp = "obj",
   u = 1
