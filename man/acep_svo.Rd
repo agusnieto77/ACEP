@@ -6,7 +6,9 @@
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 
-\href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modleo UDPipe}
+\href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modelo UDPipe}
+
+\href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 }
 \usage{
 acep_svo(

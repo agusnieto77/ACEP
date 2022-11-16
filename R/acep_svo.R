@@ -41,7 +41,8 @@
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 #' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
 #' @source \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
-#' @source \href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modleo UDPipe}
+#' @source \href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modelo UDPipe}
+#' @source \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 #' @keywords sintaxis
 #' @examples
 #' texto <- "El SOIP declara la huelga en demanda de aumento salarial."
