@@ -94,15 +94,15 @@ acep_postag <- function(texto,
   texto_tag$sent_ <- sent
 
   texto_only_entity_loc <- texto_only_entity
-  texto_only_entity_loc <- subset(texto_only_entity_loc, entity_type == "LOC")
+  texto_only_entity_loc <- unique(subset(texto_only_entity_loc, entity_type == "LOC"))
   texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
 
   texto_geocoder <- tidygeocoder::geo(unique(texto_only_entity_loc$entity_), method = "osm")
   names(texto_geocoder) <- c("entity_", "lat", "long")
-  texto_only_entity_loc <- merge(texto_only_entity_loc, texto_geocoder, by = "entity_")
+  texto_only_entity_loc <- base::merge(x = texto_only_entity_loc, y = texto_geocoder, by = "entity_", all.x = TRUE)
   names(texto_only_entity_loc) <- c("entity_", "doc_id", "sentence", "entity", "entity_type", "lat", "long")
-  texto_only_entity_loc <- merge(texto_only_entity_loc, texto_tag[ , c("sentence", "sent_")], by = "sentence")
-  texto_only_entity_loc <- unique(texto_only_entity_loc)
+  texto_only_entity_loc <- merge(texto_only_entity_loc, texto_tag[ , c("doc_id", "sentence", "sent_")], by = c("doc_id", "sentence"))
+  texto_only_entity_loc <- base::unique(texto_only_entity_loc) |> subset(!is.na(lat))
 
   texto_tag <- list(texto_tag = texto_tag,
                     texto_tag_entity = texto_tag_entity,

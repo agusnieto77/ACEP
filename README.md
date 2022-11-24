@@ -63,7 +63,7 @@ devtools::install_github("agusnieto77/ACEP")
 | `acep_db()`          | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia, menciones e intensidad.                                               |
 | `acep_detect()`      | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Deteccion de menciones de palabras.                                               |
 | `acep_frec()`        | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de palabras totales.                                                   |
-| `acep_int()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | indice de intensidad.                                                             |
+| `acep_int()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Indice de intensidad.                                                             |
 | `acep_load_base()`   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Carga bases de datos creadas por el Observatorio.                                 |
 | `acep_men()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de menciones de palabras.                                              |
 | `acep_plot_rst()`    | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Resumen visual de la serie temporal de los indices de conflictividad.             |
