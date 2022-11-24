@@ -10,6 +10,7 @@
 #' @param inst_reticulate parametro booleano que define si instalar o no el paquete {reticulate}.
 #' @export acep_postag
 #' @importFrom stats na.omit
+#' @importFrom utils install.packages
 #' @importFrom spacyr spacy_install spacy_download_langmodel spacy_initialize spacy_parse entity_consolidate entity_extract nounphrase_consolidate nounphrase_extract spacy_finalize
 #' @importFrom rsyntax as_tokenindex
 #' @importFrom tidygeocoder geo
@@ -30,7 +31,7 @@ acep_postag <- function(texto,
                         inst_reticulate = FALSE
                         ){
 
-  if(isTRUE(inst_reticulate)) install.packages("reticulate")
+  if(isTRUE(inst_reticulate)) utils::install.packages("reticulate")
 
   if(isTRUE(inst_spacy)) spacyr::spacy_install()
 
