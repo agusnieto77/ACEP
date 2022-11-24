@@ -1,5 +1,1 @@
-utils::globalVariables(c("clause", "clause_fill", "doc_id", "objeto", "paragraph_id",
-                         "sentence", "sentence_txt", "token", "verbo", "dep_rel",
-                         "token_id", "clause2", "upos", "relation", "sujetos", "verbos",
-                         "predicados", "lemma", "entity_type", "sent_", "s_v_o", "s_p",
-                         "pos", "s_v_o_fill", "lemma_", "conjugaciones", "eventos", "n",))
+utils::globalVariables(c("clause", "clause_fill", "doc_id", "objeto", "paragraph_id", "sentence", "sentence_txt", "token", "verbo", "dep_rel", "token_id", "clause2", "upos", "relation", "sujetos", "verbos", "predicados", "lemma", "entity_type", "sent_", "s_v_o", "s_p", "pos", "s_v_o_fill", "lemma_", "conjugaciones", "eventos", "n"))
