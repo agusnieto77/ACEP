@@ -35,7 +35,7 @@ acep_postag <- function(texto,
 
   if(isTRUE(inst_spacy)) spacyr::spacy_install()
 
-  if(isTRUE(bajar_core)) spacyr::spacy_download_langmodel("es_core_news_md")
+  if(isTRUE(bajar_core)) spacyr::spacy_download_langmodel(core)
 
   spacyr::spacy_initialize(model = core)
 
