@@ -65,8 +65,9 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|indice de intensidad.|
 |`acep_load_base()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Carga bases de datos creadas por el Observatorio.|
 |`acep_men()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de menciones de palabras.|
-|`acep_post_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los indices de conflictividad.|
-|`acep_post_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Grafico de barras de la serie temporal de indices de conflictividad.|
+|`acep_plot_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los indices de conflictividad.|
+|`acep_plot_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Grafico de barras de la serie temporal de indices de conflictividad.|
+|`acep_postag()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Funcion para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.|
 |`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
 |`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).|
 |`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para tokenizar.|

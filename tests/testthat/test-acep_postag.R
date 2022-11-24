@@ -1,9 +1,8 @@
 
-test_that("ACEP svo", {
+test_that("ACEP postag", {
   skip_if_offline()
   skip_on_cran()
   texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
-  acep_svo(texto$texto_tag)
   dimensiones <- length(texto)
   expect_equal(dimensiones, length(texto))
 })

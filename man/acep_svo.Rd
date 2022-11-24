@@ -6,14 +6,11 @@
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 
-\href{https://ufal.mff.cuni.cz/~straka/papers/2017-conll_udpipe.pdf}{Sobre el modelo UDPipe}
-
 \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 }
 \usage{
 acep_svo(
-  texto,
-  modelo = "spanish",
+  acep_tokenindex,
   prof_s = 2,
   prof_o = 2,
   relaciones = c("flat", "fixed", "appos"),
@@ -26,9 +23,8 @@ acep_svo(
 )
 }
 \arguments{
-\item{texto}{vector con los textos a procesar.}
-
-\item{modelo}{idioma del modelo de etiquetado POS del paquete {udpipe}.}
+\item{acep_tokenindex}{data.frame con el etiquetado POS y las relaciones
+de dependencia generado con la funcion acep_postag.}
 
 \item{prof_s}{es un numero entero positivo que determina la profundidad a la que se
 buscan las relaciones dentro del sujeto. Este parametro se hereda del la funcion children()
@@ -65,17 +61,17 @@ Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-Funcion que devuelve cinco objetos data.frame con
-etiquetado POS (modelo udpipe) y relaciones sintacticas
+Funcion que devuelve seis objetos data.frame con
+etiquetado POS (modelo spacyr) y relaciones sintacticas
 (modelo rsyntax) que permiten reconstruir estructuras
 sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
 las notas periodisticas referidas a conflictos, esta funcion permite
 extraer sujetos de la protesta, accion realizada y objeto(s) de la accion.
+Tambien devuelve entidades nombradas (NER).
 }
 \examples{
-texto <- "El SOIP declara la huelga en demanda de aumento salarial."
-texto_svo <- acep_svo(texto)
-texto_svo$acep_list_svo
+texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
+acep_svo(texto$texto_tag)
 }
 \references{
 Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.

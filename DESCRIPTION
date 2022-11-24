@@ -24,11 +24,12 @@ Imports:
     graphics,
     stats,
     httr,
-    udpipe,
     rsyntax,
     dplyr,
     tidyr,
-    stringr
+    stringr,
+    spacyr,
+    tidygeocoder
 Suggests: 
     covr,
     knitr,
