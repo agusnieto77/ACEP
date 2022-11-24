@@ -39,8 +39,10 @@ etiquetado POS (modelo spacyr) para su posterior
 procesamiento con la funcion acep_postag.
 }
 \examples{
+\dontrun{
 texto <- "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial."
 texto_postag <- acep_postag(texto)
 texto_postag$texto_tag[ , c(1:8)]
+}
 }
 \keyword{etiquetado}

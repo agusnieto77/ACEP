@@ -20,9 +20,11 @@
 #' @source \href{https://jessecambon.github.io/tidygeocoder/articles/tidygeocoder.html}{Sobre el paquete tidygeocoder}
 #' @keywords etiquetado
 #' @examples
+#' \dontrun{
 #' texto <- "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial."
 #' texto_postag <- acep_postag(texto)
 #' texto_postag$texto_tag[ , c(1:8)]
+#'}
 #' @export
 acep_postag <- function(texto,
                         core = "es_core_news_md",

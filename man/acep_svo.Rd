@@ -70,8 +70,10 @@ extraer sujetos de la protesta, accion realizada y objeto(s) de la accion.
 Tambien devuelve entidades nombradas (NER).
 }
 \examples{
+\dontrun{
 texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
 acep_svo(texto$texto_tag)
+}
 }
 \references{
 Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.

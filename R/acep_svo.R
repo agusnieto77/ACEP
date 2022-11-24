@@ -44,8 +44,10 @@
 #' @source \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 #' @keywords sintaxis
 #' @examples
+#'\dontrun{
 #' texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
 #' acep_svo(texto$texto_tag)
+#'}
 #' @export
 acep_svo <- function(acep_tokenindex,
                      prof_s = 2,
