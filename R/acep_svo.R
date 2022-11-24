@@ -45,8 +45,7 @@
 #' @keywords sintaxis
 #' @examples
 #'\dontrun{
-#' texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
-#' acep_svo(texto$texto_tag)
+#' acep_svo(acep_bases$spacy_postag)
 #'}
 #' @export
 acep_svo <- function(acep_tokenindex,

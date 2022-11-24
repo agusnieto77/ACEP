@@ -71,8 +71,7 @@ Tambien devuelve entidades nombradas (NER).
 }
 \examples{
 \dontrun{
-texto <- acep_postag("El SUTEBA fue al paro por mejoras salariales.")
-acep_svo(texto$texto_tag)
+acep_svo(acep_bases$spacy_postag)
 }
 }
 \references{

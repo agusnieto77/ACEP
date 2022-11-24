@@ -2,9 +2,7 @@
 test_that("ACEP svo", {
   skip_if_offline()
   skip_on_cran()
-  texto <- 1:10
-  #texto <- acep_postag("SUTEBA went on strike for better salaries.", core = "en_core_web_sm")
-  #acep_svo(texto$texto_tag)
-  dimensiones <- length(texto)
-  expect_equal(dimensiones, length(texto))
+  spacy_postag <- acep_svo(acep_bases$spacy_postag)
+  dimensiones <- length(spacy_postag)
+  expect_equal(dimensiones, length(spacy_postag))
 })
