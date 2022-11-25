@@ -19,7 +19,8 @@ acep_svo(
   rel_o = c("obj", "obl", "amod"),
   rel_evs = "nsubj",
   rel_evp = "obj",
-  u = 1
+  u = 1,
+  idioma = "spanish"
 )
 }
 \arguments{
@@ -56,6 +57,8 @@ Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
 \item{rel_evp}{etiqueta de relaciones a ser agregada en la reconstruccion del predicado.}
 
 \item{u}{numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.}
+
+\item{idioma}{del modelo udpipe.}
 }
 \value{
 Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.

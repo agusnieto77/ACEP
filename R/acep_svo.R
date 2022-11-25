@@ -31,12 +31,14 @@
 #' @param rel_evs etiqueta de relaciones a ser agregada en la reconstruccion del sujeto.
 #' @param rel_evp etiqueta de relaciones a ser agregada en la reconstruccion del predicado.
 #' @param u numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.
+#' @param idioma del modelo udpipe.
 #' @export acep_svo
 #' @importFrom stats na.omit
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
 #' @importFrom dplyr filter mutate group_by summarise ungroup rename distinct select left_join case_when arrange desc count
 #' @importFrom stringr str_trim str_replace_all str_detect
 #' @importFrom tidyr separate
+#' @importFrom udpipe udpipe
 #' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 #' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
@@ -57,7 +59,8 @@ acep_svo <- function(acep_tokenindex,
                      rel_o = c("obj","obl","amod"),
                      rel_evs = "nsubj",
                      rel_evp = "obj",
-                     u = 1
+                     u = 1,
+                     idioma = "spanish"
 ){
 
   fill <- rsyntax::custom_fill(relation = relaciones, min_window = c(1,1), connected = conexiones)
@@ -74,16 +77,26 @@ acep_svo <- function(acep_tokenindex,
 
   acep_annotate <- rsyntax::annotate_tqueries(acep_tokenindex, "s_v_o", direct, indirect, overwrite = FALSE)
 
-  acep_annotate <- acep_annotate |> dplyr::group_by(doc_id, sentence, sent_) |>
+  acep_annotate <- acep_annotate |> dplyr::group_by(doc_id, sentence) |>
     dplyr::mutate(s_p = ifelse(token_id < token_id[which(s_v_o == "verbo")][1], "sujeto", "predicado")) |>
     dplyr::ungroup()
 
+  acep_annotate_verbos <- unique(acep_annotate[ , c("token")]$token)
+  acep_annotate_verbos <- udpipe::udpipe(x = acep_annotate_verbos, object = idioma)[ , c("sentence", "feats")]
+  names(acep_annotate_verbos) <- c("token", "morph")
+
+  acep_annotate <- acep_annotate |> dplyr::left_join(acep_annotate_verbos, by = "token")
+
   acep_annotate <- acep_annotate |>
     dplyr::mutate(conjugaciones = dplyr::case_when(
-      stringr::str_detect(morph_, "Past") ~ "pasado",
-      stringr::str_detect(morph_, "Pres") ~ "presente",
-      stringr::str_detect(morph_, "Fut") ~ "futuro"
+      stringr::str_detect(morph, "Past") ~ "pasado",
+      stringr::str_detect(morph, "Pres") ~ "presente",
+      stringr::str_detect(morph, "Fut") ~ "futuro"
     ))
+
+  acep_annotate <- acep_annotate |> dplyr::group_by(doc_id, sentence) |>
+    dplyr::mutate(sent_ = paste(token, collapse = " ")) |> dplyr::ungroup()
+
   acep_annotate_o <- acep_annotate
   acep_annotate$relation <- gsub(":pass", "", acep_annotate$relation)
   no_procesadas <- acep_annotate |> dplyr::filter(is.na(s_p)) |>
@@ -115,7 +128,7 @@ acep_svo <- function(acep_tokenindex,
       sujeto = paste0(ifelse(s_p == "sujeto" & s_v_o == "sujeto", token, ""), collapse = " ") |> stringr::str_trim(),
       predicado = paste0(ifelse(s_p == "predicado", token, ""), collapse = " ") |> stringr::str_trim(),
       verbo = paste0(ifelse(relation == "ROOT", token, ""), collapse = " ") |> stringr::str_trim(),
-      lemma_verb = paste0(ifelse(relation == "ROOT", lemma_, ""), collapse = " ") |> stringr::str_trim(),
+      lemma_verb = paste0(ifelse(relation == "ROOT", lemma, ""), collapse = " ") |> stringr::str_trim(),
       conjugaciones = paste0(ifelse(s_v_o == "verbo", conjugaciones, ""), collapse = " ") |> stringr::str_trim(),
       aux_verbos = paste0(ifelse(pos == "VERB" , token, ""), collapse = " ") |> stringr::str_trim(),
       entidades = paste0(ifelse(pos == "PROPN" , token, ""), collapse = " ") |> stringr::str_trim(),
@@ -152,8 +165,8 @@ acep_svo <- function(acep_tokenindex,
     dplyr::filter(pos != "NUM", pos != "PUNCT", pos != "X", pos != "DET",
                   pos != "ADP", pos != "ADV", pos != "CCONJ", pos != "INTJ",
                   pos != "PRON", pos != "SCONJ", pos != "SYM") |>
-    dplyr::count(token, lemma_) |> dplyr::arrange(dplyr::desc(n))
-  acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:36)],
+    dplyr::count(token, lemma) |> dplyr::arrange(dplyr::desc(n))
+  acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:25)],
                         acep_pro_svo = acep_return[ , c(1:2, 7:15)] |>
                           tidyr::separate(eventos, c("sujeto_svo", "root", "objeto"),
                                           sep = " -> ", remove = FALSE),

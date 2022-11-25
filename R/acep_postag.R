@@ -31,7 +31,7 @@ acep_postag <- function(texto,
                         bajar_core = TRUE,
                         inst_spacy = FALSE,
                         inst_reticulate = FALSE
-                        ){
+){
   if(isTRUE(inst_reticulate)) utils::install.packages("reticulate")
   if(isTRUE(inst_spacy)) spacyr::spacy_install()
   if(isTRUE(bajar_core)) spacyr::spacy_download_langmodel(core)
@@ -41,51 +41,22 @@ acep_postag <- function(texto,
   texto_tag <- spacyr::spacy_parse(texto,
                                    pos = TRUE,
                                    tag = FALSE,
-                                   lemma = FALSE,
+                                   lemma = TRUE,
                                    entity = TRUE,
                                    dependency = TRUE,
                                    nounphrase = TRUE,
                                    multithread = TRUE,
-                                   additional_attributes = c("ent_type_", "is_upper", "is_title", "is_quote",
-                                                             "lemma_", "ent_iob_","ent_iob", "is_left_punct",
-                                                             "is_right_punct", "head","left_edge",
-                                                             "right_edge", "morph", "doc","sent"))
-
+                                   additional_attributes = c("is_upper", "is_title", "is_quote",
+                                                             "ent_iob_","ent_iob", "is_left_punct",
+                                                             "is_right_punct"))
   texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
   texto_tag_entity <- spacyr::entity_consolidate(texto_tag)
   texto_only_entity <- spacyr::entity_extract(texto_tag, type = "all")
   texto_nounphrase <- spacyr::nounphrase_consolidate(texto_tag)
   texto_only_nounphrase <- spacyr::nounphrase_extract(texto_tag)
-
   spacyr::spacy_finalize()
 
   texto_tag <- rsyntax::as_tokenindex(texto_tag)
-
-  head <- c()
-  for (i in seq_along(texto_tag$head)) { head <- append(head, paste(texto_tag$head[[i]])) }
-
-  left_edge <- c()
-  for (i in seq_along(texto_tag$left_edge)) { left_edge <- append(left_edge, paste(texto_tag$left_edge[[i]])) }
-
-  right_edge <- c()
-  for (i in seq_along(texto_tag$right_edge)) { right_edge <- append(right_edge, paste(texto_tag$right_edge[[i]])) }
-
-  morph <- c()
-  for (i in seq_along(texto_tag$morph)) { morph <- append(morph, paste(texto_tag$morph[[i]])) }
-
-  doc <- c()
-  for (i in seq_along(texto_tag$doc)) { doc <- append(doc, paste(texto_tag$doc[[i]])) }
-
-  sent <- c()
-  for (i in seq_along(texto_tag$sent)) { sent <- append(sent, paste(texto_tag$sent[[i]])) }
-
-  texto_tag$head_ <- head
-  texto_tag$left_edge_ <- left_edge
-  texto_tag$right_edge_ <- right_edge
-  texto_tag$morph_ <- morph
-  texto_tag$doc_ <- doc
-  texto_tag$sent_ <- sent
-
   texto_only_entity_loc <- texto_only_entity
   texto_only_entity_loc <- unique(subset(texto_only_entity_loc, entity_type == "LOC"))
   texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
@@ -94,7 +65,7 @@ acep_postag <- function(texto,
   names(texto_geocoder) <- c("entity_", "lat", "long")
   texto_only_entity_loc <- base::merge(x = texto_only_entity_loc, y = texto_geocoder, by = "entity_", all.x = TRUE)
   names(texto_only_entity_loc) <- c("entity_", "doc_id", "sentence", "entity", "entity_type", "lat", "long")
-  texto_only_entity_loc <- merge(texto_only_entity_loc, texto_tag[ , c("doc_id", "sentence", "sent_")], by = c("doc_id", "sentence"))
+  texto_only_entity_loc <- merge(texto_only_entity_loc, texto_tag[ , c("doc_id", "sentence")], by = c("doc_id", "sentence"))
   texto_only_entity_loc <- base::unique(texto_only_entity_loc) |> subset(!is.na(lat))
 
   texto_tag <- list(texto_tag = texto_tag,
@@ -103,6 +74,6 @@ acep_postag <- function(texto,
                     texto_only_entity_loc = texto_only_entity_loc,
                     texto_nounphrase = texto_nounphrase,
                     texto_only_nounphrase = texto_only_nounphrase
-                    )
+  )
   return(texto_tag)
 }
