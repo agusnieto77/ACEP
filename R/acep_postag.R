@@ -32,11 +32,8 @@ acep_postag <- function(texto,
                         inst_spacy = FALSE,
                         inst_reticulate = FALSE
                         ){
-
   if(isTRUE(inst_reticulate)) utils::install.packages("reticulate")
-
   if(isTRUE(inst_spacy)) spacyr::spacy_install()
-
   if(isTRUE(bajar_core)) spacyr::spacy_download_langmodel(core)
 
   spacyr::spacy_initialize(model = core)
@@ -55,13 +52,9 @@ acep_postag <- function(texto,
                                                              "right_edge", "morph", "doc","sent"))
 
   texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
-
   texto_tag_entity <- spacyr::entity_consolidate(texto_tag)
-
   texto_only_entity <- spacyr::entity_extract(texto_tag, type = "all")
-
   texto_nounphrase <- spacyr::nounphrase_consolidate(texto_tag)
-
   texto_only_nounphrase <- spacyr::nounphrase_extract(texto_tag)
 
   spacyr::spacy_finalize()
@@ -111,7 +104,5 @@ acep_postag <- function(texto,
                     texto_nounphrase = texto_nounphrase,
                     texto_only_nounphrase = texto_only_nounphrase
                     )
-
   return(texto_tag)
-
 }
