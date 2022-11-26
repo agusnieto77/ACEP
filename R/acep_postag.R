@@ -60,7 +60,6 @@ acep_postag <- function(texto,
   texto_only_entity_loc <- texto_only_entity
   texto_only_entity_loc <- unique(subset(texto_only_entity_loc, entity_type == "LOC"))
   texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
-
   texto_geocoder <- tidygeocoder::geo(unique(texto_only_entity_loc$entity_), method = "osm")
   names(texto_geocoder) <- c("entity_", "lat", "long")
   texto_only_entity_loc <- base::merge(x = texto_only_entity_loc, y = texto_geocoder, by = "entity_", all.x = TRUE)
