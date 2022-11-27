@@ -83,8 +83,9 @@ acep_svo <- function(acep_tokenindex,
 
   acep_annotate_verbos <- unique(acep_annotate[ , c("token")]$token)
   acep_annotate_verbos <- udpipe::udpipe(x = acep_annotate_verbos, object = idioma)[ , c("sentence", "feats")]
-  names(acep_annotate_verbos) <- c("token", "morph")
-
+  acep_annotate_verbos$token <- acep_annotate_verbos$sentence
+  acep_annotate_verbos$morph <- acep_annotate_verbos$feats
+  acep_annotate_verbos <-acep_annotate_verbos[ , c("token", "morph")]
   acep_annotate <- acep_annotate |> dplyr::left_join(acep_annotate_verbos, by = "token")
 
   acep_annotate <- acep_annotate |>
