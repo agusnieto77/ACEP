@@ -70,6 +70,7 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_postag()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.|
 |`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
 |`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).|
+|`acep_svo_udpipe()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion completa para extraer triplets SVO (Sujeto-Verbo-Objeto) desde el modelo udpipe.|
 |`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para tokenizar.|
 |`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Grafico de barras de palabras mas recurrentes en un corpus.|
 |`acep_token_table()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Tabla de frecuencia de palabras tokenizadas.|
