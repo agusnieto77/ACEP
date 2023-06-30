@@ -20,19 +20,28 @@ acep_context <- function(texto, clave, izq = 1, der = 1){
   nwi <- "[[:graph:]]*[[:space:]]*"
   nwd <- "[[:space:]]*[[:graph:]]*"
   lista_frases <- c()
-  doc_id <- c()
+
   for (c in clave) {
     claveb <- paste0(c, "[[:graph:]]*", collapse = "|")
     capturar <- paste0("(", paste0(rep(nwi,izq), collapse = ""),
                        claveb, paste0(rep(nwd, der), collapse = ""), ")")
-    for (i in seq_along(texto)) {
-      lista <- unlist(regmatches(texto[i], gregexpr(capturar, texto[i])))
-      doc_id <- append(doc_id, rep(i, length(lista)))
-      claves <- sub(paste0(".* (", claveb, ").*"), "\\1", texto[i])
-      lista <- gsub(claveb, paste0("\\| ", claves, " \\|"), lista)
-      lista_frases <- append(lista_frases, lista)
+
+    for (o in seq_along(texto)) {
+      oraciones <- unlist(strsplit(texto[o], "(?<=[a-z]\\.|\\?|\\!)\\s*(?=[A-Z]|\n[A-Z])", perl=T))
+
+      for (i in seq_along(oraciones)) {
+        vector <- unlist(regmatches(oraciones[i], gregexpr(capturar, oraciones[i])))
+
+        for (v in seq_along(vector)) {
+          claves <- unlist(regmatches(vector[v], gregexpr(claveb, vector[v])))
+          lista <- sapply(seq_along(vector[v]), function(x) sub(claveb, paste0("\\| ", claves[x], " \\|"), vector[v][x]))
+          contexto <- trimws(strsplit(lista, "|", fixed = TRUE)[[1]])
+          lista_frases <- rbind(lista_frases, data.frame(doc_id = o, oraciones_id = i, texto = lista, w_izq = contexto[1], key = contexto[2], w_der = contexto[3]))
+        }
+      }
     }
   }
-  lista_frases <- data.frame(doc_id = doc_id, contexto = lista_frases)
+
+  lista_frases <- as.data.frame(mapply(format, lista_frases, justify=c("left", "left", "left", "right", "centre", "left")))
   return(lista_frases)
 }
