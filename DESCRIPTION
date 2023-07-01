@@ -32,6 +32,7 @@ Imports:
     udpipe,
     tidygeocoder
 Suggests: 
+    corv,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

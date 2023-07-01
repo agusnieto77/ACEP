@@ -27,7 +27,7 @@
 #' gpt_api = api_gpt_acep,
 #' url = "https://api.openai.com/v1/chat/completions",
 #' modelo = "gpt-3.5-turbo-0613", rol = "user")
-#' texto_gpt
+#' cat(texto_gpt)
 #'}
 #' @export
 acep_gpt <- function(texto, instrucciones, gpt_api, url, modelo, rol) {
