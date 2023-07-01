@@ -63,6 +63,7 @@ devtools::install_github("agusnieto77/ACEP")
 | `acep_db()`          | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia, menciones e intensidad.                                                      |
 | `acep_detect()`      | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Deteccion de menciones de palabras.                                                      |
 | `acep_frec()`        | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de palabras totales.                                                          |
+| `acep_gpt()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Funcion para interactuar con los modelos de OpenAI.                                      |
 | `acep_int()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Indice de intensidad.                                                                    |
 | `acep_load_base()`   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Carga bases de datos creadas por el Observatorio.                                        |
 | `acep_men()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de menciones de palabras.                                                     |
@@ -180,15 +181,14 @@ revista_puerto$n_palabras <- acep_frec(revista_puerto$nota)
 # Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
 revista_puerto |> head()
 #> # A tibble: 6 × 7
-#>   fecha      titulo                            bajada nota  imagen link  n_pal…¹
-#>   <date>     <chr>                             <chr>  <chr> <chr>  <chr>   <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 para todos nuest… Con m… "Con… https… http…      31
-#> 2 2020-12-28 Mapa del trabajo esclavo en agua… Un re… "El … https… http…    1128
-#> 3 2020-12-24 Plantas piden tener garantizada … En Ch… "El … https… http…     530
-#> 4 2020-12-24 Los obreros navales despiden el … En Ma… "El … https… http…     483
-#> 5 2020-12-23 El incumplimiento del régimen de… Se ll… "Las… https… http…     525
-#> 6 2020-12-23 Otro fallo ratifica cautelar con… La Cá… "La … https… http…     462
-#> # … with abbreviated variable name ¹​n_palabras
+#>   fecha      titulo                         bajada nota  imagen link  n_palabras
+#>   <date>     <chr>                          <chr>  <chr> <chr>  <chr>      <dbl>
+#> 1 2020-12-29 ¡Feliz Año 2021 para todos nu… Con m… "Con… https… http…         31
+#> 2 2020-12-28 Mapa del trabajo esclavo en a… Un re… "El … https… http…       1128
+#> 3 2020-12-24 Plantas piden tener garantiza… En Ch… "El … https… http…        530
+#> 4 2020-12-24 Los obreros navales despiden … En Ma… "El … https… http…        483
+#> 5 2020-12-23 El incumplimiento del régimen… Se ll… "Las… https… http…        525
+#> 6 2020-12-23 Otro fallo ratifica cautelar … La Cá… "La … https… http…        462
 
 # Ahora con la funcion acep_men() contamos la frecuencia de menciones de
 # terminos del diccionario de conflictividad de SISMOS de cada nota y
@@ -201,15 +201,14 @@ revista_puerto$conflictos <- acep_men(revista_puerto$nota, dicc_confl_sismos)
 # menciones del diccionario de conflictividad
 revista_puerto  |> head()
 #> # A tibble: 6 × 8
-#>   fecha      titulo                    bajada nota  imagen link  n_pal…¹ confl…²
-#>   <date>     <chr>                     <chr>  <chr> <chr>  <chr>   <dbl>   <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 para tod… Con m… "Con… https… http…      31       0
-#> 2 2020-12-28 Mapa del trabajo esclavo… Un re… "El … https… http…    1128       0
-#> 3 2020-12-24 Plantas piden tener gara… En Ch… "El … https… http…     530       0
-#> 4 2020-12-24 Los obreros navales desp… En Ma… "El … https… http…     483       0
-#> 5 2020-12-23 El incumplimiento del ré… Se ll… "Las… https… http…     525       0
-#> 6 2020-12-23 Otro fallo ratifica caut… La Cá… "La … https… http…     462       0
-#> # … with abbreviated variable names ¹​n_palabras, ²​conflictos
+#>   fecha      titulo              bajada nota  imagen link  n_palabras conflictos
+#>   <date>     <chr>               <chr>  <chr> <chr>  <chr>      <dbl>      <dbl>
+#> 1 2020-12-29 ¡Feliz Año 2021 pa… Con m… "Con… https… http…         31          0
+#> 2 2020-12-28 Mapa del trabajo e… Un re… "El … https… http…       1128          0
+#> 3 2020-12-24 Plantas piden tene… En Ch… "El … https… http…        530          0
+#> 4 2020-12-24 Los obreros navale… En Ma… "El … https… http…        483          0
+#> 5 2020-12-23 El incumplimiento … Se ll… "Las… https… http…        525          0
+#> 6 2020-12-23 Otro fallo ratific… La Cá… "La … https… http…        462          0
 
 # Ahora con la funcion acep_int() calculamos un indice de intensidad de
 # la conflictividad y creamos una nueva columna llamada  intensidad
@@ -221,15 +220,14 @@ revista_puerto$intensidad <- acep_int(
 # Imprimimos en pantalla la base con la nueva columna de intensidad
 revista_puerto  |> head()
 #> # A tibble: 6 × 9
-#>   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³
-#>   <date>     <chr>             <chr>  <chr> <chr>  <chr>   <dbl>   <dbl>   <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0       0
-#> 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       0       0
-#> 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       0       0
-#> 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       0       0
-#> 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       0       0
-#> 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       0       0
-#> # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <dbl>      <dbl>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0          0
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          0          0
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          0          0
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          0          0
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          0          0
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          0          0
 ```
 
 ``` r
@@ -249,15 +247,14 @@ rp_procesada <- acep_db(subset_rp, subset_rp$nota, dicc_confl_sismos, 3)
 # Imprimimos en pantalla la base con las tres columna creadas
 rp_procesada |> head()
 #> # A tibble: 6 × 9
-#>   fecha      titulo            bajada nota  imagen link  n_pal…¹ confl…² inten…³
-#>   <date>     <chr>             <chr>  <chr> <chr>  <chr>   <dbl>   <dbl>   <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 … Con m… "Con… https… http…      31       0       0
-#> 2 2020-12-28 Mapa del trabajo… Un re… "El … https… http…    1128       0       0
-#> 3 2020-12-24 Plantas piden te… En Ch… "El … https… http…     530       0       0
-#> 4 2020-12-24 Los obreros nava… En Ma… "El … https… http…     483       0       0
-#> 5 2020-12-23 El incumplimient… Se ll… "Las… https… http…     525       0       0
-#> 6 2020-12-23 Otro fallo ratif… La Cá… "La … https… http…     462       0       0
-#> # … with abbreviated variable names ¹​n_palabras, ²​conflictos, ³​intensidad
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <dbl>      <dbl>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         31          0          0
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1128          0          0
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        530          0          0
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        483          0          0
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        525          0          0
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        462          0          0
 ```
 
 ``` r
