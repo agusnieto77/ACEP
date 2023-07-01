@@ -1,14 +1,18 @@
+# ACEP 0.0.3.9001 (versión en desarrollo)
+
+* Se mejoraron las nuevas funciones para contexto de texto y tokenizacion y se creo una nueva funcion para interactuar con la api de OpenAI.
+
 # ACEP 0.0.2.9000 (versión en desarrollo)
 
-* Se mejoraron las nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
+* Se mejoraron las nuevas funciones para limpieza de texto, tokenizacion y deteccion de menciones.
 
 # ACEP 0.0.21
 
-* Se mejoraron las nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
+* Se mejoraron las nuevas funciones para limpieza de texto, tokenizacion y deteccion de menciones.
 
 # ACEP 0.0.2
 
-* Se agregaron nuevas funciones para limpieza de texto, tokenización y deteccion de menciones.
+* Se agregaron nuevas funciones para limpieza de texto, tokenizacion y deteccion de menciones.
 
 # ACEP 0.0.1.9000 (versión en desarrollo)
 
