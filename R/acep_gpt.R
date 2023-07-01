@@ -21,7 +21,7 @@
 #' \dontrun{
 #' texto <- "El SOIP declaro la huelga por aumento de salarios."
 #' pregunta <- "¿Cual es el sujeto de la accion? Ejemplo de respuesta:
-#' 'El sujeto de la acción es: la CGT'"
+#' 'El sujeto de la accion es: la CGT'"
 #' api_gpt_acep <- gpt_api
 #' texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta,
 #' gpt_api = api_gpt_acep,
@@ -33,7 +33,7 @@
 acep_gpt <- function(texto, instrucciones, gpt_api, url, modelo, rol) {
 
   contenido <- base::paste(instrucciones,
-                  "El texto a analizar aparece a continuación",
+                  "El texto a analizar aparece a continuacion",
                   "delimitado por '```': \n```", texto, "```", sep = " ")
 
   output <- httr::POST(
