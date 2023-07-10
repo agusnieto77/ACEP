@@ -7,9 +7,9 @@
 #' @param sep El separador utilizado para concatenar las
 #' palabras clave encontradas (por defecto: " | ").
 #' @examples
-#' texto <- "Los obreros del pescado están en huelga y
-#' realizaron un piquete en el puerto"
-#' dicc <- c("huel", "manif")
+#' texto <- "Los obreros del pescado, en el marco de una huelga y
+#' realizaron una manifestación con piquete en el puerto de la ciudad."
+#' dicc <- c("huel", "manif", "piq)
 #' acep_extract(texto, dicc)
 #' @export
 acep_extract <- function(texto, dicc, sep = " | ") {
