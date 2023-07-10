@@ -9,7 +9,7 @@
 #' @examples
 #' texto <- "Los obreros del pescado, en el marco de una huelga y
 #' realizaron una manifestación con piquete en el puerto de la ciudad."
-#' dicc <- c("huel", "manif", "piq)
+#' dicc <- c("huel", "manif", "piq")
 #' acep_extract(texto, dicc)
 #' @export
 acep_extract <- function(texto, dicc, sep = " | ") {

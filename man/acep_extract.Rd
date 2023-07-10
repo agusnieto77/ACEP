@@ -19,9 +19,9 @@ Esta funcion busca palabras clave en un texto y
 extrae los resultados en un formato especifico.
 }
 \examples{
-texto <- "Los obreros del pescado están en huelga y
-realizaron un piquete en el puerto"
-dicc <- c("huel", "manif")
+texto <- "Los obreros del pescado, en el marco de una huelga y
+realizaron una manifestación con piquete en el puerto de la ciudad."
+dicc <- c("huel", "manif", "piq")
 acep_extract(texto, dicc)
 }
 \keyword{buscar}
