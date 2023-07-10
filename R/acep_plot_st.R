@@ -8,6 +8,7 @@
 #' @param ejey nombre del eje y.
 #' @param etiquetax orientacion de las etiquetas del
 #' eje x ('horizontal' | 'vertical').
+#' @param color color de las barras.
 #' @export acep_plot_st
 #' @importFrom graphics title barplot
 #' @keywords visualizacion
