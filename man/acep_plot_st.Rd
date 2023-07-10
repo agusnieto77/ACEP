@@ -27,6 +27,8 @@ acep_plot_st(
 
 \item{etiquetax}{orientacion de las etiquetas del
 eje x ('horizontal' | 'vertical').}
+
+\item{color}{color de las barras.}
 }
 \value{
 Si todas las entradas son correctas,
