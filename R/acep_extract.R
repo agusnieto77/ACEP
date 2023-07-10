@@ -13,12 +13,15 @@
 #' acep_extract(texto, dicc)
 #' @export
 acep_extract <- function(texto, dicc, sep = " | ") {
-  patron <- paste0(dicc, "\\w*\\b")
-  p_extract <- unlist(
-    regmatches(texto,
-               gregexpr(
-                 paste(patron, collapse = "|"),
-                 texto, ignore.case = TRUE)))
+  p_extract <- character()
+  p_texto <- unlist(strsplit(texto, " "))
+
+  for (p in dicc) {
+    patron <- paste0(p, "\\w*\\b")
+    p_encontradas <- p_texto[grep(patron, p_texto, ignore.case = TRUE)]
+    p_extract <- c(p_extract, p_encontradas)
+  }
+
   p_extract <- gsub("[[:punct:]]", "", p_extract)
   resultados <- paste(p_extract, collapse = sep)
   return(resultados)

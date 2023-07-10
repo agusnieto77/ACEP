@@ -18,26 +18,29 @@
 #' df
 #' @export
 acep_men <- function(x, y, tolower = TRUE) {
-  if(is.vector(x) != TRUE | is.list(x) == TRUE){
+  if (is.vector(x) != TRUE | is.list(x) == TRUE) {
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   }
-  if(is.vector(y) != TRUE | is.list(x) == TRUE){
+  if (is.vector(y) != TRUE | is.list(x) == TRUE) {
     mensaje <- "No ingresaste un vector en el parametro y. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
   } else {
-    if(is.vector(x) == TRUE & is.list(x) != TRUE) {
+    if (is.vector(x) == TRUE & is.list(x) != TRUE) {
       out <- tryCatch({
+        detect <- numeric(length(x))
         dicc <- paste0(y, collapse = "|")
         if (tolower == TRUE) {
-          vapply(gregexpr(dicc, tolower(x), perl = TRUE),
-                 function(z) sum(z != -1), c(frec = 0))
+          for (i in seq_along(x)) {
+            detect[i] <- sum(gregexpr(dicc, tolower(x[i]), perl = TRUE)[[1]] != -1)
+          }
         } else {
-          vapply(gregexpr(dicc, x, perl = TRUE),
-                 function(z) sum(z != -1), c(frec = 0))
+          for (i in seq_along(x)) {
+            detect[i] <- sum(gregexpr(dicc, x[i], perl = TRUE)[[1]] != -1)
+          }
         }
-      }
-      )
+        detect
+      })
     }
     return(out)
   }

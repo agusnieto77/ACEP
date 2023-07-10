@@ -15,23 +15,24 @@
 #' df$detect <- acep_detect(df$texto, diccionario)
 #' df
 #' @export
-
 acep_detect <- function(x, y, u = 1, tolower = TRUE) {
-  if(is.vector(x) == TRUE  & is.list(x) != TRUE){
-  out <- tryCatch({
-    dicc  <- paste0(y, collapse = "|")
-    if (tolower == TRUE) {
-      detect <- vapply(gregexpr(dicc, tolower(x)),
-                       function(z) sum(z != -1), c(frec = 0))
-    } else {
-      detect <- vapply(gregexpr(dicc, x),
-                       function(z) sum(z != -1), c(frec = 0))
-    }
-    ifelse(detect >= u, 1, 0)
-  }
-  )
-  return(out)
-} else {
+  if (is.vector(x) == TRUE & is.list(x) != TRUE) {
+    out <- tryCatch({
+      detect <- numeric(length(x))
+      dicc <- paste0(y, collapse = "|")
+      if (tolower == TRUE) {
+        for (i in seq_along(x)) {
+          detect[i] <- sum(gregexpr(dicc, tolower(x[i]))[[1]] != -1)
+        }
+      } else {
+        for (i in seq_along(x)) {
+          detect[i] <- sum(gregexpr(dicc, x[i])[[1]] != -1)
+        }
+      }
+      ifelse(detect >= u, 1, 0)
+    })
+    return(out)
+  } else {
     message("No ingresaste un vector. Vuelve a intentarlo ingresando un vector!")
   }
 }
