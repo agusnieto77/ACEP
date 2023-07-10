@@ -16,6 +16,7 @@
 #' acep_token_plot(tokens)
 #' @export
 acep_token_plot <- function(x, u = 10, frec = TRUE) {
+  par(mar=c(6,9,4,1))
   if(is.vector(x) != TRUE | is.list(x) == TRUE){
     mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
     return(message(mensaje))
@@ -45,8 +46,8 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
       xlim = c(0, (max(tabla_token$frec) * 1.1)),
       horiz = TRUE,
       las = 1,
-      cex.names = 0.7,
-      cex.axis = 0.7
+      cex.names = 0.8,
+      cex.axis = 0.8
     )
   } else {
     tabla_token <- base::table(x) |> as.data.frame()
@@ -69,8 +70,8 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
       xlim = c(0, (max(tabla_token$prop) * 1.15)),
       horiz = TRUE,
       las = 1,
-      cex.names = 0.7,
-      cex.axis = 0.7
+      cex.names = 0.8,
+      cex.axis = 0.8
     )
   }
         }
