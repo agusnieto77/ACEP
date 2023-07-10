@@ -4,7 +4,7 @@
 \alias{acep_extract}
 \title{Funcion para buscar y extraer palabras en un texto}
 \usage{
-acep_extract(texto, dicc, sep = " | ")
+acep_extract(texto, dicc, sep = " | ", tolower = TRUE)
 }
 \arguments{
 \item{texto}{El texto en el que se buscarán las palabras clave.}
@@ -13,6 +13,8 @@ acep_extract(texto, dicc, sep = " | ")
 
 \item{sep}{El separador utilizado para concatenar las
 palabras clave encontradas (por defecto: " | ").}
+
+\item{tolower}{convierte los textos a minusculas.}
 }
 \description{
 Esta funcion busca palabras clave en un texto y
