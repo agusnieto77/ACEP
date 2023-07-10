@@ -28,7 +28,13 @@
 #' etiquetax = 'horizontal')
 #' @export
 acep_plot_st <- function(x, y, t = "", ejex = "",
-                         ejey = "", etiquetax = "horizontal") {
+                         ejey = "", etiquetax = "horizontal", color = "mint") {
+  c <- y
+  c <- if (max(c)-min(c) < 10) {
+    c <- c*10000
+  } else {
+    c
+  }
   etiquetax  <- if (etiquetax == "horizontal") {
     etiquetax <- 0
   } else if (etiquetax == "vertical") {
@@ -50,7 +56,7 @@ acep_plot_st <- function(x, y, t = "", ejex = "",
                    xlab = "",
                    cex.names = 1.0,
                    border = "grey",
-                   col = grDevices::hcl.colors(length(y), "Pastel 1"),
+                   col = grDevices::hcl.colors(max(c), alpha = 0.5, color, rev = TRUE)[c],
                    las = etiquetax)
   graphics::title(xlab = ejex, line = -0.1, cex.lab = 1.0)
   graphics::title(ylab = ejey, line = -1.0, cex.lab = 1.0)

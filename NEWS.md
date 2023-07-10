@@ -1,5 +1,7 @@
 # ACEP 0.0.3.9001 (versión en desarrollo)
 
+* Incorporamos una función para extraer palabras clave de corpus de texto en base a un diccionario.
+
 * Se mejoraron las nuevas funciones para contexto de texto y tokenizacion y se creo una nueva funcion para interactuar con la api de OpenAI.
 
 # ACEP 0.0.2.9000 (versión en desarrollo)

@@ -4,7 +4,15 @@
 \alias{acep_plot_st}
 \title{Grafico de barras de la serie temporal de indices de conflictividad.}
 \usage{
-acep_plot_st(x, y, t = "", ejex = "", ejey = "", etiquetax = "horizontal")
+acep_plot_st(
+  x,
+  y,
+  t = "",
+  ejex = "",
+  ejey = "",
+  etiquetax = "horizontal",
+  color = "mint"
+)
 }
 \arguments{
 \item{x}{vector de valores del eje x (por ejemplo, fechas).}

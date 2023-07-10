@@ -50,7 +50,7 @@ test_that("ACEP Plot ST E2", {
                                     st = "mes")
   pst <- acep_plot_st(
     datos_procesados_anio$st,
-    datos_procesados_anio,
+    datos_procesados_anio$frecn,
     t = "Evolución de la conflictividad en el sector pesquero argentino",
     ejex = "Meses analizados",
     ejey = "Menciones de términos del diccionario de conflictos",

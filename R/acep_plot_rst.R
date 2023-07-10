@@ -27,17 +27,21 @@ acep_plot_rst <- function(datos, tagx = "horizontal") {
       par(mfrow = c(2, 2))
       acep_plot_st(datos$st, datos$int_notas_confl,
                    t = "Eventos de protesta",
-                   etiquetax = tagx)
+                   etiquetax = tagx,
+                   color = "plasma")
       acep_plot_st(datos$st, datos$frecm,
                    t = "Acciones de protesta",
-                   etiquetax = tagx)
+                   etiquetax = tagx,
+                   color = "mako")
       acep_plot_st(datos$st, datos$intensidad,
                    t = "Intensidad de la protesta",
-                   etiquetax = tagx)
+                   etiquetax = tagx,
+                   color = "inferno")
       acep_plot_st(datos$st, datos$intac,
                    t = "Intensidad acumulada de la protesta",
-                   etiquetax = tagx)
+                   etiquetax = tagx,
+                   color = "viridis")
       par(mfrow = c(1, 1))
-}
-    )
+      }
+      )
   }
