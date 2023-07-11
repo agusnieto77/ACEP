@@ -3,9 +3,10 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   conflictividad_soip: conflictividad_soip.html
+  extraccion_palabras_clave: extraccion_palabras_clave.html
   limpieza_de_texto_con_acep: limpieza_de_texto_con_acep.html
   tokenizar_con_acep: tokenizar_con_acep.html
-last_built: 2023-07-10T06:44Z
+last_built: 2023-07-11T18:27Z
 urls:
   reference: https://agusnieto77.github.io/ACEP/reference
   article: https://agusnieto77.github.io/ACEP/articles
