@@ -1,4 +1,4 @@
-# ACEP 0.0.3.9001 (versión en desarrollo)
+# ACEP 0.0.3.9002 (versión en desarrollo)
 
 * Incorporamos una función para extraer palabras clave de corpus de texto en base a un diccionario.
 
