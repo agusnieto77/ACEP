@@ -42,6 +42,6 @@ acep_context <- function(texto, clave, izq = 1, der = 1){
     }
   }
 
-  lista_frases <- as.data.frame(mapply(format, lista_frases, justify=c("left", "left", "left", "right", "centre", "left")))
   return(lista_frases)
+
 }
