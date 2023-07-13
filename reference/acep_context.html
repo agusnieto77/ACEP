@@ -101,13 +101,8 @@ procesado y el contexto de las palabras y/o frases entradas.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">texto</span> <span class="op">&lt;-</span> <span class="st">"El SOIP para por aumento de salarios"</span></span></span>
 <span class="r-in"><span><span class="va">texto_context</span> <span class="op">&lt;-</span> <span class="fu">acep_context</span><span class="op">(</span>texto <span class="op">=</span> <span class="va">texto</span>, clave <span class="op">=</span> <span class="st">"para"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">texto_context</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              mapply(format, lista_frases, justify = c("left", "left", "left", "right", "centre", "left"))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> doc_id                                                                                                  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> oraciones_id                                                                                            1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> texto                                                                                   SOIP | para | por</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> w_izq                                                                                                SOIP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> key                                                                                                  para</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> w_der                                                                                                 por</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   doc_id oraciones_id             texto w_izq  key w_der</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1            1 SOIP | para | por  SOIP para   por</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
