@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
                         <h4 data-toc-skip class="author">Diego
 Pacheco</h4>
             
-            <h4 data-toc-skip class="date">2023-07-18</h4>
+            <h4 data-toc-skip class="date">2023-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/limpieza_de_texto_con_acep.Rmd" class="external-link"><code>vignettes/limpieza_de_texto_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>limpieza_de_texto_con_acep.Rmd</code></div>
@@ -94,18 +94,19 @@ Pacheco</h4>
     
     
 <p>Este artículo se propone explicar las distintas maneras de ejecutar
-la función acep_clean(). En primer lugar, corresponde mencionar los
-parámetros que conforman la función: Tolower, rm_cesp, rm_emoji,
-rm_hashtag, rm_users, rm_punt, rm_num, rm_url, rm_meses, rm_dias,
-rm_stopwords, rm_shortwords, rm_newline, rm_whitespace, other_sw.</p>
+la función <code><a href="../reference/acep_cleaning.html">acep_cleaning()</a></code>. En primer lugar, corresponde
+mencionar los parámetros que conforman la función: Tolower, rm_cesp,
+rm_emoji, rm_hashtag, rm_users, rm_punt, rm_num, rm_url, rm_meses,
+rm_dias, rm_stopwords, rm_shortwords, rm_newline, rm_whitespace,
+other_sw.</p>
 <p>Por defecto, todos los parámetros están seteados con el valor TRUE,
 es decir que están activados a excepción de other_sw. Este parámetro
 está marcado como NULL.</p>
-<p>Para comprender el funcionamiento de acep_clean(), repasaremos cada
-uno de los parámetros con ejemplos. Utilizaremos una base de tweets
-sobre el paro de trenes realizado el día 08/11/2022 que contienen las
-palabras “La Fraternidad” que refieren al sindicato argentino de
-maquinistas de locomotoras y trenes.</p>
+<p>Para comprender el funcionamiento de <code><a href="../reference/acep_cleaning.html">acep_cleaning()</a></code>,
+repasaremos cada uno de los parámetros con ejemplos. Utilizaremos una
+base de tweets sobre el paro de trenes realizado el día 08/11/2022 que
+contienen las palabras “La Fraternidad” que refieren al sindicato
+argentino de maquinistas de locomotoras y trenes.</p>
 <div class="section level2">
 <h2 id="to-lower">to lower<a class="anchor" aria-label="anchor" href="#to-lower"></a>
 </h2>
@@ -123,7 +124,7 @@ FALSE a excepción del que queremos probar.</p>
 <span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"</span></span>
 <span></span>
-<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
+<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>, select <span class="op">=</span> <span class="va">text</span><span class="op">)</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
 <p>Seleccionemos ahora tan sólo un tweet:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -132,10 +133,11 @@ FALSE a excepción del que queremos probar.</p>
 <span><span class="va">primer_tweet</span></span>
 <span><span class="co">#&gt; [1] "👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes\nhttps://t.co/644Ak0HZ7I"</span></span></code></pre></div>
 <p>Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro
-tolower de la función acep_clean() y verificamos el resultado.</p>
+tolower de la función <code><a href="../reference/acep_cleaning.html">acep_cleaning()</a></code> y verificamos el
+resultado.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">minus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
+<span><span class="va">minus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>               tolower <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>               rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>               rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -174,7 +176,7 @@ removerlos. Al igual que el caso anterior, aislamos el parámetro
 rm_cesp.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">cesp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
+<span><span class="va">cesp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -210,7 +212,7 @@ redes sociales. Estos caracteres puede ser problemáticos para el
 análisis de texto y por este motivo se remueven con el parámetro
 rm_emoji.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">emoji</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
+<code class="sourceCode R"><span><span class="va">emoji</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -247,7 +249,7 @@ Utilizamos otro tweet de la base que contiene #hashtag</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">con_hash</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span></span>
-<span><span class="va">hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span>,</span>
+<span><span class="va">hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -285,7 +287,7 @@ queremos remover. Para esto utilizamos el parámetro rm_users</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">con_user</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span>
-<span><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span>,</span>
+<span><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -320,7 +322,7 @@ palabras o análisis semántica. La podemos remover con el parámetro
 rm_punt.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">punt</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span></span>
-<span><span class="va">s_punt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span>,</span>
+<span><span class="va">s_punt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -362,7 +364,7 @@ Se remueve con el parámetro rm_num.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">num</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
-<span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
+<span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -406,7 +408,7 @@ Se remueve con el parámetro rm_num.</p>
 urls. Para removerlas usamos el parámetro rm_url</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
-<span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
+<span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -451,7 +453,7 @@ parámetro rm_meses. En este caso, el tweet tiene la palabra
 “noviembre”</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">meses</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
-<span><span class="va">meses_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
+<span><span class="va">meses_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -496,7 +498,7 @@ parámetro rm_dias. En este caso, el tweet tiene la palabra “martes”</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">dia</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span></span>
-<span><span class="va">dia_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span>,</span>
+<span><span class="va">dia_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -533,9 +535,9 @@ rm_stopwords.</p>
 en el siguiente link: stopwords &lt;- readRDS(url(“<a href="https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds" class="external-link uri">https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds</a>”))</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"</span></span>
-<span><span class="va">stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="va">stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
 <span><span class="va">stopw</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span></span>
-<span><span class="va">stopw_w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span>,</span>
+<span><span class="va">stopw_w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -568,7 +570,7 @@ quedar como “residuos” de limpiezas previas y que probablemente no
 tengan contenido útil, lo hacemos con el parámetro rm_shortwords.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">short</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">97</span><span class="op">]</span></span>
-<span><span class="va">short_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">97</span><span class="op">]</span>,</span>
+<span><span class="va">short_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">97</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -601,7 +603,7 @@ saltos de línea. En este ejemplo hay un salgo de línea antes del link
 del final del tweet.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">newl</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">newl_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span><span class="va">newl_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -637,7 +639,7 @@ los espacios en blanco.</p>
 <p>En este ejemplo, entre “en nuestro” hay un doble espacio.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">white</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">60</span><span class="op">]</span></span>
-<span><span class="va">white_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">60</span><span class="op">]</span>,</span>
+<span><span class="va">white_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">60</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -681,7 +683,7 @@ coma. En este caso se agregan las palabras “conciliación” y
 “Fraternidad”.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">osw</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">osw_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_clean.html">acep_clean</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span><span class="va">osw_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -716,7 +718,7 @@ coma. En este caso se agregan las palabras “conciliación” y
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Agustin Nieto.</p>
+<p>Developed by Agustín Nieto.</p>
 </div>
 
 <div class="pkgdown-footer-right">

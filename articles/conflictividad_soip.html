@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2023-07-18</h4>
+            <h4 data-toc-skip class="date">2023-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/conflictividad_soip.Rmd" class="external-link"><code>vignettes/conflictividad_soip.Rmd</code></a></small>
       <div class="d-none name"><code>conflictividad_soip.Rmd</code></div>
@@ -148,13 +148,13 @@ cargar todas las notas haremos uso de la función
 que contenga las frecuencias de palabras totales y de cada diccionario
 usado para cada una de las notas. En esta parte del código haremos uso
 de tres funciones y un diccionario del paquete ACEP:
-<code><a href="../reference/acep_frec.html">acep_frec()</a></code>, <code><a href="../reference/acep_men.html">acep_men()</a></code>,
+<code><a href="../reference/acep_frec.html">acep_frec()</a></code>, <code><a href="../reference/acep_count.html">acep_count()</a></code>,
 <code><a href="../reference/acep_load_base.html">acep_load_base()</a></code> y <code>acep_diccionarios</code>. También
 crearemos dos diccionarios breves para usarlos en la función
-<code><a href="../reference/acep_men.html">acep_men()</a></code> con un doble objetivo: 1) identificar las notas
-que refieran a huelgas; 2) identificar las notas que refieran a lxs
-trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar
-del Plata.</p>
+<code><a href="../reference/acep_count.html">acep_count()</a></code> con un doble objetivo: 1) identificar las
+notas que refieran a huelgas; 2) identificar las notas que refieran a
+lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de
+Mar del Plata.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Creamos la variable con la frecuencia de palabras por nota</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_frec.html">acep_frec</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span>
@@ -164,7 +164,7 @@ del Plata.</p>
 <span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a conflictividad</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a huelgas</span></span>
 <span><span class="va">dicc_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"en paro"</span>, <span class="st">"al paro"</span>, <span class="st">"huelga"</span>, <span class="st">"huelguistas"</span>, <span class="st">"paro y movil"</span>,</span>
@@ -173,7 +173,7 @@ del Plata.</p>
 <span>                  <span class="st">"el paro"</span>, <span class="st">"de brazos caídos"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a huelgas</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado</span></span>
 <span><span class="va">dicc_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"soip"</span>, <span class="st">"sindicato obrero de la industria del pescado"</span>, </span>
@@ -184,17 +184,17 @@ del Plata.</p>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que </span></span>
 <span><span class="co"># refieren a lxs obrerxs del pescado</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">rev_puerto</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 10</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Añ… Con m… <span style="color: #949494;">"</span>Con… https… http…            31               0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del … Un re… <span style="color: #949494;">"</span>El … https… http…          <span style="text-decoration: underline;">1</span>128               4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas p… En Ch… <span style="color: #949494;">"</span>El … https… http…           530               3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrer… En Ma… <span style="color: #949494;">"</span>El … https… http…           483               8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrer… En Ma… <span style="color: #949494;">"</span>El … https… http…           483               9</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incump… Se ll… <span style="color: #949494;">"</span>Las… https… http…           525               4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fall… La Cá… <span style="color: #949494;">"</span>La … https… http…           462               6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomenda… Desde… <span style="color: #949494;">"</span>En … https… http…           650               0</span></span>
@@ -237,41 +237,41 @@ huelgas. Para la elaboración de estos índices haremos uso de la función
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">rev_puerto</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 888 × 13</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 383 × 13</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-04 SOIP pide… <span style="color: #949494;">"</span>El g… <span style="color: #949494;">"</span>Lue… https… http…           500               4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-11-27 Se acordó… <span style="color: #949494;">"</span>Es u… <span style="color: #949494;">"</span>Tal… https… http…           517               2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-11-24 Mardi, la… <span style="color: #949494;">"</span>Con … <span style="color: #949494;">"</span>Tra… https… http…          <span style="text-decoration: underline;">1</span>125               1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-11-16 Cierran l… <span style="color: #949494;">"</span>El v… <span style="color: #949494;">"</span>Des… https… http…           380               4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-11-13 CaIPA-SOI… <span style="color: #949494;">"</span>Las … <span style="color: #949494;">"</span>Lo … https… http…           376               3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-10-30 Conflicto… <span style="color: #949494;">"</span>El S… <span style="color: #949494;">"</span>La … https… http…           680               3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-10-12 Obreros r… <span style="color: #949494;">"</span>Pert… <span style="color: #949494;">"</span>Un … https… http…           421               6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-10-07 Langostin… <span style="color: #949494;">"</span>El m… <span style="color: #949494;">"</span>El … https… http…          <span style="text-decoration: underline;">1</span>104               5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-09-15 Corvina: … <span style="color: #949494;">"</span>Áfri… <span style="color: #949494;">"</span>La … https… http…           661               5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-08-31 Peón de u… <span style="color: #949494;">"</span>Es u… <span style="color: #949494;">"</span>Víc… https… http…           747               5</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 878 more rows</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-11-24 Mardi, la… <span style="color: #949494;">"</span>Con … <span style="color: #949494;">"</span>Tra… https… http…          <span style="text-decoration: underline;">1</span>125               1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-11-16 Cierran l… <span style="color: #949494;">"</span>El v… <span style="color: #949494;">"</span>Des… https… http…           380               4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-11-13 CaIPA-SOI… <span style="color: #949494;">"</span>Las … <span style="color: #949494;">"</span>Lo … https… http…           376               3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-10-30 Conflicto… <span style="color: #949494;">"</span>El S… <span style="color: #949494;">"</span>La … https… http…           680               3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-10-12 Obreros r… <span style="color: #949494;">"</span>Pert… <span style="color: #949494;">"</span>Un … https… http…           421               6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-10-07 Langostin… <span style="color: #949494;">"</span>El m… <span style="color: #949494;">"</span>El … https… http…          <span style="text-decoration: underline;">1</span>104               5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-09-15 Corvina: … <span style="color: #949494;">"</span>Áfri… <span style="color: #949494;">"</span>La … https… http…           661               5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-08-31 Peón de u… <span style="color: #949494;">"</span>Es u… <span style="color: #949494;">"</span>Víc… https… http…           747               5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-08-26 “La salid… <span style="color: #949494;">"</span>Lo d… <span style="color: #949494;">"</span>Due… https… http…          <span style="text-decoration: underline;">1</span>606               5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-08-11 Los comed… <span style="color: #949494;">"</span>Aume… <span style="color: #949494;">"</span>Es … https… http…          <span style="text-decoration: underline;">1</span>254               5</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 373 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: frec_huelgas &lt;dbl&gt;, frec_soip &lt;dbl&gt;, i_conf_gral &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   i_soip &lt;dbl&gt;, i_huelgas &lt;dbl&gt;</span></span></span></code></pre></div>
-<p>Al realizar los filtros la base se redujo a 888 notas que presentan
+<p>Al realizar los filtros la base se redujo a 383 notas que presentan
 al menos una mención de una palabra que refiere a conflicto y al menos
 un término que refiere a lxs trabajadorxs del pescado.</p>
 </div>
 <div class="section level2">
 <h2 id="serie-temporal-de-índices">Serie temporal de índices<a class="anchor" aria-label="anchor" href="#serie-temporal-de-%C3%ADndices"></a>
 </h2>
-<p>En esta parte del código usaremos la función <code><a href="../reference/acep_rst.html">acep_rst()</a></code>
+<p>En esta parte del código usaremos la función <code><a href="../reference/acep_sst.html">acep_sst()</a></code>
 para calcular los índices agrupados por año y mes. Primero construimos
 la serie de tiempo para la conflictividad general.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice anual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
 <span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
-<span><span class="co"># por la función acep_rst()</span></span>
+<span><span class="co"># por la función acep_sst()</span></span>
 <span><span class="co"># Estos pasos previos se deben realizar porque en este ejemplo no hicimos uso </span></span>
 <span><span class="co"># de la función acep_db() que calcula frecuencia, menciones e intensidad y</span></span>
 <span><span class="co"># deja el marco de datos resultante en un formato adecuado para ser usado</span></span>
-<span><span class="co"># con la función acep_rst()</span></span>
+<span><span class="co"># con la función acep_sst()</span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -285,26 +285,22 @@ la serie de tiempo para la conflictividad general.</p>
 <span><span class="va">conflictos</span> <span class="op">&lt;-</span> <span class="va">datos</span><span class="op">$</span><span class="va">conflictos</span></span>
 <span></span>
 <span><span class="co"># Ahora agrupamos por mes la conflictividad general del sector</span></span>
-<span><span class="va">conf_gral_anio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_rst.html">acep_rst</a></span><span class="op">(</span><span class="va">datos</span>, </span>
-<span>                      <span class="va">fecha</span>, </span>
-<span>                      <span class="va">n_palabras</span>,</span>
-<span>                      <span class="va">conflictos</span>,</span>
-<span>                      st <span class="op">=</span> <span class="st">"anio"</span><span class="op">)</span></span>
+<span><span class="va">conf_gral_anio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_sst.html">acep_sst</a></span><span class="op">(</span><span class="va">datos</span>, st <span class="op">=</span> <span class="st">"anio"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">conf_gral_anio</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;     st frecn csn  frecp frecm  intac intensidad int_notas_confl</span></span>
-<span><span class="co">#&gt; 1 2009    51  36  41178   251 0.3315     0.0061          0.7059</span></span>
-<span><span class="co">#&gt; 2 2010    50  37  40036   308 0.4259     0.0077          0.7400</span></span>
-<span><span class="co">#&gt; 3 2011   106  79  74779   648 1.0012     0.0087          0.7453</span></span>
-<span><span class="co">#&gt; 4 2012   149 121 119419  1020 1.3347     0.0085          0.8121</span></span>
-<span><span class="co">#&gt; 5 2013   101  67  80654   596 0.7576     0.0074          0.6634</span></span>
-<span><span class="co">#&gt; 6 2014    84  60  50679   430 0.7425     0.0085          0.7143</span></span></code></pre></div>
+<span><span class="co">#&gt;     st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
+<span><span class="co">#&gt; 1 2009    34  24 26351   156 0.2214     0.0059          0.7059</span></span>
+<span><span class="co">#&gt; 2 2010    29  21 27053   207 0.2583     0.0077          0.7241</span></span>
+<span><span class="co">#&gt; 3 2011    44  32 30954   256 0.4024     0.0083          0.7273</span></span>
+<span><span class="co">#&gt; 4 2012    78  67 68256   617 0.7521     0.0090          0.8590</span></span>
+<span><span class="co">#&gt; 5 2013    26  16 19307   151 0.2062     0.0078          0.6154</span></span>
+<span><span class="co">#&gt; 6 2014    17  12 12804    86 0.1164     0.0067          0.7059</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice mensual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
 <span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
-<span><span class="co"># por la función acep_rst()</span></span>
+<span><span class="co"># por la función acep_sst()</span></span>
 <span><span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -322,27 +318,24 @@ la serie de tiempo para la conflictividad general.</p>
 <span><span class="va">conflictos</span> <span class="op">&lt;-</span> <span class="va">datos</span><span class="op">$</span><span class="va">conflictos</span></span>
 <span></span>
 <span><span class="co"># Ahora agrupamos por mes la conflictividad general del sector</span></span>
-<span><span class="va">conf_gral</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_rst.html">acep_rst</a></span><span class="op">(</span><span class="va">datos</span>, </span>
-<span>                      <span class="va">fecha</span>, </span>
-<span>                      <span class="va">n_palabras</span>,</span>
-<span>                      <span class="va">conflictos</span><span class="op">)</span></span>
+<span><span class="va">conf_gral</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_sst.html">acep_sst</a></span><span class="op">(</span><span class="va">datos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">conf_gral</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
-<span><span class="co">#&gt; 1 2012-01    14  12 10930    78 0.1180     0.0071          0.8571</span></span>
-<span><span class="co">#&gt; 2 2012-02     5   5  3122    22 0.0355     0.0070          1.0000</span></span>
-<span><span class="co">#&gt; 3 2012-03    18  10 12100    61 0.0980     0.0050          0.5556</span></span>
-<span><span class="co">#&gt; 4 2012-04    11  11  8615    89 0.1206     0.0103          1.0000</span></span>
-<span><span class="co">#&gt; 5 2012-05    12  11 10194   133 0.1641     0.0130          0.9167</span></span>
-<span><span class="co">#&gt; 6 2012-06    17  15 14001   163 0.1961     0.0116          0.8824</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2012-01     4   3  3401    18 0.0234     0.0053          0.7500</span></span>
+<span><span class="co">#&gt; 2 2012-02     3   3  1978    14 0.0219     0.0071          1.0000</span></span>
+<span><span class="co">#&gt; 3 2012-03     6   3  5658    16 0.0191     0.0028          0.5000</span></span>
+<span><span class="co">#&gt; 4 2012-04     6   6  5399    53 0.0662     0.0098          1.0000</span></span>
+<span><span class="co">#&gt; 5 2012-05     7   6  5953    79 0.0949     0.0133          0.8571</span></span>
+<span><span class="co">#&gt; 6 2012-06    12  11 11022   137 0.1495     0.0124          0.9167</span></span></code></pre></div>
 <p>En la siguiente parte del código construimos la serie de tiempo para
 la conflictividad huelguística.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice mensual de conflictividad huelguística en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
 <span><span class="co"># Pero primero preparamos el marcos de datos para ser procesado </span></span>
-<span><span class="co"># por la función acep_rst()</span></span>
+<span><span class="co"># por la función acep_sst()</span></span>
 <span><span class="va">datosh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  fecha <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">fecha</span>,</span>
 <span>  n_palabras <span class="op">=</span> <span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_palabras</span>,</span>
@@ -360,20 +353,17 @@ la conflictividad huelguística.</p>
 <span><span class="va">conflictosh</span> <span class="op">&lt;-</span> <span class="va">datosh</span><span class="op">$</span><span class="va">conflictos</span></span>
 <span></span>
 <span><span class="co"># Ahora agrupamos por mes la conflictividad huelguística del sector</span></span>
-<span><span class="va">huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_rst.html">acep_rst</a></span><span class="op">(</span><span class="va">datosh</span>, </span>
-<span>                    <span class="va">fechah</span>, </span>
-<span>                    <span class="va">n_palabrash</span>,</span>
-<span>                    <span class="va">conflictosh</span><span class="op">)</span></span>
+<span><span class="va">huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_sst.html">acep_sst</a></span><span class="op">(</span><span class="va">datosh</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">huelgas</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
-<span><span class="co">#&gt; 1 2012-01    14   0 10930     0 0.0000     0.0000          0.0000</span></span>
-<span><span class="co">#&gt; 2 2012-02     5   0  3122     0 0.0000     0.0000          0.0000</span></span>
-<span><span class="co">#&gt; 3 2012-03    18   0 12100     0 0.0000     0.0000          0.0000</span></span>
-<span><span class="co">#&gt; 4 2012-04    11   0  8615     8 0.9010     0.0009          0.0000</span></span>
-<span><span class="co">#&gt; 5 2012-05    12   2 10194    17 1.2651     0.0017          0.1667</span></span>
-<span><span class="co">#&gt; 6 2012-06    17   2 14001    19 1.4480     0.0014          0.1176</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2012-01     4   0  3401     0 0.0000     0.0000          0.0000</span></span>
+<span><span class="co">#&gt; 2 2012-02     3   0  1978     0 0.0000     0.0000          0.0000</span></span>
+<span><span class="co">#&gt; 3 2012-03     6   0  5658     0 0.0000     0.0000          0.0000</span></span>
+<span><span class="co">#&gt; 4 2012-04     6   1  5399     6 0.6082     0.0011          0.1667</span></span>
+<span><span class="co">#&gt; 5 2012-05     7   1  5953     9 0.5800     0.0015          0.1429</span></span>
+<span><span class="co">#&gt; 6 2012-06    12   2 11022    17 1.0869     0.0015          0.1667</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="las-visualizaciones">Las visualizaciones<a class="anchor" aria-label="anchor" href="#las-visualizaciones"></a>
@@ -449,7 +439,7 @@ la conflictividad en la industria pesquera argentina.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Agustin Nieto.</p>
+<p>Developed by Agustín Nieto.</p>
 </div>
 
 <div class="pkgdown-footer-right">

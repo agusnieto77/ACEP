@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2023-07-18</h4>
+            <h4 data-toc-skip class="date">2023-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/extraccion_palabras_clave.Rmd" class="external-link"><code>vignettes/extraccion_palabras_clave.Rmd</code></a></small>
       <div class="d-none name"><code>extraccion_palabras_clave.Rmd</code></div>
@@ -147,10 +147,10 @@ y una de carácter que contenga las frecuencias de palabras totales, la
 frecuencia de palabras de cada diccionario usado para cada una de las
 notas y las palabras clave mencionadas en cada nota. En esta parte del
 código haremos uso de tres funciones y un diccionario del paquete ACEP:
-<code><a href="../reference/acep_men.html">acep_men()</a></code>, <code><a href="../reference/acep_extract.html">acep_extract()</a></code>,
+<code><a href="../reference/acep_count.html">acep_count()</a></code>, <code><a href="../reference/acep_extract.html">acep_extract()</a></code>,
 <code><a href="../reference/acep_load_base.html">acep_load_base()</a></code> y <code>acep_diccionarios</code>. También
 crearemos dos diccionarios breves para usarlos en las funciones
-<code><a href="../reference/acep_men.html">acep_men()</a></code> y <code><a href="../reference/acep_extract.html">acep_extract()</a></code>, con un doble
+<code><a href="../reference/acep_count.html">acep_count()</a></code> y <code><a href="../reference/acep_extract.html">acep_extract()</a></code>, con un doble
 objetivo: 1) identificar las notas que refieran a huelgas; 2)
 identificar las notas que refieran a lxs trabajadorxs del procesamiento
 de pescado en tierra en la ciudad de Mar del Plata.</p>
@@ -160,7 +160,7 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a conflictividad</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a huelgas</span></span>
 <span><span class="va">dicc_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"en paro"</span>, <span class="st">"al paro"</span>, <span class="st">"huelga"</span>, <span class="st">"huelguistas"</span>, <span class="st">"paro y movil"</span>,</span>
@@ -169,7 +169,7 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span>                  <span class="st">"el paro"</span>, <span class="st">"de brazos caídos"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a huelgas</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado</span></span>
 <span><span class="va">dicc_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"soip"</span>, <span class="st">"sindicato obrero de la industria del pescado"</span>, </span>
@@ -180,7 +180,7 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que </span></span>
 <span><span class="co"># refieren a lxs obrerxs del pescado</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_men.html">acep_men</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">rev_puerto</span></span>
@@ -190,8 +190,8 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del t… Un re… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas pi… En Ch… <span style="color: #949494;">"</span>El … https… http…               3            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               8            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               9            0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fallo… La Cá… <span style="color: #949494;">"</span>La … https… http…               6            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomendac… Desde… <span style="color: #949494;">"</span>En … https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-12-22 Trelew con… En 20… <span style="color: #949494;">"</span>Ins… https… http…               4            0</span></span>
@@ -223,8 +223,8 @@ Puerto</em>.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del t… Un re… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas pi… En Ch… <span style="color: #949494;">"</span>El … https… http…               3            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               8            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               9            0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fallo… La Cá… <span style="color: #949494;">"</span>La … https… http…               6            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomendac… Desde… <span style="color: #949494;">"</span>En … https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-12-22 Trelew con… En 20… <span style="color: #949494;">"</span>Ins… https… http…               4            0</span></span>
@@ -249,20 +249,20 @@ Veamos.</p>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
 <span><span class="va">rev_puerto_seleccion</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 150 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 76 × 3</span></span></span>
 <span><span class="co">#&gt;    extract_conflictos                               extract_huelgas extract_soip</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span> amenazaba |  conciliación obligatoria |  bloq… conciliación o… soip | obre…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span> piquete |  pidieron |  conciliación obligator… conciliación o… soip | obre…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span> reclama |  reclamo |  reclamando |  retención… conciliación o… fileteros |…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span> concentración |  paro |  concentración<span style="color: #949494;">"</span>        un paro         fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span> paro |  acatamiento |  medida de fuerza |  me… un paro | el p… soip        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span> se manifestaron |  reclamaron |  denunciaron … conciliación o… fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span> paro |  pidieron<span style="color: #949494;">"</span>                              un paro         obreros del…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span> paro |  rechazo |  acatamiento |  medida de f… el paro | al p… sindicato o…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span> conciliación obligatoria |  piquete |  bloque… conciliación o… sindicato o…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span> bloqueo |  paro |  piden |  pedido |  pedir |… el paro         soip        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> todo amenazaba; una asamblea; la asamblea; y bl… conciliación o… obreros del…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> le advertía; encontraba amenazada; la conciliac… huelguistas; c… huelguistas…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> la conciliación obligatoria; la denuncia; hacer… huelga; concil… fileteros; …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> esa concentración; un paro                       un paro         fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> encendidas bloqueando; el bloqueo; la conciliac… conciliación o… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> un paro; y pidieron                              un paro         obreros del…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> dispar acatamiento; El acatamiento; dispar acat… al paro; al pa… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> puerta bloqueando; la conciliación obligatoria;… conciliación o… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> la lucha; la lucha; del paro; Se paró; se paró;… del paro        fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> el paro; fresqueros reclamaban                   el paro         fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 66 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="nota-final">Nota final<a class="anchor" aria-label="anchor" href="#nota-final"></a>
@@ -271,7 +271,7 @@ Veamos.</p>
 <code><a href="../reference/acep_extract.html">acep_extract()</a></code> del paquete ACEP buscamos ejemplificar de
 qué modo puede ser usada esta función para individualizar cada una de
 las palabras clave que fueron contabilizadas en las notas con la función
-<code><a href="../reference/acep_men.html">acep_men()</a></code>.</p>
+<code><a href="../reference/acep_count.html">acep_count()</a></code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -281,7 +281,7 @@ las palabras clave que fueron contabilizadas en las notas con la función
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Agustin Nieto.</p>
+<p>Developed by Agustín Nieto.</p>
 </div>
 
 <div class="pkgdown-footer-right">

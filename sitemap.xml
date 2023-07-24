@@ -40,7 +40,13 @@
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_clean.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_cleaning.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_context.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_count.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_db.html</loc>
@@ -67,7 +73,13 @@
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_load_base.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_may.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_men.html</loc>
+  </url>
+  <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_min.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.html</loc>
@@ -79,16 +91,19 @@
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_postag.html</loc>
   </url>
   <url>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_prompt_gpt.html</loc>
+  </url>
+  <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_rs.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_rst.html</loc>
   </url>
   <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_svo.html</loc>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_sst.html</loc>
   </url>
   <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_svo_udpipe.html</loc>
+    <loc>https://agusnieto77.github.io/ACEP/reference/acep_svo.html</loc>
   </url>
   <url>
     <loc>https://agusnieto77.github.io/ACEP/reference/acep_token.html</loc>
