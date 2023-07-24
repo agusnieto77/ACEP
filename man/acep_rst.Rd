@@ -7,7 +7,8 @@
 acep_rst(datos, fecha, frecp, frecm, st = "mes", u = 2, d = 4)
 }
 \arguments{
-\item{datos}{data frame con los textos a procesar.}
+\item{datos}{data frame con las variables 'fecha' (en formato Date),
+'n_palabras' (numérica), conflictos' (numérica), 'intensidad' (numérica).}
 
 \item{fecha}{columna de data frame que contiene el
 vector de fechas en formato date.}
@@ -18,8 +19,8 @@ vector de frecuencia de palabras por texto.}
 \item{frecm}{columna de data frame que contiene el
 vector de menciones del diccionario por texto.}
 
-\item{st}{parametro para establecer el segmento temporal
-a ser agrupado: anio, mes, dia.}
+\item{st}{parámetro para establecer el segmento temporal
+a ser agrupado: anio, mes, día.}
 
 \item{u}{umbral de menciones para contabilizar una nota
 como nota que refiere a un conflicto.}
@@ -33,7 +34,7 @@ la salida sera una base de datos en formato tabular
 con nuevas variables.
 }
 \description{
-Funcion que devuelve los indices de conflictividad
+Función que devuelve los indices de conflictividad
 agrupados por segmento de tiempo: dia, mes, anio.
 }
 \examples{
@@ -47,8 +48,8 @@ datos_procesados_mes <- acep_rst(datos,
 fecha, n_palabras, conflictos)
 datos_procesados_dia <- acep_rst(datos,
 fecha, n_palabras, conflictos, st = 'dia', d = 3)
-datos_procesados_anio |> head()
-datos_procesados_mes |> head()
-datos_procesados_dia |> head()
+head(datos_procesados_anio)
+head(datos_procesados_mes)
+head(datos_procesados_dia)
 }
 \keyword{resumen}

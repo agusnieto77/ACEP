@@ -21,9 +21,9 @@ Si todas las entradas son correctas, la salida sera una
 base de datos en formato tabular con tres nuevas variables.
 }
 \description{
-Funcion que usa las funciones acep_frec, acep_men y acep_int y
+Función que usa las funciones acep_frec, acep_men y acep_int y
 devuelve una tabla con tres columnas nuevas: numero de palabras,
-numero de menciones del diccionario, indice de intensidad.
+número de menciones del diccionario, indice de intensidad.
 }
 \examples{
 df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
@@ -31,4 +31,6 @@ df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales."
 diccionario <- c("paro", "lucha", "piquetes")
 acep_db(df, df$texto, diccionario, 4)
 }
+\keyword{frecuencia}
 \keyword{indicadores}
+\keyword{tokens}

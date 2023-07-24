@@ -9,7 +9,7 @@ acep_plot_rst(datos, tagx = "horizontal")
 \arguments{
 \item{datos}{data frame con datos procesados.}
 
-\item{tagx}{orientacion de las etiquetas del
+\item{tagx}{orientación de las etiquetas del
 eje x ('horizontal' | 'vertical').}
 }
 \value{
@@ -17,7 +17,7 @@ Si todas las entradas son correctas,
 la salida sera una imagen de cuatro paneles.
 }
 \description{
-Funcion que devuelve un panel visual de cuatro graficos
+Función que devuelve un panel visual de cuatro gráficos
 de barras con variables proxy de los indices de conflictividad agrupados
 por segmento de tiempo.
 }
@@ -30,4 +30,4 @@ datos_procesados_anio <- acep_rst(datos,
 fecha, n_palabras, conflictos, st = 'anio')
 acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 }
-\keyword{visualizacion}
+\keyword{visualización}

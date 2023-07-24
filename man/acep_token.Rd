@@ -4,15 +4,21 @@
 \alias{acep_token}
 \title{Tokenizador.}
 \usage{
-acep_token(x, tolower = TRUE)
+acep_token(x, tolower = TRUE, cleaning = TRUE)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la funcion de tokenizacion.}
+\item{x}{vector de textos al que se le aplica la función de tokenización.}
 
-\item{tolower}{convierte los textos a minusculas.}
+\item{tolower}{convierte los textos a minúsculas.}
+
+\item{cleaning}{hace una limpieza de los textos.}
+}
+\value{
+Si todas las entradas son correctas,
+la salida será un data.frame con las palabras tokenizadas.
 }
 \description{
-Funcion que tokeniza las notas/textos.
+Función que tokeniza las notas/textos.
 }
 \examples{
 acep_token("Huelga de obreros del pescado en el puerto")

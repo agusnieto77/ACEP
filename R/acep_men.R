@@ -1,47 +1,38 @@
 #' @title Frecuencia de menciones de palabras.
-#' @description Funcion que cuenta la frecuencia de menciones de
+#' @description Función que cuenta la frecuencia de menciones de
 #' palabras que refieren a conflictos en cada una de las notas/textos.
-#' @param x vector de textos al que se le aplica la funcion de conteo
+#' @param x vector de textos al que se le aplica la función de conteo
 #' de la frecuencia de menciones de palabras del diccionario.
 #' @param y vector de palabras del diccionario utilizado.
-#' @param tolower convierte los textos a minusculas.
-#' @export acep_men
+#' @param tolower convierte los textos a minúsculas.
 #' @return Si todas las entradas son correctas,
 #' la salida sera un vector con una frecuencia
 #' de palabras de un diccionario.
-#' @keywords indicadores
+#' @keywords indicadores frecuencia tokens
 #' @examples
-#' df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+#' df <- data.frame(texto = c("El SUTEBA fue al paro.
+#' Reclaman mejoras salariales.",
 #' "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
 #' diccionario <- c("paro", "lucha", "piquetes")
 #' df$detect <- acep_men(df$texto, diccionario)
 #' df
 #' @export
 acep_men <- function(x, y, tolower = TRUE) {
-  if (is.vector(x) != TRUE | is.list(x) == TRUE) {
-    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
-    return(message(mensaje))
-  }
-  if (is.vector(y) != TRUE | is.list(x) == TRUE) {
-    mensaje <- "No ingresaste un vector en el parametro y. Vuelve a intentarlo ingresando un vector!"
-    return(message(mensaje))
+  if (!is.character(x)) {
+    message("No ingresaste un vector en el par\u00e1metro x.
+    Vuelve a intentarlo ingresando un vector!")
+  } else if (!is.character(y)) {
+    message("No ingresaste un vector en el par\u00e1metro y.
+    Vuelve a intentarlo ingresando un vector!")
   } else {
-    if (is.vector(x) == TRUE & is.list(x) != TRUE) {
-      out <- tryCatch({
-        detect <- numeric(length(x))
-        dicc <- paste0(y, collapse = "|")
-        if (tolower == TRUE) {
-          for (i in seq_along(x)) {
-            detect[i] <- sum(gregexpr(dicc, tolower(x[i]), perl = TRUE)[[1]] != -1)
-          }
-        } else {
-          for (i in seq_along(x)) {
-            detect[i] <- sum(gregexpr(dicc, x[i], perl = TRUE)[[1]] != -1)
-          }
-        }
-        detect
-      })
-    }
-    return(out)
+    dicc <- paste0(y, collapse = "|")
+    detect <- sapply(x, function(text) {
+      if (tolower) {
+        sum(gregexpr(dicc, tolower(text), perl = TRUE)[[1]] != -1)
+      } else {
+        sum(gregexpr(dicc, text, perl = TRUE)[[1]] != -1)
+      }
+    })
+    return(as.numeric(detect))
   }
 }

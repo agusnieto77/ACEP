@@ -41,7 +41,7 @@ rev_puerto
 
 ##  Los diccionarios
 
-Una vez descargada la base de notas vamos a crear variables numéricas que contenga las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_frec()`, `acep_men()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en la función `acep_men()` con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
+Una vez descargada la base de notas vamos a crear variables numéricas que contenga las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_frec()`, `acep_count()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en la función `acep_count()` con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
 ```{r diccionarios, eval=require("tibble")}
 # Creamos la variable con la frecuencia de palabras por nota
@@ -51,7 +51,7 @@ rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
 dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
 
 # Creamos la variable con la frecuencia de palabras que refieren a conflictividad
-rev_puerto$frec_conflictos <- acep_men(rev_puerto$nota, dicc_conflictos)
+rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
@@ -60,7 +60,7 @@ dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "el paro", "de brazos caídos")
 
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
-rev_puerto$frec_huelgas <- acep_men(rev_puerto$nota, dicc_huelgas)
+rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
 
 # Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
 dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
@@ -71,7 +71,7 @@ dicc_soip <- c("soip", "sindicato obrero de la industria del pescado",
 
 # Creamos la variable con la frecuencia de palabras que 
 # refieren a lxs obrerxs del pescado
-rev_puerto$frec_soip <- acep_men(rev_puerto$nota, dicc_soip)
+rev_puerto$frec_soip <- acep_count(rev_puerto$nota, dicc_soip)
 
 # Imprimimos la base en consola
 rev_puerto
@@ -113,17 +113,17 @@ Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que prese
 
 ## Serie temporal de índices
 
-En esta parte del código usaremos la función `acep_rst()` para calcular los índices agrupados por año y mes. Primero construimos la serie de tiempo para la conflictividad general.
+En esta parte del código usaremos la función `acep_sst()` para calcular los índices agrupados por año y mes. Primero construimos la serie de tiempo para la conflictividad general.
 
 ```{r temporal0, eval=require("tibble")}
 # Calculamos el índice anual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
-# por la función acep_rst()
+# por la función acep_sst()
 # Estos pasos previos se deben realizar porque en este ejemplo no hicimos uso 
 # de la función acep_db() que calcula frecuencia, menciones e intensidad y
 # deja el marco de datos resultante en un formato adecuado para ser usado
-# con la función acep_rst()
+# con la función acep_sst()
 datos <- data.frame(
   fecha = rev_puerto$fecha,
   n_palabras = rev_puerto$frec_palabras,
@@ -137,11 +137,7 @@ n_palabras <- datos$n_palabras
 conflictos <- datos$conflictos
 
 # Ahora agrupamos por mes la conflictividad general del sector
-conf_gral_anio <- acep_rst(datos, 
-                      fecha, 
-                      n_palabras,
-                      conflictos,
-                      st = "anio")
+conf_gral_anio <- acep_sst(datos, st = "anio")
 
 # Imprimimos la base en consola
 conf_gral_anio |> head()
@@ -152,7 +148,7 @@ conf_gral_anio |> head()
 # Calculamos el índice mensual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
-# por la función acep_rst()
+# por la función acep_sst()
 datos <- data.frame(
   fecha = rev_puerto$fecha,
   n_palabras = rev_puerto$frec_palabras,
@@ -170,10 +166,7 @@ n_palabras <- datos$n_palabras
 conflictos <- datos$conflictos
 
 # Ahora agrupamos por mes la conflictividad general del sector
-conf_gral <- acep_rst(datos, 
-                      fecha, 
-                      n_palabras,
-                      conflictos)
+conf_gral <- acep_sst(datos)
 
 # Imprimimos la base en consola
 conf_gral |> head()
@@ -186,7 +179,7 @@ En la siguiente parte del código construimos la serie de tiempo para la conflic
 # Calculamos el índice mensual de conflictividad huelguística en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
-# por la función acep_rst()
+# por la función acep_sst()
 datosh <- data.frame(
   fecha = rev_puerto$fecha,
   n_palabras = rev_puerto$frec_palabras,
@@ -204,10 +197,7 @@ n_palabrash <- datosh$n_palabras
 conflictosh <- datosh$conflictos
 
 # Ahora agrupamos por mes la conflictividad huelguística del sector
-huelgas <- acep_rst(datosh, 
-                    fechah, 
-                    n_palabrash,
-                    conflictosh)
+huelgas <- acep_sst(datosh)
 
 # Imprimimos la base en consola
 huelgas |> head()

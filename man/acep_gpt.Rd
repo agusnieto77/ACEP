@@ -2,9 +2,16 @@
 % Please edit documentation in R/acep_gpt.R
 \name{acep_gpt}
 \alias{acep_gpt}
-\title{Funcion para interactuar con los modelos  de OpenAI.}
+\title{Función para interactuar con los modelos  de OpenAI.}
 \usage{
-acep_gpt(texto, instrucciones, gpt_api, url, modelo, rol)
+acep_gpt(
+  texto,
+  instrucciones,
+  gpt_api = Sys.getenv("OPENAI_API_KEY"),
+  url,
+  modelo,
+  rol
+)
 }
 \arguments{
 \item{texto}{texto a procesar.}
@@ -29,14 +36,14 @@ la salida sera una cadena de caracteres con la
 información solicitada.
 }
 \description{
-Funcion para interactuar con los modelos de OpenAI
+Función para interactuar con los modelos de OpenAI
 desde las claves API secretas y pagas.
 }
 \examples{
 \dontrun{
 texto <- "El SOIP declaro la huelga por aumento de salarios."
-pregunta <- "¿Cual es el sujeto de la accion? Ejemplo de respuesta:
-'El sujeto de la accion es: la CGT'"
+pregunta <- "¿Cual es el sujeto de la acción? Ejemplo de respuesta:
+'El sujeto de la acción es: la CGT'"
 api_gpt_acep <- gpt_api
 texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta,
 gpt_api = api_gpt_acep,
@@ -46,3 +53,4 @@ cat(texto_gpt)
 }
 }
 \keyword{gpt}
+\keyword{tripletes}

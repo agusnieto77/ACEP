@@ -7,12 +7,12 @@
 acep_men(x, y, tolower = TRUE)
 }
 \arguments{
-\item{x}{vector de textos al que se le aplica la funcion de conteo
+\item{x}{vector de textos al que se le aplica la función de conteo
 de la frecuencia de menciones de palabras del diccionario.}
 
 \item{y}{vector de palabras del diccionario utilizado.}
 
-\item{tolower}{convierte los textos a minusculas.}
+\item{tolower}{convierte los textos a minúsculas.}
 }
 \value{
 Si todas las entradas son correctas,
@@ -20,14 +20,17 @@ la salida sera un vector con una frecuencia
 de palabras de un diccionario.
 }
 \description{
-Funcion que cuenta la frecuencia de menciones de
+Función que cuenta la frecuencia de menciones de
 palabras que refieren a conflictos en cada una de las notas/textos.
 }
 \examples{
-df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+df <- data.frame(texto = c("El SUTEBA fue al paro.
+Reclaman mejoras salariales.",
 "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
 diccionario <- c("paro", "lucha", "piquetes")
 df$detect <- acep_men(df$texto, diccionario)
 df
 }
+\keyword{frecuencia}
 \keyword{indicadores}
+\keyword{tokens}

@@ -2,75 +2,40 @@
 % Please edit documentation in R/acep_svo.R
 \name{acep_svo}
 \alias{acep_svo}
-\title{Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).}
+\title{Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).}
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 
 \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 }
 \usage{
-acep_svo(
-  acep_tokenindex,
-  prof_s = 2,
-  prof_o = 2,
-  relaciones = c("flat", "fixed", "appos"),
-  conexiones = FALSE,
-  rel_s = c("nsubj", "conj", "nmod"),
-  rel_o = c("obj", "obl", "amod"),
-  rel_evs = "nsubj",
-  rel_evp = "obj",
-  u = 1,
-  idioma = "spanish"
-)
+acep_svo(acep_tokenindex, prof_s = 2, prof_o = 2, u = 1)
 }
 \arguments{
 \item{acep_tokenindex}{data.frame con el etiquetado POS y las relaciones
-de dependencia generado con la funcion acep_postag.}
+de dependencia generado con la función acep_postag.}
 
 \item{prof_s}{es un numero entero positivo que determina la profundidad a la que se
-buscan las relaciones dentro del sujeto. Este parametro se hereda del la funcion children()
+buscan las relaciones dentro del sujeto. Este parámetro se hereda del la función children()
 del paquete {rsyntax}. Se recomienda no superar el valor 2.}
 
 \item{prof_o}{es un numero entero positivo que determina la profundidad a la que se
-buscan las relaciones dentro del objeto. Este parametro se hereda del la funcion children()
+buscan las relaciones dentro del objeto. Este parámetro se hereda del la función children()
 del paquete {rsyntax}. Se recomienda no superar el valor 2.}
 
-\item{relaciones}{vector con las etiquetas de relaciones que se usaran en la funcion de relleno.
-Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.}
-
-\item{conexiones}{es un parametro heredado del paquete {rsyntax} que controla
-el comportamiento si la profundidad es > 1 y se utilizan filtros.
-Si es FALSE, se recuperan todos los padres/hijos hasta la profundidad dada, y luego se filtran.
-De esta manera, los nietos que satisfacen las condiciones del filtro se recuperan incluso si
-sus padres no satisfacen las condiciones. Si es TRUE, el filtro se aplica en cada nivel de
-profundidad, de modo que solo se recuperan las ramas totalmente conectadas de los nodos que
-satisfacen las condiciones. Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.}
-
-\item{rel_s}{vector de etiquetas de relaciones sintacticas en el sujeto.
-Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
-
-\item{rel_o}{vector de etiquetas de relaciones sintacticas en el objeto.
-Este parametro se hereda del la funcion children() del paquete {rsyntax}.}
-
-\item{rel_evs}{etiqueta de relaciones a ser agregada en la reconstruccion del sujeto.}
-
-\item{rel_evp}{etiqueta de relaciones a ser agregada en la reconstruccion del predicado.}
-
-\item{u}{numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.}
-
-\item{idioma}{del modelo udpipe.}
+\item{u}{numero entero que indica el umbral de palabras del objeto en la reconstrucción SVO.}
 }
 \value{
 Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-Funcion que devuelve seis objetos data.frame con
-etiquetado POS (modelo spacyr) y relaciones sintacticas
+Función que devuelve seis objetos data.frame con
+etiquetado POS (modelo spacyr) y relaciones sintácticas
 (modelo rsyntax) que permiten reconstruir estructuras
-sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
-las notas periodisticas referidas a conflictos, esta funcion permite
-extraer sujetos de la protesta, accion realizada y objeto(s) de la accion.
-Tambien devuelve entidades nombradas (NER).
+sintácticas como SVO y Sujeto-Predicado. Una vez seleccionadas
+las notas periodísticas referidas a conflictos, esta función permite
+extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.
+También devuelve entidades nombradas (NER).
 }
 \examples{
 \dontrun{
@@ -78,7 +43,9 @@ acep_svo(acep_bases$spacy_postag)
 }
 }
 \references{
-Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
+Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax:
+An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
 }
 \keyword{sintaxis}
+\keyword{tripletes}

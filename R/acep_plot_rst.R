@@ -1,15 +1,15 @@
 #' @title Resumen visual de la serie temporal de los indices de conflictividad.
-#' @description Funcion que devuelve un panel visual de cuatro graficos
+#' @description Función que devuelve un panel visual de cuatro gráficos
 #' de barras con variables proxy de los indices de conflictividad agrupados
 #' por segmento de tiempo.
 #' @param datos data frame con datos procesados.
-#' @param tagx orientacion de las etiquetas del
+#' @param tagx orientación de las etiquetas del
 #' eje x ('horizontal' | 'vertical').
 #' @export acep_plot_rst
 #' @importFrom graphics par
 #' @return Si todas las entradas son correctas,
 #' la salida sera una imagen de cuatro paneles.
-#' @keywords visualizacion
+#' @keywords visualización
 #' @examples
 #' datos <- acep_bases$rp_procesada
 #' fecha <- datos$fecha
@@ -20,7 +20,10 @@
 #' acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 #' @export
 acep_plot_rst <- function(datos, tagx = "horizontal") {
-      tryCatch({
+  if (paste(names(datos), collapse = "") != "stfrecncsnfrecpfrecmintacintensidadint_notas_confl") {
+    return(message("Debe ingresar un dataframe construido con la funcion 'acep_rst'."))
+  } else {
+    tryCatch({
       oldpar <- par(no.readonly = TRUE)
       on.exit(par(oldpar))
       datos <- datos
@@ -42,6 +45,6 @@ acep_plot_rst <- function(datos, tagx = "horizontal") {
                    etiquetax = tagx,
                    color = "viridis")
       par(mfrow = c(1, 1))
-      }
-      )
+    })
   }
+}

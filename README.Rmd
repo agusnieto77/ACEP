@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800706.svg)](https://doi.org/10.5281/zenodo.6800706)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://www.r-pkg.org/badges/version/ACEP)](https://cran.r-project.org/package=ACEP)
-[![](https://img.shields.io/badge/devel%20version-0.0.3.9002-blue.svg)](https://github.com/agusnieto77/ACEP)
+[![](https://img.shields.io/badge/devel%20version-0.0.3.9003-blue.svg)](https://github.com/agusnieto77/ACEP)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![](https://img.shields.io/github/languages/code-size/agusnieto77/ACEP.svg)](https://github.com/agusnieto77/ACEP)
 [![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -34,11 +34,11 @@ knitr::opts_chunk$set(
 
 ### Vision general
 
-ACEP es un paquete de funciones en lenguaje R utiles para la deteccion y el analisis de eventos de protesta en corpus de textos periodisticos. Sus funciones son aplicables a cualquier corpus de textos. Ademas de las funciones, ACEP contiene tambien bases de datos con colecciones de notas sobre protestas y una coleccion de diccionarios de palabras conflictivas y otros topicos referidos a diferentes aspectos del analisis de eventos de protesta.
+ACEP es un paquete de funciones en lenguaje R útiles para la detección y el análisis de eventos de protesta en corpus de textos periodísticos. Sus funciones son aplicables a cualquier corpus de textos. Ademas de las funciones, ACEP contiene también bases de datos con colecciones de notas sobre protestas y una colección de diccionarios de palabras conflictivas y otros tópicos referidos a diferentes aspectos del análisis de eventos de protesta.
 
 ### Instalacion de la version estable
 
-Puedes instalar la version estable de ACEP desde [CRAN](https://CRAN.R-project.org/package=ACEP) con:
+Puedes instalar la versión estable de ACEP desde [CRAN](https://CRAN.R-project.org/package=ACEP) con:
 
 ``` r
 install.packages("ACEP")
@@ -46,7 +46,7 @@ install.packages("ACEP")
 
 ### Instalacion de la version en desarrollo
 
-Puedes instalar la version de desarrollo de ACEP desde [GitHub](https://github.com/agusnieto77/ACEP) con:
+Puedes instalar la versión de desarrollo de ACEP desde [GitHub](https://github.com/agusnieto77/ACEP) con:
 
 ``` r
 # install.packages("devtools")
@@ -55,49 +55,54 @@ devtools::install_github("agusnieto77/ACEP")
 
 ### Funciones
 
-| Nombre | Ciclo | Descripcion |
+| Nombre | Ciclo | Descripción |
 |:--|:--|:-----|
-|`acep_clean()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Limpieza de texto.|
-|`acep_context()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer contexto de palabras o frases.|
+|`acep_clean()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Limpieza de texto.|
+|`acep_cleaning()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Limpieza de texto.|
+|`acep_context()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para extraer contexto de palabras o frases.|
+|`acep_count()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de menciones de palabras.|
 |`acep_db()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia, menciones e intensidad.|
-|`acep_detect()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Deteccion de menciones de palabras.|
+|`acep_detect()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Detección de menciones de palabras.|
 |`acep_extract()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Extraer palabras de un texto.|
 |`acep_frec()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de palabras totales.|
-|`acep_gpt()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para interactuar con los modelos  de OpenAI.|
+|`acep_gpt()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con los modelos  de OpenAI.|
 |`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Indice de intensidad.|
 |`acep_load_base()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Carga bases de datos creadas por el Observatorio.|
-|`acep_men()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de menciones de palabras.|
+|`acep_may()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Convierte el texto mayúsculas|
+|`acep_men()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Frecuencia de menciones de palabras.|
+|`acep_min()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Convierte el texto minúsculas.|
 |`acep_plot_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los indices de conflictividad.|
-|`acep_plot_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Grafico de barras de la serie temporal de indices de conflictividad.|
-|`acep_postag()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.|
-|`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
-|`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).|
-|`acep_svo_udpipe()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion completa para extraer triplets SVO (Sujeto-Verbo-Objeto) desde el modelo udpipe.|
-|`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Funcion para tokenizar.|
-|`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Grafico de barras de palabras mas recurrentes en un corpus.|
+|`acep_plot_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Gráfico de barras de la serie temporal de indices de conflictividad.|
+|`acep_postag()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para etiquetado POS, lematización, tokenización, extracción de entidades.|
+|`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Serie temporal de indices de conflictividad.|
+|`acep_sst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
+|`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).|
+|`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para tokenizar.|
+|`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Gráfico de barras de palabras mas recurrentes en un corpus.|
 |`acep_token_table()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Tabla de frecuencia de palabras tokenizadas.|
 
 ### Colecciones
 
-| Nombre | Descripcion |
+| Nombre | Descripción |
 |:---|:------|
-|`acep_bases`|Coleccion de notas.|
-|`acep_diccionarios`|Coleccion de diccionarios.|
+|`acep_bases`|Colección de notas.|
+|`acep_diccionarios`|Colección de diccionarios.|
+|`acep_prompt_gpt`|Colección de instrucciones.|
 |`acep_rs`|Cadenas de caracteres para limpiar y normalizar textos.|
 
 ### Corpus
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg)](https://doi.org/10.5281/zenodo.6800663) Coleccion de notas del diario ***La Nacion***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800663.svg)](https://doi.org/10.5281/zenodo.6800663) Colección de notas del diario ***La Nación***
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800765.svg)](https://doi.org/10.5281/zenodo.6800765) Subset de notas del diario ***La Nacion***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800765.svg)](https://doi.org/10.5281/zenodo.6800765) Subset de notas del diario ***La Nación***
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800617.svg)](https://doi.org/10.5281/zenodo.6800617) Coleccion de notas del ***Ecos Diarios***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800617.svg)](https://doi.org/10.5281/zenodo.6800617) Colección de notas del ***Ecos Diarios***
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800637.svg)](https://doi.org/10.5281/zenodo.6800637) Coleccion de notas de la ***Revista Puerto***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800637.svg)](https://doi.org/10.5281/zenodo.6800637) Colección de notas de la ***Revista Puerto***
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800650.svg)](https://doi.org/10.5281/zenodo.6800650) Coleccion de notas del diario ***La Nueva***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800650.svg)](https://doi.org/10.5281/zenodo.6800650) Colección de notas del diario ***La Nueva***
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg)](https://doi.org/10.5281/zenodo.6800660) Coleccion de notas del diario ***La Capital***
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6800660.svg)](https://doi.org/10.5281/zenodo.6800660) Colección de notas del diario ***La Capital***
 
 ### Bases de datos de Eventos de protesta disponibles online
 
@@ -125,9 +130,9 @@ devtools::install_github("agusnieto77/ACEP")
 
 [BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco Mundial.
 
-[OIT](https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm): Estadisticas y bases de datos.
+[OIT](https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm): Estadísticas y bases de datos.
 
-[CEPAL](https://www.cepal.org/es/datos-y-estadisticas): Datos y estadisticas.
+[CEPAL](https://www.cepal.org/es/datos-y-estadisticas): Datos y estadísticas.
 
 [DARG](https://www.datos.gob.ar/): Datos abiertos de Argentina.
 
@@ -137,10 +142,10 @@ devtools::install_github("agusnieto77/ACEP")
 
 ```{r ejemplo1, eval=require("tibble")}
 
-# Cargamos la libreria
+# Cargamos la librería
 require(ACEP)
 
-# Cargamos la base de notas de la Revista Puerto con la funcion acep_load_base()
+# Cargamos la base de notas de la Revista Puerto con la función acep_load_base()
 rev_puerto <- acep_load_base(acep_bases$rp_mdp)
 
 # Cargamos la etiqueta de la base a descargar
@@ -152,25 +157,25 @@ revista_puerto <- acep_load_base(rp_mdp)
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 
-# Con la funcion acep_frec() contamos la frecuencia de palabras de cada nota
+# Con la función acep_frec() contamos la frecuencia de palabras de cada nota
 # y creamos una nueva columna llamada  n_palabras
 revista_puerto$n_palabras <- acep_frec(revista_puerto$nota)
 
 # Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
-revista_puerto |> head()
+head(revista_puerto)
 
-# Ahora con la funcion acep_men() contamos la frecuencia de menciones de
-# terminos del diccionario de conflictividad de SISMOS de cada nota y
+# Ahora con la función acep_men() contamos la frecuencia de menciones de
+# términos del diccionario de conflictividad de SISMOS de cada nota y
 # creamos una nueva columna llamada  conflictos.
 # Elaboramos un corpus acotado para el ejemplo
 revista_puerto <- revista_puerto[1:100, ]
-revista_puerto$conflictos <- acep_men(revista_puerto$nota, dicc_confl_sismos)
+revista_puerto$conflictos <- acep_count(revista_puerto$nota, dicc_confl_sismos)
 
 # Imprimimos en pantalla la base con la nueva columna de
 # menciones del diccionario de conflictividad
-revista_puerto  |> head()
+head(revista_puerto)
 
-# Ahora con la funcion acep_int() calculamos un indice de intensidad de
+# Ahora con la función acep_int() calculamos un indice de intensidad de
 # la conflictividad y creamos una nueva columna llamada  intensidad
 revista_puerto$intensidad <- acep_int(
   revista_puerto$conflictos,
@@ -178,7 +183,7 @@ revista_puerto$intensidad <- acep_int(
   3)
 
 # Imprimimos en pantalla la base con la nueva columna de intensidad
-revista_puerto  |> head()
+head(revista_puerto)
 
 ```
 
@@ -192,11 +197,11 @@ subset_rp <- revista_puerto[1:100, ]
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 
-# Ahora con la funcion acep_db() aplicamos las tres funciones en un solo paso
+# Ahora con la función acep_db() aplicamos las tres funciones en un solo paso
 rp_procesada <- acep_db(subset_rp, subset_rp$nota, dicc_confl_sismos, 3)
 
 # Imprimimos en pantalla la base con las tres columna creadas
-rp_procesada |> head()
+head(rp_procesada)
 
 ```
 
@@ -204,15 +209,13 @@ rp_procesada |> head()
 # Cargamos los datos procesados
 rp_procesada <- acep_bases$rp_procesada
 
-# Ahora con la funcion acep_rst() elaboramos un resumen estadistico
-rp_procesada <- acep_rst(
-  rp_procesada, rp_procesada$fecha, rp_procesada$n_palabras,
-  rp_procesada$conflictos, st = "anio", u = 4)
+# Ahora con la función acep_rst() elaboramos un resumen estadístico
+rp_procesada <- acep_sst(rp_procesada, st = "anio", u = 4)
 
-# Imprimimos en pantalla la base con las metricas de conflictividad
-rp_procesada |> head()
+# Imprimimos en pantalla la base con las métricas de conflictividad
+head(rp_procesada)
 
-# Ahora con la funcion acep_plot_st() elaboramos un grafico de barras
+# Ahora con la función acep_plot_st() elaboramos un gráfico de barras
 # con menciones del diccionario de conflictividad
 acep_plot_st(rp_procesada$st, rp_procesada$frecm,
  t = "Evolucion de la conflictividad en el sector pesquero argentino",
@@ -220,8 +223,8 @@ acep_plot_st(rp_procesada$st, rp_procesada$frecm,
  ejey = "Menciones del diccionario de conflictos",
  etiquetax = "horizontal")
 
-# Ahora con la funcion acep_plot_rst() elaboramos una visualizacion resumen.
-# con cuatro graficos de barras
+# Ahora con la función acep_plot_rst() elaboramos una visualización resumen.
+# con cuatro gráficos de barras
 acep_plot_rst(rp_procesada, tagx = "vertical")
 ```
 

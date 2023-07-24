@@ -1,46 +1,36 @@
 #' @title Tokenizador.
-#' @description Funcion que tokeniza las notas/textos.
-#' @param x vector de textos al que se le aplica la funcion de tokenizacion.
-#' @param tolower convierte los textos a minusculas.
+#' @description Función que tokeniza las notas/textos.
+#' @param x vector de textos al que se le aplica la función de tokenización.
+#' @param tolower convierte los textos a minúsculas.
+#' @param cleaning hace una limpieza de los textos.
+#' @return Si todas las entradas son correctas,
+#' la salida será un data.frame con las palabras tokenizadas.
 #' @keywords tokenizar
 #' @examples
 #' acep_token("Huelga de obreros del pescado en el puerto")
 #' @export
 
-acep_token <- function(x, tolower = TRUE) {
-  if(is.vector(x) != TRUE | is.list(x) == TRUE){
-    mensaje <- "No ingresaste un vector en el parametro x. Vuelve a intentarlo ingresando un vector!"
-    return(message(mensaje))
-  } else {
-    if(is.vector(x) == TRUE) {
-      tryCatch({
-  if (tolower == TRUE) {
-    id <- data.frame(id_doc = seq_len(length(x)), texto = x)
-    id_token <- seq_len(length(unlist(strsplit(tolower(x), " "))))
-    token <- unlist(strsplit(tolower(x), " "))
-    texto <- rep(x, vapply(strsplit(x, " "), length, c(frec = 0)))
-  } else {
-    id  <- data.frame(id_doc = seq_len(length(x)), texto = x)
-    id_token  <- seq_len(length(unlist(strsplit(x, " "))))
-    token <- unlist(strsplit(x, " "))
-    texto <- rep(x, vapply(strsplit(x, " "), length, c(frec = 0)))
+acep_token <- function(x, tolower = TRUE, cleaning = TRUE) {
+  if (!is.logical(tolower) | !is.logical(cleaning)) {
+    return(message("Debe ingresar un valor booleano: TRUE o FALSE"))
   }
-  df <- merge(data.frame(texto = texto,
-                         id_token = id_token, token = token), id)
-  df <- df[order(df$id_token, decreasing = FALSE), ]
-  df$id_token_doc <- as.vector(unlist(aggregate(
-    df$token ~ df$id_doc,
-    FUN = function(x) seq_len(length(x)))[, 2]))
-  df <- data.frame(
-    id_doc = df$id_doc,
-    texto = df$texto,
-    id_token = df$id_token,
-    id_token_doc = df$id_token_doc,
-    token = df$token)
-  return(df)
-      }
-      )
-    }
+  if (!is.character(x) | is.list(x)){
+    return(message("No ingresaste un vector en el par\u00e1metro x.
+                   Vuelve a intentarlo ingresando un vector!"))
   }
-}
+  if (tolower) {
+    x <- ACEP::acep_min(x)
+  }
+  if (cleaning) {
+    x <- acep_cleaning(x)
+  }
+  texto_id <- seq_along(x)
+  tokens <- lapply(x, function(texto) {
+    tokens <- unlist(strsplit(texto, "\\W+"))
+    tokens <- tokens[tokens != ""]
+    return(tokens)
+  })
 
+  df <- data.frame(texto_id = rep(texto_id, sapply(tokens, length)), tokens = unlist(tokens))
+  return(df)
+}

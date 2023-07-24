@@ -1,19 +1,19 @@
 Type: Package
 Package: ACEP
-Title: Analisis Computacional de Eventos de Protesta
-Version: 0.0.3.9002
+Title: Análisis Computacional de Eventos de Protesta
+Version: 0.0.3.9003
 Authors@R: 
-    person("Agustin", "Nieto", , "agustin.nieto77@gmail.com", role = c("aut", "cre"),
+    person("Agustín", "Nieto", , "agustin.nieto77@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4467-873X"))
-Description: La libreria 'ACEP' contiene funciones especificas para
-    desarrollar analisis computacional de eventos de protesta. Asimismo,
-    contiene base de datos con colecciones de notas sobre protestas y
-    diccionarios de palabras conflictivas. Coleccion de diccionarios que
-    reune diccionarios de diferentes origenes. The 'ACEP' library
-    contains specific functions to perform computational analysis of
-    protest events. It also contains a database with collections of notes
-    on protests and dictionaries of conflicting words. Collection of
-    dictionaries that brings together dictionaries from different sources.
+Description: La librería 'ACEP' contiene funciones específicas para
+    desarrollar análisis computacional de eventos de protesta. Asimismo,
+    contiene bases de datos con colecciones de notas sobre protestas y
+    diccionarios de palabras conflictivas. La colección de diccionarios
+    reune diccionarios de diferentes orígenes. 
+    The 'ACEP' library contains specific functions to perform computational 
+    analysis of protest events. It also contains a database with collections 
+    of notes on protests and dictionaries of conflicting words. Collection 
+    of dictionaries that brings together dictionaries from different sources.
 License: MIT + file LICENSE
 URL: https://github.com/agusnieto77/ACEP,
     https://agusnieto77.github.io/ACEP/
@@ -25,11 +25,7 @@ Imports:
     stats,
     httr,
     rsyntax,
-    dplyr,
-    tidyr,
-    stringr,
     spacyr,
-    udpipe,
     tidygeocoder
 Suggests: 
     covr,

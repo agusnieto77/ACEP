@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_context.R
 \name{acep_context}
 \alias{acep_context}
-\title{Funcion para extraer contexto de palabras o frases.}
+\title{Función para extraer contexto de palabras o frases.}
 \usage{
 acep_context(texto, clave, izq = 1, der = 1)
 }
@@ -11,9 +11,9 @@ acep_context(texto, clave, izq = 1, der = 1)
 
 \item{clave}{vector de palabras clave a contextualizar.}
 
-\item{izq}{numero de palabras de la ventana hacia la izquierda.}
+\item{izq}{número de palabras de la ventana hacia la izquierda.}
 
-\item{der}{numero de palabras de la ventana hacia la derecha.}
+\item{der}{número de palabras de la ventana hacia la derecha.}
 }
 \value{
 Si todas las entradas son correctas,
@@ -21,7 +21,7 @@ la salida sera un data frame con el id de los textos
 procesado y el contexto de las palabras y/o frases entradas.
 }
 \description{
-Funcion que devuelve un data.frame con el contexto
+Función que devuelve un data.frame con el contexto
 de una o más palabras o frases según una ventana de palabras hacia
 las izquierda y otra ventana de palabras hacia la derecha.
 }
@@ -31,3 +31,4 @@ texto_context <- acep_context(texto = texto, clave = "para")
 texto_context
 }
 \keyword{contexto}
+\keyword{tokens}

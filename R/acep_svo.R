@@ -1,50 +1,30 @@
-#' @title Funcion para extraer triplets SVO (Sujeto-Verbo-Objeto).
+#' @title Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).
 #' @description
-#' Funcion que devuelve seis objetos data.frame con
-#' etiquetado POS (modelo spacyr) y relaciones sintacticas
+#' Función que devuelve seis objetos data.frame con
+#' etiquetado POS (modelo spacyr) y relaciones sintácticas
 #' (modelo rsyntax) que permiten reconstruir estructuras
-#' sintacticas como SVO y Sujeto-Predicado. Una vez seleccionadas
-#' las notas periodisticas referidas a conflictos, esta funcion permite
-#' extraer sujetos de la protesta, accion realizada y objeto(s) de la accion.
-#' Tambien devuelve entidades nombradas (NER).
+#' sintácticas como SVO y Sujeto-Predicado. Una vez seleccionadas
+#' las notas periodísticas referidas a conflictos, esta función permite
+#' extraer sujetos de la protesta, acción realizada y objeto(s) de la acción.
+#' También devuelve entidades nombradas (NER).
 #' @param acep_tokenindex data.frame con el etiquetado POS y las relaciones
-#' de dependencia generado con la funcion acep_postag.
+#' de dependencia generado con la función acep_postag.
 #' @param prof_s es un numero entero positivo que determina la profundidad a la que se
-#' buscan las relaciones dentro del sujeto. Este parametro se hereda del la funcion children()
+#' buscan las relaciones dentro del sujeto. Este parámetro se hereda del la función children()
 #' del paquete {rsyntax}. Se recomienda no superar el valor 2.
 #' @param prof_o es un numero entero positivo que determina la profundidad a la que se
-#' buscan las relaciones dentro del objeto. Este parametro se hereda del la funcion children()
+#' buscan las relaciones dentro del objeto. Este parámetro se hereda del la función children()
 #' del paquete {rsyntax}. Se recomienda no superar el valor 2.
-#' @param relaciones vector con las etiquetas de relaciones que se usaran en la funcion de relleno.
-#' Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.
-#' @param conexiones es un parametro heredado del paquete {rsyntax} que controla
-#' el comportamiento si la profundidad es > 1 y se utilizan filtros.
-#' Si es FALSE, se recuperan todos los padres/hijos hasta la profundidad dada, y luego se filtran.
-#' De esta manera, los nietos que satisfacen las condiciones del filtro se recuperan incluso si
-#' sus padres no satisfacen las condiciones. Si es TRUE, el filtro se aplica en cada nivel de
-#' profundidad, de modo que solo se recuperan las ramas totalmente conectadas de los nodos que
-#' satisfacen las condiciones. Este parametro se hereda de la funcion custom_fill() del paquete {rsyntax}.
-#' @param rel_s vector de etiquetas de relaciones sintacticas en el sujeto.
-#' Este parametro se hereda del la funcion children() del paquete {rsyntax}.
-#' @param rel_o vector de etiquetas de relaciones sintacticas en el objeto.
-#' Este parametro se hereda del la funcion children() del paquete {rsyntax}.
-#' @param rel_evs etiqueta de relaciones a ser agregada en la reconstruccion del sujeto.
-#' @param rel_evp etiqueta de relaciones a ser agregada en la reconstruccion del predicado.
-#' @param u numero entero que indica el umbral de palabras del objeto en la reconstruccion SVO.
-#' @param idioma del modelo udpipe.
-#' @export acep_svo
-#' @importFrom stats na.omit
+#' @param u numero entero que indica el umbral de palabras del objeto en la reconstrucción SVO.
+#' @importFrom stats ave setNames
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
-#' @importFrom dplyr filter mutate group_by summarise ungroup rename distinct select left_join case_when arrange desc count
-#' @importFrom stringr str_trim str_replace_all str_detect
-#' @importFrom tidyr separate
-#' @importFrom udpipe udpipe
 #' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
-#' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
+#' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax:
+#' An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 #' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
 #' @source \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 #' @source \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
-#' @keywords sintaxis
+#' @keywords tripletes sintaxis
 #' @examples
 #'\dontrun{
 #' acep_svo(acep_bases$spacy_postag)
@@ -53,15 +33,34 @@
 acep_svo <- function(acep_tokenindex,
                      prof_s = 2,
                      prof_o = 2,
-                     relaciones = c("flat","fixed","appos"),
-                     conexiones = FALSE,
-                     rel_s = c("nsubj", "conj", "nmod"),
-                     rel_o = c("obj","obl","amod"),
-                     rel_evs = "nsubj",
-                     rel_evp = "obj",
-                     u = 1,
-                     idioma = "spanish"
+                     u = 1
 ){
+  relaciones = c("flat","fixed","appos")
+  conexiones = FALSE
+  rel_s = c("nsubj", "conj", "nmod")
+  rel_o = c("obj","obl","amod")
+  rel_evs = "nsubj"
+  rel_evp = "obj"
+  if (class(acep_tokenindex)[1] != "tokenIndex") {
+    return(
+      message(
+        "El par\u00e1metro 'acep_tokenindex' debe ser de clase 'tokenIndex'"))
+  }
+  if (!is.numeric(prof_s) | prof_s > 5 | prof_s < 1) {
+    return(
+      message(
+        "El par\u00e1metro 'prof_s' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+  }
+  if (!is.numeric(prof_o) | prof_o > 5 | prof_o < 1) {
+    return(
+      message(
+        "El par\u00e1metro 'prof_o' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+  }
+  if (!is.numeric(u) | u > 5 | u < 1) {
+    return(
+      message(
+        "El par\u00e1metro 'u' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+  }
 
   fill <- rsyntax::custom_fill(relation = relaciones, min_window = c(1,1), connected = conexiones)
 
@@ -77,64 +76,115 @@ acep_svo <- function(acep_tokenindex,
 
   acep_annotate <- rsyntax::annotate_tqueries(acep_tokenindex, "s_v_o", direct, indirect, overwrite = FALSE)
 
-  acep_annotate <- acep_annotate |> dplyr::group_by(doc_id, sentence) |>
-    dplyr::mutate(s_p = ifelse(token_id < token_id[which(s_v_o == "verbo")][1], "sujeto", "predicado")) |>
-    dplyr::ungroup()
+  acep_annotate$s_p <- stats::ave(acep_annotate$token_id, acep_annotate$doc_id, acep_annotate$sentence,
+                           FUN = function(x) ifelse(x < x[which(acep_annotate$s_v_o == "verbo")][1], "sujeto", "predicado"))
 
-  acep_annotate_verbos <- unique(acep_annotate[ , c("token")]$token)
-  acep_annotate_verbos <- udpipe::udpipe(x = acep_annotate_verbos, object = idioma)[ , c("sentence", "feats")]
-  acep_annotate_verbos$token <- acep_annotate_verbos$sentence
-  acep_annotate_verbos$morph <- acep_annotate_verbos$feats
-  acep_annotate_verbos <-acep_annotate_verbos[ , c("token", "morph")]
-  acep_annotate <- acep_annotate |> dplyr::left_join(acep_annotate_verbos, by = "token")
-
-  acep_annotate <- acep_annotate |>
-    dplyr::mutate(conjugaciones = dplyr::case_when(
-      stringr::str_detect(morph, "Past") ~ "pasado",
-      stringr::str_detect(morph, "Pres") ~ "presente",
-      stringr::str_detect(morph, "Fut") ~ "futuro"
-    ))
-
-  acep_annotate <- acep_annotate |> dplyr::group_by(doc_id, sentence) |>
-    dplyr::mutate(sent_ = paste(token, collapse = " ")) |> dplyr::ungroup()
+  acep_annotate$conjugaciones <- ifelse(grepl("Past", acep_annotate$morph), "pasado",
+                                        ifelse(grepl("Pres", acep_annotate$morph), "presente",
+                                               ifelse(grepl("Fut", acep_annotate$morph), "futuro", NA)))
 
   acep_annotate_o <- acep_annotate
   acep_annotate$relation <- gsub(":pass", "", acep_annotate$relation)
-  no_procesadas <- acep_annotate |> dplyr::filter(is.na(s_p)) |>
-    dplyr::distinct(doc_id, sentence, sent_) |>
-    dplyr::rename(oracion_id = sentence,
-                  oracion = sent_)
-  sust_pred <- acep_annotate |>
-    dplyr::group_by(doc_id, sentence, sent_) |>
-    dplyr::summarise(
-      sust_pred = paste0(ifelse(s_p == "predicado" & pos == "PROPN" | s_p == "predicado" & pos == "NOUN", token, ""), collapse = "|"),
-      .groups = "drop"
-    ) |>
-    dplyr::mutate(sust_pred = stringr::str_replace_all(sust_pred, "  ", " ")) |>
-    dplyr::mutate(sust_pred = stringr::str_replace_all(sust_pred, "\\|+", "|")) |>
-    dplyr::mutate(sust_pred = stringr::str_replace_all(sust_pred, "\\|", " | ")) |>
-    dplyr::mutate(sust_pred = stringr::str_replace_all(sust_pred, "^ \\|", "|")) |>
-    dplyr::mutate(sust_pred = stringr::str_replace_all(sust_pred, "\\| $", "|")) |>
-    dplyr::select(sent_, sust_pred)
-  acep_return <-  dplyr::filter(acep_annotate, !is.na(s_v_o_fill))
-  acep_return <- acep_return |> dplyr::filter(pos != "ADP")
-  acep_return <- acep_return |>
-    dplyr::group_by(doc_id, sentence, sent_) |>
-    dplyr::summarise(
-      sent_ = unique(sent_),
-      sujetos = paste0(ifelse(s_p == "sujeto" & relation == "nsubj" | s_p == "sujeto" & relation == rel_evs, token, ""), collapse = " "),
-      verbos = paste0(ifelse(relation == "ROOT" , token, ""), collapse = " "),
-      predicados = paste0(stats::na.omit(ifelse(relation == "obj" | relation == rel_evp, token, NA))[1:u], collapse = " "),
-      eventos = paste0(sujetos, " -> ", verbos, " -> ", predicados),
-      sujeto = paste0(ifelse(s_p == "sujeto" & s_v_o == "sujeto", token, ""), collapse = " ") |> stringr::str_trim(),
-      predicado = paste0(ifelse(s_p == "predicado", token, ""), collapse = " ") |> stringr::str_trim(),
-      verbo = paste0(ifelse(relation == "ROOT", token, ""), collapse = " ") |> stringr::str_trim(),
-      lemma_verb = paste0(ifelse(relation == "ROOT", lemma, ""), collapse = " ") |> stringr::str_trim(),
-      conjugaciones = paste0(ifelse(s_v_o == "verbo", conjugaciones, ""), collapse = " ") |> stringr::str_trim(),
-      aux_verbos = paste0(ifelse(pos == "VERB" , token, ""), collapse = " ") |> stringr::str_trim(),
-      entidades = paste0(ifelse(pos == "PROPN" , token, ""), collapse = " ") |> stringr::str_trim(),
-      .groups = "drop"
-    )
+
+  no_procesadas <- setNames(
+    subset(acep_annotate, is.na(s_p))[, c("doc_id", "sentence", "sent")],
+    c("doc_id", "oracion_id", "oracion"))
+
+  sust_pred <- setNames(
+    subset(
+      aggregate(
+        token ~ doc_id + sentence + sent,
+        subset(acep_annotate, s_p == "predicado" & (pos == "PROPN" | pos == "NOUN")),
+        paste0, collapse = " | "),
+      select = c(sent, token)),
+    c("sent", "sust_pred"))
+
+  acep_return <-  subset(acep_annotate, !is.na(s_v_o_fill))
+  acep_return <- subset(acep_return, pos != "ADP")
+
+  acep_return <-
+    base::merge(
+      base::merge(
+        base::merge(
+          base::merge(
+            base::merge(
+              base::merge(
+                base::merge(
+                  base::merge(
+                    base::merge(
+                      setNames(
+                        aggregate(
+                          token ~ doc_id + sentence + sent,
+                          subset(acep_return, s_p == "sujeto" & relation == "nsubj" | s_p == "sujeto" & relation == rel_evs),
+                          paste0, collapse = " "),
+                        c("doc_id", "sentence", "sent", "sujetos")),
+                      setNames(
+                        aggregate(
+                          token ~ doc_id + sentence + sent,
+                          subset(acep_return, relation == "ROOT"),
+                          paste0, collapse = " "),
+                        c("doc_id", "sentence", "sent", "verbos")),
+                      by.x = c("doc_id", "sentence", "sent")),
+                    setNames(
+                      aggregate(
+                        token ~ doc_id + sentence + sent,
+                        subset(acep_return, relation == "obj" | relation == rel_evp),
+                        paste0, collapse = " "),
+                      c("doc_id", "sentence", "sent", "predicados")),
+                    by.x = c("doc_id", "sentence", "sent")),
+                  setNames(
+                    aggregate(
+                      token ~ doc_id + sentence + sent,
+                      subset(acep_return, s_p == "sujeto" & s_v_o == "sujeto"),
+                      paste0, collapse = " "),
+                    c("doc_id", "sentence", "sent", "sujeto")),
+                  by.x = c("doc_id", "sentence", "sent")),
+                setNames(
+                  aggregate(
+                    token ~ doc_id + sentence + sent,
+                    subset(acep_return, s_p == "predicado"),
+                    paste0, collapse = " "),
+                  c("doc_id", "sentence", "sent", "predicado")),
+                by.x = c("doc_id", "sentence", "sent")),
+              setNames(
+                aggregate(
+                  token ~ doc_id + sentence + sent,
+                  subset(acep_return, relation == "ROOT"),
+                  paste0, collapse = " "),
+                c("doc_id", "sentence", "sent", "verbo")),
+              by.x = c("doc_id", "sentence", "sent")),
+            setNames(
+              aggregate(
+                lemma ~ doc_id + sentence + sent,
+                subset(acep_return, relation == "ROOT"),
+                paste0, collapse = " "),
+              c("doc_id", "sentence", "sent", "lemma_verb")),
+            by.x = c("doc_id", "sentence", "sent")),
+          setNames(
+            aggregate(
+              conjugaciones ~ doc_id + sentence + sent,
+              subset(acep_return, s_v_o == "verbo"),
+              paste0, collapse = " "),
+            c("doc_id", "sentence", "sent", "conjugaciones")),
+          by.x = c("doc_id", "sentence", "sent")),
+        setNames(
+          aggregate(
+            token ~ doc_id + sentence + sent,
+            subset(acep_return, pos == "VERB"),
+            paste0, collapse = " "),
+          c("doc_id", "sentence", "sent", "aux_verbos")),
+        by.x = c("doc_id", "sentence", "sent")),
+      stats::setNames(
+        aggregate(
+          token ~ doc_id + sentence + sent,
+          subset(acep_return, pos == "PROPN"),
+          paste0, collapse = " "),
+        c("doc_id", "sentence", "sent", "entidades")),
+      by.x = c("doc_id", "sentence", "sent"))
+
+
+  acep_return$eventos <- paste0(acep_return$sujetos, " -> ", acep_return$verbos, " -> ", acep_return$predicados)
+
   acep_return$entidades <- gsub("\\s[a-z]+\\s+", "  ", acep_return$entidades)
   acep_return$entidades <- gsub("\\s\\s+", "  ", acep_return$entidades)
   acep_return$entidades <- gsub("\\s\\s+", " | ", acep_return$entidades)
@@ -156,21 +206,44 @@ acep_svo <- function(acep_tokenindex,
   acep_return$eventos <- gsub("*\\s$", "", acep_return$eventos)
   acep_return$eventos <- gsub("^-> ", "NA -> ", acep_return$eventos)
   acep_return$eventos <- gsub("-> ->", "-> NA ->", acep_return$eventos)
-  acep_return <- acep_return |> dplyr::left_join(sust_pred, by = "sent_")
-  acep_return <- acep_return |> dplyr::rename(oracion_id = sentence,
-                                              oracion = sent_)
-  acep_ret <- acep_return[ , c(1:2, 7)] |>
-    tidyr::separate(eventos, c("sujeto", "verbo", "objeto"), sep = " -> ", remove = FALSE)
+
+  acep_return <- merge(acep_return, sust_pred, by.x = "sent")
+
+  acep_return <- acep_return[ , c(2, 3, 1, 4:6, 14, 7:13, 15)]
+
+  names(acep_return)[names(acep_return) == "sentence"] <- "oracion_id"
+  names(acep_return)[names(acep_return) == "sent"] <- "oracion"
+
+  acep_ret <- acep_return[, c(1:2, 7)]
+
+  acep_ret <- cbind(acep_ret, do.call("rbind", strsplit(as.character(acep_ret$eventos), " -> ", fixed = TRUE)))
+
+  names(acep_ret)[names(acep_ret) == "1"] <- "sujeto"
+  names(acep_ret)[names(acep_ret) == "2"] <- "verbo"
+  names(acep_ret)[names(acep_ret) == "3"] <- "objeto"
+
   acep_sp <- acep_return[ , c(1:2, 8:15)]
-  acep_lista_lemmas <- acep_annotate_o |> dplyr::filter(nchar(token) > 1) |>
-    dplyr::filter(pos != "NUM", pos != "PUNCT", pos != "X", pos != "DET",
-                  pos != "ADP", pos != "ADV", pos != "CCONJ", pos != "INTJ",
-                  pos != "PRON", pos != "SCONJ", pos != "SYM") |>
-    dplyr::count(token, lemma) |> dplyr::arrange(dplyr::desc(n))
+
+  acep_lista_lemmas <- subset(acep_annotate_o, nchar(token) > 1)
+
+  acep_lista_lemmas <- subset(acep_lista_lemmas, !pos %in% c("NUM", "PUNCT", "X", "DET", "ADP", "ADV", "CCONJ", "INTJ", "PRON", "SCONJ", "SYM"))
+
+  acep_lista_lemmas <- stats::setNames(as.data.frame(table(acep_lista_lemmas$lemma)), c("lemma", "n"))
+
+  acep_lista_lemmas <- acep_lista_lemmas[order(acep_lista_lemmas$n, decreasing = TRUE), ]
+
+  acep_pro_svo  <- acep_return[ , c(1:2, 7:15)]
+
+  acep_pro_svo <- cbind(acep_pro_svo, do.call("rbind", strsplit(as.character(acep_pro_svo$eventos), " -> ", fixed = TRUE)))
+
+  names(acep_pro_svo)[names(acep_pro_svo) == "1"] <- "sujeto_svo"
+  names(acep_pro_svo)[names(acep_pro_svo) == "2"] <- "root"
+  names(acep_pro_svo)[names(acep_pro_svo) == "3"] <- "objeto"
+
+  acep_pro_svo <- acep_pro_svo[ , c(1:3, 12:14, 4:11)]
+
   acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:25)],
-                        acep_pro_svo = acep_return[ , c(1:2, 7:15)] |>
-                          tidyr::separate(eventos, c("sujeto_svo", "root", "objeto"),
-                                          sep = " -> ", remove = FALSE),
+                        acep_pro_svo = acep_pro_svo,
                         acep_list_svo = acep_ret,
                         acep_sp = acep_sp,
                         acep_lista_lemmas = acep_lista_lemmas,

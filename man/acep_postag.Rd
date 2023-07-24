@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_postag.R
 \name{acep_postag}
 \alias{acep_postag}
-\title{Funcion para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.}
+\title{Función para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.}
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 
@@ -13,7 +13,7 @@
 \usage{
 acep_postag(
   texto,
-  core = "es_core_news_md",
+  core = "es_core_news_lg",
   bajar_core = TRUE,
   inst_spacy = FALSE,
   inst_reticulate = FALSE
@@ -24,19 +24,19 @@ acep_postag(
 
 \item{core}{idioma del modelo de etiquetado POS del paquete {spacyr}.}
 
-\item{bajar_core}{parametro booleano que define si bajar o no el modelo de etiquetado POS.}
+\item{bajar_core}{parámetro booleano que define si bajar o no el modelo de etiquetado POS.}
 
-\item{inst_spacy}{parametro booleano que define si instalar o no spacy (python).}
+\item{inst_spacy}{parámetro booleano que define si instalar o no spacy (python).}
 
-\item{inst_reticulate}{parametro booleano que define si instalar o no el paquete {reticulate}.}
+\item{inst_reticulate}{parámetro booleano que define si instalar o no el paquete {reticulate}.}
 }
 \value{
 Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 }
 \description{
-Funcion que devuelve seis objetos data.frame con
+Función que devuelve seis objetos data.frame con
 etiquetado POS (modelo spacyr) para su posterior
-procesamiento con la funcion acep_postag.
+procesamiento con la función acep_postag.
 }
 \examples{
 \dontrun{

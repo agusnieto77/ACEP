@@ -2,22 +2,31 @@
 % Please edit documentation in R/acep_extract.R
 \name{acep_extract}
 \alias{acep_extract}
-\title{Funcion para buscar y extraer palabras en un texto}
+\title{Función para buscar y extraer palabras en un texto}
 \usage{
-acep_extract(texto, dicc, sep = " | ", tolower = TRUE)
+acep_extract(texto, dic, sep = "; ", izq = "\\\\b\\\\w*", der = "\\\\w*\\\\b")
 }
 \arguments{
-\item{texto}{El texto en el que se buscarán las palabras clave.}
+\item{texto}{El texto en el que se buscaran las palabras clave.}
 
-\item{dicc}{Un vector con las palabras clave a buscar.}
+\item{dic}{Un vector con las palabras clave a buscar.}
 
 \item{sep}{El separador utilizado para concatenar las
 palabras clave encontradas (por defecto: " | ").}
 
-\item{tolower}{convierte los textos a minusculas.}
+\item{izq}{expresión regular para incorporar otros caracteres a
+la izquierda de los términos del vector 'dic'.}
+
+\item{der}{expresión regular para incorporar otros caracteres a
+la derecha de los términos del vector 'dic'.}
+}
+\value{
+Si todas las entradas son correctas,
+la salida sera un vector de tipo caracter.
+procesado y el contexto de las palabras y/o frases entradas.
 }
 \description{
-Esta funcion busca palabras clave en un texto y
+Esta función busca palabras clave en un texto y
 extrae los resultados en un formato especifico.
 }
 \examples{

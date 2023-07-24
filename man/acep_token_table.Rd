@@ -9,7 +9,7 @@ acep_token_table(x, u = 10)
 \arguments{
 \item{x}{vector de palabras tokenizadas.}
 
-\item{u}{numero de corte para el top de palabras mas frecuentes.}
+\item{u}{número de corte para el top de palabras más frecuentes.}
 }
 \value{
 Si todas las entradas son correctas,
@@ -17,12 +17,13 @@ la salida sera una tabla con la frecuencia relativa y
 absoluta de palabras tokenizadas.
 }
 \description{
-Funcion que cuenta la frecuencia de palabras tokenizadas.
+Función que cuenta la frecuencia de palabras tokenizadas.
 }
 \examples{
-tokens <- c(rep("paro",15), rep("piquete",25), rep("corte",20), rep("manifestacion",10),
+tokens <- c(rep("paro",15), rep("piquete",25), rep("corte",20), rep("manifestación",10),
 rep("bloqueo",5), rep("alerta",16), rep("ciudad",12), rep("sindicato",11), rep("paritaria",14),
 rep("huelga",14), rep("escrache",15))
 acep_token_table(tokens)
 }
 \keyword{tablas}
+\keyword{tokens}

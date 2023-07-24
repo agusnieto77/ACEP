@@ -16,13 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-Este artículo se propone explicar las distintas maneras de ejecutar la función acep_clean().
+Este artículo se propone explicar las distintas maneras de ejecutar la función `acep_cleaning()`.
 En primer lugar, corresponde mencionar los parámetros que conforman la función:
 Tolower, rm_cesp, rm_emoji, rm_hashtag, rm_users, rm_punt, rm_num, rm_url, rm_meses, rm_dias, rm_stopwords, rm_shortwords, rm_newline, rm_whitespace, other_sw.
 
 Por defecto, todos los parámetros están seteados con el valor TRUE, es decir que están activados a excepción de other_sw. Este parámetro está marcado como NULL.
 
-Para comprender el funcionamiento de acep_clean(), repasaremos cada uno de los parámetros con ejemplos.
+Para comprender el funcionamiento de `acep_cleaning()`, repasaremos cada uno de los parámetros con ejemplos.
 Utilizaremos una base de tweets sobre el paro de trenes realizado el día 08/11/2022 que contienen las palabras "La Fraternidad" que refieren al sindicato argentino de maquinistas de locomotoras y trenes.
 
 ## to lower
@@ -38,7 +38,7 @@ library(ACEP)
 
 url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
 
-base <- acep_load_base(url)[ , c("text")]$text
+base <- base::subset(acep_load_base(url), select = text)$text
 
 ```
 
@@ -51,11 +51,11 @@ primer_tweet <- base[2]
 primer_tweet
 ```
 
-Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro tolower de la función acep_clean() y verificamos el resultado.
+Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro tolower de la función `acep_cleaning()` y verificamos el resultado.
 
 ```{r tolower}
 
-minus <- acep_clean(primer_tweet,
+minus <- acep_cleaning(primer_tweet,
                tolower = TRUE,
                rm_cesp = FALSE,
                rm_emoji = FALSE,
@@ -87,7 +87,7 @@ Al igual que el caso anterior, aislamos el parámetro rm_cesp.
 
 ```{r cesp}
 
-cesp <- acep_clean(primer_tweet,
+cesp <- acep_cleaning(primer_tweet,
                      tolower = FALSE,
                      rm_cesp = TRUE,
                      rm_emoji = FALSE,
@@ -116,7 +116,7 @@ En este caso hay sólo una tilde en "conciliación" y fue removida.
 Es común que aparezcan emojis en tweets o texto obtenido a través de redes sociales. Estos caracteres puede ser problemáticos para el análisis de texto y por este motivo se remueven con el parámetro rm_emoji.
 
 ```{r emoji}
-emoji <- acep_clean(primer_tweet,
+emoji <- acep_cleaning(primer_tweet,
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = TRUE,
@@ -146,7 +146,7 @@ Utilizamos otro tweet de la base que contiene #hashtag
 ```{r hash}
 
 con_hash <- base[40]
-hash <- acep_clean(base[40],
+hash <- acep_cleaning(base[40],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -177,7 +177,7 @@ La mención de usuarios es algo que suele aparecer en análisis de texto en rede
 ```{r user}
 
 con_user <- base[12]
-user <- acep_clean(base[12],
+user <- acep_cleaning(base[12],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -208,7 +208,7 @@ La puntuación son caracteres que pueden aparecer muchísimas veces, pero nuevam
 
 ```{r punct}
 punt <- base[13]
-s_punt <- acep_clean(base[13],
+s_punt <- acep_cleaning(base[13],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -239,7 +239,7 @@ Se remueve con el parámetro rm_num.
 ```{r num}
 
 num <- base[70]
-num_s <- acep_clean(base[70],
+num_s <- acep_cleaning(base[70],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -268,7 +268,7 @@ Para removerlas usamos el parámetro rm_url
 
 ```{r url}
 num <- base[70]
-num_s <- acep_clean(base[70],
+num_s <- acep_cleaning(base[70],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -297,7 +297,7 @@ En el caso de querer remover meses del año, podemos utilizar el parámetro rm_m
 
 ```{r meses}
 meses <- base[70]
-meses_s <- acep_clean(base[70],
+meses_s <- acep_cleaning(base[70],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -325,7 +325,7 @@ En el caso de querer remover días de la semana, podemos utilizar el parámetro 
 ```{r dia}
 
 dia <- base[429]
-dia_s <- acep_clean(base[429],
+dia_s <- acep_cleaning(base[429],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -357,9 +357,9 @@ stopwords <- readRDS(url("https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904
 
 ```{r stop}
 url <- "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"
-stopwords <- acep_clean(url)
+stopwords <- acep_cleaning(url)
 stopw <- base[429]
-stopw_w <- acep_clean(base[429],
+stopw_w <- acep_cleaning(base[429],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -388,7 +388,7 @@ En caso de querer eliminar las palabras de 1 sólo caracter que pueden quedar co
 
 ```{r short}
 short <- base[97]
-short_s <- acep_clean(base[97],
+short_s <- acep_cleaning(base[97],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -417,7 +417,7 @@ El parámetro rm_newline se utiliza en caso de querer eliminar los saltos de lí
 
 ```{r newline}
 newl <- base[2]
-newl_s <- acep_clean(base[2],
+newl_s <- acep_cleaning(base[2],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -448,7 +448,7 @@ En este ejemplo, entre "en  nuestro" hay un doble espacio.
 
 ```{r whitespace}
 white <- base[60]
-white_s <- acep_clean(base[60],
+white_s <- acep_cleaning(base[60],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,
@@ -480,7 +480,7 @@ En este caso se agregan las palabras "conciliación" y "Fraternidad".
 
 ```{r other}
 osw <- base[2]
-osw_s <- acep_clean(base[2],
+osw_s <- acep_cleaning(base[2],
                      tolower = FALSE,
                      rm_cesp = FALSE,
                      rm_emoji = FALSE,

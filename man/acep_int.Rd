@@ -2,12 +2,12 @@
 % Please edit documentation in R/acep_int.R
 \name{acep_int}
 \alias{acep_int}
-\title{Indice de intensidad.}
+\title{Índice de intensidad.}
 \usage{
 acep_int(pc, pt, decimales = 4)
 }
 \arguments{
-\item{pc}{vector numerico con la frecuencia de palabras conflictivas
+\item{pc}{vector numérico con la frecuencia de palabras conflictivas
 presentes en cada texto.}
 
 \item{pt}{vector de palabras totales en cada texto.}
@@ -17,11 +17,11 @@ pero se puede modificar.}
 }
 \value{
 Si todas las entradas son correctas,
-la salida sera un vector numerico.
+la salida sera un vector numérico.
 }
 \description{
-Funcion que elabora un indice de intensidad en
-base a la relacion entre palabras totales y palabras del diccionario
+Función que elabora un indice de intensidad en
+base a la relación entre palabras totales y palabras del diccionario
 presentes en el texto.
 }
 \examples{
@@ -29,4 +29,6 @@ conflictos <- c(1, 5, 0, 3, 7)
 palabras <- c(4, 11, 12, 9, 34)
 acep_int(conflictos, palabras, 3)
 }
+\keyword{frecuencia}
 \keyword{indicadores}
+\keyword{tokens}

@@ -1,38 +1,57 @@
-#' @title Funcion para buscar y extraer palabras en un texto
-#' @description Esta funcion busca palabras clave en un texto y
+#' @title Función para buscar y extraer palabras en un texto
+#' @description Esta función busca palabras clave en un texto y
 #' extrae los resultados en un formato especifico.
-#' @param texto El texto en el que se buscarán las palabras clave.
-#' @param dicc Un vector con las palabras clave a buscar.
-#' @keywords buscar palabras texto diccionario
+#' @param texto El texto en el que se buscaran las palabras clave.
+#' @param dic Un vector con las palabras clave a buscar.
 #' @param sep El separador utilizado para concatenar las
 #' palabras clave encontradas (por defecto: " | ").
-#' @param tolower convierte los textos a minusculas.
+#' @param izq expresión regular para incorporar otros caracteres a
+#' la izquierda de los términos del vector 'dic'.
+#' @param der expresión regular para incorporar otros caracteres a
+#' la derecha de los términos del vector 'dic'.
+#' @return Si todas las entradas son correctas,
+#' la salida sera un vector de tipo caracter.
+#' procesado y el contexto de las palabras y/o frases entradas.
+#' @keywords buscar palabras texto diccionario
 #' @examples
 #' texto <- "Los obreros del pescado, en el marco de una huelga y
 #' realizaron una manifestación con piquete en el puerto de la ciudad."
 #' dicc <- c("huel", "manif", "piq")
 #' acep_extract(texto, dicc)
 #' @export
-acep_extract <- function(texto, dicc, sep = " | ", tolower = TRUE) {
-  if (is.vector(texto) == TRUE & is.list(texto) != TRUE) {
-    out <- tryCatch({
-      p_extract <- character(length(texto))
-      claves <- paste0(dicc, "\\w*\\b", collapse = "|")
-      if (tolower == TRUE) {
-        for (i in seq_along(texto)) {
-          palabras_encontradas <- regmatches(tolower(texto[i]), gregexpr(claves, tolower(texto[i])))[[1]]
-          p_extract[i] <- paste(palabras_encontradas, collapse = sep)
-        }
-      } else {
-        for (i in seq_along(texto)) {
-          palabras_encontradas <- regmatches(texto[i], gregexpr(claves, texto[i]))[[1]]
-          p_extract[i] <- paste(palabras_encontradas, collapse = sep)
-        }
-      }
-      p_extract
-    })
-    return(out)
+acep_extract <- function(texto, dic, sep="; ", izq="\\b\\w*", der="\\w*\\b") {
+  if (!is.character(texto)) {
+    return(message(
+      "No ingresaste un vector de texto en el par\u00e1metro 'texto'.
+      Vuelve a intentarlo ingresando un vector de texto!"))
+  }
+  if (!is.character(dic)) {
+    return(message(
+      "No ingresaste un vector de texto en el par\u00e1metro 'dic'.
+      Vuelve a intentarlo ingresando un vector de texto!"))
+  }
+  if (!is.character(sep) && !is.null(sep)) {
+    return(message(
+      "No ingresaste un caracter separador en el par\u00e1metro 'sep'."))
+  }
+  if (!is.character(izq) && !is.null(izq)) {
+    return(message(
+      "No ingresaste una expresi\u00f3n regular en el par\u00e1metro 'izq'."))
+  }
+  if (!is.character(der) && !is.null(der)) {
+    return(message(
+      "No ingresaste una expresi\u00f3n regular en el par\u00e1metro 'der'."))
   } else {
-    message("No ingresaste un vector. Vuelve a intentarlo ingresando un vector!")
+    sapply(texto, function(txt) {
+      key_words <- unlist(lapply(
+        paste0(izq, dic, der),
+        function(x) regmatches(txt, gregexpr(x, txt))))
+      key_words <- key_words[sapply(key_words, length) > 0]
+      if (!is.null(sep)) {
+        paste(key_words, collapse = sep)
+      } else {
+        unname(sapply(key_words, function(x) unlist(x)))
+      }
+    }, USE.NAMES = FALSE)
   }
 }
