@@ -77,27 +77,25 @@ acep_svo <- function(acep_tokenindex,
   acep_annotate <- rsyntax::annotate_tqueries(acep_tokenindex, "s_v_o", direct, indirect, overwrite = FALSE)
 
   acep_annotate$s_p <- stats::ave(acep_annotate$token_id, acep_annotate$doc_id, acep_annotate$sentence,
-                           FUN = function(x) ifelse(x < x[which(acep_annotate$s_v_o == "verbo")][1], "sujeto", "predicado"))
-
-  acep_annotate$conjugaciones <- ifelse(grepl("Past", acep_annotate$morph), "pasado",
-                                        ifelse(grepl("Pres", acep_annotate$morph), "presente",
-                                               ifelse(grepl("Fut", acep_annotate$morph), "futuro", NA)))
+                                  FUN = function(x) ifelse(x < x[which(acep_annotate$s_v_o == "verbo")][1], "sujeto", "predicado"))
 
   acep_annotate_o <- acep_annotate
+
   acep_annotate$relation <- gsub(":pass", "", acep_annotate$relation)
 
   no_procesadas <- setNames(
-    subset(acep_annotate, is.na(s_p))[, c("doc_id", "sentence", "sent")],
-    c("doc_id", "oracion_id", "oracion"))
+    subset(acep_annotate, is.na(s_p))[, c("doc_id", "sentence")],
+    c("doc_id", "oracion_id"))
 
-  sust_pred <- setNames(
-    subset(
-      aggregate(
-        token ~ doc_id + sentence + sent,
-        subset(acep_annotate, s_p == "predicado" & (pos == "PROPN" | pos == "NOUN")),
-        paste0, collapse = " | "),
-      select = c(sent, token)),
-    c("sent", "sust_pred"))
+  sust_pred <-
+    setNames(
+      subset(
+        aggregate(
+          token ~ doc_id + sentence,
+          subset(acep_annotate, s_p == "predicado" & pos == "PROPN" | pos == "NOUN"),
+          paste0, collapse = " | "),
+        select = c(doc_id, sentence, token)),
+      c("doc_id", "sentence", "sust_pred"))
 
   acep_return <-  subset(acep_annotate, !is.na(s_v_o_fill))
   acep_return <- subset(acep_return, pos != "ADP")
@@ -111,110 +109,87 @@ acep_svo <- function(acep_tokenindex,
               base::merge(
                 base::merge(
                   base::merge(
-                    base::merge(
-                      setNames(
-                        aggregate(
-                          token ~ doc_id + sentence + sent,
-                          subset(acep_return, s_p == "sujeto" & relation == "nsubj" | s_p == "sujeto" & relation == rel_evs),
-                          paste0, collapse = " "),
-                        c("doc_id", "sentence", "sent", "sujetos")),
-                      setNames(
-                        aggregate(
-                          token ~ doc_id + sentence + sent,
-                          subset(acep_return, relation == "ROOT"),
-                          paste0, collapse = " "),
-                        c("doc_id", "sentence", "sent", "verbos")),
-                      by.x = c("doc_id", "sentence", "sent")),
                     setNames(
                       aggregate(
-                        token ~ doc_id + sentence + sent,
-                        subset(acep_return, relation == "obj" | relation == rel_evp),
+                        token ~ doc_id + sentence,
+                        subset(acep_return, s_p == "sujeto" & relation == "nsubj" | s_p == "sujeto" & relation == rel_evs),
                         paste0, collapse = " "),
-                      c("doc_id", "sentence", "sent", "predicados")),
-                    by.x = c("doc_id", "sentence", "sent")),
+                      c("doc_id", "sentence", "sujetos")),
+                    setNames(
+                      aggregate(
+                        token ~ doc_id + sentence,
+                        subset(acep_return, relation == "ROOT"),
+                        paste0, collapse = " "),
+                      c("doc_id", "sentence", "verbos")),
+                    all.x = TRUE),
                   setNames(
                     aggregate(
-                      token ~ doc_id + sentence + sent,
-                      subset(acep_return, s_p == "sujeto" & s_v_o == "sujeto"),
-                      paste0, collapse = " "),
-                    c("doc_id", "sentence", "sent", "sujeto")),
-                  by.x = c("doc_id", "sentence", "sent")),
+                      token ~ doc_id + sentence,
+                      subset(acep_return, relation == "obj" | relation == rel_evp),
+                      paste0, collapse = " "), # 3 y 9 no predicado
+                    c("doc_id", "sentence", "predicados")),
+                  all.x = TRUE),
                 setNames(
                   aggregate(
-                    token ~ doc_id + sentence + sent,
-                    subset(acep_return, s_p == "predicado"),
+                    token ~ doc_id + sentence,
+                    subset(acep_return, s_p == "sujeto" & s_v_o == "sujeto"),
                     paste0, collapse = " "),
-                  c("doc_id", "sentence", "sent", "predicado")),
-                by.x = c("doc_id", "sentence", "sent")),
+                  c("doc_id", "sentence", "sujeto")),
+                all.x = TRUE),
               setNames(
                 aggregate(
-                  token ~ doc_id + sentence + sent,
-                  subset(acep_return, relation == "ROOT"),
+                  token ~ doc_id + sentence,
+                  subset(acep_return, s_p == "predicado"),
                   paste0, collapse = " "),
-                c("doc_id", "sentence", "sent", "verbo")),
-              by.x = c("doc_id", "sentence", "sent")),
+                c("doc_id", "sentence", "predicado")),
+              all.x = TRUE),
             setNames(
               aggregate(
-                lemma ~ doc_id + sentence + sent,
+                token ~ doc_id + sentence,
                 subset(acep_return, relation == "ROOT"),
                 paste0, collapse = " "),
-              c("doc_id", "sentence", "sent", "lemma_verb")),
-            by.x = c("doc_id", "sentence", "sent")),
+              c("doc_id", "sentence", "verbo")),
+            all.x = TRUE),
           setNames(
             aggregate(
-              conjugaciones ~ doc_id + sentence + sent,
-              subset(acep_return, s_v_o == "verbo"),
+              lemma ~ doc_id + sentence,
+              subset(acep_return, relation == "ROOT"),
               paste0, collapse = " "),
-            c("doc_id", "sentence", "sent", "conjugaciones")),
-          by.x = c("doc_id", "sentence", "sent")),
+            c("doc_id", "sentence", "lemma_verb")),
+          all.x = TRUE),
         setNames(
           aggregate(
-            token ~ doc_id + sentence + sent,
+            token ~ doc_id + sentence,
             subset(acep_return, pos == "VERB"),
             paste0, collapse = " "),
-          c("doc_id", "sentence", "sent", "aux_verbos")),
-        by.x = c("doc_id", "sentence", "sent")),
+          c("doc_id", "sentence", "aux_verbos")),
+        all.x = TRUE),
       stats::setNames(
         aggregate(
-          token ~ doc_id + sentence + sent,
+          token ~ doc_id + sentence,
           subset(acep_return, pos == "PROPN"),
           paste0, collapse = " "),
-        c("doc_id", "sentence", "sent", "entidades")),
-      by.x = c("doc_id", "sentence", "sent"))
+        c("doc_id", "sentence", "entidades")),
+      all.x = TRUE)
 
 
   acep_return$eventos <- paste0(acep_return$sujetos, " -> ", acep_return$verbos, " -> ", acep_return$predicados)
 
-  acep_return$entidades <- gsub("\\s[a-z]+\\s+", "  ", acep_return$entidades)
-  acep_return$entidades <- gsub("\\s\\s+", "  ", acep_return$entidades)
-  acep_return$entidades <- gsub("\\s\\s+", " | ", acep_return$entidades)
-  acep_return$entidades <- gsub("(\\b[A-Z]+\\b)", "| \\1 |", acep_return$entidades)
-  acep_return$entidades <- gsub("\\| \\|", "|", acep_return$entidades)
-  acep_return$entidades <- gsub("\\s+", " ", acep_return$entidades)
-  acep_return$entidades <- paste0("| ", acep_return$entidades, " |", sep = "")
-  acep_return$entidades <- gsub("\\| \\|", "|", acep_return$entidades)
-  acep_return$entidades <- gsub("\\|  \\|", "", acep_return$entidades)
-  acep_return$aux_verbos <- gsub("\\s+", " | ", acep_return$aux_verbos)
-  acep_return$aux_verbos <- gsub("\\s+", " ", acep_return$aux_verbos)
-  acep_return$aux_verbos <- paste0("| ", acep_return$aux_verbos, " |", sep = "")
-  acep_return$aux_verbos <- gsub("\\| \\|", "|", acep_return$aux_verbos)
-  acep_return$aux_verbos <- gsub("\\|  \\|", "", acep_return$aux_verbos)
-  acep_return$conjugaciones <- gsub("(^[a-zA-Z]+)\\s.+", "\\1", acep_return$conjugaciones)
-  acep_return$eventos <- gsub("\\s+", " ", acep_return$eventos)
-  acep_return$eventos <- gsub(" -> $", "", acep_return$eventos)
-  acep_return$eventos <- gsub("^\\s*", "", acep_return$eventos)
-  acep_return$eventos <- gsub("*\\s$", "", acep_return$eventos)
-  acep_return$eventos <- gsub("^-> ", "NA -> ", acep_return$eventos)
-  acep_return$eventos <- gsub("-> ->", "-> NA ->", acep_return$eventos)
+  acep_return <- merge(acep_return, sust_pred, all.x = TRUE)
 
-  acep_return <- merge(acep_return, sust_pred, by.x = "sent")
+  acep_return <- acep_return[ , c('doc_id','sentence','sujetos','verbos',
+                                  'predicados','sujeto','entidades','eventos',
+                                  'predicado','verbo','lemma_verb','aux_verbos',
+                                  'sust_pred')]
 
-  acep_return <- acep_return[ , c(2, 3, 1, 4:6, 14, 7:13, 15)]
+  acep_return <- acep_return[order(acep_return$doc_id), ]
+
+  row.names(acep_return) <- 1:length(acep_return$doc_id)
 
   names(acep_return)[names(acep_return) == "sentence"] <- "oracion_id"
   names(acep_return)[names(acep_return) == "sent"] <- "oracion"
 
-  acep_ret <- acep_return[, c(1:2, 7)]
+  acep_ret <- acep_return[, c("doc_id","oracion_id","eventos")]
 
   acep_ret <- cbind(acep_ret, do.call("rbind", strsplit(as.character(acep_ret$eventos), " -> ", fixed = TRUE)))
 
@@ -222,7 +197,8 @@ acep_svo <- function(acep_tokenindex,
   names(acep_ret)[names(acep_ret) == "2"] <- "verbo"
   names(acep_ret)[names(acep_ret) == "3"] <- "objeto"
 
-  acep_sp <- acep_return[ , c(1:2, 8:15)]
+  acep_sp <- acep_return[ , c("doc_id","oracion_id","sujeto","predicado","verbo",
+                              "lemma_verb","aux_verbos","entidades","sust_pred")]
 
   acep_lista_lemmas <- subset(acep_annotate_o, nchar(token) > 1)
 
@@ -232,7 +208,8 @@ acep_svo <- function(acep_tokenindex,
 
   acep_lista_lemmas <- acep_lista_lemmas[order(acep_lista_lemmas$n, decreasing = TRUE), ]
 
-  acep_pro_svo  <- acep_return[ , c(1:2, 7:15)]
+  acep_pro_svo  <- acep_return[ , c('doc_id','oracion_id','eventos','sujeto','predicado','verbo',
+                                    'lemma_verb','aux_verbos','entidades','sust_pred')]
 
   acep_pro_svo <- cbind(acep_pro_svo, do.call("rbind", strsplit(as.character(acep_pro_svo$eventos), " -> ", fixed = TRUE)))
 
@@ -240,9 +217,11 @@ acep_svo <- function(acep_tokenindex,
   names(acep_pro_svo)[names(acep_pro_svo) == "2"] <- "root"
   names(acep_pro_svo)[names(acep_pro_svo) == "3"] <- "objeto"
 
-  acep_pro_svo <- acep_pro_svo[ , c(1:3, 12:14, 4:11)]
+  acep_pro_svo <- acep_pro_svo[ , c("doc_id","oracion_id","eventos","sujeto_svo",
+                                    "root","objeto","sujeto","predicado","verbo",
+                                    "lemma_verb","aux_verbos","entidades","sust_pred")]
 
-  acep_svo_list <- list(acep_annotate_svo = acep_annotate_o[ , c(1:25)],
+  acep_svo_list <- list(acep_annotate_svo = acep_annotate_o,
                         acep_pro_svo = acep_pro_svo,
                         acep_list_svo = acep_ret,
                         acep_sp = acep_sp,

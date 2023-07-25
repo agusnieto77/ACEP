@@ -13,7 +13,7 @@
 #' @importFrom spacyr spacy_install spacy_download_langmodel spacy_initialize spacy_parse entity_consolidate entity_extract nounphrase_consolidate nounphrase_extract spacy_finalize
 #' @importFrom rsyntax as_tokenindex
 #' @importFrom tidygeocoder geo
-#' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
+#' @return Si todas las entradas son correctas, la salida sera una lista con seis bases de datos en formato tabular.
 #' @source \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 #' @source \href{https://cran.r-project.org/web/packages/spacyr/spacyr.pdf}{Sobre el modelo spaCy de Python para R}
 #' @source \href{https://jessecambon.github.io/tidygeocoder/articles/tidygeocoder.html}{Sobre el paquete tidygeocoder}
