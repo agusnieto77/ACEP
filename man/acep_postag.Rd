@@ -31,7 +31,7 @@ acep_postag(
 \item{inst_reticulate}{parámetro booleano que define si instalar o no el paquete {reticulate}.}
 }
 \value{
-Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
+Si todas las entradas son correctas, la salida sera una lista con seis bases de datos en formato tabular.
 }
 \description{
 Función que devuelve seis objetos data.frame con
