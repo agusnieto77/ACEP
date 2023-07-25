@@ -23,8 +23,7 @@
 #' \item{ln_arg}{es una url para la descarga del corpus de
 #' notas de La Nación}
 #' \item{spacy_postag}{es un data.frame con una oración procesada con spacyr}
-#' \item{titulares}{es un data.frame con 10 titulares de
-#' notas referidas a conflictos sociales}
+#' \item{titulares}{es un vector con titulares de notas referidas a conflictos sociales}
 #'}
 #' @docType data
 #' @usage data(acep_bases)
