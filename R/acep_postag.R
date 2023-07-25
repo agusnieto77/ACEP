@@ -60,17 +60,25 @@ acep_postag <- function(texto,
   }
   spacyr::spacy_initialize(model = core)
 
-  texto_tag <- spacyr::spacy_parse(texto,
-                                   pos = TRUE,
-                                   tag = FALSE,
-                                   lemma = TRUE,
-                                   entity = TRUE,
-                                   dependency = TRUE,
-                                   nounphrase = TRUE,
-                                   multithread = TRUE,
-                                   additional_attributes = c("is_upper", "is_title", "is_quote",
-                                                             "ent_iob_","ent_iob", "is_left_punct",
-                                                             "is_right_punct", "morph", "sent"))
+  texto_tag <- data.frame()
+  for (i in seq_along(texto)) {
+    postag <-
+      suppressWarnings({
+        spacyr::spacy_parse(texto[i],
+                            pos = TRUE,
+                            tag = FALSE,
+                            lemma = TRUE,
+                            entity = TRUE,
+                            dependency = TRUE,
+                            nounphrase = TRUE,
+                            multithread = TRUE,
+                            additional_attributes =
+                              c("is_upper", "is_title", "is_quote",
+                                "ent_iob_","ent_iob", "is_left_punct",
+                                "is_right_punct", "morph", "sent"))})
+    postag$doc_id <- i
+    texto_tag <- rbind(texto_tag, postag)
+  }
   texto_tag$morph <- sapply(texto_tag$morph, function(m) paste0(m))
   texto_tag$sent <- sapply(texto_tag$sent, function(s) paste0(s))
   texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
