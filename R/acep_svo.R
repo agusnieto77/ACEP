@@ -125,8 +125,8 @@ acep_svo <- function(acep_tokenindex,
                   setNames(
                     aggregate(
                       token ~ doc_id + sentence,
-                      subset(acep_return, relation == "obj" | relation == rel_evp),
-                      paste0, collapse = " "), # 3 y 9 no predicado
+                      subset(acep_return, relation == "obj" | relation == "obl"),
+                      paste0, collapse = " "),
                     c("doc_id", "sentence", "predicados")),
                   all.x = TRUE),
                 setNames(
