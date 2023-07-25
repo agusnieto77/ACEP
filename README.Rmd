@@ -66,19 +66,19 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_extract()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Extraer palabras de un texto.|
 |`acep_frec()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de palabras totales.|
 |`acep_gpt()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con los modelos  de OpenAI.|
-|`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Indice de intensidad.|
+|`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Índice de intensidad.|
 |`acep_load_base()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Carga bases de datos creadas por el Observatorio.|
 |`acep_may()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Convierte el texto mayúsculas|
 |`acep_men()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Frecuencia de menciones de palabras.|
 |`acep_min()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Convierte el texto minúsculas.|
-|`acep_plot_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los indices de conflictividad.|
-|`acep_plot_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Gráfico de barras de la serie temporal de indices de conflictividad.|
+|`acep_plot_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Resumen visual de la serie temporal de los índices de conflictividad.|
+|`acep_plot_st()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Gráfico de barras de la serie temporal de índices de conflictividad.|
 |`acep_postag()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para etiquetado POS, lematización, tokenización, extracción de entidades.|
-|`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Serie temporal de indices de conflictividad.|
-|`acep_sst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de indices de conflictividad.|
+|`acep_rst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)|Serie temporal de índices de conflictividad.|
+|`acep_sst()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Serie temporal de índices de conflictividad.|
 |`acep_svo()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).|
 |`acep_token()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para tokenizar.|
-|`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Gráfico de barras de palabras mas recurrentes en un corpus.|
+|`acep_token_plot()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Gráfico de barras de palabras más recurrentes en un corpus.|
 |`acep_token_table()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Tabla de frecuencia de palabras tokenizadas.|
 
 ### Colecciones
@@ -175,7 +175,7 @@ revista_puerto$conflictos <- acep_count(revista_puerto$nota, dicc_confl_sismos)
 # menciones del diccionario de conflictividad
 head(revista_puerto)
 
-# Ahora con la función acep_int() calculamos un indice de intensidad de
+# Ahora con la función acep_int() calculamos un índice de intensidad de
 # la conflictividad y creamos una nueva columna llamada  intensidad
 revista_puerto$intensidad <- acep_int(
   revista_puerto$conflictos,
