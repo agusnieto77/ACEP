@@ -1,7 +1,7 @@
 Type: Package
 Package: ACEP
 Title: Análisis Computacional de Eventos de Protesta
-Version: 0.0.3.9003
+Version: 0.0.3.9004
 Authors@R: 
     person("Agustín", "Nieto", , "agustin.nieto77@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4467-873X"))
@@ -26,6 +26,8 @@ Imports:
     httr,
     rsyntax,
     spacyr,
+    udpipe,
+    reticulate,
     tidygeocoder
 Suggests: 
     covr,

@@ -21,7 +21,7 @@ acep_token_table <- function(x, u = 10) {
     return(message("El par\u00e1metro 'u' debe ser un n\u00famero entero positivo"))
   } else {
       tryCatch({
-  tabla_token <- as.data.frame(base::table(x))
+  tabla_token <- as.data.frame(table(x))
   tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
   tabla_token <- utils::head(tabla_token, n = u)
   tabla_token$prop <- tabla_token$Freq / sum(tabla_token$Freq)

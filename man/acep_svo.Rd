@@ -9,7 +9,7 @@
 \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
 }
 \usage{
-acep_svo(acep_tokenindex, prof_s = 2, prof_o = 2, u = 1)
+acep_svo(acep_tokenindex, prof_s = 3, prof_o = 3, u = 1)
 }
 \arguments{
 \item{acep_tokenindex}{data.frame con el etiquetado POS y las relaciones

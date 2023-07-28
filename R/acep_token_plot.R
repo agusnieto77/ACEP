@@ -28,7 +28,7 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
     } else {
       tryCatch({
         if (frec) {
-          tabla_token <- as.data.frame(base::table(x))
+          tabla_token <- as.data.frame(table(x))
           tabla_token$x <- as.character(tabla_token$x)
           tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
           tabla_token <- utils::head(tabla_token, n = u)
@@ -54,7 +54,7 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
             cex.axis = 0.8
           )
   } else {
-    tabla_token <- as.data.frame(base::table(x))
+    tabla_token <- as.data.frame(table(x))
     tabla_token$x <- as.character(tabla_token$x)
     tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
     tabla_token <- utils::head(tabla_token, n = u)

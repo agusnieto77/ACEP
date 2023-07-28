@@ -16,6 +16,7 @@ acep_postag(
   core = "es_core_news_lg",
   bajar_core = TRUE,
   inst_spacy = FALSE,
+  inst_miniconda = FALSE,
   inst_reticulate = FALSE
 )
 }
@@ -27,6 +28,11 @@ acep_postag(
 \item{bajar_core}{parámetro booleano que define si bajar o no el modelo de etiquetado POS.}
 
 \item{inst_spacy}{parámetro booleano que define si instalar o no spacy (python).}
+
+\item{inst_miniconda}{parámetro booleano que define si instalar o no miniconda.
+Miniconda es un instalador mínimo gratuito para conda. Es una pequeña versión de
+arranque de Anaconda que incluye solo conda, Python, los paquetes de los que dependen y
+una pequeña cantidad de otros paquetes útiles, incluidos pip, zlib y algunos otros.}
 
 \item{inst_reticulate}{parámetro booleano que define si instalar o no el paquete {reticulate}.}
 }
