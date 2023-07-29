@@ -4,7 +4,7 @@
 #' viene a reemplazar a acep_rst. Simplifica los parámetros.
 #' @param datos data frame con las variables 'fecha' (en formato Date),
 #' 'n_palabras' (numérica), conflictos' (numérica), 'intensidad' (numérica).
-#' Las ultimas tres se pueden construir en un solo paso con la funcion 'acep_db'
+#' Las ultimas tres se pueden construir en un solo paso con la función 'acep_db'
 #' o en tres pasos con las funciones 'acep_frec', 'acep_men', 'acep_int'.
 #' @param st parámetro para establecer el segmento temporal
 #' a ser agrupado: 'anio', 'mes', 'dia'.
