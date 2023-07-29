@@ -1,4 +1,4 @@
-#' @title Convierte caracteres a minúsculas
+#' @title Convierte caracteres a minúsculas.
 #' @description Esta función toma un vector de texto y convierte todas las letras
 #' mayusculas en minúsculas, manteniendo el resto de los caracteres sin cambios.
 #' @param x Un vector de texto (caracteres) que se desea convertir a minúsculas.

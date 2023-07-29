@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_token_plot.R
 \name{acep_token_plot}
 \alias{acep_token_plot}
-\title{Gráfico de barras de palabras mas recurrentes en un corpus.}
+\title{Gráfico de barras de palabras más recurrentes en un corpus.}
 \usage{
 acep_token_plot(x, u = 10, frec = TRUE)
 }

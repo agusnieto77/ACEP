@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_extract.R
 \name{acep_extract}
 \alias{acep_extract}
-\title{Función para buscar y extraer palabras en un texto}
+\title{Función para buscar y extraer palabras en un texto.}
 \usage{
 acep_extract(texto, dic, sep = "; ", izq = "\\\\b\\\\w*", der = "\\\\w*\\\\b")
 }

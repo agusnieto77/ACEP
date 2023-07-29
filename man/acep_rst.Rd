@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_rst.R
 \name{acep_rst}
 \alias{acep_rst}
-\title{Serie temporal de indices de conflictividad.}
+\title{Serie temporal de índices de conflictividad.}
 \usage{
 acep_rst(datos, fecha, frecp, frecm, st = "mes", u = 2, d = 4)
 }
@@ -35,7 +35,7 @@ con nuevas variables.
 }
 \description{
 Función que devuelve los indices de conflictividad
-agrupados por segmento de tiempo: dia, mes, anio.
+agrupados por segmento de tiempo: 'dia', 'mes', 'anio'.
 }
 \examples{
 datos <- acep_bases$rp_procesada

@@ -1,0 +1,59 @@
+---
+title: "Rendimiento de las nuevas funciones"
+date: "`r Sys.Date()`"
+author: "Agust\u00edn Nieto"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tokenizar_con_acep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+require(ACEP)
+rp <- acep_load_base(acep_bases$rp_mdp)
+dicc <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
+df <- rp[1:100, ]
+```
+
+## Funciones a comparar:
+
+En este artículo se compara le rendimiento de las funciones nuevas en relación a al funciones anteriores en la realización de una misma tarea:
+
+- `acep_cleaning()` vs `acep_clean()`
+
+- `acep_count()` vs `acep_men()`
+
+El input para la prueba de rendimiento son 100 notas de la *Revista Puerto*.
+
+## Comparativa entre `acep_cleaning()` vs `acep_clean()`
+
+```{r comp01, results = TRUE, warning = FALSE, message = FALSE, eval=require("tibble")}
+FUN.v1 <- system.time({ acep_clean(df$nota) })
+
+FUN.v2 <- system.time({ acep_cleaning(df$nota) })
+
+cat("\nLa nueva versión (acep_cleaning) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
+    "\nLa vieja versión (acep_clean) procesa los datos ingresados en", FUN.v1[3], "segundos.", 
+    "\nLa diferencia es de", FUN.v1[3]-FUN.v2[3])
+```
+
+## Comparativa entre `acep_count()` vs `acep_men()`
+
+```{r comp02, results = TRUE, warning = FALSE, message = FALSE, eval=require("tibble")}
+FUN.v1 <- system.time({ acep_men(df$nota, dicc, tolower = FALSE) })
+
+FUN.v2 <- system.time({ acep_count(df$nota, dicc) })
+
+cat("\nLa nueva versión (acep_count) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
+    "\nLa vieja versión (acep_men) procesa los datos ingresados en", FUN.v1[3], "segundos.", 
+    "\nLa diferencia es de", FUN.v1[3]-FUN.v2[3])
+```
+
+## Resultados
+
+Las mejoras en el rendimiento son significativas, en especial entre las dos versiones de la función de limpieza y normalización de texto.

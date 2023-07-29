@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_min.R
 \name{acep_min}
 \alias{acep_min}
-\title{Convierte caracteres a minúsculas}
+\title{Convierte caracteres a minúsculas.}
 \usage{
 acep_min(x)
 }

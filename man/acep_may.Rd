@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_may.R
 \name{acep_may}
 \alias{acep_may}
-\title{Convierte caracteres a mayusculas}
+\title{Convierte caracteres a mayusculas.}
 \usage{
 acep_may(x)
 }

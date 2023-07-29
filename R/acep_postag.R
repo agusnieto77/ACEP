@@ -1,4 +1,4 @@
-#' @title Función para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.
+#' @title Función para etiquetado POS, lematización, tokenización, extracción de entidades.
 #' @description
 #' Función que devuelve seis objetos data.frame con
 #' etiquetado POS (modelo spacyr) para su posterior

@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_upos.R
 \name{acep_upos}
 \alias{acep_upos}
-\title{Función para etiquetado POS, lematizacion, tokenizacion.}
+\title{Función para etiquetado POS, lematización, tokenización.}
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 

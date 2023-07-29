@@ -1,6 +1,6 @@
-#' @title Serie temporal de indices de conflictividad.
+#' @title Serie temporal de índices de conflictividad.
 #' @description Función que devuelve los indices de conflictividad
-#' agrupados por segmento de tiempo: dia, mes, anio. Esta función
+#' agrupados por segmento de tiempo: 'dia', 'mes', 'anio'. Esta función
 #' viene a reemplazar a acep_rst. Simplifica los parámetros.
 #' @param datos data frame con las variables 'fecha' (en formato Date),
 #' 'n_palabras' (numérica), conflictos' (numérica), 'intensidad' (numérica).

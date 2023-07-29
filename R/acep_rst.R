@@ -1,6 +1,6 @@
-#' @title Serie temporal de indices de conflictividad.
+#' @title Serie temporal de índices de conflictividad.
 #' @description Función que devuelve los indices de conflictividad
-#' agrupados por segmento de tiempo: dia, mes, anio.
+#' agrupados por segmento de tiempo: 'dia', 'mes', 'anio'.
 #' @param datos data frame con las variables 'fecha' (en formato Date),
 #' 'n_palabras' (numérica), conflictos' (numérica), 'intensidad' (numérica).
 #' @param fecha columna de data frame que contiene el

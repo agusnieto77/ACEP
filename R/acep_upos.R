@@ -1,4 +1,4 @@
-#' @title Función para etiquetado POS, lematizacion, tokenizacion.
+#' @title Función para etiquetado POS, lematización, tokenización.
 #' @description
 #' Función que devuelve un marco de datos objetos con
 #' etiquetado POS (modelo udpipe) para su posterior

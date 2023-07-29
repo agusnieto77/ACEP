@@ -1,4 +1,4 @@
-#' @title Gráfico de barras de palabras mas recurrentes en un corpus.
+#' @title Gráfico de barras de palabras más recurrentes en un corpus.
 #' @description Función que devuelve un gráfico de barras con las palabras
 #' mas recurrentes en un corpus textual.
 #' @param x vector de palabras tokenizadas.

@@ -1,4 +1,4 @@
-#' @title Convierte caracteres a mayusculas
+#' @title Convierte caracteres a mayusculas.
 #' @description Esta función toma un vector de texto y convierte todas las letras
 #' minúsculas en mayúsculas, manteniendo el resto de los caracteres sin cambios.
 #' @param x es un vector de texto (caracteres) que se desea convertir a mayúsculas.

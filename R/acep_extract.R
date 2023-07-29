@@ -1,4 +1,4 @@
-#' @title Función para buscar y extraer palabras en un texto
+#' @title Función para buscar y extraer palabras en un texto.
 #' @description Esta función busca palabras clave en un texto y
 #' extrae los resultados en un formato especifico.
 #' @param texto El texto en el que se buscaran las palabras clave.

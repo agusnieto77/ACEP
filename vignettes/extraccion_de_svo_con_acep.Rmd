@@ -1,0 +1,251 @@
+---
+title: "Extraer S-V-O con ACEP"
+date: "`r Sys.Date()`"
+author: "Agust\u00edn Nieto"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tokenizar_con_acep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Función a presentar:
+
+En este artículo se explicarán los procesos que realizan las funciones:
+
+- `acep_postag()`
+
+- `acep_upos()`
+
+- `acep_svo()`
+
+
+## Función `acep_postag()`
+
+Esta función realiza etiquetado POS, lematización, tokenización, extracción de entidades y georreferenciación. Para llevar a cabo estas tareas `acep_postag` envuelve y articula funciones de tres librerías: *spacyr*, *rsyntax* y *tidygeocoder*.
+
+En primer lugar, cargamos la librería *ACEP*. Luego, cargamos un vector de titulares de portales noticiosos sobre notas referidas a conflictos. Con esta selección de titulares haremos la prueba. También agregamos una última oración unimembre como ejemplo extremo de oración no procesable con la función `acep_svo()`.
+
+```{r titulares, results = TRUE, warning = FALSE, message = FALSE, eval=require("tibble")}
+library(ACEP)
+
+titulares <- c(acep_bases$titulares, "Hola mundo.")
+
+titulares
+```
+
+Ejecutamos la función `acep_postag()` para los titulares contenidos en el vector.
+
+¿Cuál es el resultado?
+
+La función `acep_postag` toma el vector de textos y realiza diferentes acciones:
+
+- Verifica que el objeto entregado sea un vector de tipo caracter (de lo contrario imprime un mensaje de advertencia)
+
+- Verifica que el parámetro 'core' sean un modelo válido (de lo contrario devuelve un mensaje de advertencia)
+
+- Verifica que los parámetros 'bajar_core', 'inst_spacy', 'inst_miniconda', 'inst_reticulate' ingresados sean valores booleanos (de lo contrario envía un mensaje de advertencia)
+
+- Crea una lista de seis objetos de tipo data frame:
+
+  - **texto_tag**: es un objeto de clases 'tokenIndex' que sirve como input para la función `acep_svo()`. Contiene 20 variables que reúnen información de los procesos de tokenización, lematización, etiquetado pos, etiquetado de relaciones de dependencia, etiquetado NER y morfológico. 
+  
+  - **texto_tag_entity**: es un objeto de clase 'spacyr_parsed' con una columna que identifica los distintos tipos de entidades.
+  
+  - **texto_only_entity**: es un 'data.frame' con 4 variables que contiene solo las entidades identificadas.
+  
+  - **texto_only_entity_loc**: es un 'data.frame' de 7 variables que permite la georreferenciación de las entidades identificadas como tipo 'LOC'.
+  
+  - **texto_nounphrase**: es un objeto de clase 'spacyr_parsed' con una columna que identifica las distintas frases compuestas por sustantivos (nounphrase).
+  
+  - **texto_only_nounphrase**: es un 'data.frame' con tres variables que identifica y filtra los sustantivos que forman frases: 'las_principales_ciudades'.
+  
+Cabe mencionar que los textos ingresados son tokenizados, es decir, cada palabra es un token.
+
+```{r pos, eval=require("tibble"), message=FALSE, warning=FALSE}
+titulares_tags <- acep_postag(
+  texto = titulares,
+  core = "es_core_news_lg", # valor por defecto
+  bajar_core = FALSE,       # el valor por defecto es TRUE
+  inst_spacy = FALSE,       # valor por defecto
+  inst_miniconda = FALSE,   # valor por defecto
+  inst_reticulate = FALSE   # valor por defecto
+)
+
+str(titulares_tags)
+```
+
+En este resultado podemos ver cómo la función crea los seis marcos de datos con información relevante sobre el contenido y la forma de los textos ingresados. En nuestro caso, textos referidos a conflictos.
+
+Veamos con un poco más de detalle cada uno de los marcos de datos creados con la función `acep_postag()`:
+
+### texto_tag
+
+Como adelantamos, el primer objeto de la lista es un marco de datos estructurado para servir de input de la función `acep_svo()`.
+
+```{r postag01}
+head(titulares_tags$texto_tag[43:54, ], n = 12)
+```
+
+### texto_tag_entity
+
+El segundo objeto de la lista es un marco de datos que reescribe la columna 'pos' con la etiqueta 'ENTITY' e identifica el tipo de entidad en la columna 'entity_type'. Si la entidad detectada está compuesta por más de un token, la función colapsa todos los tokens referidos a esa entidad en una sola celda de la columna token. Ejemplo: 'Ciudad_de_Buenos_Aires'.
+
+```{r postag02}
+head(titulares_tags$texto_tag_entity[52:65, ], n = 14)
+```
+
+### texto_only_entity
+El tercer objeto de la lista es el marco de datos 'texto_tag_entity' filtrado por el valor 'ENTITY' de la columna 'pos'.
+
+```{r postag03}
+head(titulares_tags$texto_only_entity, n = 10)
+```
+
+### texto_only_entity_loc
+
+El cuarto objeto de la lista es el marco de datos 'texto_only_entity' filtrado por el valor 'LOC' de la columna 'entity_type' y procesado con la función 'geo()' del paquete *tidygeocoder*.
+
+```{r postag04}
+head(titulares_tags$texto_only_entity_loc[ , c(1:3, 6:7)], n = 4)
+```
+
+### texto_nounphrase
+
+El quinto objeto de la lista es un marco de datos que reescribe la columna 'pos' con la etiqueta 'nounphrase'. Si el sustantivo detectado está compuesto por más de un token, la función colapsa todos los tokens referidos a ese sustantivo en una sola celda de la columna token. Ejemplo: 'las_principales_ciudades'.
+
+```{r postag05}
+head(titulares_tags$texto_nounphrase[ , c(1:2, 4, 6)], n = 10)
+```
+
+### texto_only_nounphrase
+
+El sexto objeto de la lista es el marco de datos 'texto_nounphrase' filtrado por el valor 'nounphrase' de la columna 'pos'.
+
+```{r postag06}
+head(titulares_tags$texto_only_nounphrase, n = 10)
+```
+
+## Función `acep_upos()`
+
+Esta función realiza etiquetado POS, lematización, tokenización, pero no realiza extracción de entidades y, por ende, no puede hacer georreferenciación. Para llevar a cabo estas tareas acep_upos envuelve la función udpipe() de la librería homonimia. 
+
+**Advertencia**: ponemos esta alternativa a `acep_postag` porque la instalación de *reticulate*, *anaconda* y las librerías de Python necesarias para el funcionamiento de *spacyr* pueden traer más de un problema.
+
+Repetimos el proceso realizado con la función `acep_postag`: activamos la librería *ACEP*, luego, cargamos un vector de titulares de portales noticiosos sobre notas referidas a conflictos para su prueba, y agregamos una última oración unimembre como ejemplo extremo de oración no procesable con la función `acep_svo()`.
+
+```{r titulares2, results = TRUE, warning = FALSE, message = FALSE, eval=require("tibble")}
+library(ACEP)
+
+titulares <- c(acep_bases$titulares, "Hola mundo.")
+
+titulares
+```
+
+Ejecutamos la función `acep_upos()` para los titulares contenidos en el vector.
+
+¿Cuál es el resultado?
+
+La función `acep_upos` toma el vector de textos y realiza diferentes acciones:
+
+- Verifica que el objeto entregado sea un vector de tipo caracter (de lo contrario imprime un mensaje de advertencia)
+
+- Verifica que el parámetro 'modelo' sean un modelo válido (de lo contrario devuelve un mensaje de advertencia)
+
+- Crea un objeto de clases 'tokenIndex' que sirve como input para la función `acep_svo()`. Contiene 17 variables que reúnen información de los procesos de tokenización, lematización, etiquetado pos, etiquetado de relaciones de dependencia y morfológico. 
+  
+Cabe mencionar que, al igual que acep_postag, los textos ingresados son tokenizados, es decir, cada palabra es un token.
+
+```{r upos, eval=require("tibble"), message=FALSE, warning=FALSE}
+titulares_utags <- acep_upos(
+  texto = titulares,
+  modelo = "spanish" # valor por defecto
+)
+
+str(titulares_utags)
+```
+
+En este resultado podemos ver cómo la función crea el input para usar con `acep_svo()`. Hay que tener en cuenta que *udpipe* y *spacyr* usan modelos distintos para el etiquetado pos y las relaciones de dependencia, así como para parsear el texto en oraciones. Por ende, el resultado obtenido de la función `acep_svo` puede ser ligeramente diferente si usamos uno u otro modelo de etiquetado. En el ejemplo que sigue usaremos el output de la función `acep_upos`.
+
+## Función `acep_svo()`
+
+Una vez que tenemos la lista, con 6 marcos de datos, creada a partir de la función `acep_upos()`, podemos utilizar la función `acep_svo()` para obtener un listado nuevo, con otros 6 marcos de datos, que nos proveerá la siguiente información:
+
+- acep_annotate_svo: es un marco de datos con 22 variables. Mantiene la estructura del objeto ingresado a la función (titulares_utags) y agrega 5 nuevas variables ('s_v_o', 's_v_o_id', 's_v_o_fill', 's_p', 'conjugaciones').
+
+- acep_pro_svo: es un marco de datos con 13 variables ('doc_id', 'oracion_id', 'eventos', 'sujeto_svo', 'root', 'objeto', 'sujeto', 'predicado', 'verbo', 'lemma_verb', 'aux_verbos', 'entidades', 'sust_pred') que reúne los tripletes SVO e información de contexto. Ejemplo de extracción SVO: "gremios -> convocan -> paro presencialidad".
+
+- acep_list_svo: es un marco de datos con 6 variables ('doc_id', 'oracion_id', 'eventos', 'sujeto', 'verbo' 'objeto') que procesa los tripletes SVO y los devuelve separados en sujeto, verbo, objeto. Ejemplo de extracción SVO: "gremios" "convocan" "paro presencialidad".
+
+- acep_sp: es un marco de datos con 9 variables ('doc_id', 'oracion_id', 'sujeto', 'predicado', 'verbo', 'lemma_verb', 'aux_verbos', 'entidades', 'sust_pred') que ofrece más información de contexto como entidades, sustantivos dentro de la oración analizada, etc.
+
+- acep_lista_lemmas: es un marco de datos con dos variables ('lemma', 'n') que ofrece la frecuencia absoluta de las palabras lemmatizadas presentes en el corpus analizado.
+
+- acep_no_procesadas: es un marco de datos con tres variables ('doc_id', 'oracion_id', 'oracion') que ofrece la frecuencia absoluta de las palabras lemmatizadas presentes en el corpus analizado.
+
+```{r svo01}
+titulares_svo <- acep_svo(titulares_utags)
+
+str(titulares_svo)
+```
+
+Veamos con un poco más de detalle cada uno de los marcos de datos creados con la función `acep_svo()`.
+
+### acep_annotate_svo
+
+Es el marco de datos inicial procesado con las funciones del paquete *rsyntax*.
+
+```{r svo02, eval=require("tibble")}
+head(titulares_svo$acep_annotate_svo[98:106, ], n=20)
+```
+
+### acep_annotate_svo
+
+Este marco de datos contiene las oraciones procesables con la identificación y extracción de sujeto-verbo-objeto y contexto.
+
+```{r svo03, eval=require("tibble")}
+head(titulares_svo$acep_pro_svo, n=10)
+```
+
+### acep_list_svo
+
+Este marco de datos es una versión reducida del data.frame 'acep_pro_svo'. Solo contiene los tripletes sujeto-verbo-objeto en versión colapsada ('gremios -> convocan -> paro') y en versión separada (una columna para 'sujeto', otra para 'verbo' y otra para 'objeto').
+
+```{r svo04, eval=require("tibble")}
+head(titulares_svo$acep_list_svo, n=10)
+```
+
+### acep_sp
+
+Este marco de datos contiene los 'sujetos' y los 'predicados' identificados en cada oración y una aproximación a 'entidades', 'sustantivos' y 'verbos auxiliares' como contexto que ayuda a mejorar la extracción de sujetos y objetos de la acción.
+
+```{r svo05, eval=require("tibble")}
+head(titulares_svo$acep_sp, n=10)
+```
+
+### acep_lista_lemmas
+
+Este marco de datos es un análisis de frecuencias absolutas de lemmas presentes en el corpus procesado.
+
+```{r svo06, eval=require("tibble")}
+head(titulares_svo$acep_lista_lemmas, n=10)
+```
+
+### acep_no_procesadas
+
+Este marco de datos contiene las oraciones que no pudieron ser procesadas por no ser posible identificar sujeto y predicado.
+
+```{r svo07, eval=require("tibble")}
+head(titulares_svo$acep_no_procesadas, n=10)
+```
+
+## Nota final
+
+Los resultados obtenidos en este ejemplo son muy prometedores, pero la realidad es que la bondad de los resultados está determinada por la complejidad de las oraciones. Es verdad que los textos ingresados en este ejemplo fueron tomados de portales de noticias, pero también es verdad que no todos los títulos son igual de descriptivos y muchos son oraciones unimembres. Sin embargo, con los cuidados del caso, los resultados arrojados por la función `acep_svo()` pueden ser muy útiles para una primera aproximación exploratoria de eventos de protesta en un corpus extenso de notas.

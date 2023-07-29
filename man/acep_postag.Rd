@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_postag.R
 \name{acep_postag}
 \alias{acep_postag}
-\title{Función para etiquetado POS, lematizacion, tokenizacion, extraccion de entidades.}
+\title{Función para etiquetado POS, lematización, tokenización, extracción de entidades.}
 \source{
 \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
 
