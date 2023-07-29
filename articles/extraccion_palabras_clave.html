@@ -186,11 +186,11 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="va">rev_puerto</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 9</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del t… Un re… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas pi… En Ch… <span style="color: #949494;">"</span>El … https… http…               3            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               9            0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               8            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fallo… La Cá… <span style="color: #949494;">"</span>La … https… http…               6            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomendac… Desde… <span style="color: #949494;">"</span>En … https… http…               0            0</span></span>
@@ -198,7 +198,7 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-12-21 El CFP pre… En la… <span style="color: #949494;">"</span>Ant… https… http…               3            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota a… Puert… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: frec_soip &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: frec_soip &lt;int&gt;</span></span></span></code></pre></div>
 <p>Ahora vamos a usar las función <code><a href="../reference/acep_extract.html">acep_extract()</a></code> para
 extraer las palabras clave de los diccionarios de conflictividad,
 huelgas y SOIP que aparecen en cada una de las notas de la <em>Revista
@@ -219,11 +219,11 @@ Puerto</em>.</p>
 <span><span class="va">rev_puerto</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 12</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del t… Un re… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas pi… En Ch… <span style="color: #949494;">"</span>El … https… http…               3            0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               9            0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrero… En Ma… <span style="color: #949494;">"</span>El … https… http…               8            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incumpl… Se ll… <span style="color: #949494;">"</span>Las… https… http…               4            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fallo… La Cá… <span style="color: #949494;">"</span>La … https… http…               6            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomendac… Desde… <span style="color: #949494;">"</span>En … https… http…               0            0</span></span>
@@ -231,7 +231,7 @@ Puerto</em>.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-12-21 El CFP pre… En la… <span style="color: #949494;">"</span>Ant… https… http…               3            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota a… Puert… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: frec_soip &lt;dbl&gt;, extract_conflictos &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: frec_soip &lt;int&gt;, extract_conflictos &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   extract_huelgas &lt;chr&gt;, extract_soip &lt;chr&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">

@@ -190,11 +190,11 @@ Mar del Plata.</p>
 <span><span class="va">rev_puerto</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 10</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Añ… Con m… <span style="color: #949494;">"</span>Con… https… http…            31               0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-12-28 Mapa del … Un re… <span style="color: #949494;">"</span>El … https… http…          <span style="text-decoration: underline;">1</span>128               4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-12-24 Plantas p… En Ch… <span style="color: #949494;">"</span>El … https… http…           530               3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrer… En Ma… <span style="color: #949494;">"</span>El … https… http…           483               9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020-12-24 Los obrer… En Ma… <span style="color: #949494;">"</span>El … https… http…           483               8</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020-12-23 El incump… Se ll… <span style="color: #949494;">"</span>Las… https… http…           525               4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020-12-23 Otro fall… La Cá… <span style="color: #949494;">"</span>La … https… http…           462               6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020-12-22 Recomenda… Desde… <span style="color: #949494;">"</span>En … https… http…           650               0</span></span>
@@ -202,7 +202,7 @@ Mar del Plata.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-12-21 El CFP pr… En la… <span style="color: #949494;">"</span>Ant… https… http…          <span style="text-decoration: underline;">1</span>434               3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota … Puert… <span style="color: #949494;">"</span>El … https… http…          <span style="text-decoration: underline;">1</span>056               4</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: frec_huelgas &lt;dbl&gt;, frec_soip &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: frec_huelgas &lt;int&gt;, frec_soip &lt;int&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="los-índices">Los índices<a class="anchor" aria-label="anchor" href="#los-%C3%ADndices"></a>
@@ -239,7 +239,7 @@ huelgas. Para la elaboración de estos índices haremos uso de la función
 <span><span class="va">rev_puerto</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 383 × 13</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-11-24 Mardi, la… <span style="color: #949494;">"</span>Con … <span style="color: #949494;">"</span>Tra… https… http…          <span style="text-decoration: underline;">1</span>125               1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020-11-16 Cierran l… <span style="color: #949494;">"</span>El v… <span style="color: #949494;">"</span>Des… https… http…           380               4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020-11-13 CaIPA-SOI… <span style="color: #949494;">"</span>Las … <span style="color: #949494;">"</span>Lo … https… http…           376               3</span></span>
@@ -251,7 +251,7 @@ huelgas. Para la elaboración de estos índices haremos uso de la función
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-08-26 “La salid… <span style="color: #949494;">"</span>Lo d… <span style="color: #949494;">"</span>Due… https… http…          <span style="text-decoration: underline;">1</span>606               5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-08-11 Los comed… <span style="color: #949494;">"</span>Aume… <span style="color: #949494;">"</span>Es … https… http…          <span style="text-decoration: underline;">1</span>254               5</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 373 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: frec_huelgas &lt;dbl&gt;, frec_soip &lt;dbl&gt;, i_conf_gral &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: frec_huelgas &lt;int&gt;, frec_soip &lt;int&gt;, i_conf_gral &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   i_soip &lt;dbl&gt;, i_huelgas &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>Al realizar los filtros la base se redujo a 383 notas que presentan
 al menos una mención de una palabra que refiere a conflicto y al menos
@@ -291,11 +291,11 @@ la serie de tiempo para la conflictividad general.</p>
 <span><span class="va">conf_gral_anio</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     st frecn csn frecp frecm  intac intensidad int_notas_confl</span></span>
 <span><span class="co">#&gt; 1 2009    34  24 26351   156 0.2214     0.0059          0.7059</span></span>
-<span><span class="co">#&gt; 2 2010    29  21 27053   207 0.2583     0.0077          0.7241</span></span>
-<span><span class="co">#&gt; 3 2011    44  32 30954   256 0.4024     0.0083          0.7273</span></span>
-<span><span class="co">#&gt; 4 2012    78  67 68256   617 0.7521     0.0090          0.8590</span></span>
-<span><span class="co">#&gt; 5 2013    26  16 19307   151 0.2062     0.0078          0.6154</span></span>
-<span><span class="co">#&gt; 6 2014    17  12 12804    86 0.1164     0.0067          0.7059</span></span></code></pre></div>
+<span><span class="co">#&gt; 2 2010    29  21 27053   205 0.2552     0.0076          0.7241</span></span>
+<span><span class="co">#&gt; 3 2011    44  32 30954   253 0.3977     0.0082          0.7273</span></span>
+<span><span class="co">#&gt; 4 2012    78  67 68256   614 0.7480     0.0090          0.8590</span></span>
+<span><span class="co">#&gt; 5 2013    26  16 19307   149 0.2020     0.0077          0.6154</span></span>
+<span><span class="co">#&gt; 6 2014    17  12 12804    84 0.1130     0.0066          0.7059</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculamos el índice mensual de conflictividad general en el</span></span>
 <span><span class="co"># ámbito de la industrial del procesado de pescado en tierra</span></span>
@@ -326,7 +326,7 @@ la serie de tiempo para la conflictividad general.</p>
 <span><span class="co">#&gt; 1 2012-01     4   3  3401    18 0.0234     0.0053          0.7500</span></span>
 <span><span class="co">#&gt; 2 2012-02     3   3  1978    14 0.0219     0.0071          1.0000</span></span>
 <span><span class="co">#&gt; 3 2012-03     6   3  5658    16 0.0191     0.0028          0.5000</span></span>
-<span><span class="co">#&gt; 4 2012-04     6   6  5399    53 0.0662     0.0098          1.0000</span></span>
+<span><span class="co">#&gt; 4 2012-04     6   6  5399    51 0.0639     0.0094          1.0000</span></span>
 <span><span class="co">#&gt; 5 2012-05     7   6  5953    79 0.0949     0.0133          0.8571</span></span>
 <span><span class="co">#&gt; 6 2012-06    12  11 11022   137 0.1495     0.0124          0.9167</span></span></code></pre></div>
 <p>En la siguiente parte del código construimos la serie de tiempo para
@@ -361,7 +361,7 @@ la conflictividad huelguística.</p>
 <span><span class="co">#&gt; 1 2012-01     4   0  3401     0 0.0000     0.0000          0.0000</span></span>
 <span><span class="co">#&gt; 2 2012-02     3   0  1978     0 0.0000     0.0000          0.0000</span></span>
 <span><span class="co">#&gt; 3 2012-03     6   0  5658     0 0.0000     0.0000          0.0000</span></span>
-<span><span class="co">#&gt; 4 2012-04     6   1  5399     6 0.6082     0.0011          0.1667</span></span>
+<span><span class="co">#&gt; 4 2012-04     6   0  5399     5 0.5695     0.0009          0.0000</span></span>
 <span><span class="co">#&gt; 5 2012-05     7   1  5953     9 0.5800     0.0015          0.1429</span></span>
 <span><span class="co">#&gt; 6 2012-06    12   2 11022    17 1.0869     0.0015          0.1667</span></span></code></pre></div>
 </div>
