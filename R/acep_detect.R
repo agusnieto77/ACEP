@@ -9,6 +9,7 @@
 #' @param tolower convierte los textos a minúsculas.
 #' @return Si todas las entradas son correctas,
 #' la salida sera un vector numérico.
+#' @importFrom stringr str_count
 #' @keywords indicadores frecuencia tokens
 #' @examples
 #' df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
@@ -26,29 +27,19 @@ acep_detect <- function(x, y, u = 1, tolower = TRUE) {
     message("No ingresaste un vector de texto en el par\u00e1metro 'y'.
             Vuelve a intentarlo ingresando un vector!")
     return(NULL)
-    }
+  }
   if (!is.logical(tolower)) {
     message("No ingresaste un valor l\u00f3gico en el par\u00e1metro 'tolower'.")
   }
   if (!is.numeric(u)) {
     message("No ingresaste un valor num\u00e9rico en el par\u00e1metro 'u'.")
   } else {
+    if (tolower) {
+      x <- tolower(x)
+    }
     out <- tryCatch({
-      if (tolower == TRUE){
-        detect <- sapply(tolower(x), function(txt) {
-          ocurrencias <- Reduce('+', lapply(y, function(word) {
-            sum(gregexpr(word, txt)[[1]] >= 0)
-          }))
-          ocurrencias
-        })
-      } else {
-        detect <- sapply(x, function(txt) {
-          ocurrencias <- Reduce('+', lapply(y, function(word) {
-            sum(gregexpr(word, txt)[[1]] >= 0)
-          }))
-          ocurrencias
-        })
-      }
+      dicc <- paste0(y, collapse = "|")
+      detect <- stringr::str_count(x, dicc)
       ifelse(as.numeric(detect) >= u, 1, 0)
     })
     return(out)

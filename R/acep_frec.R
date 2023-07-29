@@ -14,10 +14,7 @@ acep_frec <- function(x) {
     return(message("No ingresaste un vector de texto.
            Vuelve a intentarlo ingresando un vector de texto!"))
   } else {
-    out <- tryCatch({
-      vapply(strsplit(x, " "), length, integer(1))
-    }
-    )
+    out <- tryCatch({ lengths(strsplit(x, " ")) })
     return(out)
   }
 }
