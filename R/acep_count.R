@@ -8,6 +8,7 @@
 #' la salida sera un vector con una frecuencia
 #' de palabras de un diccionario.
 #' @keywords indicadores frecuencia tokens
+#' @importFrom stringr str_count
 #' @examples
 #' df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
 #' "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
@@ -22,12 +23,8 @@ acep_count <- function(texto, dic) {
   if (!is.character(dic)) {
     return(message("No ingresaste un vector de texto en el par\u00e1metro 'dic'"))
   } else {
-    counts <- sapply(texto, function(txt) {
-      ocurrencias <- Reduce('+', lapply(dic, function(word) {
-        sum(gregexpr(word, txt)[[1]] >= 0)
-      }))
-      ocurrencias
-    })
-    return(as.numeric(counts))
+    dicc <- paste0(dic, collapse = "|")
+    detect <- stringr::str_count(texto, dicc)
+    return(detect)
   }
 }

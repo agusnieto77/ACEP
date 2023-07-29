@@ -27,6 +27,7 @@ Imports:
     rsyntax,
     spacyr,
     udpipe,
+    stringr,
     reticulate,
     tidygeocoder
 Suggests: 
