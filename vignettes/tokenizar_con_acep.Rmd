@@ -34,7 +34,7 @@ En primer lugar cargamos la librería ACEP. Luego, cargamos una base de tweets p
 ```{r cargar base,results = FALSE, warning = FALSE, message = FALSE, eval=require("tibble")}
 library(ACEP)
 
-url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
+url <- "https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"
 
 base <- subset(acep_load_base(url), select = text)$text
 ```
@@ -66,7 +66,7 @@ Cabe mencionar que los tokens quedarán identificados a través de los espacios 
 ```{r token, eval=require("tibble")}
 tweets <- acep_token(base[1:2])
 
-tweets |> head()
+head(tweets)
 ```
 
 En este resultado podemos ver cómo la función identifica a cada observación como un documento aparte (en este caso, cada tweet es un documento identificado en la columna id_doc). La numeración del id_token continúa de principio a fin mientras que la numeración del id_token_doc se reinicia cada vez que empieza un nuevo documento. La columna texto presenta el documento completo original y por último podemos visualizar la columna token en la que la función aísla cada token.
