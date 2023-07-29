@@ -9,7 +9,7 @@ acep_sst(datos, st = "mes", u = 2, d = 4)
 \arguments{
 \item{datos}{data frame con las variables 'fecha' (en formato Date),
 'n_palabras' (numérica), conflictos' (numérica), 'intensidad' (numérica).
-Las ultimas tres se pueden construir en un solo paso con la funcion 'acep_db'
+Las ultimas tres se pueden construir en un solo paso con la función 'acep_db'
 o en tres pasos con las funciones 'acep_frec', 'acep_men', 'acep_int'.}
 
 \item{st}{parámetro para establecer el segmento temporal
