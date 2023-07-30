@@ -49,8 +49,10 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/conflictividad_soip.html">Conflictividad laboral en la pesca</a>
+    <a class="dropdown-item" href="../articles/extraccion_de_svo_con_acep.html">Extraer S-V-O con ACEP</a>
     <a class="dropdown-item" href="../articles/extraccion_palabras_clave.html">Extracción de palabas clave</a>
     <a class="dropdown-item" href="../articles/limpieza_de_texto_con_acep.html">Limpieza de texto con ACEP</a>
+    <a class="dropdown-item" href="../articles/rendimiento_funciones_acep.html">Rendimiento de las nuevas funciones</a>
     <a class="dropdown-item" href="../articles/tokenizar_con_acep.html">Tokenizar con ACEP</a>
   </div>
 </li>
@@ -85,7 +87,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2023-07-29</h4>
+            <h4 data-toc-skip class="date">2023-07-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/extraccion_palabras_clave.Rmd" class="external-link"><code>vignettes/extraccion_palabras_clave.Rmd</code></a></small>
       <div class="d-none name"><code>extraccion_palabras_clave.Rmd</code></div>
@@ -120,11 +122,10 @@ cargar todas las notas haremos uso de la función
 <span></span>
 <span><span class="co"># Descargamos el corpus de notas de la Revista Puerto</span></span>
 <span><span class="va">rev_puerto</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
-<span><span class="va">rev_puerto</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 6</span></span></span>
+<span><span class="va">rev_puerto</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 6</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo                                   bajada nota  imagen link </span></span>
 <span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año 2021 para todos nuestros ami… Con m… <span style="color: #949494;">"</span>Con… https… http…</span></span>
@@ -137,7 +138,7 @@ cargar todas las notas haremos uso de la función
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020-12-22 Trelew consolida su inserción en la ind… En 20… <span style="color: #949494;">"</span>Ins… https… http…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-12-21 El CFP presentó el estado y la captura … En la… <span style="color: #949494;">"</span>Ant… https… http…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota amarilla cierra el año con sos… Puert… <span style="color: #949494;">"</span>El … https… http…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="los-diccionarios">Los diccionarios<a class="anchor" aria-label="anchor" href="#los-diccionarios"></a>
@@ -154,10 +155,9 @@ crearemos dos diccionarios breves para usarlos en las funciones
 objetivo: 1) identificar las notas que refieran a huelgas; 2)
 identificar las notas que refieran a lxs trabajadorxs del procesamiento
 de pescado en tierra en la ciudad de Mar del Plata.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cargamos el diccionario de palabras que refieren a conflictividad</span></span>
 <span><span class="va">dicc_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_confl_sismos</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Descargando...</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con la frecuencia de palabras que refieren a conflictividad</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
@@ -183,8 +183,8 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">frec_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_count.html">acep_count</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
-<span><span class="va">rev_puerto</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 9</span></span></span>
+<span><span class="va">rev_puerto</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 9</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
@@ -198,14 +198,13 @@ de pescado en tierra en la ciudad de Mar del Plata.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020-12-21 El CFP pre… En la… <span style="color: #949494;">"</span>Ant… https… http…               3            0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota a… Puert… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: frec_soip &lt;int&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: frec_soip &lt;int&gt;</span></span></span></code></pre>
 <p>Ahora vamos a usar las función <code><a href="../reference/acep_extract.html">acep_extract()</a></code> para
 extraer las palabras clave de los diccionarios de conflictividad,
 huelgas y SOIP que aparecen en cada una de las notas de la <em>Revista
 Puerto</em>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Creamos la variable con las palabras que refieren a conflictividad</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Creamos la variable con las palabras que refieren a conflictividad</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_extract.html">acep_extract</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con las palabras que refieren a huelgas</span></span>
@@ -216,8 +215,8 @@ Puerto</em>.</p>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_soip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_extract.html">acep_extract</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_soip</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
-<span><span class="va">rev_puerto</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 12</span></span></span>
+<span><span class="va">rev_puerto</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7,816 × 12</span></span></span>
 <span><span class="co">#&gt;    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020-12-29 ¡Feliz Año… Con m… <span style="color: #949494;">"</span>Con… https… http…               0            0</span></span>
@@ -232,7 +231,7 @@ Puerto</em>.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020-12-21 La flota a… Puert… <span style="color: #949494;">"</span>El … https… http…               4            0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7,806 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: frec_soip &lt;int&gt;, extract_conflictos &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   extract_huelgas &lt;chr&gt;, extract_soip &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   extract_huelgas &lt;chr&gt;, extract_soip &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="las-palabras-clave-extraídas">Las palabras clave extraídas<a class="anchor" aria-label="anchor" href="#las-palabras-clave-extra%C3%ADdas"></a>
@@ -241,15 +240,15 @@ Puerto</em>.</p>
 rendimiento de la función <code><a href="../reference/acep_extract.html">acep_extract()</a></code>. Seleccionaremos
 las columnas referidas a las extracciones de conflictos y huelgas.
 Veamos.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Seleccionamos las variables de extracción de palabras clave</span></span>
 <span><span class="va">rev_puerto_huelgas</span> <span class="op">&lt;-</span> <span class="va">rev_puerto</span><span class="op">[</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_huelgas</span> <span class="op">!=</span> <span class="st">""</span>,<span class="op">]</span></span>
 <span><span class="va">rev_puerto_soip</span> <span class="op">&lt;-</span> <span class="va">rev_puerto_huelgas</span><span class="op">[</span><span class="va">rev_puerto_huelgas</span><span class="op">$</span><span class="va">extract_soip</span> <span class="op">!=</span> <span class="st">""</span>,<span class="op">]</span></span>
 <span><span class="va">rev_puerto_seleccion</span> <span class="op">&lt;-</span> <span class="va">rev_puerto_soip</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'extract_conflictos'</span>, <span class="st">'extract_huelgas'</span>, <span class="st">'extract_soip'</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Imprimimos la base en consola</span></span>
-<span><span class="va">rev_puerto_seleccion</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 76 × 3</span></span></span>
+<span><span class="va">rev_puerto_seleccion</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 76 × 3</span></span></span>
 <span><span class="co">#&gt;    extract_conflictos                               extract_huelgas extract_soip</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> todo amenazaba; una asamblea; la asamblea; y bl… conciliación o… obreros del…</span></span>
@@ -262,7 +261,7 @@ Veamos.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> puerta bloqueando; la conciliación obligatoria;… conciliación o… fileteros   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> a pedir; la lucha; la lucha; del paro; Se paró;… del paro        fileteros   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> el paro; fresqueros reclamaban                   el paro         fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 66 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 66 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="nota-final">Nota final<a class="anchor" aria-label="anchor" href="#nota-final"></a>

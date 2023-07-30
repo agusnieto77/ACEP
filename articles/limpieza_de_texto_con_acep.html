@@ -49,8 +49,10 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/conflictividad_soip.html">Conflictividad laboral en la pesca</a>
+    <a class="dropdown-item" href="../articles/extraccion_de_svo_con_acep.html">Extraer S-V-O con ACEP</a>
     <a class="dropdown-item" href="../articles/extraccion_palabras_clave.html">Extracción de palabas clave</a>
     <a class="dropdown-item" href="../articles/limpieza_de_texto_con_acep.html">Limpieza de texto con ACEP</a>
+    <a class="dropdown-item" href="../articles/rendimiento_funciones_acep.html">Rendimiento de las nuevas funciones</a>
     <a class="dropdown-item" href="../articles/tokenizar_con_acep.html">Tokenizar con ACEP</a>
   </div>
 </li>
@@ -85,7 +87,7 @@
                         <h4 data-toc-skip class="author">Diego
 Pacheco</h4>
             
-            <h4 data-toc-skip class="date">2023-07-29</h4>
+            <h4 data-toc-skip class="date">2023-07-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/limpieza_de_texto_con_acep.Rmd" class="external-link"><code>vignettes/limpieza_de_texto_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>limpieza_de_texto_con_acep.Rmd</code></div>
@@ -127,17 +129,15 @@ FALSE a excepción del que queremos probar.</p>
 <span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>, select <span class="op">=</span> <span class="va">text</span><span class="op">)</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
 <p>Seleccionemos ahora tan sólo un tweet:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">primer_tweet</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">primer_tweet</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">primer_tweet</span></span>
-<span><span class="co">#&gt; [1] "👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes\nhttps://t.co/644Ak0HZ7I"</span></span></code></pre></div>
+<span><span class="va">primer_tweet</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; [1] "👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes\nhttps://t.co/644Ak0HZ7I"</span></span></code></pre>
 <p>Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro
 tolower de la función <code><a href="../reference/acep_cleaning.html">acep_cleaning()</a></code> y verificamos el
 resultado.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">minus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">minus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>               tolower <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>               rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>               rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -154,15 +154,15 @@ resultado.</p>
 <span>               rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>               other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN tolower****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN tolower****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN tolower****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN tolower****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON tolower****\n"</span>, <span class="va">minus</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON tolower****</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON tolower****\n"</span>, <span class="va">minus</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON tolower****</span></span>
 <span><span class="co">#&gt; 👉protesta/la fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644ak0hz7i****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/644ak0hz7i****</span></span></code></pre>
 <p>Efectivamente, los caracteres en mayúscula pasan a minúscula.</p>
 </div>
 <div class="section level2">
@@ -174,9 +174,8 @@ muchos caracteres especiales tales como tildes. Estos caracteres no
 hacen ningún aporte al análisis semántico por lo que es conveniente
 removerlos. Al igual que el caso anterior, aislamos el parámetro
 rm_cesp.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">cesp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cesp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     rm_emoji <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -193,15 +192,15 @@ rm_cesp.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_cesp****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_cesp****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_cesp****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_cesp****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_cesp****\n"</span>, <span class="va">cesp</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_cesp****</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_cesp****\n"</span>, <span class="va">cesp</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_cesp****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliacion obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
 <p>En este caso hay sólo una tilde en “conciliación” y fue removida.</p>
 </div>
 <div class="section level2">
@@ -211,7 +210,7 @@ rm_cesp.</p>
 redes sociales. Estos caracteres puede ser problemáticos para el
 análisis de texto y por este motivo se remueven con el parámetro
 rm_emoji.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">emoji</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">primer_tweet</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -229,15 +228,15 @@ rm_emoji.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_emoji****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"***\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_emoji****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_emoji****\n"</span>, <span class="va">primer_tweet</span>, <span class="st">"***\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_emoji****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I***</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_emoji****\n"</span>, <span class="va">emoji</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_emoji****</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I***</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_emoji****\n"</span>, <span class="va">emoji</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_emoji****</span></span>
 <span><span class="co">#&gt;  PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="hashtag">Hashtag<a class="anchor" aria-label="anchor" href="#hashtag"></a>
@@ -246,9 +245,8 @@ rm_emoji.</p>
 también caracteres que esconden palabras cuando realizamos un análisis
 semántico. Para removerlos, utilizamos el parámetro rm_hashtag.
 Utilizamos otro tweet de la base que contiene #hashtag</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">con_hash</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">con_hash</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span></span>
 <span><span class="va">hash</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">40</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -266,15 +264,15 @@ Utilizamos otro tweet de la base que contiene #hashtag</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_hashtag****\n"</span>, <span class="va">con_hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_hashtag****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_hashtag****\n"</span>, <span class="va">con_hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_hashtag****</span></span>
 <span><span class="co">#&gt; #Transporte | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.</span></span>
-<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_hashtag****\n"</span>, <span class="va">hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_hashtag****</span></span>
+<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_hashtag****\n"</span>, <span class="va">hash</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_hashtag****</span></span>
 <span><span class="co">#&gt;  | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.</span></span>
-<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/1bHDoEVS76****</span></span></code></pre>
 <p>NOTA: se elimina todo el #hashtags, no sólo el símbolo
 (#Transporte)</p>
 </div>
@@ -284,9 +282,8 @@ Utilizamos otro tweet de la base que contiene #hashtag</p>
 <p>La mención de usuarios es algo que suele aparecer en análisis de
 texto en redes. Respuestas a otros tweets o menciones a usuarios que
 queremos remover. Para esto utilizamos el parámetro rm_users</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">con_user</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">con_user</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span>
 <span><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -304,13 +301,13 @@ queremos remover. Para esto utilizamos el parámetro rm_users</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_users****\n"</span>, <span class="va">con_user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_users****</span></span>
-<span><span class="co">#&gt; @TrenesArg Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_users****\n"</span>, <span class="va">user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_users****</span></span>
-<span><span class="co">#&gt;  Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_users****\n"</span>, <span class="va">con_user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_users****</span></span>
+<span><span class="co">#&gt; @TrenesArg Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_users****\n"</span>, <span class="va">user</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_users****</span></span>
+<span><span class="co">#&gt;  Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****</span></span></code></pre>
 <p>NOTA: Igual que con el #hashtag, quita todo, no sólo el símbolo @</p>
 </div>
 <div class="section level2">
@@ -320,7 +317,7 @@ queremos remover. Para esto utilizamos el parámetro rm_users</p>
 pero nuevamente, aportan a la compresión lectora pero no al conteo de
 palabras o análisis semántica. La podemos remover con el parámetro
 rm_punt.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">punt</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span></span>
 <span><span class="va">s_punt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -339,19 +336,19 @@ rm_punt.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_punt****\n"</span>, <span class="va">punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_punt****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_punt****\n"</span>, <span class="va">punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_punt****</span></span>
 <span><span class="co">#&gt; Sociedad: Paro de trenes: La Fraternidad no acató la conciliación y no habrá servicio en el país</span></span>
 <span><span class="co">#&gt; ✍️por Agostina Carlesso </span></span>
 <span><span class="co">#&gt; 👉https://t.co/WI6mzHYM1i</span></span>
-<span><span class="co">#&gt; #InformacionEsPoder****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_punt****\n"</span>, <span class="va">s_punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_punt****</span></span>
+<span><span class="co">#&gt; #InformacionEsPoder****</span></span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_punt****\n"</span>, <span class="va">s_punt</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_punt****</span></span>
 <span><span class="co">#&gt; Sociedad  Paro de trenes  La Fraternidad no acató la conciliación y no habrá servicio en el país</span></span>
 <span><span class="co">#&gt; ✍ por Agostina Carlesso </span></span>
 <span><span class="co">#&gt; 👉https   t co WI6mzHYM1i</span></span>
-<span><span class="co">#&gt; #InformacionEsPoder****</span></span></code></pre></div>
+<span><span class="co">#&gt; #InformacionEsPoder****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="números">Números<a class="anchor" aria-label="anchor" href="#n%C3%BAmeros"></a>
@@ -361,9 +358,8 @@ relevante y requieren ser limpiados de nuestra base. Más aún en análisis
 de texto obtenido a través de redes sociales, ya sea por nombres de
 usuario o información codificada, aparece una gran cantidad de números.
 Se remueve con el parámetro rm_num.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">num</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
 <span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -381,32 +377,32 @@ Se remueve con el parámetro rm_num.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_num****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_num****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_num****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_num****</span></span>
 <span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_num****\n"</span>, <span class="va">num_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_num****</span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_num****\n"</span>, <span class="va">num_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_num****</span></span>
 <span><span class="co">#&gt; Del  al  de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZjih </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkNnYFo****</span></span></code></pre></div>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkNnYFo****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="urls">URLs<a class="anchor" aria-label="anchor" href="#urls"></a>
 </h2>
 <p>Las URLs aparecen comúnmente, links o imágenes que se codifican como
 urls. Para removerlas usamos el parámetro rm_url</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
 <span><span class="va">num_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -425,25 +421,25 @@ urls. Para removerlas usamos el parámetro rm_url</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_url****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_url****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_url****\n"</span>, <span class="va">num</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_url****</span></span>
 <span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_url****\n"</span>, <span class="va">num_s</span>,  <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_url****</span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_url****\n"</span>, <span class="va">num_s</span>,  <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_url****</span></span>
 <span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! ****</span></span></code></pre></div>
+<span><span class="co">#&gt; ¡Te esperamos! ****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="meses">Meses<a class="anchor" aria-label="anchor" href="#meses"></a>
@@ -451,7 +447,7 @@ urls. Para removerlas usamos el parámetro rm_url</p>
 <p>En el caso de querer remover meses del año, podemos utilizar el
 parámetro rm_meses. En este caso, el tweet tiene la palabra
 “noviembre”</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">meses</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span></span>
 <span><span class="va">meses_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">70</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -470,34 +466,33 @@ parámetro rm_meses. En este caso, el tweet tiene la palabra
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_mes****\n"</span>, <span class="va">meses</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_mes****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_mes****\n"</span>, <span class="va">meses</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_mes****</span></span>
 <span><span class="co">#&gt; Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_mes****\n"</span>, <span class="va">meses_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_mes****</span></span>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_mes****\n"</span>, <span class="va">meses_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_mes****</span></span>
 <span><span class="co">#&gt; Del 14 al 20 de  celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre></div>
+<span><span class="co">#&gt; ¡Te esperamos! https://t.co/vJHkN3nYFo****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="días">Días<a class="anchor" aria-label="anchor" href="#d%C3%ADas"></a>
 </h2>
 <p>En el caso de querer remover días de la semana, podemos utilizar el
 parámetro rm_dias. En este caso, el tweet tiene la palabra “martes”</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">dia</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dia</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span></span>
 <span><span class="va">dia_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     rm_cesp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -515,13 +510,13 @@ parámetro rm_dias. En este caso, el tweet tiene la palabra “martes”</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_dias****\n"</span>, <span class="va">dia</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_dias****</span></span>
-<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_dias****\n"</span>, <span class="va">dia_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_dias****</span></span>
-<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este  no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_dias****\n"</span>, <span class="va">dia</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_dias****</span></span>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_dias****\n"</span>, <span class="va">dia_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_dias****</span></span>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este  no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="stop-words">Stop words<a class="anchor" aria-label="anchor" href="#stop-words"></a>
@@ -533,7 +528,7 @@ aportan al contenido. Se pueden remover con el parámetro
 rm_stopwords.</p>
 <p>La lista de las palabras consideradas “stop words” puede verificarse
 en el siguiente link: stopwords &lt;- readRDS(url(“<a href="https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds" class="external-link uri">https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds</a>”))</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"</span></span>
 <span><span class="va">stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
 <span><span class="va">stopw</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">429</span><span class="op">]</span></span>
@@ -554,13 +549,13 @@ en el siguiente link: stopwords &lt;- readRDS(url(“<a href="https://github.com
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_stopwords****\n"</span>, <span class="va">stopw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_stopwords****</span></span>
-<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_stopwords****\n"</span>, <span class="va">stopw_w</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_stopwords****</span></span>
-<span><span class="co">#&gt; Paro   trenes:   sindicato     Fraternidad   acatará   conciliación obligatoria   dictó   ministerio   Trabajo     martes     servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_stopwords****\n"</span>, <span class="va">stopw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_stopwords****</span></span>
+<span><span class="co">#&gt; Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_stopwords****\n"</span>, <span class="va">stopw_w</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_stopwords****</span></span>
+<span><span class="co">#&gt; Paro   trenes:   sindicato     Fraternidad   acatará   conciliación obligatoria   dictó   ministerio   Trabajo     martes     servicio - Infobae https://t.co/0YH6FDeGXN****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="short-words">Short words<a class="anchor" aria-label="anchor" href="#short-words"></a>
@@ -568,7 +563,7 @@ en el siguiente link: stopwords &lt;- readRDS(url(“<a href="https://github.com
 <p>En caso de querer eliminar las palabras de 1 sólo caracter que pueden
 quedar como “residuos” de limpiezas previas y que probablemente no
 tengan contenido útil, lo hacemos con el parámetro rm_shortwords.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">short</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">97</span><span class="op">]</span></span>
 <span><span class="va">short_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">97</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -587,13 +582,13 @@ tengan contenido útil, lo hacemos con el parámetro rm_shortwords.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_shortwords****\n"</span>, <span class="va">short</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_shortwords****</span></span>
-<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad y x primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo a los JUBILADOS.para q le den un bono a fin de año...jamás nadie se acordó de apoyar a los jubilados x primera vez un gremio rompe un pacto con la CGT..ya q no querían .****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_shortwords****\n"</span>, <span class="va">short_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_shortwords****</span></span>
-<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad     primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo   los JUBILADOS.para   le den un bono   fin de año...jamás nadie se acordó de apoyar   los jubilados   primera vez un gremio rompe un pacto con la CGT..ya   no querían .****</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_shortwords****\n"</span>, <span class="va">short</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_shortwords****</span></span>
+<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad y x primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo a los JUBILADOS.para q le den un bono a fin de año...jamás nadie se acordó de apoyar a los jubilados x primera vez un gremio rompe un pacto con la CGT..ya q no querían .****</span></span></code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_shortwords****\n"</span>, <span class="va">short_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_shortwords****</span></span>
+<span><span class="co">#&gt; @GusDeheza @PolloSobrero NO es un paro de la Fraternidad     primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo   los JUBILADOS.para   le den un bono   fin de año...jamás nadie se acordó de apoyar   los jubilados   primera vez un gremio rompe un pacto con la CGT..ya   no querían .****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="new-line">New line<a class="anchor" aria-label="anchor" href="#new-line"></a>
@@ -601,7 +596,7 @@ tengan contenido útil, lo hacemos con el parámetro rm_shortwords.</p>
 <p>El parámetro rm_newline se utiliza en caso de querer eliminar los
 saltos de línea. En este ejemplo hay un salgo de línea antes del link
 del final del tweet.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">newl</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span><span class="va">newl_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -620,14 +615,14 @@ del final del tweet.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_newline****\n"</span>,<span class="va">newl</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_newline****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_newline****\n"</span>,<span class="va">newl</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_newline****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_newline****\n"</span>,<span class="va">newl_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_newline****</span></span>
-<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_newline****\n"</span>,<span class="va">newl_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_newline****</span></span>
+<span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes https://t.co/644Ak0HZ7I****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="whitespace">Whitespace<a class="anchor" aria-label="anchor" href="#whitespace"></a>
@@ -637,7 +632,7 @@ limpiezas previas, suelen quedar espacios en blanco en los textos que no
 ayudan a la legibilidad del texto. El parámetro rm_whitespace elimina
 los espacios en blanco.</p>
 <p>En este ejemplo, entre “en nuestro” hay un doble espacio.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">white</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">60</span><span class="op">]</span></span>
 <span><span class="va">white_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">60</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -656,17 +651,17 @@ los espacios en blanco.</p>
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_whitespace****\n"</span>, <span class="va">white</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN rm_whitespace****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN rm_whitespace****\n"</span>, <span class="va">white</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN rm_whitespace****</span></span>
 <span><span class="co">#&gt; El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en  nuestro país. </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_whitespace****\n"</span>, <span class="va">white_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON rm_whitespace****</span></span>
+<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span></code></pre>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON rm_whitespace****\n"</span>, <span class="va">white_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON rm_whitespace****</span></span>
 <span><span class="co">#&gt; El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en nuestro país. </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span></code></pre></div>
+<span><span class="co">#&gt; Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="other-stop-words">Other Stop words<a class="anchor" aria-label="anchor" href="#other-stop-words"></a>
@@ -681,7 +676,7 @@ palabra de remover. En caso de querer agregar más de una palabra, se
 puede crear un vector string con cada una de las palabras separadas por
 coma. En este caso se agregan las palabras “conciliación” y
 “Fraternidad”.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">osw</span> <span class="op">&lt;-</span> <span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span><span class="va">osw_s</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                     tolower <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -700,15 +695,15 @@ coma. En este caso se agregan las palabras “conciliación” y
 <span>                     rm_whitespace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     other_sw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"conciliación"</span>, <span class="st">"Fraternidad"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN other_sw****\n"</span>, <span class="va">osw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****SIN other_sw****</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****SIN other_sw****\n"</span>, <span class="va">osw</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****SIN other_sw****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON other_sw****\n"</span>, <span class="va">osw_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ****CON other_sw****</span></span>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"****CON other_sw****\n"</span>, <span class="va">osw_s</span>, <span class="st">"****\n"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; ****CON other_sw****</span></span>
 <span><span class="co">#&gt; 👉PROTESTA/La   desoye   obligatoria   mantiene paralizados   trenes</span></span>
-<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre></div>
+<span><span class="co">#&gt; https://t.co/644Ak0HZ7I****</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
