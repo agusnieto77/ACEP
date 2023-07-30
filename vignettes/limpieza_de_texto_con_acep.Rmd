@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 ```
@@ -44,7 +44,7 @@ base <- base::subset(acep_load_base(url), select = text)$text
 
 Seleccionemos ahora tan sólo un tweet:
 
-```{r twett}
+```{r twett, message=FALSE}
 
 primer_tweet <- base[2]
 
@@ -53,7 +53,7 @@ primer_tweet
 
 Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro tolower de la función `acep_cleaning()` y verificamos el resultado.
 
-```{r tolower}
+```{r tolower, message=FALSE}
 
 minus <- acep_cleaning(primer_tweet,
                tolower = TRUE,
@@ -85,7 +85,7 @@ Efectivamente, los caracteres en mayúscula pasan a minúscula.
 El parámetros rm_cesp refiere a los caracteres especiales. Es común que en una base conformada por tweets (aunque no solamente) aparezcan muchos caracteres especiales tales como tildes. Estos caracteres no hacen ningún aporte al análisis semántico por lo que es conveniente removerlos.
 Al igual que el caso anterior, aislamos el parámetro rm_cesp.
 
-```{r cesp}
+```{r cesp, message=FALSE}
 
 cesp <- acep_cleaning(primer_tweet,
                      tolower = FALSE,
@@ -115,7 +115,7 @@ En este caso hay sólo una tilde en "conciliación" y fue removida.
 
 Es común que aparezcan emojis en tweets o texto obtenido a través de redes sociales. Estos caracteres puede ser problemáticos para el análisis de texto y por este motivo se remueven con el parámetro rm_emoji.
 
-```{r emoji}
+```{r emoji, message=FALSE}
 emoji <- acep_cleaning(primer_tweet,
                      tolower = FALSE,
                      rm_cesp = FALSE,
@@ -143,7 +143,7 @@ cat(paste("****CON rm_emoji****\n", emoji, "****\n", sep=""))
 Los #hashtags son muy comunes en los textos de redes sociales. Son también caracteres que esconden palabras cuando realizamos un análisis semántico. Para removerlos, utilizamos el parámetro rm_hashtag.
 Utilizamos otro tweet de la base que contiene #hashtag
 
-```{r hash}
+```{r hash, message=FALSE}
 
 con_hash <- base[40]
 hash <- acep_cleaning(base[40],
@@ -174,7 +174,7 @@ NOTA: se elimina todo el #hashtags, no sólo el símbolo (#Transporte)
 ## Users
 La mención de usuarios es algo que suele aparecer en análisis de texto en redes. Respuestas a otros tweets o menciones a usuarios que queremos remover. Para esto utilizamos el parámetro rm_users
 
-```{r user}
+```{r user, message=FALSE}
 
 con_user <- base[12]
 user <- acep_cleaning(base[12],
@@ -206,7 +206,7 @@ NOTA: Igual que con el #hashtag, quita todo, no sólo el símbolo @
 
 La puntuación son caracteres que pueden aparecer muchísimas veces, pero nuevamente, aportan a la compresión lectora pero no al conteo de palabras o análisis semántica. La podemos remover con el parámetro rm_punt.
 
-```{r punct}
+```{r punct, message=FALSE}
 punt <- base[13]
 s_punt <- acep_cleaning(base[13],
                      tolower = FALSE,
@@ -236,7 +236,7 @@ cat(paste("****CON rm_punt****\n", s_punt, "****\n", sep=""))
 Siguiendo la misma lógica, los números no aportan información relevante y requieren ser limpiados de nuestra base. Más aún en análisis de texto obtenido a través de redes sociales, ya sea por nombres de usuario o información codificada, aparece una gran cantidad de números.
 Se remueve con el parámetro rm_num.
 
-```{r num}
+```{r num, message=FALSE}
 
 num <- base[70]
 num_s <- acep_cleaning(base[70],
@@ -266,7 +266,7 @@ cat(paste("****CON rm_num****\n", num_s, "****\n", sep=""))
 Las URLs aparecen comúnmente, links o imágenes que se codifican como urls.
 Para removerlas usamos el parámetro rm_url
 
-```{r url}
+```{r url, message=FALSE}
 num <- base[70]
 num_s <- acep_cleaning(base[70],
                      tolower = FALSE,
@@ -295,7 +295,7 @@ cat(paste("****CON rm_url****\n", num_s,  "****\n", sep=""))
 
 En el caso de querer remover meses del año, podemos utilizar el parámetro rm_meses. En este caso, el tweet tiene la palabra "noviembre"
 
-```{r meses}
+```{r meses, message=FALSE}
 meses <- base[70]
 meses_s <- acep_cleaning(base[70],
                      tolower = FALSE,
@@ -322,7 +322,7 @@ cat(paste("****CON rm_mes****\n", meses_s, "****\n", sep=""))
 ## Días
 En el caso de querer remover días de la semana, podemos utilizar el parámetro rm_dias. En este caso, el tweet tiene la palabra "martes"
 
-```{r dia}
+```{r dia, message=FALSE}
 
 dia <- base[429]
 dia_s <- acep_cleaning(base[429],
@@ -355,7 +355,7 @@ Las stopwords son palabras que tienen distintas funciones aportando a la compren
 La lista de las palabras consideradas "stop words" puede verificarse en el siguiente link:
 stopwords <- readRDS(url("https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"))
 
-```{r stop}
+```{r stop, message=FALSE}
 url <- "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"
 stopwords <- acep_cleaning(url)
 stopw <- base[429]
@@ -386,7 +386,7 @@ cat(paste("****CON rm_stopwords****\n", stopw_w, "****\n", sep=""))
 
 En caso de querer eliminar las palabras de 1 sólo caracter que pueden quedar como "residuos" de limpiezas previas y que probablemente no tengan contenido útil, lo hacemos con el parámetro rm_shortwords.
 
-```{r short}
+```{r short, message=FALSE}
 short <- base[97]
 short_s <- acep_cleaning(base[97],
                      tolower = FALSE,
@@ -415,7 +415,7 @@ cat(paste("****CON rm_shortwords****\n", short_s, "****\n", sep=""))
 
 El parámetro rm_newline se utiliza en caso de querer eliminar los saltos de línea. En este ejemplo hay un salgo de línea antes del link del final del tweet.
 
-```{r newline}
+```{r newline, message=FALSE}
 newl <- base[2]
 newl_s <- acep_cleaning(base[2],
                      tolower = FALSE,
@@ -446,7 +446,7 @@ Ya sea porque los usuarios tipean dobles espacios por error o por limpiezas prev
 
 En este ejemplo, entre "en  nuestro" hay un doble espacio.
 
-```{r whitespace}
+```{r whitespace, message=FALSE}
 white <- base[60]
 white_s <- acep_cleaning(base[60],
                      tolower = FALSE,
@@ -478,7 +478,7 @@ En este ejemplo, agregamos la palabra "Fraternidad" como stop word para que la d
 Posteriormente, se agrega entre comillas la palabra de remover. En caso de querer agregar más de una palabra, se puede crear un vector string con cada una de las palabras separadas por coma.
 En este caso se agregan las palabras "conciliación" y "Fraternidad".
 
-```{r other}
+```{r other, message=FALSE}
 osw <- base[2]
 osw_s <- acep_cleaning(base[2],
                      tolower = FALSE,

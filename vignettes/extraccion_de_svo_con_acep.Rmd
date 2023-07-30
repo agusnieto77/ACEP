@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 ```
@@ -69,7 +69,7 @@ La función `acep_postag` toma el vector de textos y realiza diferentes acciones
   
 Cabe mencionar que los textos ingresados son tokenizados, es decir, cada palabra es un token.
 
-```{r pos, eval=require("tibble"), message=FALSE, warning=FALSE}
+```{r tt, eval=FALSE}
 titulares_tags <- acep_postag(
   texto = titulares,
   core = "es_core_news_lg", # valor por defecto
@@ -81,6 +81,12 @@ titulares_tags <- acep_postag(
 
 str(titulares_tags)
 ```
+
+```{r postag00, eval=require("tibble"), message=FALSE, warning=FALSE, echo=FALSE}
+titulares_tags <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/titulares_spacy.rds")
+str(titulares_tags)
+```
+
 
 En este resultado podemos ver cómo la función crea los seis marcos de datos con información relevante sobre el contenido y la forma de los textos ingresados. En nuestro caso, textos referidos a conflictos.
 
@@ -163,12 +169,17 @@ La función `acep_upos` toma el vector de textos y realiza diferentes acciones:
   
 Cabe mencionar que, al igual que acep_postag, los textos ingresados son tokenizados, es decir, cada palabra es un token.
 
-```{r upos, eval=require("tibble"), message=FALSE, warning=FALSE}
+```{r t, eval=FALSE}
 titulares_utags <- acep_upos(
   texto = titulares,
   modelo = "spanish" # valor por defecto
 )
 
+str(titulares_utags)
+```
+
+```{r upos, eval=require("tibble"), message=FALSE, warning=FALSE, echo=FALSE}
+titulares_utags <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/titulares_udpipe.rds")
 str(titulares_utags)
 ```
 

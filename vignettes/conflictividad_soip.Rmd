@@ -11,7 +11,7 @@ vignette: >
   
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 ```
@@ -24,7 +24,7 @@ En este artículo desarrollaremos una introducción al análisis de la conflicti
 
 Las notas que componen el corpus utilizado en este ejercicio fueron raspadas del sitio  [revistapuerto.com.ar](https://revistapuerto.com.ar) con las funciones del paquete `rvest`. Se compone de `r nrow(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` notas y `r length(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` variables: `r paste0(names(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp)), collapse = ', ')`. El corpus de notas cubre desde el 2 de marzo de 2009 hasta el 29 de diciembre de 2020. Para cargar todas las notas haremos uso de la función `acep_load_base()`.
 
-```{r setup, eval=require("tibble")}
+```{r setup, eval=require("tibble"), message=FALSE}
 # Cargamos la librería ACEP
 library(ACEP)
 
@@ -43,7 +43,7 @@ rev_puerto
 
 Una vez descargada la base de notas vamos a crear variables numéricas que contenga las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_frec()`, `acep_count()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en la función `acep_count()` con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
-```{r diccionarios, eval=require("tibble")}
+```{r diccionarios, eval=require("tibble"), message=FALSE}
 # Creamos la variable con la frecuencia de palabras por nota
 rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
 
@@ -82,7 +82,7 @@ rev_puerto
 
 Ya construidas las variables de frecuencia de palabras y menciones nos ocuparemos de elaborar nuevas variables con índices de intensidad en base al ratio entre las frecuencias de palabras totales y las menciones de los diccionarios sobre trabajadorxs del pescado, conflictos y huelgas. Para la elaboración de estos índices haremos uso de la función `acep_int()` del paquete ACEP.
 
-```{r ratio, eval=require("tibble")}
+```{r ratio, eval=require("tibble"), message=FALSE}
 # Creamos la variable con el índice de conflictividad general
 rev_puerto$i_conf_gral <- acep_int(rev_puerto$frec_conflictos, 
                                    rev_puerto$frec_palabras)
@@ -115,7 +115,7 @@ Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que prese
 
 En esta parte del código usaremos la función `acep_sst()` para calcular los índices agrupados por año y mes. Primero construimos la serie de tiempo para la conflictividad general.
 
-```{r temporal0, eval=require("tibble")}
+```{r temporal0, eval=require("tibble"), message=FALSE}
 # Calculamos el índice anual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -144,7 +144,7 @@ conf_gral_anio |> head()
 ```
 
 
-```{r temporal, eval=require("tibble")}
+```{r temporal, eval=require("tibble"), message=FALSE}
 # Calculamos el índice mensual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -175,7 +175,7 @@ conf_gral |> head()
 
 En la siguiente parte del código construimos la serie de tiempo para la conflictividad huelguística.
 
-```{r temporal_huelgas, eval=require("tibble")}
+```{r temporal_huelgas, eval=require("tibble"), message=FALSE}
 # Calculamos el índice mensual de conflictividad huelguística en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -208,7 +208,7 @@ huelgas |> head()
 
 En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación anual de la conflictividad general protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de 2020. También visualizaremos la variación mensual durante el año 2012, el más conflictivo de período bajo análisis. 
 
-```{r plot00}
+```{r plot00, message=FALSE}
 # Visualizaremos el índice de conflictividad general 
 # agrupado por año para el período 2009-2020
 acep_plot_st(
@@ -229,7 +229,7 @@ acep_plot_rst(conf_gral_anio, tagx = "vertical")
 
 ![](plot_vignette.png)
 
-```{r plot01}
+```{r plot01, message=FALSE}
 # Visualizaremos el índice de conflictividad general 
 # agrupado por mes para el 2012
 acep_plot_st(
@@ -243,7 +243,7 @@ acep_plot_st(
 ```
 
 
-```{r plot02}
+```{r plot02, message=FALSE}
 # Visualizaremos el índice de conflictividad huelguística 
 # agrupado por mes para el 2012
 acep_plot_st(

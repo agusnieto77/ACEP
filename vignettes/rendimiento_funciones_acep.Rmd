@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 require(ACEP)
@@ -37,7 +37,7 @@ FUN.v1 <- system.time({ acep_clean(df$nota) })
 
 FUN.v2 <- system.time({ acep_cleaning(df$nota) })
 
-cat("\nLa nueva versión (acep_cleaning) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
+cat("La nueva versión (acep_cleaning) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
     "\nLa vieja versión (acep_clean) procesa los datos ingresados en", FUN.v1[3], "segundos.", 
     "\nLa diferencia es de", FUN.v1[3]-FUN.v2[3])
 ```
@@ -49,7 +49,7 @@ FUN.v1 <- system.time({ acep_men(df$nota, dicc, tolower = FALSE) })
 
 FUN.v2 <- system.time({ acep_count(df$nota, dicc) })
 
-cat("\nLa nueva versión (acep_count) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
+cat("La nueva versión (acep_count) procesa los datos ingresados en", FUN.v2[3], "segundos.", 
     "\nLa vieja versión (acep_men) procesa los datos ingresados en", FUN.v1[3], "segundos.", 
     "\nLa diferencia es de", FUN.v1[3]-FUN.v2[3])
 ```

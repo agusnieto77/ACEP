@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 ```
@@ -63,7 +63,7 @@ La función acep_token toma el vector y realiza diferentes acciones:
   
 Cabe mencionar que los tokens quedarán identificados a través de los espacios en blanco, es decir, cada palabra es un token.
 
-```{r token, eval=require("tibble")}
+```{r token, eval=require("tibble"), message=FALSE}
 tweets <- acep_token(base[1:2])
 
 head(tweets)
@@ -83,13 +83,13 @@ Una vez que tenemos el data frame creado a partir de la función acep_token(), p
 
 Para obtener una tabla que tenga sentido, podemos utilizar en primer lugar la función `acep_cleaning()` para deshacernos de los stop words, urls, menciones, # etc.
 
-```{r limpia}
+```{r limpia, message=FALSE}
 base_limpia <- acep_cleaning(base)
 ```
 
 En segunda instancia, creamos un nuevo objeto derivado de la base limpia con acep_token() que nos devuelve, como vimos previamente, una tabla con la información de cada token.
 
-```{r tabla, eval=require("tibble")}
+```{r tabla, eval=require("tibble"), message=FALSE}
 tabla_tokenizada <- acep_token(base_limpia)
 head(tabla_tokenizada)
 ```
@@ -104,7 +104,7 @@ Suponiendo que queremos obtener los 20 token de mayor frecuencia:
 
 Ejemplo: acep_token_table(tabla_tokenizada$token, u = 20)
 
-```{r table, eval=require("tibble")}
+```{r table, eval=require("tibble"), message=FALSE}
 acep_token_table(tabla_tokenizada$token)
 ```
 
@@ -118,6 +118,6 @@ Por defecto, el resultado serán los 10 tokens más frecuentes, sin embargo, a t
 
 En este ejemplo, tomamos la tabla tokenizada y le indicamos la columna "token" a visualizar.
 
-```{r plot}
+```{r plot, message=FALSE}
 acep_token_plot(tabla_tokenizada$token, u =15)
 ```
