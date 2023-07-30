@@ -12,6 +12,7 @@
 #' @return Si todas las entradas son correctas,
 #' la salida sera un vector de tipo caracter.
 #' procesado y el contexto de las palabras y/o frases entradas.
+#' @importFrom stringr str_extract_all
 #' @keywords buscar palabras texto diccionario
 #' @examples
 #' texto <- "Los obreros del pescado, en el marco de una huelga y
@@ -43,9 +44,8 @@ acep_extract <- function(texto, dic, sep="; ", izq="\\b\\w*", der="\\w*\\b") {
       "No ingresaste una expresi\u00f3n regular en el par\u00e1metro 'der'."))
   } else {
     sapply(texto, function(txt) {
-      key_words <- unlist(lapply(
-        paste0(izq, dic, der),
-        function(x) regmatches(txt, gregexpr(x, txt))))
+      x <- paste0(izq, dic, der, collapse = "|")
+      key_words <- unlist(stringr::str_extract_all(txt, x))
       key_words <- key_words[sapply(key_words, length) > 0]
       if (!is.null(sep)) {
         paste(key_words, collapse = sep)

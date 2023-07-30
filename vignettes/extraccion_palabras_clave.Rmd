@@ -76,10 +76,10 @@ rev_puerto
 
 Ahora vamos a usar las función `acep_extract()` para extraer las palabras clave de los diccionarios de conflictividad, huelgas y SOIP que aparecen en cada una de las notas de la *Revista Puerto*.
 
-```{r diccionarios1, eval=FALSE}
+```{r diccionarios1, eval=require("tibble")}
 
 # Creamos la variable con las palabras que refieren a conflictividad
-rev_puerto$extract_conflictos <- acep_extract(rev_puerto$nota, dicc_conflictos)
+rev_puerto$extract_conflictos <- acep_extract(rev_puerto$nota, dicc_conflictos, izq = "")
 
 # Creamos la variable con las palabras que refieren a huelgas
 rev_puerto$extract_huelgas <- acep_extract(rev_puerto$nota, dicc_huelgas)
@@ -94,9 +94,9 @@ rev_puerto
 ```
 
 
-```{r extract0, echo=FALSE, message=FALSE, warning=FALSE}
-rev_puerto <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/rp_extract.rds")
-rev_puerto
+```{r extract0, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+#rev_puerto <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/rp_extract.rds")
+#rev_puerto
 ```
 
 
