@@ -205,7 +205,7 @@ huelgas y SOIP que aparecen en cada una de las notas de la <em>Revista
 Puerto</em>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Creamos la variable con las palabras que refieren a conflictividad</span></span>
-<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_extract.html">acep_extract</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span><span class="op">)</span></span>
+<span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_conflictos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_extract.html">acep_extract</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_conflictos</span>, izq <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Creamos la variable con las palabras que refieren a huelgas</span></span>
 <span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">extract_huelgas</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_extract.html">acep_extract</a></span><span class="op">(</span><span class="va">rev_puerto</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dicc_huelgas</span><span class="op">)</span></span>
@@ -251,16 +251,16 @@ Veamos.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 76 × 3</span></span></span>
 <span><span class="co">#&gt;    extract_conflictos                               extract_huelgas extract_soip</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> todo amenazaba; una asamblea; la asamblea; y bl… conciliación o… obreros del…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> le advertía; encontraba amenazada; la conciliac… huelguistas; c… huelguistas…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> la conciliación obligatoria; la denuncia; hacer… huelga; concil… fileteros; …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> esa concentración; un paro                       un paro         fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> encendidas bloqueando; el bloqueo; la conciliac… conciliación o… fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> y pidieron; un paro                              un paro         obreros del…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> que advirtió; la amenaza; sus demandas; dispar … al paro; al pa… fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> puerta bloqueando; la conciliación obligatoria;… conciliación o… fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> a pedir; la lucha; la lucha; del paro; Se paró;… del paro        fileteros   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> el paro; fresqueros reclamaban                   el paro         fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">"</span> amenazaba;  conciliación obligatoria;  bloque… conciliación o… obreros del…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">"</span> piquete;  pidieron;  conciliación obligatoria… conciliación o… obreros del…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">"</span> reclama;  reclamo;  reclamando;  retención de… conciliación o… fileteros; …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">"</span> concentración;  paro;  concentración<span style="color: #949494;">"</span>          un paro         fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">"</span> se manifestaron;  reclamaron;  denunciaron;  … conciliación o… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">"</span> paro;  pidieron<span style="color: #949494;">"</span>                               un paro         obreros del…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">"</span> paro;  rechazo;  acatamiento;  medida de fuer… al paro; al pa… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span> reclaman;  reclamo;  se manifestaron;  plan d… conciliación o… fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span> paro;  paró;  paró;  lucha;  paró;  lucha;  r… del paro        fileteros   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span> reclamaban;  paro<span style="color: #949494;">"</span>                             el paro         fileteros   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 66 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
