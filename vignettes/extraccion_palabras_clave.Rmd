@@ -93,13 +93,6 @@ rev_puerto
 
 ```
 
-
-```{r extract0, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
-#rev_puerto <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/rp_extract.rds")
-#rev_puerto
-```
-
-
 ## Las palabras clave extraídas
 
 Ya construidas las variables nos ocuparemos de poner el foco en el rendimiento de la función `acep_extract()`. Seleccionaremos las columnas referidas a las extracciones de conflictos y huelgas. Veamos.
