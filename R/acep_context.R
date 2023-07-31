@@ -6,6 +6,8 @@
 #' @param clave vector de palabras clave a contextualizar.
 #' @param izq número de palabras de la ventana hacia la izquierda.
 #' @param der número de palabras de la ventana hacia la derecha.
+#' @param ci expresión regular a la izquierda de la palabra clave.
+#' @param cd expresión regular a la derecha de la palabra clave.
 #' @return Si todas las entradas son correctas,
 #' la salida sera un data frame con el id de los textos
 #' procesado y el contexto de las palabras y/o frases entradas.
@@ -15,36 +17,47 @@
 #' texto_context <- acep_context(texto = texto, clave = "para")
 #' texto_context
 #' @export
-acep_context <- function(texto, clave, izq = 1, der = 1){
+acep_context <- function(texto, clave, izq = 1, der = 1, ci = "\\b", cd = "\\S*"){
   if (!is.character(texto)) {
     return(message(
-    "No ingresaste un vector de texto en el par\u00e1metro 'texto'.
+      "No ingresaste un vector de texto en el par\u00e1metro 'texto'.
     Vuelve a intentarlo ingresando un vector de texto."))
   }
   if (!is.character(clave)) {
     return(message(
-    "No ingresaste un vector de texto en el par\u00e1metro 'clave'.
+      "No ingresaste un vector de texto en el par\u00e1metro 'clave'.
     Vuelve a intentarlo ingresando un vector de texto."))
+  }
+  if (!is.character(ci)) {
+    return(message(
+      "No ingresaste un string en el par\u00e1metro 'ci'.
+    Vuelve a intentarlo ingresando una ExpReg."))
+  }
+  if (!is.character(cd)) {
+    return(message(
+      "No ingresaste un string en el par\u00e1metro 'cd'.
+    Vuelve a intentarlo ingresando una ExpReg."))
   }
   if (!is.numeric(izq)) {
     return(message(
-    "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'izq'.
+      "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'izq'.
     Vuelve a intentarlo ingresando un vector num\u00e9rico"))
   }
   if (!is.numeric(der)) {
     return(message(
-    "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'der'.
+      "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'der'.
     Vuelve a intentarlo ingresando un vector num\u00e9rico."))
   } else {
     nwi <- "\\S*\\s*"
     nwd <- "\\s*\\S*"
+
     lista_frases <- c()
 
     for (c in clave) {
-      claveb <- paste0(c, "\\S*", collapse = "|")
+      claveb <- paste0(ci, c, cd, collapse = "|")
       capturar <- paste0(
         "(", paste0(rep(nwi,izq), collapse = ""),
-         claveb, paste0(rep(nwd, der), collapse = ""), ")")
+        claveb, paste0(rep(nwd, der), collapse = ""), ")")
 
       for (o in seq_along(texto)) {
         oraciones <- unlist(
@@ -70,10 +83,10 @@ acep_context <- function(texto, clave, izq = 1, der = 1){
                                         fixed = TRUE)[[1]])
             lista_frases <- rbind(
               lista_frases,
-                data.frame(doc_id = o, oraciones_id = i,
-                           texto = lista, w_izq = contexto[1],
-                           key = contexto[2],
-                           w_der = contexto[3]))
+              data.frame(doc_id = o, oraciones_id = i,
+                         texto = lista, w_izq = contexto[1],
+                         key = contexto[2],
+                         w_der = contexto[3]))
           }
         }
       }

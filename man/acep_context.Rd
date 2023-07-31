@@ -4,7 +4,7 @@
 \alias{acep_context}
 \title{Función para extraer contexto de palabras o frases.}
 \usage{
-acep_context(texto, clave, izq = 1, der = 1)
+acep_context(texto, clave, izq = 1, der = 1, ci = "\\\\b", cd = "\\\\S*")
 }
 \arguments{
 \item{texto}{vector con los textos a procesar.}
@@ -14,6 +14,10 @@ acep_context(texto, clave, izq = 1, der = 1)
 \item{izq}{número de palabras de la ventana hacia la izquierda.}
 
 \item{der}{número de palabras de la ventana hacia la derecha.}
+
+\item{ci}{expresión regular a la izquierda de la palabra clave.}
+
+\item{cd}{expresión regular a la derecha de la palabra clave.}
 }
 \value{
 Si todas las entradas son correctas,
