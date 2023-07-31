@@ -1,8 +1,4 @@
 
-# ACEP 0.0.21
-
-* Se mejoraron las nuevas funciones para limpieza de texto, tokenización y detección de menciones.
-
 # ACEP 0.0.3.9004 (versión en desarrollo vigente)
 
 * Se mejoraron las funciones existentes y se creó la función acep_upos().
@@ -21,11 +17,15 @@
 
 * Se mejoraron las nuevas funciones para contexto de texto y tokenización.
 
+# ACEP 0.0.21 (versión CRAN vigente)
+
+* Se mejoraron las nuevas funciones para limpieza de texto, tokenización y detección de menciones.
+
 # ACEP 0.0.2.9000 (versión en desarrollo)
 
 * Se mejoraron las nuevas funciones para limpieza de texto, tokenización y detección de menciones.
 
-# ACEP 0.0.2
+# ACEP 0.0.2 (versión CRAN)
 
 * Se agregaron nuevas funciones para limpieza de texto, tokenizacion y detección de menciones.
 
@@ -36,6 +36,6 @@
 * se agregaron nuevas descripciones.
 * se agregaron nuevos ejemplos.
 
-# ACEP 0.0.1
+# ACEP 0.0.1 (versión CRAN)
 
 * Se ha añadido un archivo `NEWS.md` para seguir los cambios en el paquete.
