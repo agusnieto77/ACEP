@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Diego
 Pacheco</h4>
             
-            <h4 data-toc-skip class="date">2023-07-31</h4>
+            <h4 data-toc-skip class="date">2023-08-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/tokenizar_con_acep.Rmd" class="external-link"><code>vignettes/tokenizar_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>tokenizar_con_acep.Rmd</code></div>
@@ -101,27 +101,27 @@ Pacheco</h4>
 <p>En este artículo se explicarán los procesos que realizan las
 funciones:</p>
 <ul>
-<li><p>acep_token()</p></li>
-<li><p>acep_token_table()</p></li>
-<li><p>acep_token_plot()</p></li>
+<li><p><code><a href="../reference/acep_token.html">acep_token()</a></code></p></li>
+<li><p><code><a href="../reference/acep_token_table.html">acep_token_table()</a></code></p></li>
+<li><p><code><a href="../reference/acep_token_plot.html">acep_token_plot()</a></code></p></li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="función-acep_token">Función acep_token()<a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token"></a>
+<h2 id="función-acep_token">Función <code>acep_token()</code><a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token"></a>
 </h2>
-<p>En primer lugar cargamos la librería ACEP. Luego, cargamos una base
-de tweets para su prueba.</p>
+<p>En primer lugar cargamos la librería <em>ACEP</em>. Luego, cargamos
+una base de tweets para su prueba.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agusnieto77/ACEP" class="external-link">ACEP</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"</span></span>
 <span></span>
 <span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>, select <span class="op">=</span> <span class="va">text</span><span class="op">)</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
-<p>Ejecutamos la función acep_token() para los primeros dos elementos de
-la base.</p>
+<p>Ejecutamos la función <code><a href="../reference/acep_token.html">acep_token()</a></code> para los primeros dos
+elementos de la base.</p>
 <p>¿Cuál es el resultado?</p>
-<p>La función acep_token toma el vector y realiza diferentes
-acciones:</p>
+<p>La función <code>acep_token</code> toma el vector y realiza
+diferentes acciones:</p>
 <ul>
 <li><p>Verifica que el objeto entregado sea un vector (de lo contrario
 indica un mensaje de advertencia)</p></li>
@@ -129,12 +129,8 @@ indica un mensaje de advertencia)</p></li>
 <li>
 <p>Crea un nuevo data frame con la siguiente información:</p>
 <ul>
-<li><p>id_doc (columna que numera el documento)</p></li>
-<li><p>texto (vector original)</p></li>
-<li><p>id_token (numeración de cada uno de los tokens
-obtenidos)</p></li>
-<li><p>id_token_doc (numeración del token por vector)</p></li>
-<li><p>token (el token propiamente)</p></li>
+<li><p>texto_id (columna que numera el documento)</p></li>
+<li><p>tokens (el token propiamente)</p></li>
 </ul>
 </li>
 </ul>
@@ -153,18 +149,17 @@ espacios en blanco, es decir, cada palabra es un token.</p>
 <span><span class="co">#&gt; 6        2 conciliacion</span></span></code></pre>
 <p>En este resultado podemos ver cómo la función identifica a cada
 observación como un documento aparte (en este caso, cada tweet es un
-documento identificado en la columna id_doc). La numeración del id_token
-continúa de principio a fin mientras que la numeración del id_token_doc
-se reinicia cada vez que empieza un nuevo documento. La columna texto
-presenta el documento completo original y por último podemos visualizar
-la columna token en la que la función aísla cada token.</p>
+documento identificado en la columna ‘texto_id’). Por su parte, la
+columna ‘tokens’ es la columna en la que la función aísla cada
+token.</p>
 </div>
 <div class="section level2">
-<h2 id="función-acep_token_table">Función acep_token_table()<a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token_table"></a>
+<h2 id="función-acep_token_table">Función <code>acep_token_table()</code><a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token_table"></a>
 </h2>
 <p>Una vez que tenemos el data frame creado a partir de la función
-acep_token(), podemos utilizar la función acep_table() para obtener un
-nuevo data frame que nos proveerá la siguiente información:</p>
+<code><a href="../reference/acep_token.html">acep_token()</a></code>, podemos utilizar la
+<code>función acep_table()</code> para obtener un nuevo data frame que
+nos proveerá la siguiente información:</p>
 <ul>
 <li><p>token</p></li>
 <li><p>frec (frecuencia que aparece ese token)</p></li>
@@ -173,12 +168,12 @@ corpus)</p></li>
 </ul>
 <p>Para obtener una tabla que tenga sentido, podemos utilizar en primer
 lugar la función <code><a href="../reference/acep_cleaning.html">acep_cleaning()</a></code> para deshacernos de los
-stop words, urls, menciones, # etc.</p>
+stopwords, urls, menciones, hashtags, etc.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">base_limpia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_cleaning.html">acep_cleaning</a></span><span class="op">(</span><span class="va">base</span><span class="op">)</span></span></code></pre></div>
 <p>En segunda instancia, creamos un nuevo objeto derivado de la base
-limpia con acep_token() que nos devuelve, como vimos previamente, una
-tabla con la información de cada token.</p>
+limpia con <code><a href="../reference/acep_token.html">acep_token()</a></code> que nos devuelve, como vimos
+previamente, una tabla con la información de cada token.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tabla_tokenizada</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_token.html">acep_token</a></span><span class="op">(</span><span class="va">base_limpia</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">)</span></span></code></pre></div>
@@ -189,42 +184,47 @@ tabla con la información de cada token.</p>
 <span><span class="co">#&gt; 4        2  fraternidad</span></span>
 <span><span class="co">#&gt; 5        2       desoye</span></span>
 <span><span class="co">#&gt; 6        2 conciliacion</span></span></code></pre>
-<p>Por último, aplicamos la función acep_token_table() a la columna
-token.</p>
-<p>Por defecto, acep_token_table() nos devuelve los 10 primeros
-registros, es decir, las 10 palabras con mayor frecuencia.</p>
+<p>Por último, aplicamos la función <code><a href="../reference/acep_token_table.html">acep_token_table()</a></code> a la
+columna ‘tokens’.</p>
+<p>Por defecto, <code><a href="../reference/acep_token_table.html">acep_token_table()</a></code> nos devuelve los 10
+primeros registros, es decir, las 10 palabras con mayor frecuencia.</p>
 <p>Si quisiéramos modificar la cantidad de palabras, debemos modificar
-el parámetro u =</p>
-<p>Suponiendo que queremos obtener los 20 token de mayor frecuencia:</p>
-<p>Ejemplo: acep_token_table(tabla_tokenizada$token, u = 20)</p>
+el parámetro ‘u’ =</p>
+<p>Suponiendo que queremos obtener los 20 token de mayor frecuencia:
+<code>acep_token_table(tabla_tokenizada$token, u = 20)</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/acep_token_table.html">acep_token_table</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">$</span><span class="va">token</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/acep_token_table.html">acep_token_table</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">$</span><span class="va">tokens</span>, u <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;           token frec       prop</span></span>
-<span><span class="co">#&gt; 1   fraternidad 1956 0.55316742</span></span>
-<span><span class="co">#&gt; 2        trenes  264 0.07466063</span></span>
-<span><span class="co">#&gt; 3          paro  217 0.06136878</span></span>
-<span><span class="co">#&gt; 4  conciliacion  184 0.05203620</span></span>
-<span><span class="co">#&gt; 5           paz  175 0.04949095</span></span>
-<span><span class="co">#&gt; 6   obligatoria  163 0.04609729</span></span>
-<span><span class="co">#&gt; 7      libertad  160 0.04524887</span></span>
-<span><span class="co">#&gt; 8      igualdad  157 0.04440045</span></span>
-<span><span class="co">#&gt; 9            si  140 0.03959276</span></span>
-<span><span class="co">#&gt; 10         amor  120 0.03393665</span></span></code></pre>
+<span><span class="co">#&gt; 1   fraternidad 1956 0.47847358</span></span>
+<span><span class="co">#&gt; 2        trenes  264 0.06457926</span></span>
+<span><span class="co">#&gt; 3          paro  217 0.05308219</span></span>
+<span><span class="co">#&gt; 4  conciliacion  184 0.04500978</span></span>
+<span><span class="co">#&gt; 5           paz  175 0.04280822</span></span>
+<span><span class="co">#&gt; 6   obligatoria  163 0.03987280</span></span>
+<span><span class="co">#&gt; 7      libertad  160 0.03913894</span></span>
+<span><span class="co">#&gt; 8      igualdad  157 0.03840509</span></span>
+<span><span class="co">#&gt; 9            si  140 0.03424658</span></span>
+<span><span class="co">#&gt; 10         amor  120 0.02935421</span></span>
+<span><span class="co">#&gt; 11    universal  120 0.02935421</span></span>
+<span><span class="co">#&gt; 12       fuerza  117 0.02862035</span></span>
+<span><span class="co">#&gt; 13       medida  107 0.02617417</span></span>
+<span><span class="co">#&gt; 14        mundo  106 0.02592955</span></span>
+<span><span class="co">#&gt; 15          ser  102 0.02495108</span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="función-acep_token_plot">Función acep_token_plot()<a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token_plot"></a>
+<h2 id="función-acep_token_plot">Función <code>acep_token_plot()</code><a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token_plot"></a>
 </h2>
 <p>Esta función permite visualizar en un gráfico de barras, los tokens
 más frecuentes.</p>
-<p>A partir del resultado de acep_token(), podemos obtener el gráfico
-con los tokens más frecuentes.</p>
+<p>A partir del resultado de <code><a href="../reference/acep_token.html">acep_token()</a></code>, podemos obtener
+el gráfico con los tokens más frecuentes.</p>
 <p>Por defecto, el resultado serán los 10 tokens más frecuentes, sin
 embargo, a través del parámetro “u =” podemos modificar la cantidad de
 tokens a visualizar.</p>
 <p>En este ejemplo, tomamos la tabla tokenizada y le indicamos la
 columna “token” a visualizar.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/acep_token_plot.html">acep_token_plot</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">$</span><span class="va">token</span>, u <span class="op">=</span><span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/acep_token_plot.html">acep_token_plot</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">$</span><span class="va">tokens</span>, u <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tokenizar_con_acep_files/figure-html/plot-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
