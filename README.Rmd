@@ -6,7 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
@@ -141,7 +141,7 @@ devtools::install_github("agusnieto77/ACEP")
 
 ### Uso de las funciones del paquete ACEP: un ejemplo.
 
-```{r ejemplo1, eval=require("tibble")}
+```{r ejemplo1, eval=require("tibble"), message=FALSE, warning=FALSE}
 
 # Cargamos la librería
 require(ACEP)
@@ -149,51 +149,45 @@ require(ACEP)
 # Cargamos la base de notas de la Revista Puerto con la función acep_load_base()
 rev_puerto <- acep_load_base(acep_bases$rp_mdp)
 
-# Cargamos la etiqueta de la base a descargar
-rp_mdp <- acep_bases$rp_mdp
-
-# Cargamos la base de notas de la Revista Puerto
-revista_puerto <- acep_load_base(rp_mdp)
-
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
 
 # Con la función acep_frec() contamos la frecuencia de palabras de cada nota
 # y creamos una nueva columna llamada  n_palabras
-revista_puerto$n_palabras <- acep_frec(revista_puerto$nota)
+rev_puerto$n_palabras <- acep_frec(rev_puerto$nota)
 
 # Imprimimos en pantalla la base con la nueva columna de frecuencia de palabras
-head(revista_puerto)
+head(rev_puerto)
 
-# Ahora con la función acep_men() contamos la frecuencia de menciones de
+# Ahora con la función acep_count() contamos la frecuencia de menciones de
 # términos del diccionario de conflictividad de SISMOS de cada nota y
 # creamos una nueva columna llamada  conflictos.
 # Elaboramos un corpus acotado para el ejemplo
-revista_puerto <- revista_puerto[1:100, ]
-revista_puerto$conflictos <- acep_count(revista_puerto$nota, dicc_confl_sismos)
+rev_puerto <- rev_puerto[1:100, ]
+rev_puerto$conflictos <- acep_count(rev_puerto$nota, dicc_confl_sismos)
 
 # Imprimimos en pantalla la base con la nueva columna de
 # menciones del diccionario de conflictividad
-head(revista_puerto)
+head(rev_puerto)
 
 # Ahora con la función acep_int() calculamos un índice de intensidad de
 # la conflictividad y creamos una nueva columna llamada  intensidad
-revista_puerto$intensidad <- acep_int(
-  revista_puerto$conflictos,
-  revista_puerto$n_palabras,
+rev_puerto$intensidad <- acep_int(
+  rev_puerto$conflictos,
+  rev_puerto$n_palabras,
   3)
 
 # Imprimimos en pantalla la base con la nueva columna de intensidad
-head(revista_puerto)
+head(rev_puerto)
 
 ```
 
-```{r ejemplo2, eval=require("tibble")}
+```{r ejemplo2, eval=require("tibble"), message=FALSE, warning=FALSE}
 # Volvemos a cargar la base de notas de la Revista Puerto sin procesar
-revista_puerto <- acep_load_base(rp_mdp)
+rev_puerto <- acep_load_base(acep_bases$rp_mdp)
 
 # Creamos un subset
-subset_rp <- revista_puerto[1:100, ]
+subset_rp <- rev_puerto[1:100, ]
 
 # Cargamos el diccionario de conflictos de SISMOS
 dicc_confl_sismos <- acep_diccionarios$dicc_confl_sismos
@@ -206,11 +200,11 @@ head(rp_procesada)
 
 ```
 
-```{r ejemplo3, eval=require("tibble")}
+```{r ejemplo3, eval=require("tibble"), message=FALSE, warning=FALSE}
 # Cargamos los datos procesados
 rp_procesada <- acep_bases$rp_procesada
 
-# Ahora con la función acep_rst() elaboramos un resumen estadístico
+# Ahora con la función acep_sst() elaboramos un resumen estadístico
 rp_procesada <- acep_sst(rp_procesada, st = "anio", u = 4)
 
 # Imprimimos en pantalla la base con las métricas de conflictividad

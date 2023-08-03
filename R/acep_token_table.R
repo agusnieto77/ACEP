@@ -22,6 +22,7 @@ acep_token_table <- function(x, u = 10) {
   } else {
       tryCatch({
   tabla_token <- as.data.frame(table(x))
+  tabla_token$x <- as.character(tabla_token$x)
   tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
   tabla_token <- utils::head(tabla_token, n = u)
   tabla_token$prop <- tabla_token$Freq / sum(tabla_token$Freq)

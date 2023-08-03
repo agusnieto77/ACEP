@@ -20,16 +20,16 @@ knitr::opts_chunk$set(
 
 En este artículo se explicarán los procesos que realizan las funciones:
 
-- acep_token()
+- `acep_token()`
 
-- acep_token_table()
+- `acep_token_table()`
 
-- acep_token_plot()
+- `acep_token_plot()`
 
 
-## Función acep_token()
+## Función `acep_token()`
 
-En primer lugar cargamos la librería ACEP. Luego, cargamos una base de tweets para su prueba.
+En primer lugar cargamos la librería *ACEP*. Luego, cargamos una base de tweets para su prueba.
 
 ```{r cargar base,results = FALSE, warning = FALSE, message = FALSE, eval=require("tibble")}
 library(ACEP)
@@ -39,11 +39,11 @@ url <- "https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"
 base <- subset(acep_load_base(url), select = text)$text
 ```
 
-Ejecutamos la función acep_token() para los primeros dos elementos de la base.
+Ejecutamos la función `acep_token()` para los primeros dos elementos de la base.
 
 ¿Cuál es el resultado?
 
-La función acep_token toma el vector y realiza diferentes acciones:
+La función `acep_token` toma el vector y realiza diferentes acciones:
 
 - Verifica que el objeto entregado sea un vector (de lo contrario indica un mensaje de advertencia)
 
@@ -51,15 +51,9 @@ La función acep_token toma el vector y realiza diferentes acciones:
 
 - Crea un nuevo data frame con la siguiente información:
 
-  - id_doc (columna que numera el documento)
+  - texto_id (columna que numera el documento)
   
-  - texto (vector original)
-  
-  - id_token (numeración de cada uno de los tokens obtenidos)
-  
-  - id_token_doc (numeración del token por vector)
-  
-  - token (el token propiamente)
+  - tokens (el token propiamente)
   
 Cabe mencionar que los tokens quedarán identificados a través de los espacios en blanco, es decir, cada palabra es un token.
 
@@ -69,11 +63,11 @@ tweets <- acep_token(base[1:2])
 head(tweets)
 ```
 
-En este resultado podemos ver cómo la función identifica a cada observación como un documento aparte (en este caso, cada tweet es un documento identificado en la columna id_doc). La numeración del id_token continúa de principio a fin mientras que la numeración del id_token_doc se reinicia cada vez que empieza un nuevo documento. La columna texto presenta el documento completo original y por último podemos visualizar la columna token en la que la función aísla cada token.
+En este resultado podemos ver cómo la función identifica a cada observación como un documento aparte (en este caso, cada tweet es un documento identificado en la columna 'texto_id'). Por su parte, la columna 'tokens' es la columna en la que la función aísla cada token.
 
-## Función acep_token_table()
+## Función `acep_token_table()`
 
-Una vez que tenemos el data frame creado a partir de la función acep_token(), podemos utilizar la función acep_table() para obtener un nuevo data frame que nos proveerá la siguiente información:
+Una vez que tenemos el data frame creado a partir de la función `acep_token()`, podemos utilizar la `función acep_table()` para obtener un nuevo data frame que nos proveerá la siguiente información:
 
 - token
 
@@ -81,43 +75,41 @@ Una vez que tenemos el data frame creado a partir de la función acep_token(), p
 
 - prop (el peso que tiene ese token en el total del corpus)
 
-Para obtener una tabla que tenga sentido, podemos utilizar en primer lugar la función `acep_cleaning()` para deshacernos de los stop words, urls, menciones, # etc.
+Para obtener una tabla que tenga sentido, podemos utilizar en primer lugar la función `acep_cleaning()` para deshacernos de los stopwords, urls, menciones, hashtags,  etc.
 
 ```{r limpia, message=FALSE}
 base_limpia <- acep_cleaning(base)
 ```
 
-En segunda instancia, creamos un nuevo objeto derivado de la base limpia con acep_token() que nos devuelve, como vimos previamente, una tabla con la información de cada token.
+En segunda instancia, creamos un nuevo objeto derivado de la base limpia con `acep_token()` que nos devuelve, como vimos previamente, una tabla con la información de cada token.
 
 ```{r tabla, eval=require("tibble"), message=FALSE}
 tabla_tokenizada <- acep_token(base_limpia)
 head(tabla_tokenizada)
 ```
 
-Por último, aplicamos la función acep_token_table() a la columna token.
+Por último, aplicamos la función `acep_token_table()` a la columna 'tokens'.
 
-Por defecto, acep_token_table() nos devuelve los 10 primeros registros, es decir, las 10 palabras con mayor frecuencia.
+Por defecto, `acep_token_table()` nos devuelve los 10 primeros registros, es decir, las 10 palabras con mayor frecuencia.
 
-Si quisiéramos modificar la cantidad de palabras, debemos modificar el parámetro u =
+Si quisiéramos modificar la cantidad de palabras, debemos modificar el parámetro 'u' =
 
-Suponiendo que queremos obtener los 20 token de mayor frecuencia:
-
-Ejemplo: acep_token_table(tabla_tokenizada$token, u = 20)
+Suponiendo que queremos obtener los 20 token de mayor frecuencia: `acep_token_table(tabla_tokenizada$token, u = 20)`
 
 ```{r table, eval=require("tibble"), message=FALSE}
-acep_token_table(tabla_tokenizada$token)
+acep_token_table(tabla_tokenizada$tokens, u = 15)
 ```
 
-## Función acep_token_plot()
+## Función `acep_token_plot()`
 
 Esta función permite visualizar en un gráfico de barras, los tokens más frecuentes.
 
-A partir del resultado de acep_token(), podemos obtener el gráfico con los tokens más frecuentes.
+A partir del resultado de `acep_token()`, podemos obtener el gráfico con los tokens más frecuentes.
 
 Por defecto, el resultado serán los 10 tokens más frecuentes, sin embargo, a través del parámetro "u =" podemos modificar la cantidad de tokens a visualizar.
 
 En este ejemplo, tomamos la tabla tokenizada y le indicamos la columna "token" a visualizar.
 
 ```{r plot, message=FALSE}
-acep_token_plot(tabla_tokenizada$token, u =15)
+acep_token_plot(tabla_tokenizada$tokens, u = 15)
 ```
