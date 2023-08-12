@@ -18,6 +18,7 @@
 #' texto_context
 #' @export
 acep_context <- function(texto, clave, izq = 1, der = 1, ci = "\\b", cd = "\\S*"){
+  texto <- gsub("|", "", texto)
   if (!is.character(texto)) {
     return(message(
       "No ingresaste un vector de texto en el par\u00e1metro 'texto'.
