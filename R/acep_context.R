@@ -63,7 +63,7 @@ acep_context <- function(texto, clave, izq = 1, der = 1, ci = "\\b", cd = "\\S*"
       for (o in seq_along(texto)) {
         oraciones <- unlist(
           strsplit(texto[o],
-                   "(?<=[a-z]\\.|\\?|\\!)\\s*(?=[A-Z]|\n[A-Z])",
+                   "(?<=[a-z]\\.|\\?|\\!)\\s*(?=[A-Z]|\n\\s[A-Z])",
                    perl=T))
 
         for (i in seq_along(oraciones)) {
