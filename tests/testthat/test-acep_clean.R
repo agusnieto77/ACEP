@@ -117,7 +117,7 @@ test_that("ACEP CLEAN RMSHWF", {
 test_that("ACEP CLEAN RMNLF", {
   skip_if_offline()
   skip_on_cran()
-  clean <- acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.",
+  clean <- acep_clean("El SOIP fue al paro. Reclaman mejoras salariales.",
     rm_newline = FALSE)
   dimensiones <- length(clean)
   expect_equal(dimensiones, length(clean))
