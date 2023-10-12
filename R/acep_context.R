@@ -22,32 +22,32 @@ acep_context <- function(texto, clave, izq = 1, der = 1, ci = "\\b", cd = "\\S*"
   if (!is.character(texto)) {
     return(message(
       "No ingresaste un vector de texto en el par\u00e1metro 'texto'.
-    Vuelve a intentarlo ingresando un vector de texto."))
+     Vuelve a intentarlo ingresando un vector de texto."))
   }
   if (!is.character(clave)) {
     return(message(
       "No ingresaste un vector de texto en el par\u00e1metro 'clave'.
-    Vuelve a intentarlo ingresando un vector de texto."))
+     Vuelve a intentarlo ingresando un vector de texto."))
   }
   if (!is.character(ci)) {
     return(message(
       "No ingresaste un string en el par\u00e1metro 'ci'.
-    Vuelve a intentarlo ingresando una ExpReg."))
+     Vuelve a intentarlo ingresando una ExpReg."))
   }
   if (!is.character(cd)) {
     return(message(
       "No ingresaste un string en el par\u00e1metro 'cd'.
-    Vuelve a intentarlo ingresando una ExpReg."))
+     Vuelve a intentarlo ingresando una ExpReg."))
   }
   if (!is.numeric(izq)) {
     return(message(
       "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'izq'.
-    Vuelve a intentarlo ingresando un vector num\u00e9rico"))
+     Vuelve a intentarlo ingresando un vector num\u00e9rico"))
   }
   if (!is.numeric(der)) {
     return(message(
       "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'der'.
-    Vuelve a intentarlo ingresando un vector num\u00e9rico."))
+     Vuelve a intentarlo ingresando un vector num\u00e9rico."))
   } else {
     nwi <- "\\S*\\s*"
     nwd <- "\\s*\\S*"
