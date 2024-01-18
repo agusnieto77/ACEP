@@ -27,7 +27,6 @@ acep_gpt <- function(texto,
                      modelo = "gpt-3.5-turbo-1106") {
   stopifnot(is.character(texto),
             is.character(instrucciones),
-            is.character(url),
             is.character(modelo))
   if (nchar(gpt_api) == 0) {
     stop("La clave API de OpenAI no est\u00e1 configurada.")
