@@ -8,9 +8,7 @@ acep_gpt(
   texto,
   instrucciones,
   gpt_api = Sys.getenv("OPENAI_API_KEY"),
-  url,
-  modelo,
-  rol
+  modelo = "gpt-3.5-turbo-1106"
 )
 }
 \arguments{
@@ -22,13 +20,7 @@ su generación de texto.}
 
 \item{gpt_api}{clave API secreta.}
 
-\item{url}{ruta de API utilizada para enviar solicitudes de
-generación de texto basadas en el modelo de lenguaje GPT de OpenAI.}
-
 \item{modelo}{modelo de lenguaje GPT de OpenAI.}
-
-\item{rol}{le asigna al modelo una perspectiva específica o
-un punto de vista particular al generar texto.}
 }
 \value{
 Si todas las entradas son correctas,
@@ -42,13 +34,8 @@ desde las claves API secretas y pagas.
 \examples{
 \dontrun{
 texto <- "El SOIP declaro la huelga por aumento de salarios."
-pregunta <- "¿Cual es el sujeto de la acción? Ejemplo de respuesta:
-'El sujeto de la acción es: la CGT'"
-api_gpt_acep <- gpt_api
-texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta,
-gpt_api = api_gpt_acep,
-url = "https://api.openai.com/v1/chat/completions",
-modelo = "gpt-3.5-turbo-0613", rol = "user")
+pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: CGT'"
+texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta)
 cat(texto_gpt)
 }
 }

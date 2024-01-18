@@ -6,12 +6,9 @@
 #' proporcionan al modelo de lenguaje GPT para influir en
 #' su generación de texto.
 #' @param gpt_api clave API secreta.
-#' @param url ruta de API utilizada para enviar solicitudes de
-#' generación de texto basadas en el modelo de lenguaje GPT de OpenAI.
 #' @param modelo modelo de lenguaje GPT de OpenAI.
-#' @param rol le asigna al modelo una perspectiva específica o
-#' un punto de vista particular al generar texto.
-#' @importFrom httr POST add_headers content_type_json content
+#' @importFrom httr POST add_headers content
+#' @importFrom jsonlite toJSON
 #' @return Si todas las entradas son correctas,
 #' la salida sera una cadena de caracteres con la
 #' información solicitada.
@@ -19,43 +16,46 @@
 #' @examples
 #' \dontrun{
 #' texto <- "El SOIP declaro la huelga por aumento de salarios."
-#' pregunta <- "¿Cual es el sujeto de la acción? Ejemplo de respuesta:
-#' 'El sujeto de la acción es: la CGT'"
-#' api_gpt_acep <- gpt_api
-#' texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta,
-#' gpt_api = api_gpt_acep,
-#' url = "https://api.openai.com/v1/chat/completions",
-#' modelo = "gpt-3.5-turbo-0613", rol = "user")
+#' pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: CGT'"
+#' texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta)
 #' cat(texto_gpt)
 #'}
 #' @export
-acep_gpt <- function(texto, instrucciones, gpt_api = Sys.getenv("OPENAI_API_KEY"), url, modelo, rol) {
-  if (!is.character(texto) || !is.character(instrucciones) ||
-      !is.character(gpt_api) || !is.character(url) ||
-      !is.character(modelo) || !is.character(rol)) {
-    return(message("Todos los par\u00e1metro deben ser cadenas de caracteres."))
-  }
-  if (is.null(gpt_api) || gpt_api == "") {
-    return(message("La clave API de OpenAI no est\u00e1 configurada."))
+acep_gpt <- function(texto,
+                     instrucciones,
+                     gpt_api = Sys.getenv("OPENAI_API_KEY"),
+                     modelo = "gpt-3.5-turbo-1106") {
+  stopifnot(is.character(texto),
+            is.character(instrucciones),
+            is.character(url),
+            is.character(modelo))
+  if (nchar(gpt_api) == 0) {
+    stop("La clave API de OpenAI no est\u00e1 configurada.")
   }
   contenido <- paste(instrucciones,
-                     "El texto a analizar aparece a continuaci\u00f3n",
-                     "delimitado por '```': \n```", texto, "```", sep = " ")
+                     " | El texto a analizar aparece a continuaci\u00f3n:\n",
+                     texto,
+                     sep = " ")
+  body <- list(
+    model = modelo,
+    seed=123456,
+    temperature=0,
+    response_format = list(type = "json_object"),
+    messages = list(
+      list(role = "system", content = "You are a helpful assistant designed to output JSON."),
+      list(role = "user", content = contenido)
+    )
+  )
+  json_body <- jsonlite::toJSON(body, auto_unbox = TRUE)
+  headers <- c(
+    `Content-Type` = "application/json",
+    Authorization = paste("Bearer", gpt_api)
+  )
   tryCatch({
     output <- httr::POST(
-      url = url,
-      httr::add_headers(Authorization = paste("Bearer", gpt_api)),
-      httr::content_type_json(),
-      encode = "json",
-      body = list(
-        model = modelo,
-        messages = list(
-          list(
-            role = rol,
-            content = contenido
-          )
-        )
-      )
+      url = "https://api.openai.com/v1/chat/completions",
+      body = json_body,
+      httr::add_headers(.headers=headers)
     )
     respuesta <- httr::content(output)$choices[[1]]$message$content
     if (is.null(respuesta)) {

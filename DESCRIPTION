@@ -24,6 +24,7 @@ Imports:
     graphics,
     stats,
     httr,
+    jsonlite,
     rsyntax,
     spacyr,
     udpipe,
