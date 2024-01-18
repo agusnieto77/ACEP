@@ -1,4 +1,8 @@
 
+# ACEP 0.0.2.9005 (versión en desarrollo)
+
+* Se actualizó y mejoró la función para interactuar con los modelos de OpenAI.
+
 # ACEP 0.0.3.9004 (versión en desarrollo vigente)
 
 * Se mejoraron las funciones existentes y se creó la función acep_upos().
@@ -20,10 +24,6 @@
 # ACEP 0.0.21 (versión CRAN vigente)
 
 * Se mejoraron las nuevas funciones para limpieza de texto, tokenización y detección de menciones.
-
-# ACEP 0.0.2.9000 (versión en desarrollo)
-
-* Se actualizó y mejoró la función para interactuar con los modelos de OpenAI.
 
 # ACEP 0.0.2.9000 (versión en desarrollo)
 
