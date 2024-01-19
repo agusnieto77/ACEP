@@ -34,7 +34,7 @@ desde las claves API secretas y pagas.
 \examples{
 \dontrun{
 texto <- "El SOIP declaro la huelga por aumento de salarios."
-pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: CGT'"
+pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: 'CGT'"
 texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta)
 cat(texto_gpt)
 }

@@ -10,13 +10,12 @@
 #' @importFrom httr POST add_headers content
 #' @importFrom jsonlite toJSON
 #' @return Si todas las entradas son correctas,
-#' la salida sera una cadena de caracteres con la
-#' información solicitada.
+#' la salida sera un JSON con la información solicitada.
 #' @keywords tripletes gpt
 #' @examples
 #' \dontrun{
 #' texto <- "El SOIP declaro la huelga por aumento de salarios."
-#' pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: CGT'"
+#' pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: 'CGT'"
 #' texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta)
 #' cat(texto_gpt)
 #'}
@@ -32,13 +31,17 @@ acep_gpt <- function(texto,
     stop("La clave API de OpenAI no est\u00e1 configurada.")
   }
   contenido <- paste(instrucciones,
-                     " | El texto a analizar aparece a continuaci\u00f3n:\n",
+                     "\nEl texto a analizar aparece a continuaci\u00f3n:\n###\n",
                      texto,
+                     "\n###",
                      sep = " ")
   body <- list(
     model = modelo,
     seed=123456,
     temperature=0,
+    max_tokens=1000,
+    top_p= 0.2,
+    frequency_penalty=0.2,
     response_format = list(type = "json_object"),
     messages = list(
       list(role = "system", content = "You are a helpful assistant designed to output JSON."),
