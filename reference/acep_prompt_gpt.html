@@ -76,9 +76,27 @@ Universidad Nacional de Mar del Plata.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>Es un objeto de clase 'list' con 1 componente.</p><dl><dt>dicc_confl_gp</dt>
-<dd><p>es un texto con instrucciones para que el modelo
- gpt-3 turbo de OpenAI devuelva una codificación de eventos de protesta.</p></dd>
+    <p>Es un objeto de clase 'list' con 4 componentes.</p><dl><dt>instruccion_breve_sao_es</dt>
+<dd><p>es un texto en castellano con instrucciones breves para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'fecha',
+ 'sujeto', 'accion', 'objeto', 'lugar'.</p></dd>
+
+ <dt>instruccion_larga_sao_es</dt>
+<dd><p>es un texto en castellano con instrucciones largas para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
+ 'cronica', 'fecha', 'sujeto', 'organizacion', 'participacion', 'accion',
+ 'objeto', 'lugar'.</p></dd>
+
+<dt>instruccion_breve_sao_en</dt>
+<dd><p>es un texto en inglés con instrucciones breves para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'date',
+ 'subject', 'action', 'object', 'place'.</p></dd>
+
+ <dt>instruccion_larga_sao_en</dt>
+<dd><p>es un texto en inglés con instrucciones largas para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
+ 'chronicle', 'date', 'subject', 'organization', 'participation', 'action',
+ 'object', 'place'.</p></dd>
 
 
 </dl></div>
