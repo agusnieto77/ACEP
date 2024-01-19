@@ -5,10 +5,22 @@
 \alias{acep_prompt_gpt}
 \title{Colección de instrucciones para GPT.}
 \format{
-Es un objeto de clase 'list' con 1 componente.
+Es un objeto de clase 'list' con 4 componentes.
 \describe{
-\item{dicc_confl_gp}{es un texto con instrucciones para que el modelo
- gpt-3 turbo de OpenAI devuelva una codificación de eventos de protesta.}
+\item{instruccion_breve_sao_es}{es un texto en castellano con instrucciones breves para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'fecha',
+ 'sujeto', 'accion', 'objeto', 'lugar'.}
+ \item{instruccion_larga_sao_es}{es un texto en castellano con instrucciones largas para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
+ 'cronica', 'fecha', 'sujeto', 'organizacion', 'participacion', 'accion',
+ 'objeto', 'lugar'.}
+\item{instruccion_breve_sao_en}{es un texto en inglés con instrucciones breves para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'date',
+ 'subject', 'action', 'object', 'place'.}
+ \item{instruccion_larga_sao_en}{es un texto en inglés con instrucciones largas para
+ extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
+ 'chronicle', 'date', 'subject', 'organization', 'participation', 'action',
+ 'object', 'place'.}
 }
 }
 \usage{

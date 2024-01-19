@@ -24,8 +24,7 @@ su generación de texto.}
 }
 \value{
 Si todas las entradas son correctas,
-la salida sera una cadena de caracteres con la
-información solicitada.
+la salida sera un JSON con la información solicitada.
 }
 \description{
 Función para interactuar con los modelos de OpenAI
