@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2024-01-19</h4>
+            <h4 data-toc-skip class="date">2024-02-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/HEAD/vignettes/extraccion_de_svo_con_acep.Rmd" class="external-link"><code>vignettes/extraccion_de_svo_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>extraccion_de_svo_con_acep.Rmd</code></div>
@@ -258,20 +258,23 @@ estructurado para servir de input de la función
 <code><a href="../reference/acep_svo.html">acep_svo()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag</span><span class="op">[</span><span class="fl">43</span><span class="op">:</span><span class="fl">54</span>, <span class="op">]</span>, n <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;     doc_id sentence token_id      token     lemma   pos parent relation entity</span></span>
-<span><span class="co">#&gt;  1:      2        1        1        Los        el   DET      2      det       </span></span>
-<span><span class="co">#&gt;  2:      2        1        2    gremios    gremio  NOUN      4    nsubj       </span></span>
-<span><span class="co">#&gt;  3:      2        1        3   docentes   docente   ADJ      2     amod       </span></span>
-<span><span class="co">#&gt;  4:      2        1        4   rechazan  rechazar  VERB     NA     ROOT       </span></span>
-<span><span class="co">#&gt;  5:      2        1        5     volver    volver  VERB      4    xcomp       </span></span>
-<span><span class="co">#&gt;  6:      2        1        6          a         a   ADP      8     case       </span></span>
-<span><span class="co">#&gt;  7:      2        1        7        las        el   DET      8      det       </span></span>
-<span><span class="co">#&gt;  8:      2        1        8      aulas      aula  NOUN      5      obl       </span></span>
-<span><span class="co">#&gt;  9:      2        1        9        sin       sin   ADP     10     case       </span></span>
-<span><span class="co">#&gt; 10:      2        1       10  garantías  garantía  NOUN      5      obl       </span></span>
-<span><span class="co">#&gt; 11:      2        1       11 sanitarias sanitario   ADJ     10     amod       </span></span>
-<span><span class="co">#&gt; 12:      2        1       12          .         . PUNCT      4    punct       </span></span>
+<pre><code><span><span class="co">#&gt; Key: &lt;doc_id, sentence, token_id&gt;</span></span>
+<span><span class="co">#&gt;     doc_id sentence token_id      token     lemma    pos parent relation entity</span></span>
+<span><span class="co">#&gt;      &lt;int&gt;    &lt;int&gt;    &lt;num&gt;     &lt;char&gt;    &lt;char&gt; &lt;char&gt;  &lt;num&gt;   &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt;  1:      2        1        1        Los        el    DET      2      det       </span></span>
+<span><span class="co">#&gt;  2:      2        1        2    gremios    gremio   NOUN      4    nsubj       </span></span>
+<span><span class="co">#&gt;  3:      2        1        3   docentes   docente    ADJ      2     amod       </span></span>
+<span><span class="co">#&gt;  4:      2        1        4   rechazan  rechazar   VERB     NA     ROOT       </span></span>
+<span><span class="co">#&gt;  5:      2        1        5     volver    volver   VERB      4    xcomp       </span></span>
+<span><span class="co">#&gt;  6:      2        1        6          a         a    ADP      8     case       </span></span>
+<span><span class="co">#&gt;  7:      2        1        7        las        el    DET      8      det       </span></span>
+<span><span class="co">#&gt;  8:      2        1        8      aulas      aula   NOUN      5      obl       </span></span>
+<span><span class="co">#&gt;  9:      2        1        9        sin       sin    ADP     10     case       </span></span>
+<span><span class="co">#&gt; 10:      2        1       10  garantías  garantía   NOUN      5      obl       </span></span>
+<span><span class="co">#&gt; 11:      2        1       11 sanitarias sanitario    ADJ     10     amod       </span></span>
+<span><span class="co">#&gt; 12:      2        1       12          .         .  PUNCT      4    punct       </span></span>
 <span><span class="co">#&gt;     nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
+<span><span class="co">#&gt;         &lt;char&gt;     &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;char&gt;   &lt;int&gt;</span></span>
 <span><span class="co">#&gt;  1:        beg       TRUE    FALSE     TRUE    FALSE        O       2</span></span>
 <span><span class="co">#&gt;  2:   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
 <span><span class="co">#&gt;  3:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
@@ -285,6 +288,7 @@ estructurado para servir de input de la función
 <span><span class="co">#&gt; 11:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
 <span><span class="co">#&gt; 12:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
 <span><span class="co">#&gt;     is_left_punct is_right_punct</span></span>
+<span><span class="co">#&gt;            &lt;lgcl&gt;         &lt;lgcl&gt;</span></span>
 <span><span class="co">#&gt;  1:         FALSE          FALSE</span></span>
 <span><span class="co">#&gt;  2:         FALSE          FALSE</span></span>
 <span><span class="co">#&gt;  3:         FALSE          FALSE</span></span>
@@ -298,6 +302,7 @@ estructurado para servir de input de la función
 <span><span class="co">#&gt; 11:         FALSE          FALSE</span></span>
 <span><span class="co">#&gt; 12:         FALSE          FALSE</span></span>
 <span><span class="co">#&gt;                                                     morph</span></span>
+<span><span class="co">#&gt;                                                    &lt;char&gt;</span></span>
 <span><span class="co">#&gt;  1:     Definite=Def|Gender=Masc|Number=Plur|PronType=Art</span></span>
 <span><span class="co">#&gt;  2:                               Gender=Masc|Number=Plur</span></span>
 <span><span class="co">#&gt;  3:                                           Number=Plur</span></span>
@@ -311,6 +316,7 @@ estructurado para servir de input de la función
 <span><span class="co">#&gt; 11:                                Gender=Fem|Number=Plur</span></span>
 <span><span class="co">#&gt; 12:                                        PunctType=Peri</span></span>
 <span><span class="co">#&gt;                                                                           sent</span></span>
+<span><span class="co">#&gt;                                                                         &lt;char&gt;</span></span>
 <span><span class="co">#&gt;  1: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
 <span><span class="co">#&gt;  2: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
 <span><span class="co">#&gt;  3: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
@@ -629,7 +635,9 @@ creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a
 <em>rsyntax</em>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_annotate_svo</span><span class="op">[</span><span class="fl">98</span><span class="op">:</span><span class="fl">106</span>, <span class="op">]</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id paragraph_id sentence                                        sent</span></span>
+<pre><code><span><span class="co">#&gt; Key: &lt;doc_id, sentence, token_id&gt;</span></span>
+<span><span class="co">#&gt;    doc_id paragraph_id sentence                                        sent</span></span>
+<span><span class="co">#&gt;     &lt;int&gt;        &lt;int&gt;    &lt;int&gt;                                      &lt;char&gt;</span></span>
 <span><span class="co">#&gt; 1:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
 <span><span class="co">#&gt; 2:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
 <span><span class="co">#&gt; 3:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
@@ -639,27 +647,30 @@ creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a
 <span><span class="co">#&gt; 7:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
 <span><span class="co">#&gt; 8:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
 <span><span class="co">#&gt; 9:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt;    start end term_id token_id   token    lemma   pos xpos</span></span>
-<span><span class="co">#&gt; 1:     1   2       1        1      Un      uno   DET &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2:     4   9       2        2  gremio   gremio  NOUN &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3:    11  15       3        3   aéreo    aéreo   ADJ &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4:    17  23       4        4 levantó levantar  VERB &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5:    25  26       5        5      el       el   DET &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6:    28  31       6        6    paro     paro  NOUN &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7:    33  34       7        7      en       en   ADP &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8:    36  42       8        8 Tucumán  tucumán PROPN &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9:    43  43       9        9       .        . PUNCT &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;                                                    morph parent relation deps</span></span>
-<span><span class="co">#&gt; 1:     Definite=Ind|Gender=Masc|Number=Sing|PronType=Art      2      det &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2:                               Gender=Masc|Number=Sing      4    nsubj &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3:                               Gender=Masc|Number=Sing      2     amod &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4: Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin     NA     ROOT &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5:     Definite=Def|Gender=Masc|Number=Sing|PronType=Art      6      det &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6:                               Gender=Masc|Number=Sing      4      obj &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7:                                                  &lt;NA&gt;      8     case &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8:                                                  &lt;NA&gt;      6     nmod &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9:                                                  &lt;NA&gt;      4    punct &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;    start   end term_id token_id   token    lemma    pos   xpos</span></span>
+<span><span class="co">#&gt;    &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;num&gt;  &lt;char&gt;   &lt;char&gt; &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:     1     2       1        1      Un      uno    DET   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2:     4     9       2        2  gremio   gremio   NOUN   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3:    11    15       3        3   aéreo    aéreo    ADJ   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4:    17    23       4        4 levantó levantar   VERB   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5:    25    26       5        5      el       el    DET   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6:    28    31       6        6    paro     paro   NOUN   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 7:    33    34       7        7      en       en    ADP   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8:    36    42       8        8 Tucumán  tucumán  PROPN   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 9:    43    43       9        9       .        .  PUNCT   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                    morph parent relation   deps</span></span>
+<span><span class="co">#&gt;                                                   &lt;char&gt;  &lt;num&gt;   &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt; 1:     Definite=Ind|Gender=Masc|Number=Sing|PronType=Art      2      det   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2:                               Gender=Masc|Number=Sing      4    nsubj   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3:                               Gender=Masc|Number=Sing      2     amod   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4: Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin     NA     ROOT   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5:     Definite=Def|Gender=Masc|Number=Sing|PronType=Art      6      det   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6:                               Gender=Masc|Number=Sing      4      obj   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 7:                                                  &lt;NA&gt;      8     case   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8:                                                  &lt;NA&gt;      6     nmod   &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 9:                                                  &lt;NA&gt;      4    punct   &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;             misc  s_v_o s_v_o_id s_v_o_fill       s_p conjugaciones</span></span>
+<span><span class="co">#&gt;           &lt;char&gt; &lt;fctr&gt;   &lt;fctr&gt;      &lt;num&gt;    &lt;char&gt;        &lt;char&gt;</span></span>
 <span><span class="co">#&gt; 1:          &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;         NA    sujeto          &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2:          &lt;NA&gt; sujeto    6.1.4          0    sujeto          &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 3:          &lt;NA&gt; sujeto    6.1.4          1    sujeto          &lt;NA&gt;</span></span>
@@ -868,7 +879,9 @@ presentes en el corpus procesado.</p>
 procesadas por no ser posible identificar sujeto y predicado.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_no_procesadas</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id oracion_id                                                 oracion</span></span>
+<pre><code><span><span class="co">#&gt; Key: &lt;doc_id, oracion_id&gt;</span></span>
+<span><span class="co">#&gt;    doc_id oracion_id                                                 oracion</span></span>
+<span><span class="co">#&gt;     &lt;int&gt;      &lt;int&gt;                                                  &lt;char&gt;</span></span>
 <span><span class="co">#&gt; 1:      8          1 Conciliación obligatoria en el conflicto del neumático.</span></span>
 <span><span class="co">#&gt; 2:      9          1                                             Hola mundo.</span></span></code></pre>
 </div>
