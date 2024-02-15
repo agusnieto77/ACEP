@@ -8,7 +8,7 @@ acep_gpt(
   texto,
   instrucciones,
   gpt_api = Sys.getenv("OPENAI_API_KEY"),
-  modelo = "gpt-3.5-turbo-1106"
+  modelo = "gpt-3.5-turbo-0125"
 )
 }
 \arguments{

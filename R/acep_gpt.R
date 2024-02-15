@@ -23,7 +23,7 @@
 acep_gpt <- function(texto,
                      instrucciones,
                      gpt_api = Sys.getenv("OPENAI_API_KEY"),
-                     modelo = "gpt-3.5-turbo-1106") {
+                     modelo = "gpt-3.5-turbo-0125") {
   stopifnot(is.character(texto),
             is.character(instrucciones),
             is.character(modelo))

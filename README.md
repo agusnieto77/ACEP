@@ -13,7 +13,7 @@ coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)]
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://www.r-pkg.org/badges/version/ACEP)](https://cran.r-project.org/package=ACEP)
-[![](https://img.shields.io/badge/devel%20version-0.0.3.9004-blue.svg)](https://github.com/agusnieto77/ACEP)
+[![](https://img.shields.io/badge/devel%20version-0.0.3.9005-blue.svg)](https://github.com/agusnieto77/ACEP)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![](https://img.shields.io/github/languages/code-size/agusnieto77/ACEP.svg)](https://github.com/agusnieto77/ACEP)
