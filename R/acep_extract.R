@@ -44,7 +44,8 @@ acep_extract <- function(texto, dic, sep="; ", izq="\\b\\w*", der="\\w*\\b") {
       "No ingresaste una expresi\u00f3n regular en el par\u00e1metro 'der'."))
   } else {
     sapply(texto, function(txt) {
-      x <- paste0(izq, dic, der, collapse = "|")
+      dic <- gsub(" $", "\\\\b", dic)
+      x <- paste0(izq, gsub("^ ", "", dic), der, collapse = "|")
       key_words <- unlist(stringr::str_extract_all(txt, x))
       key_words <- key_words[sapply(key_words, length) > 0]
       if (!is.null(sep)) {

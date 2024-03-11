@@ -23,7 +23,7 @@ acep_count <- function(texto, dic) {
   if (!is.character(dic)) {
     return(message("No ingresaste un vector de texto en el par\u00e1metro 'dic'"))
   } else {
-    dicc <- paste0(dic, collapse = "|")
+    dicc <- paste0(gsub("^ | $", "\\\\b", dic), collapse = "|")
     detect <- stringr::str_count(texto, dicc)
     return(detect)
   }

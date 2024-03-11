@@ -25,7 +25,7 @@ acep_men <- function(x, y, tolower = TRUE) {
     message("No ingresaste un vector en el par\u00e1metro y.
     Vuelve a intentarlo ingresando un vector!")
   } else {
-    dicc <- paste0(y, collapse = "|")
+    dicc <- paste0(gsub("^ | $", "\\\\b", y), collapse = "|")
     detect <- sapply(x, function(text) {
       if (tolower) {
         sum(gregexpr(dicc, tolower(text), perl = TRUE)[[1]] != -1)
