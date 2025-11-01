@@ -22,7 +22,7 @@ acep_token <- function(x, tolower = TRUE, cleaning = TRUE) {
     x <- ACEP::acep_min(x)
   }
   if (cleaning) {
-    x <- acep_cleaning(x)
+    x <- acep_clean(x)
   }
   texto_id <- seq_along(x)
   tokens <- lapply(x, function(texto) {

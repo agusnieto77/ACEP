@@ -17,11 +17,11 @@ de dependencia generado con la función acep_postag.}
 
 \item{prof_s}{es un numero entero positivo que determina la profundidad a la que se
 buscan las relaciones dentro del sujeto. Este parámetro se hereda del la función children()
-del paquete {rsyntax}. Se recomienda no superar el valor 2.}
+del paquete \{rsyntax\}. Se recomienda no superar el valor 2.}
 
 \item{prof_o}{es un numero entero positivo que determina la profundidad a la que se
 buscan las relaciones dentro del objeto. Este parámetro se hereda del la función children()
-del paquete {rsyntax}. Se recomienda no superar el valor 2.}
+del paquete \{rsyntax\}. Se recomienda no superar el valor 2.}
 
 \item{u}{numero entero que indica el umbral de palabras del objeto en la reconstrucción SVO.}
 }

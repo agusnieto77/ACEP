@@ -75,10 +75,10 @@ Una vez que tenemos el data frame creado a partir de la función `acep_token()`,
 
 - prop (el peso que tiene ese token en el total del corpus)
 
-Para obtener una tabla que tenga sentido, podemos utilizar en primer lugar la función `acep_cleaning()` para deshacernos de los stopwords, urls, menciones, hashtags,  etc.
+Para obtener una tabla que tenga sentido, podemos utilizar en primer lugar la función `acep_clean()` para deshacernos de los stopwords, urls, menciones, hashtags,  etc.
 
 ```{r limpia, message=FALSE}
-base_limpia <- acep_cleaning(base)
+base_limpia <- acep_clean(base)
 ```
 
 En segunda instancia, creamos un nuevo objeto derivado de la base limpia con `acep_token()` que nos devuelve, como vimos previamente, una tabla con la información de cada token.

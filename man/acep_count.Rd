@@ -2,30 +2,31 @@
 % Please edit documentation in R/acep_count.R
 \name{acep_count}
 \alias{acep_count}
-\title{Frecuencia de menciones de palabras.}
+\title{Conteo de menciones de palabras de un diccionario}
 \usage{
-acep_count(texto, dic)
+acep_count(texto, dic, use_cache = TRUE)
 }
 \arguments{
-\item{texto}{vector de textos al que se le aplica la función de conteo
-de la frecuencia de menciones de palabras del diccionario.}
+\item{texto}{vector de textos al que se le aplica la función de conteo.}
 
 \item{dic}{vector de palabras del diccionario utilizado.}
+
+\item{use_cache}{logical, usar caché de regex (default TRUE).}
 }
 \value{
-Si todas las entradas son correctas,
-la salida sera un vector con una frecuencia
-de palabras de un diccionario.
+Vector con frecuencia de palabras del diccionario.
 }
 \description{
-Reemplaza a la función 'acep_men' que cuenta la frecuencia de
-menciones de palabras que refieren a conflictos en cada una de las notas/textos.
+Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
+Utiliza expresiones regulares con límites de palabra (word boundaries) para
+evitar coincidencias parciales. Incluye un sistema de caché que almacena los
+patrones regex compilados para acelerar ejecuciones repetidas con el mismo diccionario.
 }
 \examples{
 df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
 "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
 diccionario <- c("paro", "lucha", "piquetes")
-df$detect <- acep_men(df$texto, diccionario)
+df$detect <- acep_count(df$texto, diccionario)
 df
 }
 \keyword{frecuencia}

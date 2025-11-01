@@ -23,11 +23,7 @@ por segmento de tiempo.
 }
 \examples{
 datos <- acep_bases$rp_procesada
-fecha <- datos$fecha
-n_palabras <- datos$n_palabras
-conflictos <- datos$conflictos
-datos_procesados_anio <- acep_rst(datos,
-fecha, n_palabras, conflictos, st = 'anio')
+datos_procesados_anio <- acep_sst(datos, st = 'anio')
 acep_plot_rst(datos_procesados_anio, tagx = 'vertical')
 }
 \keyword{visualización}

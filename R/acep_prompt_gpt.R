@@ -24,6 +24,6 @@
 #' @usage data(acep_prompt_gpt)
 #' @keywords diccionarios
 #' @examples
-#' prompt01 <- acep_prompt_gpt$instrucciones_gpt
+#' prompt01 <- acep_prompt_gpt$instruccion_larga_sao_es
 #' prompt01
 "acep_prompt_gpt"

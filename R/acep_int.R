@@ -16,23 +16,12 @@
 #' acep_int(conflictos, palabras, 3)
 #' @export
 acep_int <- function(pc, pt, decimales = 4) {
-  if(!is.numeric(pc)){
-    return(message(
-      "No ingresaste un vector num\u00e9rico en el par\u00e1metro 'pc'.
-      Vuelve a intentarlo ingresando un vector num\u00e9rico!"))
-  }
-  if(!is.numeric(pt)){
-    return(message(
-      "No ingresaste un vector num\u00e9rico en el par\u00e1metro' pt'.
-      Vuelve a intentarlo ingresando un vector num\u00e9rico!"))
-  } else {
-    if(is.numeric(pc)) {
-      tryCatch({
-        if(is.numeric(pt)){
-          round(pc / pt, decimales)
-        }
-      }
-      )
-    }
-  }
+  validate_numeric(pc, "pc", min = 0)
+  validate_numeric(pt, "pt", min = 0)
+  validate_numeric(decimales, "decimales", min = 0)
+
+  tryCatch({
+    round(pc / pt, decimales)
+  })
 }
+

@@ -33,7 +33,7 @@ que realizamos en el Observatorio de Conflictividad Social de la
 Universidad Nacional de Mar del Plata.
 }
 \examples{
-prompt01 <- acep_prompt_gpt$instrucciones_gpt
+prompt01 <- acep_prompt_gpt$instruccion_larga_sao_es
 prompt01
 }
 \keyword{diccionarios}

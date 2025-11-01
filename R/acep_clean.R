@@ -7,7 +7,7 @@
 #' @param rm_punt remueve la puntuación.
 #' @param rm_num remueve números.
 #' @param rm_whitespace remueve los espacios en blanco.
-#' @param rm_newline remueve los saltos de línea.
+#' @param rm_newline remueve los saltos de linea.
 #' @param rm_cesp remueve caracteres especiales.
 #' @param rm_stopwords remueve palabras vacías.
 #' @param rm_dias remueve los dias de la semana.
@@ -21,10 +21,10 @@
 #' @param tolower convierte los textos a minúsculas.
 #' @return Si todas las entradas son correctas,
 #' la salida sera un vector de textos normalizados.
-#' @importFrom utils read.delim
 #' @keywords limpieza normalización
 #' @examples
-#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_punt = FALSE)
+#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = FALSE)
+#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = TRUE)
 #' @export
 acep_clean <- function(x,
                        tolower = TRUE,
@@ -44,38 +44,57 @@ acep_clean <- function(x,
                        other_sw = NULL,
                        u = 1) {
   if(!is.vector(x) | is.list(x)){
-    return(message("No ingresaste un vector en el par\u00e1metro x.
-                   Vuelve a intentarlo ingresando un vector!"))
+    return(message("No ingresaste un vector en el parametro x.
+           Vuelve a intentarlo ingresando un vector!"))
+  }
+  if (!is.logical(tolower) || !is.logical(rm_cesp) ||
+      !is.logical(rm_emoji) || !is.logical(rm_hashtag) ||
+      !is.logical(rm_users) || !is.logical(rm_punt) ||
+      !is.logical(rm_num) || !is.logical(rm_url) ||
+      !is.logical(rm_meses) || !is.logical(rm_dias) ||
+      !is.logical(rm_stopwords) || !is.logical(rm_shortwords)||
+      !is.logical(rm_newline) || !is.logical(rm_whitespace)) {
+    return(message("Debe ingresar un valor booleano: TRUE o FALSE"))
   } else {
     if(is.vector(x) & !is.list(x)) {
       out <- tryCatch({
       if (tolower) {
         x <- gsub(pattern = "([[:upper:]])", perl = TRUE,
                   replacement = "\\L\\1", x)
+      }
+      if (rm_stopwords) {
+        if (is.null(other_sw)) {
+          x <- gsub(
+            paste(
+              ACEP::acep_rs$sw1,
+              ACEP::acep_rs$sw2,
+              collapse = ""),
+            " ", x, perl = FALSE)
+        } else {
+          othersw <- paste0("|\\b", other_sw, "\\b", collapse = "")
+          x <- gsub(
+            paste0(
+              paste(
+                ACEP::acep_rs$sw1,
+                ACEP::acep_rs$sw2,
+                collapse = ""),
+              othersw),
+            " ", x, perl = FALSE)
         }
+      }
       if (tolower) {
-        tildes <- readRDS(
-          url(
-            "https://observatoriodeconflictividad.org/basesdatos/tildes.rds"))
-        x <- chartr(tildes, tolower(tildes), x)
+        x <- chartr(ACEP::acep_rs$tildes,
+                    tolower(ACEP::acep_rs$tildes), x)
         }
       if (rm_cesp) {
-        tildes <- readRDS(
-          url(
-            "https://observatoriodeconflictividad.org/basesdatos/tildes.rds"))
-        sintildes <- readRDS(
-          url(
-            "https://observatoriodeconflictividad.org/basesdatos/sintildes.rds"))
-        x <- chartr(tildes, sintildes, x)
+        x <- chartr(ACEP::acep_rs$tildes,
+                    ACEP::acep_rs$sintildes, x)
         }
       if (rm_url) {
         x <- gsub(ACEP::acep_rs$url, "", x, perl = TRUE)
         }
       if (rm_emoji) {
-        emojis <- utils::read.delim(
-          'https://raw.githubusercontent.com/HDyCSC/datos/main/emojis.txt',
-          header = FALSE)$V1
-        x <- gsub(emojis, " ", x, perl = TRUE)
+        x <- gsub(ACEP::acep_rs$emojis, " ", x, perl = TRUE)
         }
       if (rm_hashtag) {
         x <- gsub(ACEP::acep_rs$hashtag, "", x, perl = TRUE)
@@ -84,45 +103,22 @@ acep_clean <- function(x,
         x <- gsub(ACEP::acep_rs$users, "", x, perl = TRUE)
         }
       if (rm_punt) {
-        punt1 <- utils::read.delim(
-          'https://raw.githubusercontent.com/HDyCSC/datos/main/punt1.txt',
-          header = FALSE)$V1
-        x <- gsub(punt1, " ", x, perl = TRUE)
+        x <- gsub(ACEP::acep_rs$punt, " ", x, perl = TRUE)
         }
       if (rm_num) {
         x <- gsub(ACEP::acep_rs$num, "", x, perl = TRUE)
-        }
+      }
       if (rm_meses) {
-        meses <- utils::read.delim(
-          'https://raw.githubusercontent.com/HDyCSC/datos/main/meses.txt',
-          header = FALSE)$V1
-        x <- gsub(meses, "", x, perl = TRUE)
+        x <- gsub(ACEP::acep_rs$meses, "", x, perl = TRUE)
         }
       if (rm_dias) {
-        dias <- utils::read.delim(
-          'https://raw.githubusercontent.com/HDyCSC/datos/main/dias.txt',
-          header = FALSE)$V1
-        x <- gsub(dias, "", x, perl = TRUE)
+        x <- gsub(ACEP::acep_rs$dias, "", x, perl = TRUE)
         }
-      if (rm_stopwords) {
-        stopwords <- readRDS(
-          url(
-            "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"))
-        if (is.null(other_sw)) {
-          x <- gsub(stopwords, " ", x, perl = FALSE)
-        } else {
-          othersw <- paste0("|\\b", other_sw, "\\b", collapse = "")
-          x <- gsub(paste0(stopwords, othersw), " ", x, perl = FALSE)
-        }
-      }
       if (rm_shortwords) {
         x <- gsub(paste0("\\b[[:alpha:]]{1,", u, "}\\b"), " ", x, perl = FALSE)
         }
       if (rm_punt) {
-        punt1 <- utils::read.delim(
-          'https://raw.githubusercontent.com/HDyCSC/datos/main/punt1.txt',
-          header = FALSE)$V1
-        x <- gsub(paste0("\\b",punt1,"\\b"), "", x, perl = TRUE)
+        x <- gsub(paste0("\\b", ACEP::acep_rs$punt,"\\b"), "", x, perl = TRUE)
         }
       if (rm_newline) {
         x <- gsub(ACEP::acep_rs$saltos, " ", x, perl = TRUE)

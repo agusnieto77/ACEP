@@ -27,7 +27,9 @@ test_that("ACEP DETECT E1", {
   df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",
                              "El SOIP lleva adelante un plan de lucha con paros y piquetes."))
   diccionario <- c("paro", "lucha", "piquetes")
-  detect <- acep_detect(df, diccionario)
-  dimensiones <- 1
-  expect_equal(dimensiones, length(dimensiones))
+
+  expect_error(
+    acep_detect(df, diccionario),
+    "debe ser un vector de texto"
+  )
 })

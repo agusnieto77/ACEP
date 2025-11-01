@@ -15,11 +15,7 @@
 #' la salida sera una imagen de un panel.
 #' @examples
 #' datos <- acep_bases$rp_procesada
-#' fecha <- datos$fecha
-#' n_palabras <- datos$n_palabras
-#' conflictos <- datos$conflictos
-#' dpa <- acep_rst(datos,
-#' fecha, n_palabras, conflictos, st = 'anio')
+#' dpa <- acep_sst(datos, st = 'anio')
 #' acep_plot_st(
 #' dpa$st, dpa$frecm,
 #' t = 'Evoluci\u00f3n de la conflictividad en el sector pesquero argentino',

@@ -52,7 +52,7 @@ función de limpieza de texto.}
 
 \item{rm_shortwords}{remueve las palabras cortas.}
 
-\item{rm_newline}{remueve los saltos de línea.}
+\item{rm_newline}{remueve los saltos de linea.}
 
 \item{rm_whitespace}{remueve los espacios en blanco.}
 
@@ -69,7 +69,8 @@ la salida sera un vector de textos normalizados.
 Función que limpia y normaliza las notas/textos.
 }
 \examples{
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_punt = FALSE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = FALSE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = TRUE)
 }
 \keyword{limpieza}
 \keyword{normalización}

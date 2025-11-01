@@ -1,5 +1,5 @@
 #' @title Frecuencia, menciones e intensidad.
-#' @description Función que usa las funciones acep_frec, acep_men y acep_int y
+#' @description Función que usa las funciones acep_frec, acep_count y acep_int y
 #' devuelve una tabla con tres columnas nuevas: numero de palabras,
 #' número de menciones del diccionario, indice de intensidad.
 #' @param db data frame con los textos a procesar.
@@ -38,7 +38,7 @@ acep_db <- function(db, t, d, n) {
         if(is.data.frame(db)){
         #db <- db
         db$n_palabras <- acep_frec(t)
-        db$conflictos <- acep_men(t, d)
+        db$conflictos <- acep_count(t, d)
         db$intensidad <- acep_int(db$conflictos, db$n_palabras, n)
         }
       }

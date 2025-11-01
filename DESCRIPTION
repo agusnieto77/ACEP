@@ -1,7 +1,7 @@
 Type: Package
 Package: ACEP
 Title: Análisis Computacional de Eventos de Protesta
-Version: 0.0.3.9005
+Version: 0.1.0.9000
 Authors@R: 
     person("Agustín", "Nieto", , "agustin.nieto77@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4467-873X"))
@@ -30,8 +30,12 @@ Imports:
     udpipe,
     stringr,
     reticulate,
-    tidygeocoder
-Suggests: 
+    tidygeocoder,
+    utils,
+    magrittr
+Suggests:
+    furrr,
+    future,
     covr,
     knitr,
     rmarkdown,
@@ -40,5 +44,5 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: es
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr

@@ -11,10 +11,10 @@
 #' de dependencia generado con la función acep_postag.
 #' @param prof_s es un numero entero positivo que determina la profundidad a la que se
 #' buscan las relaciones dentro del sujeto. Este parámetro se hereda del la función children()
-#' del paquete {rsyntax}. Se recomienda no superar el valor 2.
+#' del paquete \{rsyntax\}. Se recomienda no superar el valor 2.
 #' @param prof_o es un numero entero positivo que determina la profundidad a la que se
 #' buscan las relaciones dentro del objeto. Este parámetro se hereda del la función children()
-#' del paquete {rsyntax}. Se recomienda no superar el valor 2.
+#' del paquete \{rsyntax\}. Se recomienda no superar el valor 2.
 #' @param u numero entero que indica el umbral de palabras del objeto en la reconstrucción SVO.
 #' @importFrom stats ave setNames
 #' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries

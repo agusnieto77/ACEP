@@ -2,41 +2,86 @@
 % Please edit documentation in R/acep_gpt.R
 \name{acep_gpt}
 \alias{acep_gpt}
-\title{Función para interactuar con los modelos  de OpenAI.}
+\title{Interacción con modelos GPT usando Structured Outputs}
 \usage{
 acep_gpt(
   texto,
   instrucciones,
-  gpt_api = Sys.getenv("OPENAI_API_KEY"),
-  modelo = "gpt-3.5-turbo-0125"
+  modelo = "gpt-4o-mini",
+  api_key = Sys.getenv("OPENAI_API_KEY"),
+  schema = NULL,
+  parse_json = TRUE,
+  temperature = 0,
+  max_tokens = 2000,
+  top_p = 0.2,
+  frequency_penalty = 0.2,
+  seed = 123456
 )
 }
 \arguments{
-\item{texto}{texto a procesar.}
+\item{texto}{Texto a analizar con GPT. Puede ser una noticia, tweet, documento, etc.}
 
-\item{instrucciones}{indicaciones de contexto que se le
-proporcionan al modelo de lenguaje GPT para influir en
-su generación de texto.}
+\item{instrucciones}{Instrucciones en lenguaje natural que indican al modelo qué hacer
+con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".}
 
-\item{gpt_api}{clave API secreta.}
+\item{modelo}{Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (más rápido y económico),
+`"gpt-4o"` (más potente), `"gpt-4o-2024-08-06"`, `"gpt-4o-2024-11-20"`. Por defecto: `"gpt-4o-mini"`.}
 
-\item{modelo}{modelo de lenguaje GPT de OpenAI.}
+\item{api_key}{Clave de API de OpenAI. Si no se proporciona, busca la variable de
+entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys}
+
+\item{schema}{Esquema JSON que define la estructura de la respuesta. Puede usar
+`acep_gpt_schema()` para obtener esquemas predefinidos o crear uno personalizado.
+Si es `NULL`, usa un esquema simple con campo "respuesta".}
+
+\item{parse_json}{Lógico. Si `TRUE` (por defecto), parsea automáticamente el JSON
+a un objeto R (lista o data frame). Si `FALSE`, devuelve el JSON como string.}
+
+\item{temperature}{Parámetro de temperatura (0-2). Valores bajos (0-0.3) generan
+respuestas más deterministas y consistentes. Valores altos (0.7-1) más creativas.
+Por defecto: 0 (máxima determinismo).}
+
+\item{max_tokens}{Número máximo de tokens en la respuesta. Por defecto: 2000.}
+
+\item{top_p}{Parámetro top-p para nucleus sampling (0-1). Controla la diversidad
+de la respuesta. Por defecto: 0.2.}
+
+\item{frequency_penalty}{Penalización por repetición de tokens frecuentes (-2 a 2).
+Por defecto: 0.2.}
+
+\item{seed}{Semilla numérica para reproducibilidad. Usar el mismo seed con los
+mismos parámetros genera respuestas idénticas. Por defecto: 123456.}
 }
 \value{
-Si todas las entradas son correctas,
-la salida sera un JSON con la información solicitada.
+Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
+  estructurada según el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 }
 \description{
-Función para interactuar con los modelos de OpenAI
-desde las claves API secretas y pagas.
+Función para interactuar con la API de OpenAI utilizando Structured Outputs,
+una funcionalidad que garantiza respuestas en formato JSON que cumplen estrictamente
+con un esquema predefinido. Esto elimina la necesidad de parseo y validación manual,
+haciendo las respuestas más confiables y estructuradas. Compatible con modelos
+`gpt-4o` y `gpt-4o-mini`.
 }
 \examples{
 \dontrun{
-texto <- "El SOIP declaro la huelga por aumento de salarios."
-pregunta <- "¿Cuál es el sujeto de la acción? Ejemplo de respuesta: 'CGT'"
-texto_gpt <- acep_gpt(texto = texto, instrucciones = pregunta)
-cat(texto_gpt)
+# Extraer entidades de un texto
+texto <- "El SUTEBA convocó a un paro en Buenos Aires el 15 de marzo."
+instrucciones <- "Extrae todas las entidades nombradas del texto."
+schema <- acep_gpt_schema("extraccion_entidades")
+resultado <- acep_gpt(texto, instrucciones, schema = schema)
+print(resultado)
+
+# Análisis de sentimiento
+texto <- "La protesta fue pacífica y bien organizada."
+schema <- acep_gpt_schema("sentimiento")
+resultado <- acep_gpt(texto, "Analiza el sentimiento del texto", schema = schema)
+print(resultado$sentimiento_general)
+
+# Clasificar noticia
+texto <- "Trabajadores reclamaron mejoras salariales."
+schema <- acep_gpt_schema("clasificacion")
+resultado <- acep_gpt(texto, "Clasifica esta noticia", schema = schema)
+print(resultado$categoria)
 }
 }
-\keyword{gpt}
-\keyword{tripletes}

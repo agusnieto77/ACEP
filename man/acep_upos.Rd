@@ -16,7 +16,7 @@ acep_upos(texto, modelo = "spanish")
 \arguments{
 \item{texto}{vector con los textos a procesar.}
 
-\item{modelo}{idioma del modelo de etiquetado POS del paquete {udpipe}.}
+\item{modelo}{idioma del modelo de etiquetado POS del paquete \code{udpipe}.}
 }
 \value{
 Si todas las entradas son correctas, la salida sera un marco de datos con 17 variables.

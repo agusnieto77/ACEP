@@ -1,3 +1,40 @@
+# ACEP 0.1.0.9000 (versión en desarrollo)
+
+## Nuevas funcionalidades
+
+* Se agregó `acep_corpus()`: constructor de objetos corpus para trabajar con pipelines de procesamiento de texto.
+* Se agregó `acep_result()`: constructor de objetos resultado con métodos de impresión y resumen.
+* Se agregó `acep_pipeline()`: pipeline completo que integra limpieza, conteo e intensidad.
+* Se agregaron funciones pipeline para análisis composable:
+  - `pipe_clean()`: limpieza de texto en pipeline
+  - `pipe_count()`: conteo de menciones en pipeline
+  - `pipe_intensity()`: cálculo de intensidad en pipeline
+  - `pipe_timeseries()`: generación de series temporales en pipeline
+* Se agregó `acep_postag_hibrido()`: etiquetado POS, lematización y extracción de entidades con spacyr.
+* Se agregó `acep_process_chunks()`: procesamiento de textos en lotes para gestionar grandes volúmenes de datos.
+* Se agregó `acep_gpt_schema()`: esquemas JSON predefinidos para análisis de texto con GPT.
+* Se agregaron funciones auxiliares para gestión de caché:
+  - `acep_clear_regex_cache()`: limpia el caché de expresiones regulares
+  - `acep_regex_cache_size()`: consulta el tamaño del caché
+
+## Mejoras en funciones existentes
+
+* `acep_count()`: se incorporó sistema de caché de expresiones regulares para mejorar rendimiento.
+* `acep_gpt()`: se actualizó para usar Structured Outputs de OpenAI con esquemas JSON.
+* `acep_clean()`: renombrada desde `acep_cleaning()` para mayor consistencia.
+
+## Documentación
+
+* Se mejoró la documentación de todas las funciones nuevas y modificadas.
+* Se agregaron ejemplos prácticos a todas las funciones operativas.
+* Se actualizó README.Rmd con la lista completa de 33 funciones del paquete.
+* Se actualizaron todas las viñetas para usar las nuevas funciones.
+
+## Funciones deprecadas
+
+* `acep_cleaning()` → usar `acep_clean()`
+* `acep_men()` → usar `acep_count()`
+* `acep_rst()` → funcionalidad integrada en otras funciones
 
 # ACEP 0.0.2.9005 (versión en desarrollo)
 

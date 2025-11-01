@@ -4,7 +4,7 @@
 #' etiquetado POS (modelo udpipe) para su posterior
 #' procesamiento con la función acep_postag.
 #' @param texto vector con los textos a procesar.
-#' @param modelo idioma del modelo de etiquetado POS del paquete {udpipe}.
+#' @param modelo idioma del modelo de etiquetado POS del paquete \code{udpipe}.
 #' @importFrom udpipe udpipe
 #' @importFrom rsyntax as_tokenindex
 #' @return Si todas las entradas son correctas, la salida sera un marco de datos con 17 variables.

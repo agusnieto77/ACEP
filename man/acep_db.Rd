@@ -21,7 +21,7 @@ Si todas las entradas son correctas, la salida sera una
 base de datos en formato tabular con tres nuevas variables.
 }
 \description{
-Función que usa las funciones acep_frec, acep_men y acep_int y
+Función que usa las funciones acep_frec, acep_count y acep_int y
 devuelve una tabla con tres columnas nuevas: numero de palabras,
 número de menciones del diccionario, indice de intensidad.
 }

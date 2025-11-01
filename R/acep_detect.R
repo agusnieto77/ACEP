@@ -19,29 +19,21 @@
 #' df
 #' @export
 acep_detect <- function(x, y, u = 1, tolower = TRUE) {
-  if (!is.character(x)) {
-    message("No ingresaste un vector de texto en el par\u00e1metro 'x'.
-            Vuelve a intentarlo ingresando un vector!")
+  validate_character(x, "x")
+  validate_character(y, "y")
+  validate_numeric(u, "u", min = 0)
+  validate_logical(tolower, "tolower")
+
+  if (tolower) {
+    x <- tolower(x)
   }
-  if (!is.character(y)) {
-    message("No ingresaste un vector de texto en el par\u00e1metro 'y'.
-            Vuelve a intentarlo ingresando un vector!")
-    return(NULL)
-  }
-  if (!is.logical(tolower)) {
-    message("No ingresaste un valor l\u00f3gico en el par\u00e1metro 'tolower'.")
-  }
-  if (!is.numeric(u)) {
-    message("No ingresaste un valor num\u00e9rico en el par\u00e1metro 'u'.")
-  } else {
-    if (tolower) {
-      x <- tolower(x)
-    }
-    out <- tryCatch({
-      dicc <- paste0(gsub("^ | $", "\\\\b", y), collapse = "|")
-      detect <- stringr::str_count(x, dicc)
-      ifelse(as.numeric(detect) >= u, 1, 0)
-    })
-    return(out)
-  }
+
+  out <- tryCatch({
+    dicc <- paste0(gsub("^ | $", "\\b", y), collapse = "|")
+    detect <- stringr::str_count(x, dicc)
+    ifelse(as.numeric(detect) >= u, 1, 0)
+  })
+
+  return(out)
 }
+

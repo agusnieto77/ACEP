@@ -1,0 +1,30 @@
+[
+  {
+    "entity_": "México",
+    "lat": 23.6585,
+    "long": -102.0077
+  },
+  {
+    "entity_": "Gobierno",
+    "lat": 12.1487,
+    "long": -86.2728
+  },
+  {
+    "entity_": "Ciudad de Buenos Aires",
+    "lat": -34.6096,
+    "long": -58.3888
+  },
+  {
+    "entity_": "Chubut",
+    "lat": -43.7128,
+    "long": -68.7462
+  },
+  {
+    "entity_": "Tucumán",
+    "lat": -27.0448,
+    "long": -65.3658
+  },
+  {
+    "entity_": "Ctera"
+  }
+]

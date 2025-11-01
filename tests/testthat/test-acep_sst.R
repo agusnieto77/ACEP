@@ -34,10 +34,11 @@ test_that("ACEP SST ANIO E1", {
   skip_if_offline()
   skip_on_cran()
   datos <- acep_bases$rp_procesada
-  datos_procesados_anio <- acep_sst(datos$fecha,
-                                    st = "anio", u = 4)
-  dimensiones <- 12
-  expect_equal(dimensiones, 12)
+
+  expect_error(
+    acep_sst(datos$fecha, st = "anio", u = 4),
+    "debe ser un data.frame"
+  )
 })
 
 test_that("ACEP SST DIA E2", {
@@ -45,8 +46,9 @@ test_that("ACEP SST DIA E2", {
   skip_on_cran()
   datos <- acep_bases$rp_procesada
   names(datos) <- c("A", "B", "C", "D")
-  datos_procesados_dia <- acep_sst(datos,
-                                   st = "dia")
+  expect_error(
+    datos_procesados_dia <- acep_sst(datos,st = "dia")
+  )
   dimensiones <- 2895
   expect_equal(dimensiones, 2895)
 })

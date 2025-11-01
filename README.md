@@ -13,7 +13,7 @@ coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)]
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://www.r-pkg.org/badges/version/ACEP)](https://cran.r-project.org/package=ACEP)
-[![](https://img.shields.io/badge/devel%20version-0.0.3.9005-blue.svg)](https://github.com/agusnieto77/ACEP)
+[![](https://img.shields.io/badge/devel%20version-0.1.0.9000-blue.svg)](https://github.com/agusnieto77/ACEP)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 [![](https://img.shields.io/github/languages/code-size/agusnieto77/ACEP.svg)](https://github.com/agusnieto77/ACEP)
@@ -56,41 +56,50 @@ devtools::install_github("agusnieto77/ACEP")
 
 ### Funciones
 
-| Nombre               | Ciclo                                                                        | Descripción                                                                       |
-|:---------------------|:-----------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
-| `acep_clean()`       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)   | Limpieza de texto.                                                                |
-| `acep_cleaning()`    | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Limpieza de texto.                                                                |
-| `acep_context()`     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer contexto de palabras o frases.                               |
-| `acep_count()`       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de menciones de palabras.                                              |
-| `acep_db()`          | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia, menciones e intensidad.                                               |
-| `acep_detect()`      | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Detección de menciones de palabras.                                               |
-| `acep_extract()`     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Extraer palabras de un texto.                                                     |
-| `acep_frec()`        | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de palabras totales.                                                   |
-| `acep_gpt()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con los modelos de OpenAI.                               |
-| `acep_int()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Índice de intensidad.                                                             |
-| `acep_load_base()`   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Carga bases de datos creadas por el Observatorio.                                 |
-| `acep_may()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto mayúsculas                                                     |
-| `acep_men()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)   | Frecuencia de menciones de palabras.                                              |
-| `acep_min()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto minúsculas.                                                    |
-| `acep_plot_rst()`    | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Resumen visual de la serie temporal de los índices de conflictividad.             |
-| `acep_plot_st()`     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Gráfico de barras de la serie temporal de índices de conflictividad.              |
-| `acep_postag()`      | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para etiquetado POS, lematización, tokenización, extracción de entidades. |
-| `acep_rst()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-deprecated.svg)   | Serie temporal de índices de conflictividad.                                      |
-| `acep_sst()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Serie temporal de índices de conflictividad.                                      |
-| `acep_svo()`         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).                         |
-| `acep_token()`       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para tokenizar.                                                           |
-| `acep_token_plot()`  | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Gráfico de barras de palabras más recurrentes en un corpus.                       |
-| `acep_token_table()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Tabla de frecuencia de palabras tokenizadas.                                      |
-| `acep_upos()`        | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para etiquetado POS, lematización, tokenización.                          |
+| Nombre | Ciclo | Descripción |
+|:---|:---|:---|
+| `acep_clean()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Limpieza de texto. |
+| `acep_clear_regex_cache()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Limpia la caché de expresiones regulares compiladas. |
+| `acep_context()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer contexto de palabras o frases. |
+| `acep_corpus()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Constructor de objetos acep_corpus para pipelines. |
+| `acep_count()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Frecuencia de menciones de palabras. |
+| `acep_db()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Frecuencia, menciones e intensidad. |
+| `acep_detect()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Detección de menciones de palabras. |
+| `acep_extract()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Extraer palabras de un texto. |
+| `acep_frec()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Frecuencia de palabras totales. |
+| `acep_gpt()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con los modelos de OpenAI. |
+| `acep_gpt_schema()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Define esquemas para respuestas estructuradas de GPT. |
+| `acep_int()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Índice de intensidad. |
+| `acep_load_base()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Carga bases de datos creadas por el Observatorio. |
+| `acep_may()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a mayúsculas. |
+| `acep_min()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a minúsculas. |
+| `acep_pipeline()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline composable para procesamiento de texto. |
+| `acep_plot_rst()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Resumen visual de la serie temporal de los índices de conflictividad. |
+| `acep_plot_st()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Gráfico de barras de la serie temporal de índices de conflictividad. |
+| `acep_postag()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para etiquetado POS, lematización, tokenización, extracción de entidades. |
+| `acep_postag_hibrido()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Etiquetado POS híbrido combinando udpipe y spacyr. |
+| `acep_process_chunks()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Procesamiento de textos en chunks para optimizar memoria. |
+| `acep_regex_cache_size()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Consulta el tamaño actual de la caché de regex. |
+| `acep_result()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Constructor de objetos acep_result para resultados de análisis. |
+| `acep_sst()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Serie temporal de índices de conflictividad. |
+| `acep_svo()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer tripletes SVO (Sujeto-Verbo-Objeto). |
+| `acep_token()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para tokenizar. |
+| `acep_token_plot()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Gráfico de barras de palabras más recurrentes en un corpus. |
+| `acep_token_table()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Tabla de frecuencia de palabras tokenizadas. |
+| `acep_upos()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para etiquetado POS, lematización, tokenización. |
+| `pipe_clean()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline: limpieza de texto. |
+| `pipe_count()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline: conteo de menciones. |
+| `pipe_intensity()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline: cálculo de intensidad. |
+| `pipe_timeseries()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline: series temporales. |
 
 ### Colecciones
 
-| Nombre              | Descripción                                             |
-|:--------------------|:--------------------------------------------------------|
-| `acep_bases`        | Colección de notas.                                     |
-| `acep_diccionarios` | Colección de diccionarios.                              |
-| `acep_prompt_gpt`   | Colección de instrucciones.                             |
-| `acep_rs`           | Cadenas de caracteres para limpiar y normalizar textos. |
+| Nombre | Descripción |
+|:---|:---|
+| `acep_bases` | Colección de notas. |
+| `acep_diccionarios` | Colección de diccionarios. |
+| `acep_prompt_gpt` | Colección de instrucciones. |
+| `acep_rs` | Cadenas de caracteres para limpiar y normalizar textos. |
 
 ### Corpus
 
@@ -253,7 +262,7 @@ head(rp_procesada)
 
     #> # A tibble: 6 × 9
     #>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
-    #>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <dbl>      <dbl>
+    #>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
     #> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         28          0          0
     #> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1142          0          0
     #> 3 2020-12-24 Plantas… En Ch… "El … https… http…        536          0          0
