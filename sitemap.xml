@@ -1,129 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/404.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/conflictividad_soip.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/extraccion_de_svo_con_acep.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/extraccion_palabras_clave.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/limpieza_de_texto_con_acep.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/rendimiento_funciones_acep.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/articles/tokenizar_con_acep.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_bases.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_clean.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_cleaning.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_context.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_count.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_db.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_detect.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_diccionarios.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_extract.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_frec.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_gpt.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_int.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_load_base.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_may.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_men.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_min.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_st.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_postag.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_prompt_gpt.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_rs.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_rst.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_sst.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_svo.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_token_table.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/acep_upos.html</loc>
-  </url>
-  <url>
-    <loc>https://agusnieto77.github.io/ACEP/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://agusnieto77.github.io/ACEP/404.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/LICENSE-text.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/LICENSE.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/conflictividad_soip.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/extraccion_de_svo_con_acep.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/extraccion_palabras_clave.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/index.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/limpieza_de_texto_con_acep.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/articles/tokenizar_con_acep.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/authors.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/index.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/news/index.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_bases.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_clean.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_clear_regex_cache.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_context.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_corpus.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_count.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_db.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_detect.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_diccionarios.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_extract.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_frec.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_gpt.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_gpt_schema.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_int.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_load_base.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_may.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_min.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_pipeline.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_st.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_postag.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_postag_hibrido.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_process_chunks.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_prompt_gpt.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_regex_cache_size.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_result.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_rs.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_sst.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_svo.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_token.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_token_plot.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_token_table.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_upos.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_regex_cache.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/index.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/pipe.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_clean.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_count.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_intensity.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_timeseries.html</loc></url>
 </urlset>
+
