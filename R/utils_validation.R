@@ -14,7 +14,7 @@ validate_character <- function(x, arg_name = "x", allow_null = FALSE) {
 
   if (!is.character(x) || is.list(x)) {
     stop(
-      sprintf("El parámetro '%s' debe ser un vector de texto (character).\n", arg_name),
+      sprintf("El parametro '%s' debe ser un vector de texto (character).\n", arg_name),
       sprintf("Recibido: %s", class(x)[1]),
       call. = FALSE
     )
@@ -41,7 +41,7 @@ validate_numeric <- function(x, arg_name = "x", min = NULL, max = NULL, allow_nu
 
   if (!is.numeric(x)) {
     stop(
-      sprintf("El parámetro '%s' debe ser numérico.\n", arg_name),
+      sprintf("El parametro '%s' debe ser numerico.\n", arg_name),
       sprintf("Recibido: %s", class(x)[1]),
       call. = FALSE
     )
@@ -49,14 +49,14 @@ validate_numeric <- function(x, arg_name = "x", min = NULL, max = NULL, allow_nu
 
   if (!is.null(min) && any(x < min, na.rm = TRUE)) {
     stop(
-      sprintf("El parámetro '%s' debe ser >= %s", arg_name, min),
+      sprintf("El parametro '%s' debe ser >= %s", arg_name, min),
       call. = FALSE
     )
   }
 
   if (!is.null(max) && any(x > max, na.rm = TRUE)) {
     stop(
-      sprintf("El parámetro '%s' debe ser <= %s", arg_name, max),
+      sprintf("El parametro '%s' debe ser <= %s", arg_name, max),
       call. = FALSE
     )
   }
@@ -75,7 +75,7 @@ validate_numeric <- function(x, arg_name = "x", min = NULL, max = NULL, allow_nu
 validate_logical <- function(x, arg_name = "x") {
   if (!is.logical(x) || length(x) != 1) {
     stop(
-      sprintf("El parámetro '%s' debe ser un valor lógico (TRUE o FALSE).\n", arg_name),
+      sprintf("El parametro '%s' debe ser un valor logico (TRUE o FALSE).\n", arg_name),
       sprintf("Recibido: %s", paste(class(x), collapse = ", ")),
       call. = FALSE
     )
@@ -96,7 +96,7 @@ validate_logical <- function(x, arg_name = "x") {
 validate_dataframe <- function(df, required_cols = NULL, arg_name = "datos") {
   if (!is.data.frame(df)) {
     stop(
-      sprintf("El parámetro '%s' debe ser un data frame.\n", arg_name),
+      sprintf("El parametro '%s' debe ser un data frame.\n", arg_name),
       sprintf("Recibido: %s", class(df)[1]),
       call. = FALSE
     )
@@ -134,7 +134,7 @@ validate_date <- function(x, arg_name = "fecha") {
       test_date <- try(as.Date(x), silent = TRUE)
       if (inherits(test_date, "try-error")) {
         stop(
-          sprintf("El parámetro '%s' debe ser un vector de tipo Date o convertible a Date.\n", arg_name),
+          sprintf("El parametro '%s' debe ser un vector de tipo Date o convertible a Date.\n", arg_name),
           sprintf("Recibido: %s\n", class(x)[1]),
           "Sugerencia: Use as.Date() para convertir su vector de fechas.",
           call. = FALSE
@@ -142,7 +142,7 @@ validate_date <- function(x, arg_name = "fecha") {
       }
     } else {
       stop(
-        sprintf("El parámetro '%s' debe ser un vector de tipo Date.\n", arg_name),
+        sprintf("El parametro '%s' debe ser un vector de tipo Date.\n", arg_name),
         sprintf("Recibido: %s\n", class(x)[1]),
         "Sugerencia: Use as.Date() para convertir su vector de fechas.",
         call. = FALSE
@@ -165,7 +165,7 @@ validate_date <- function(x, arg_name = "fecha") {
 validate_choice <- function(x, choices, arg_name = "x") {
   if (length(x) != 1 || !x %in% choices) {
     stop(
-      sprintf("El parámetro '%s' debe ser uno de: %s\n",
+      sprintf("El parametro '%s' debe ser uno de: %s\n",
               arg_name, paste(choices, collapse = ", ")),
       sprintf("Recibido: %s", x),
       call. = FALSE

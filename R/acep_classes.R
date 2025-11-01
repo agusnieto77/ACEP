@@ -1,15 +1,15 @@
-#' @title Constructor de corpus para análisis de texto
+#' @title Constructor de corpus para analisis de texto
 #' @description
-#' Crea un objeto de clase `acep_corpus` que encapsula una colección de textos
-#' junto con su metadata asociada. Este objeto está diseñado para trabajar
+#' Crea un objeto de clase `acep_corpus` que encapsula una coleccion de textos
+#' junto con su metadata asociada. Este objeto esta disenado para trabajar
 #' con las funciones pipeline de ACEP (`pipe_clean`, `pipe_count`, etc.),
 #' permitiendo un flujo de trabajo encadenado y manteniendo trazabilidad
 #' de las transformaciones aplicadas.
 #'
 #' @param texto Vector de caracteres con los textos a almacenar en el corpus.
-#' @param metadata Lista opcional con información adicional sobre el corpus
-#'   (ej: fuente, fecha de recolección, categorías temáticas).
-#' @param id Vector opcional de identificadores únicos para cada texto.
+#' @param metadata Lista opcional con informacion adicional sobre el corpus
+#'   (ej: fuente, fecha de recoleccion, categorias tematicas).
+#' @param id Vector opcional de identificadores unicos para cada texto.
 #'   Si no se proporciona, se asignan IDs secuenciales (1, 2, 3, ...).
 #'
 #' @return Objeto de clase `acep_corpus` con la siguiente estructura:
@@ -31,7 +31,7 @@
 #' # Crear corpus con metadata e IDs personalizados
 #' corpus <- acep_corpus(
 #'   texto = c("Noticia 1", "Noticia 2"),
-#'   metadata = list(fuente = "Diario La Nación", año = 2024),
+#'   metadata = list(fuente = "Diario La Nacion", year = 2024),
 #'   id = c("LN001", "LN002")
 #' )
 acep_corpus <- function(texto, metadata = NULL, id = NULL) {
@@ -86,31 +86,31 @@ summary.acep_corpus <- function(object, ...) {
   invisible(object)
 }
 
-#' @title Constructor de resultados de análisis
+#' @title Constructor de resultados de analisis
 #' @description
 #' Crea un objeto de clase `acep_result` que encapsula los resultados de
-#' un análisis de texto realizado con funciones de ACEP. Este objeto
-#' proporciona métodos especializados para visualización (`plot()`),
-#' resumen (`summary()`) y conversión a data frame (`as.data.frame()`).
+#' un analisis de texto realizado con funciones de ACEP. Este objeto
+#' proporciona metodos especializados para visualizacion (`plot()`),
+#' resumen (`summary()`) y conversion a data frame (`as.data.frame()`).
 #'
-#' @param data Data frame con los resultados del análisis.
+#' @param data Data frame con los resultados del analisis.
 #' @param tipo Tipo de resultado que contiene el objeto. Valores comunes:
 #'   `"frecuencia"`, `"intensidad"`, `"svo"`, `"serie_temporal"`, `"general"`.
-#'   Este parámetro determina el comportamiento de los métodos de impresión y visualización.
-#' @param metadata Lista opcional con información sobre el análisis realizado
-#'   (ej: diccionario utilizado, parámetros aplicados, corpus de origen).
+#'   Este parametro determina el comportamiento de los metodos de impresion y visualizacion.
+#' @param metadata Lista opcional con informacion sobre el analisis realizado
+#'   (ej: diccionario utilizado, parametros aplicados, corpus de origen).
 #'
 #' @return Objeto de clase `acep_result` con la siguiente estructura:
 #' \itemize{
-#'   \item \code{data}: Data frame con los resultados del análisis
+#'   \item \code{data}: Data frame con los resultados del analisis
 #'   \item \code{tipo}: Etiqueta del tipo de resultado
-#'   \item \code{metadata}: Información adicional del análisis
-#'   \item \code{fecha_creacion}: Timestamp de creación del objeto
+#'   \item \code{metadata}: Informacion adicional del analisis
+#'   \item \code{fecha_creacion}: Timestamp de creacion del objeto
 #' }
 #'
 #' @export
 #' @examples
-#' # Crear resultado de análisis de frecuencias
+#' # Crear resultado de analisis de frecuencias
 #' datos <- data.frame(
 #'   texto = c("El SUTEBA va al paro", "SOIP protesta"),
 #'   frecuencia = c(5, 3)
@@ -160,17 +160,17 @@ summary.acep_result <- function(object, ...) {
   cat("Dimensiones:", nrow(object$data), "x", ncol(object$data), "\n")
   cat("Columnas:", paste(names(object$data), collapse = ", "), "\n\n")
 
-  # Resumen específico por tipo
+  # Resumen especifico por tipo
   if (object$tipo == "frecuencia" && "n_palabras" %in% names(object$data)) {
-    cat("Estadísticas de frecuencia:\n")
+    cat("Estadisticas de frecuencia:\n")
     cat("  Total palabras:", sum(object$data$n_palabras, na.rm = TRUE), "\n")
     cat("  Promedio por documento:", mean(object$data$n_palabras, na.rm = TRUE), "\n")
   }
 
   if (object$tipo == "intensidad" && "intensidad" %in% names(object$data)) {
-    cat("Estadísticas de intensidad:\n")
+    cat("Estadisticas de intensidad:\n")
     cat("  Promedio:", mean(object$data$intensidad, na.rm = TRUE), "\n")
-    cat("  Máximo:", max(object$data$intensidad, na.rm = TRUE), "\n")
+    cat("  Maximo:", max(object$data$intensidad, na.rm = TRUE), "\n")
   }
 
   invisible(object)
@@ -191,7 +191,7 @@ plot.acep_result <- function(x, ...) {
             ylab = "Intensidad",
             ...)
   } else {
-    message("No hay método de plot específico para este tipo de resultado")
+    message("No hay metodo de plot especifico para este tipo de resultado")
   }
   invisible(x)
 }

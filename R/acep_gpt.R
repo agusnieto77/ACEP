@@ -1,49 +1,49 @@
-#' @title Interacción con modelos GPT usando Structured Outputs
+#' @title Interaccion con modelos GPT usando Structured Outputs
 #' @description
-#' Función para interactuar con la API de OpenAI utilizando Structured Outputs,
+#' Funcion para interactuar con la API de OpenAI utilizando Structured Outputs,
 #' una funcionalidad que garantiza respuestas en formato JSON que cumplen estrictamente
-#' con un esquema predefinido. Esto elimina la necesidad de parseo y validación manual,
-#' haciendo las respuestas más confiables y estructuradas. Compatible con modelos
+#' con un esquema predefinido. Esto elimina la necesidad de parseo y validacion manual,
+#' haciendo las respuestas mas confiables y estructuradas. Compatible con modelos
 #' `gpt-4o` y `gpt-4o-mini`.
 #'
 #' @param texto Texto a analizar con GPT. Puede ser una noticia, tweet, documento, etc.
-#' @param instrucciones Instrucciones en lenguaje natural que indican al modelo qué hacer
+#' @param instrucciones Instrucciones en lenguaje natural que indican al modelo que hacer
 #'   con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".
-#' @param modelo Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (más rápido y económico),
-#'   `"gpt-4o"` (más potente), `"gpt-4o-2024-08-06"`, `"gpt-4o-2024-11-20"`. Por defecto: `"gpt-4o-mini"`.
+#' @param modelo Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (mas rapido y economico),
+#'   `"gpt-4o"` (mas potente), `"gpt-4o-2024-08-06"`, `"gpt-4o-2024-11-20"`. Por defecto: `"gpt-4o-mini"`.
 #' @param api_key Clave de API de OpenAI. Si no se proporciona, busca la variable de
 #'   entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys
 #' @param schema Esquema JSON que define la estructura de la respuesta. Puede usar
 #'   `acep_gpt_schema()` para obtener esquemas predefinidos o crear uno personalizado.
 #'   Si es `NULL`, usa un esquema simple con campo "respuesta".
-#' @param parse_json Lógico. Si `TRUE` (por defecto), parsea automáticamente el JSON
+#' @param parse_json Logico. Si `TRUE` (por defecto), parsea automaticamente el JSON
 #'   a un objeto R (lista o data frame). Si `FALSE`, devuelve el JSON como string.
-#' @param temperature Parámetro de temperatura (0-2). Valores bajos (0-0.3) generan
-#'   respuestas más deterministas y consistentes. Valores altos (0.7-1) más creativas.
-#'   Por defecto: 0 (máxima determinismo).
-#' @param max_tokens Número máximo de tokens en la respuesta. Por defecto: 2000.
-#' @param top_p Parámetro top-p para nucleus sampling (0-1). Controla la diversidad
+#' @param temperature Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
+#'   respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas creativas.
+#'   Por defecto: 0 (maxima determinismo).
+#' @param max_tokens Numero maximo de tokens en la respuesta. Por defecto: 2000.
+#' @param top_p Parametro top-p para nucleus sampling (0-1). Controla la diversidad
 #'   de la respuesta. Por defecto: 0.2.
-#' @param frequency_penalty Penalización por repetición de tokens frecuentes (-2 a 2).
+#' @param frequency_penalty Penalizacion por repeticion de tokens frecuentes (-2 a 2).
 #'   Por defecto: 0.2.
-#' @param seed Semilla numérica para reproducibilidad. Usar el mismo seed con los
-#'   mismos parámetros genera respuestas idénticas. Por defecto: 123456.
+#' @param seed Semilla numerica para reproducibilidad. Usar el mismo seed con los
+#'   mismos parametros genera respuestas identicas. Por defecto: 123456.
 #'
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
-#'   estructurada según el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
+#'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
 #' @export
 #' @examples
 #' \dontrun{
 #' # Extraer entidades de un texto
-#' texto <- "El SUTEBA convocó a un paro en Buenos Aires el 15 de marzo."
+#' texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
 #' instrucciones <- "Extrae todas las entidades nombradas del texto."
 #' schema <- acep_gpt_schema("extraccion_entidades")
 #' resultado <- acep_gpt(texto, instrucciones, schema = schema)
 #' print(resultado)
 #'
-#' # Análisis de sentimiento
-#' texto <- "La protesta fue pacífica y bien organizada."
+#' # Analisis de sentimiento
+#' texto <- "La protesta fue pacifica y bien organizada."
 #' schema <- acep_gpt_schema("sentimiento")
 #' resultado <- acep_gpt(texto, "Analiza el sentimiento del texto", schema = schema)
 #' print(resultado$sentimiento_general)
@@ -68,13 +68,13 @@ acep_gpt <- function(texto,
   
   # Validaciones
   if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parámetro 'texto' debe ser una cadena de caracteres no vacía")
+    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
   }
   if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parámetro 'instrucciones' debe ser una cadena de caracteres no vacía")
+    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
   }
   if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno OPENAI_API_KEY o pasa el parámetro api_key")
+    stop("API key no encontrada. Define la variable de entorno OPENAI_API_KEY o pasa el parametro api_key")
   }
   
   # Validar modelo compatible con Structured Outputs
@@ -91,7 +91,7 @@ acep_gpt <- function(texto,
       properties = list(
         respuesta = list(
           type = "string",
-          description = "Respuesta principal a la pregunta o instrucción"
+          description = "Respuesta principal a la pregunta o instruccion"
         )
       ),
       required = I(c("respuesta")),  # Usar I() para proteger el array de auto_unbox
@@ -100,12 +100,12 @@ acep_gpt <- function(texto,
   }
   
   # Construir prompt del sistema
-  system_prompt <- "Eres un asistente experto en análisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Sé preciso, conciso y basa tus respuestas únicamente en el texto proporcionado."
-  
+  system_prompt <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+
   # Construir prompt del usuario
   user_prompt <- sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
   
-  # Construir body de la petición
+  # Construir body de la peticion
   body <- list(
     model = modelo,
     messages = list(
@@ -127,7 +127,7 @@ acep_gpt <- function(texto,
     seed = seed
   )
   
-  # Realizar petición a la API
+  # Realizar peticion a la API
   tryCatch({
     output <- httr::POST(
       url = "https://api.openai.com/v1/chat/completions",
@@ -138,23 +138,23 @@ acep_gpt <- function(texto,
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),  # Serializar con auto_unbox pero protegiendo arrays con I()
       encode = "raw"
     )
-    
-    # Verificar código HTTP
+
+    # Verificar codigo HTTP
     if (httr::status_code(output) != 200) {
       error_content <- httr::content(output, as = "parsed")
-      stop(sprintf("Error HTTP %d: %s", 
+      stop(sprintf("Error HTTP %d: %s",
                    httr::status_code(output),
                    error_content$error$message))
     }
-    
+
     # Extraer respuesta
     respuesta_json <- httr::content(output, as = "parsed")$choices[[1]]$message$content
-    
-    # Verificar respuesta vacía
+
+    # Verificar respuesta vacia
     if (is.null(respuesta_json) || nchar(respuesta_json) == 0) {
-      stop("La API devolvió una respuesta vacía. Verifica tu prompt y esquema.")
+      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
     }
-    
+
     # Parsear JSON si se solicita
     if (parse_json) {
       resultado <- jsonlite::fromJSON(respuesta_json, simplifyVector = TRUE)
@@ -162,44 +162,44 @@ acep_gpt <- function(texto,
     } else {
       return(respuesta_json)
     }
-    
+
   }, error = function(e) {
     stop(sprintf("Error al interactuar con la API de OpenAI: %s", conditionMessage(e)))
   })
 }
 
 
-#' @title Esquemas JSON predefinidos para análisis de texto con GPT
+#' @title Esquemas JSON predefinidos para analisis de texto con GPT
 #' @description
 #' Proporciona esquemas JSON predefinidos y validados para casos de uso comunes
-#' en análisis de texto con GPT. Estos esquemas garantizan respuestas estructuradas
-#' y consistentes para tareas como extracción de entidades, clasificación, análisis
-#' de sentimiento, resumen, pregunta-respuesta y extracción de tripletes.
+#' en analisis de texto con GPT. Estos esquemas garantizan respuestas estructuradas
+#' y consistentes para tareas como extraccion de entidades, clasificacion, analisis
+#' de sentimiento, resumen, pregunta-respuesta y extraccion de tripletes.
 #'
 #' @param tipo Tipo de esquema a devolver. Opciones:
 #' \itemize{
 #'   \item \code{"extraccion_entidades"}: Extrae personas, organizaciones, lugares, fechas y eventos
-#'   \item \code{"clasificacion"}: Clasifica el texto en categorías con nivel de confianza
-#'   \item \code{"sentimiento"}: Analiza sentimiento general y por aspectos específicos
-#'   \item \code{"resumen"}: Genera resúmenes cortos y detallados con puntos clave
+#'   \item \code{"clasificacion"}: Clasifica el texto en categorias con nivel de confianza
+#'   \item \code{"sentimiento"}: Analiza sentimiento general y por aspectos especificos
+#'   \item \code{"resumen"}: Genera resumenes cortos y detallados con puntos clave
 #'   \item \code{"qa"}: Responde preguntas con citas textuales y nivel de confianza
 #'   \item \code{"tripletes"}: Extrae relaciones sujeto-predicado-objeto
 #' }
 #'
 #' @return Lista con esquema JSON compatible con OpenAI Structured Outputs.
-#'   Puede usarse directamente en el parámetro `schema` de `acep_gpt()`.
+#'   Puede usarse directamente en el parametro `schema` de `acep_gpt()`.
 #'
 #' @export
 #' @examples
-#' # Obtener esquema para extracción de entidades
+#' # Obtener esquema para extraccion de entidades
 #' schema_entidades <- acep_gpt_schema("extraccion_entidades")
 #' names(schema_entidades$properties)  # personas, organizaciones, lugares, fechas, eventos
 #'
-#' # Obtener esquema para clasificación
+#' # Obtener esquema para clasificacion
 #' schema_clasif <- acep_gpt_schema("clasificacion")
 #' names(schema_clasif$properties)  # categoria, confianza, justificacion
 #'
-#' # Obtener esquema para análisis de sentimiento
+#' # Obtener esquema para analisis de sentimiento
 #' schema_sent <- acep_gpt_schema("sentimiento")
 #' names(schema_sent$properties)  # sentimiento_general, puntuacion, aspectos
 #'
@@ -209,7 +209,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
   
   esquemas <- list(
     
-    # Esquema para extracción de entidades
+    # Esquema para extraccion de entidades
     extraccion_entidades = list(
       type = "object",
       properties = list(
@@ -242,14 +242,14 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = I(c("personas", "organizaciones", "lugares", "fechas", "eventos")),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para clasificación
+
+    # Esquema para clasificacion
     clasificacion = list(
       type = "object",
       properties = list(
         categoria = list(
           type = "string",
-          description = "Categoría principal del texto"
+          description = "Categoria principal del texto"
         ),
         confianza = list(
           type = "number",
@@ -257,14 +257,14 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         ),
         justificacion = list(
           type = "string",
-          description = "Breve justificación de la clasificación"
+          description = "Breve justificacion de la clasificacion"
         )
       ),
       required = I(c("categoria", "confianza", "justificacion")),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para análisis de sentimiento
+
+    # Esquema para analisis de sentimiento
     sentimiento = list(
       type = "object",
       properties = list(
@@ -275,7 +275,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         ),
         puntuacion = list(
           type = "number",
-          description = "Puntuación de sentimiento de -1 (muy negativo) a 1 (muy positivo)"
+          description = "Puntuacion de sentimiento de -1 (muy negativo) a 1 (muy positivo)"
         ),
         aspectos = list(
           type = "array",
@@ -288,20 +288,20 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
             required = I(c("aspecto", "sentimiento")),
             additionalProperties = FALSE
           ),
-          description = "Sentimientos por aspecto específico"
+          description = "Sentimientos por aspecto especifico"
         )
       ),
       required = I(c("sentimiento_general", "puntuacion", "aspectos")),
       additionalProperties = FALSE
     ),
-    
+
     # Esquema para resumen
     resumen = list(
       type = "object",
       properties = list(
         resumen_corto = list(
           type = "string",
-          description = "Resumen en una oración"
+          description = "Resumen en una oracion"
         ),
         resumen_detallado = list(
           type = "string",
@@ -316,7 +316,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = I(c("resumen_corto", "resumen_detallado", "puntos_clave")),
       additionalProperties = FALSE
     ),
-    
+
     # Esquema para pregunta-respuesta
     qa = list(
       type = "object",
@@ -338,8 +338,8 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = I(c("respuesta", "confianza", "cita_textual")),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para extracción de tripletes (sujeto-predicado-objeto)
+
+    # Esquema para extraccion de tripletes (sujeto-predicado-objeto)
     tripletes = list(
       type = "object",
       properties = list(
@@ -355,7 +355,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
             required = I(c("sujeto", "predicado", "objeto")),
             additionalProperties = FALSE
           ),
-          description = "Lista de tripletes extraídos del texto"
+          description = "Lista de tripletes extraidos del texto"
         )
       ),
       required = I(c("tripletes")),
@@ -364,7 +364,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
   )
   
   if (!tipo %in% names(esquemas)) {
-    stop(sprintf("Tipo de esquema no válido. Opciones: %s", paste(names(esquemas), collapse = ", ")))
+    stop(sprintf("Tipo de esquema no valido. Opciones: %s", paste(names(esquemas), collapse = ", ")))
   }
   
   return(esquemas[[tipo]])

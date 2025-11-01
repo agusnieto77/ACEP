@@ -4,7 +4,7 @@ date: "`r Sys.Date()`"
 author: "Agust\u00edn Nieto"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tokenizar_con_acep}
+  %\VignetteIndexEntry{extraccion_de_svo_con_acep}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

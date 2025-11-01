@@ -1,50 +1,50 @@
-#' @title Etiquetado POS, lematización y extracción de entidades con spacyr
+#' @title Etiquetado POS, lematizacion y extraccion de entidades con spacyr
 #' @description
-#' Realiza análisis lingüístico completo de textos usando la biblioteca spaCy a través
-#' de spacyr. Incluye: etiquetado POS (Part-of-Speech), lematización, tokenización,
-#' extracción de entidades nombradas, frases nominales y geocodificación de ubicaciones.
-#' La función procesa automáticamente grandes volúmenes de texto dividiéndolos en lotes
-#' (chunks) y soporta procesamiento paralelo para acelerar el análisis
+#' Realiza analisis linguistico completo de textos usando la biblioteca spaCy a traves
+#' de spacyr. Incluye: etiquetado POS (Part-of-Speech), lematizacion, tokenizacion,
+#' extraccion de entidades nombradas, frases nominales y geocodificacion de ubicaciones.
+#' La funcion procesa automaticamente grandes volumenes de texto dividiendolos en lotes
+#' (chunks) y soporta procesamiento paralelo para acelerar el analisis
 #'
 #' @param texto Vector de caracteres con los textos a analizar.
 #' @param core Modelo de lenguaje de spaCy a utilizar. Opciones: `"es_core_news_sm"`,
-#'   `"es_core_news_md"`, `"es_core_news_lg"` (español), `"en_core_web_sm"`,
-#'   `"en_core_web_md"`, `"en_core_web_lg"` (inglés), `"pt_core_news_sm"`,
-#'   `"pt_core_news_md"`, `"pt_core_news_lg"` (portugués). Por defecto: `"es_core_news_lg"`.
-#' @param bajar_core Lógico. Si `TRUE`, descarga automáticamente el modelo si no está instalado.
-#' @param inst_spacy Lógico. Si `TRUE`, instala la biblioteca spaCy en el entorno Python.
-#' @param inst_miniconda Lógico. Si `TRUE`, instala Miniconda (necesario para spaCy).
-#' @param inst_reticulate Lógico. Si `TRUE`, instala el paquete reticulate de R.
-#' @param chunk_size Número de textos a procesar por lote. Valores más bajos consumen
-#'   menos memoria pero tardan más. Por defecto: 1000.
-#' @param parallel_chunks Lógico. Si `TRUE`, procesa los lotes en paralelo usando
-#'   múltiples núcleos del CPU. Requiere los paquetes `future` y `furrr`. Por defecto: `FALSE`.
-#' @param n_cores Número de núcleos de CPU a usar en modo paralelo. Si es `NULL`,
-#'   detecta automáticamente el número de núcleos disponibles menos uno.
-#' @param geocode_cache_file Ruta al archivo JSON donde se almacena el caché de
-#'   geocodificación para evitar consultas repetidas. Por defecto: `"geocode_cache.json"`.
-#' @param use_cache Lógico. Si `TRUE`, usa y actualiza el caché de geocodificación.
-#' @param show_progress Lógico. Si `TRUE`, muestra mensajes de progreso en la consola.
+#'   `"es_core_news_md"`, `"es_core_news_lg"` (espanol), `"en_core_web_sm"`,
+#'   `"en_core_web_md"`, `"en_core_web_lg"` (ingles), `"pt_core_news_sm"`,
+#'   `"pt_core_news_md"`, `"pt_core_news_lg"` (portugues). Por defecto: `"es_core_news_lg"`.
+#' @param bajar_core Logico. Si `TRUE`, descarga automaticamente el modelo si no esta instalado.
+#' @param inst_spacy Logico. Si `TRUE`, instala la biblioteca spaCy en el entorno Python.
+#' @param inst_miniconda Logico. Si `TRUE`, instala Miniconda (necesario para spaCy).
+#' @param inst_reticulate Logico. Si `TRUE`, instala el paquete reticulate de R.
+#' @param chunk_size Numero de textos a procesar por lote. Valores mas bajos consumen
+#'   menos memoria pero tardan mas. Por defecto: 1000.
+#' @param parallel_chunks Logico. Si `TRUE`, procesa los lotes en paralelo usando
+#'   multiples nucleos del CPU. Requiere los paquetes `future` y `furrr`. Por defecto: `FALSE`.
+#' @param n_cores Numero de nucleos de CPU a usar en modo paralelo. Si es `NULL`,
+#'   detecta automaticamente el numero de nucleos disponibles menos uno.
+#' @param geocode_cache_file Ruta al archivo JSON donde se almacena el cache de
+#'   geocodificacion para evitar consultas repetidas. Por defecto: `"geocode_cache.json"`.
+#' @param use_cache Logico. Si `TRUE`, usa y actualiza el cache de geocodificacion.
+#' @param show_progress Logico. Si `TRUE`, muestra mensajes de progreso en la consola.
 #'
-#' @return Lista con 6 data frames que contienen diferentes niveles de análisis:
+#' @return Lista con 6 data frames que contienen diferentes niveles de analisis:
 #' \itemize{
-#'   \item \code{texto_tag}: Tokenización completa con etiquetas POS, lemas, dependencias
-#'     sintácticas y atributos morfológicos para cada token
+#'   \item \code{texto_tag}: Tokenizacion completa con etiquetas POS, lemas, dependencias
+#'     sintacticas y atributos morfologicos para cada token
 #'   \item \code{texto_tag_entity}: Tokens con entidades nombradas consolidadas
 #'     (ej: "Mar del Plata" como una sola entidad en lugar de 3 tokens separados)
-#'   \item \code{texto_only_entity}: Solo las entidades nombradas extraídas
+#'   \item \code{texto_only_entity}: Solo las entidades nombradas extraidas
 #'     (personas, organizaciones, ubicaciones, fechas, etc.)
-#'   \item \code{texto_only_entity_loc}: Entidades de tipo ubicación (LOC)
-#'     con coordenadas geográficas (latitud/longitud) obtenidas mediante geocodificación
+#'   \item \code{texto_only_entity_loc}: Entidades de tipo ubicacion (LOC)
+#'     con coordenadas geograficas (latitud/longitud) obtenidas mediante geocodificacion
 #'   \item \code{texto_nounphrase}: Tokens con frases nominales consolidadas
-#'   \item \code{texto_only_nounphrase}: Solo las frases nominales extraídas
+#'   \item \code{texto_only_nounphrase}: Solo las frases nominales extraidas
 #' }
 #'
 #' @export
 #' @examples
 #' \dontrun{
-#' # Análisis básico de un texto
-#' texto <- "El SUTEBA convocó a un paro en Mar del Plata el 15 de marzo."
+#' # Analisis basico de un texto
+#' texto <- "El SUTEBA convoco a un paro en Mar del Plata el 15 de marzo."
 #' resultado <- acep_postag_hibrido(texto)
 #'
 #' # Ver tokens con etiquetas POS
@@ -56,7 +56,7 @@
 #' # Ver ubicaciones geocodificadas
 #' print(resultado$texto_only_entity_loc)
 #'
-#' # Procesar múltiples textos con procesamiento paralelo
+#' # Procesar multiples textos con procesamiento paralelo
 #' textos <- c("Primera noticia sobre conflictos.",
 #'             "Segunda noticia sobre protestas.",
 #'             "Tercera noticia sobre reclamos.")
@@ -79,35 +79,35 @@ acep_postag_hibrido <- function(texto,
   
   # Validaciones
   if (!is.character(texto)) {
-    stop("El parámetro 'texto' debe ser una cadena de caracteres")
+    stop("El parametro 'texto' debe ser una cadena de caracteres")
   }
   if (!is.logical(inst_reticulate)) {
-    stop("El parámetro 'inst_reticulate' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_reticulate' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(inst_miniconda)) {
-    stop("El parámetro 'inst_miniconda' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_miniconda' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(inst_spacy)) {
-    stop("El parámetro 'inst_spacy' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_spacy' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(bajar_core)) {
-    stop("El parámetro 'bajar_core' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'bajar_core' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(parallel_chunks)) {
-    stop("El parámetro 'parallel_chunks' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'parallel_chunks' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(use_cache)) {
-    stop("El parámetro 'use_cache' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'use_cache' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(show_progress)) {
-    stop("El parámetro 'show_progress' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'show_progress' debe ser un valor booleano: TRUE o FALSE")
   }
   
   available_models <- c('es_core_news_sm','es_core_news_md','es_core_news_lg',
                         'pt_core_news_sm','pt_core_news_md','pt_core_news_lg',
                         'en_core_web_sm','en_core_web_md','en_core_web_lg','en_core_web_trf')
   if (!core %in% available_models) {
-    stop("El parámetro 'core' debe ser un modelo 'core' válido del español, inglés o portugués: ",
+    stop("El parametro 'core' debe ser un modelo 'core' valido del espanol, ingles o portugues: ",
          paste0(available_models, collapse = ", "))
   }
   
@@ -172,10 +172,10 @@ acep_postag_hibrido <- function(texto,
     if (parallel_chunks && n_chunks >= 2) {
       # Modo paralelo: paralelizar chunks
       if (!requireNamespace("future", quietly = TRUE)) {
-        stop("El paquete 'future' es necesario para paralelización. Instálalo con: install.packages('future')")
+        stop("El paquete 'future' es necesario para paralelizacion. Instalalo con: install.packages('future')")
       }
       if (!requireNamespace("furrr", quietly = TRUE)) {
-        stop("El paquete 'furrr' es necesario para paralelización. Instálalo con: install.packages('furrr')")
+        stop("El paquete 'furrr' es necesario para paralelizacion. Instalalo con: install.packages('furrr')")
       }
       
       # Configurar plan paralelo
@@ -184,17 +184,17 @@ acep_postag_hibrido <- function(texto,
       }
       future::plan(future::multisession, workers = n_cores)
       
-      # Crear índices de chunks
+      # Crear indices de chunks
       chunk_indices <- split(1:n_textos, ceiling(seq_along(texto) / chunk_size))
-      
+
       texto_tag_list <- furrr::future_map(seq_along(chunk_indices), function(chunk_num) {
         indices <- chunk_indices[[chunk_num]]
-        
-        # Cada worker inicializa su propia sesión de spaCy
+
+        # Cada worker inicializa su propia sesion de spaCy
         tryCatch({
           spacyr::spacy_initialize(model = core)
         }, error = function(e) {
-          # Si ya está inicializado, continuar
+          # Si ya esta inicializado, continuar
         })
         
         chunk_textos <- texto[indices]
@@ -216,12 +216,12 @@ acep_postag_hibrido <- function(texto,
         # Convertir columnas especiales ANTES de devolver
         postag$morph <- sapply(postag$morph, as.character)
         postag$sent <- sapply(postag$sent, as.character)
-        
-        # Extraer número de doc_id original (text1 -> 1, text2 -> 2, etc.)
+
+        # Extraer numero de doc_id original (text1 -> 1, text2 -> 2, etc.)
         original_doc_nums <- as.integer(gsub("text", "", postag$doc_id))
         # Calcular offset basado en el chunk
         offset <- (chunk_num - 1) * chunk_size
-        # Asignar nuevos doc_ids únicos
+        # Asignar nuevos doc_ids unicos
         postag$doc_id <- paste0("text", original_doc_nums + offset)
         
         return(postag)
@@ -265,12 +265,12 @@ acep_postag_hibrido <- function(texto,
         # Convertir columnas especiales
         postag$morph <- sapply(postag$morph, as.character)
         postag$sent <- sapply(postag$sent, as.character)
-        
-        # Extraer número de doc_id original
+
+        # Extraer numero de doc_id original
         original_doc_nums <- as.integer(gsub("text", "", postag$doc_id))
         # Calcular offset basado en el chunk
         offset <- (i - 1) * chunk_size
-        # Asignar nuevos doc_ids únicos
+        # Asignar nuevos doc_ids unicos
         postag$doc_id <- paste0("text", original_doc_nums + offset)
         
         texto_tag_list[[i]] <- postag
@@ -305,52 +305,52 @@ acep_postag_hibrido <- function(texto,
   texto_only_nounphrase <- spacyr::nounphrase_extract(texto_tag)
   
   spacyr::spacy_finalize()
-  
+
   texto_tag <- rsyntax::as_tokenindex(texto_tag)
-  
-  # Geocodificación con caché
+
+  # Geocodificacion con cache
   texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
   
   if (nrow(texto_only_entity_loc) > 0) {
     texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
     unique_locations <- unique(texto_only_entity_loc$entity_)
     
-    # Cargar caché si existe
+    # Cargar cache si existe
     cached_geocoder <- data.frame(entity_ = character(), lat = numeric(), long = numeric())
     if (use_cache && file.exists(geocode_cache_file)) {
       if (show_progress) {
-        message(sprintf("Cargando caché de geocodificación desde %s...", geocode_cache_file))
+        message(sprintf("Cargando cache de geocodificacion desde %s...", geocode_cache_file))
       }
       cached_geocoder <- jsonlite::read_json(geocode_cache_file, simplifyVector = TRUE)
     }
-    
+
     # Geocodificar solo ubicaciones nuevas
     new_locations <- setdiff(unique_locations, cached_geocoder$entity_)
-    
+
     if (length(new_locations) > 0) {
       if (show_progress) {
         message(sprintf("Geocodificando %d ubicaciones nuevas...", length(new_locations)))
       }
       new_geocoder <- tidygeocoder::geo(new_locations, method = "osm")
       names(new_geocoder) <- c("entity_", "lat", "long")
-      
-      # Combinar con caché
+
+      # Combinar con cache
       cached_geocoder <- rbind(cached_geocoder, new_geocoder)
-      
-      # Guardar caché actualizado
+
+      # Guardar cache actualizado
       if (use_cache) {
         jsonlite::write_json(cached_geocoder, geocode_cache_file, pretty = TRUE)
         if (show_progress) {
-          message(sprintf("Caché actualizado: %d ubicaciones totales", nrow(cached_geocoder)))
+          message(sprintf("Cache actualizado: %d ubicaciones totales", nrow(cached_geocoder)))
         }
       }
     } else {
       if (show_progress) {
-        message("Todas las ubicaciones están en caché")
+        message("Todas las ubicaciones estan en cache")
       }
     }
-    
-    # Usar caché para merge
+
+    # Usar cache para merge
     texto_geocoder <- cached_geocoder[cached_geocoder$entity_ %in% unique_locations, ]
     
     texto_only_entity_loc <- merge(texto_only_entity_loc, texto_geocoder, 

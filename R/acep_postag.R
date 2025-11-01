@@ -1,33 +1,33 @@
 #' @title Etiquetado POS adaptativo con optimizaciones avanzadas
-#' @description Versión optimizada de acep_postag que se adapta automáticamente al tamaño del input.
-#' Implementa procesamiento por lotes (chunking) para grandes volúmenes, caché de geocodificación
-#' para evitar consultas repetidas, y estrategias de procesamiento adaptativas según la cantidad
+#' @description Version optimizada de acep_postag que se adapta automaticamente al tamano del input.
+#' Implementa procesamiento por lotes (chunking) para grandes volumenes, cache de geocodificacion
+#' para evitar consultas repetidas, y estrategias de procesamiento adaptativas segun la cantidad
 #' de textos. Puede procesar desde 10 hasta millones de textos de forma eficiente.
 #' @param texto Vector de caracteres con los textos a procesar.
 #' @param core Idioma del modelo de etiquetado POS del paquete \code{spacyr}. Opciones disponibles:
-#' 'es_core_news_sm', 'es_core_news_md', 'es_core_news_lg' (español),
-#' 'pt_core_news_sm', 'pt_core_news_md', 'pt_core_news_lg' (portugués),
-#' 'en_core_web_sm', 'en_core_web_md', 'en_core_web_lg', 'en_core_web_trf' (inglés).
+#' 'es_core_news_sm', 'es_core_news_md', 'es_core_news_lg' (espanol),
+#' 'pt_core_news_sm', 'pt_core_news_md', 'pt_core_news_lg' (portugues),
+#' 'en_core_web_sm', 'en_core_web_md', 'en_core_web_lg', 'en_core_web_trf' (ingles).
 #' Default: "es_core_news_lg".
-#' @param bajar_core Parámetro booleano que define si descargar o no el modelo de etiquetado POS.
+#' @param bajar_core Parametro booleano que define si descargar o no el modelo de etiquetado POS.
 #' Default: TRUE.
-#' @param inst_spacy Parámetro booleano que define si instalar o no spacy (Python).
+#' @param inst_spacy Parametro booleano que define si instalar o no spacy (Python).
 #' Default: FALSE.
-#' @param inst_miniconda Parámetro booleano que define si instalar o no miniconda.
+#' @param inst_miniconda Parametro booleano que define si instalar o no miniconda.
 #' Default: FALSE.
-#' @param inst_reticulate Parámetro booleano que define si instalar o no el paquete \code{reticulate}.
+#' @param inst_reticulate Parametro booleano que define si instalar o no el paquete \code{reticulate}.
 #' Default: FALSE.
-#' @param chunk_size Tamaño de los lotes para procesamiento chunking. Ajustar según RAM disponible:
+#' @param chunk_size Tamano de los lotes para procesamiento chunking. Ajustar segun RAM disponible:
 #' 500 para sistemas con 2-4 GB RAM, 1000 para 8 GB RAM (default), 2000-5000 para 16+ GB RAM.
 #' Default: 1000.
-#' @param geocode_cache_file Ruta del archivo JSON para guardar caché de geocodificación.
-#' Permite evitar consultas repetidas a la API de Nominatim y compartir caché entre proyectos.
+#' @param geocode_cache_file Ruta del archivo JSON para guardar cache de geocodificacion.
+#' Permite evitar consultas repetidas a la API de Nominatim y compartir cache entre proyectos.
 #' Default: "geocode_cache.json".
-#' @param use_cache Parámetro booleano que activa/desactiva el sistema de caché de geocodificación.
-#' Desactivar para forzar re-geocodificación de todas las ubicaciones.
+#' @param use_cache Parametro booleano que activa/desactiva el sistema de cache de geocodificacion.
+#' Desactivar para forzar re-geocodificacion de todas las ubicaciones.
 #' Default: TRUE.
-#' @param show_progress Parámetro booleano que controla la visualización de mensajes de progreso
-#' durante el procesamiento. Útil para operaciones largas.
+#' @param show_progress Parametro booleano que controla la visualizacion de mensajes de progreso
+#' durante el procesamiento. Util para operaciones largas.
 #' Default: TRUE.
 #' @importFrom utils install.packages
 #' @importFrom spacyr spacy_install spacy_download_langmodel spacy_initialize spacy_parse entity_consolidate entity_extract nounphrase_consolidate nounphrase_extract spacy_finalize
@@ -39,39 +39,39 @@
 #' \itemize{
 #'   \item \code{texto_tag}: Data frame con tokens etiquetados (POS, lemas, dependencias, etc.)
 #'   \item \code{texto_tag_entity}: Data frame con entidades nombradas consolidadas
-#'   \item \code{texto_only_entity}: Data frame con solo las entidades extraídas
+#'   \item \code{texto_only_entity}: Data frame con solo las entidades extraidas
 #'   \item \code{texto_only_entity_loc}: Data frame con entidades de tipo LOC geocodificadas (lat/long)
 #'   \item \code{texto_nounphrase}: Data frame con frases nominales consolidadas
-#'   \item \code{texto_only_nounphrase}: Data frame con solo las frases nominales extraídas
+#'   \item \code{texto_only_nounphrase}: Data frame con solo las frases nominales extraidas
 #' }
 #' @details
-#' La función implementa dos estrategias de procesamiento automáticas:
+#' La funcion implementa dos estrategias de procesamiento automaticas:
 #' \itemize{
-#'   \item \strong{Batch Processing} (≤ 100 textos): Procesa todos los textos en una sola llamada
-#'   para máxima velocidad.
-#'   \item \strong{Chunking} (> 100 textos): Divide los textos en lotes del tamaño especificado
-#'   en \code{chunk_size} para controlar el uso de memoria y permitir procesamiento de grandes volúmenes.
+#'   \item \strong{Batch Processing} (<= 100 textos): Procesa todos los textos en una sola llamada
+#'   para maxima velocidad.
+#'   \item \strong{Chunking} (> 100 textos): Divide los textos en lotes del tamano especificado
+#'   en \code{chunk_size} para controlar el uso de memoria y permitir procesamiento de grandes volumenes.
 #' }
 #'
-#' El sistema de caché de geocodificación guarda las coordenadas de ubicaciones ya consultadas
-#' en formato JSON, evitando consultas repetidas a la API de Nominatim (que tiene límite de 1 req/seg).
+#' El sistema de cache de geocodificacion guarda las coordenadas de ubicaciones ya consultadas
+#' en formato JSON, evitando consultas repetidas a la API de Nominatim (que tiene limite de 1 req/seg).
 #' Esto puede reducir el tiempo de procesamiento en 50-90% en ejecuciones posteriores con ubicaciones repetidas.
 #'
-#' Para datasets muy grandes (>100,000 textos), se recomienda procesar en lotes usando la función
+#' Para datasets muy grandes (>100,000 textos), se recomienda procesar en lotes usando la funcion
 #' auxiliar proporcionada en los ejemplos y guardar resultados incrementalmente.
 #' @keywords etiquetado optimizacion chunking cache
 #' @examples
 #' \dontrun{
-#' # Ejemplo básico con pocos textos
+#' # Ejemplo basico con pocos textos
 #' textos <- c(
 #'   "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.",
-#'   "La manifestación se realizó en Buenos Aires el 15 de marzo.",
-#'   "El presidente visitó Córdoba para inaugurar la nueva planta."
+#'   "La manifestacion se realizo en Buenos Aires el 15 de marzo.",
+#'   "El presidente visito Cordoba para inaugurar la nueva planta."
 #' )
 #' resultado <- acep_postag(texto = textos, bajar_core = FALSE)
 #' head(resultado$texto_tag)
 #'
-#' # Ejemplo con dataset mediano y configuración personalizada
+#' # Ejemplo con dataset mediano y configuracion personalizada
 #' resultado <- acep_postag(
 #'   texto = mis_1000_textos,
 #'   bajar_core = FALSE,
@@ -106,12 +106,12 @@
 #'   }
 #' }
 #'
-#' # Usar función incremental
+#' # Usar funcion incremental
 #' procesar_incremental(mis_millones_de_textos, batch_size = 10000)
 #'
-#' # Ver contenido del caché
+#' # Ver contenido del cache
 #' cache <- jsonlite::read_json("geocode_cache.json", simplifyVector = TRUE)
-#' print(paste("Ubicaciones en caché:", nrow(cache)))
+#' print(paste("Ubicaciones en cache:", nrow(cache)))
 #' }
 #' @export
 acep_postag <- function(texto,
@@ -125,30 +125,30 @@ acep_postag <- function(texto,
                         use_cache = TRUE,
                         show_progress = TRUE) {
   
-  # Validaciones de parámetros
+  # Validaciones de parametros
   if (!is.character(texto)) {
-    stop("El parámetro 'texto' debe ser un vector de caracteres")
+    stop("El parametro 'texto' debe ser un vector de caracteres")
   }
   if (!is.logical(inst_reticulate)) {
-    stop("El parámetro 'inst_reticulate' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_reticulate' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(inst_miniconda)) {
-    stop("El parámetro 'inst_miniconda' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_miniconda' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(inst_spacy)) {
-    stop("El parámetro 'inst_spacy' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'inst_spacy' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(bajar_core)) {
-    stop("El parámetro 'bajar_core' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'bajar_core' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(use_cache)) {
-    stop("El parámetro 'use_cache' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'use_cache' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.logical(show_progress)) {
-    stop("El parámetro 'show_progress' debe ser un valor booleano: TRUE o FALSE")
+    stop("El parametro 'show_progress' debe ser un valor booleano: TRUE o FALSE")
   }
   if (!is.numeric(chunk_size) || chunk_size < 1) {
-    stop("El parámetro 'chunk_size' debe ser un número entero positivo")
+    stop("El parametro 'chunk_size' debe ser un numero entero positivo")
   }
   
   available_models <- c('es_core_news_sm','es_core_news_md','es_core_news_lg',
@@ -156,7 +156,7 @@ acep_postag <- function(texto,
                         'en_core_web_sm','en_core_web_md','en_core_web_lg','en_core_web_trf')
   
   if (!core %in% available_models) {
-    stop(paste("El parámetro 'core' debe ser un modelo válido del español, inglés o portugués:",
+    stop(paste("El parametro 'core' debe ser un modelo valido del espanol, ingles o portugues:",
                paste0(available_models, collapse = ", ")))
   }
   
@@ -179,12 +179,12 @@ acep_postag <- function(texto,
   
   # Determinar estrategia de procesamiento
   n_textos <- length(texto)
-  
+
   if (show_progress) {
     message(sprintf("Procesando %d textos...", n_textos))
   }
-  
-  # Estrategia 1: Batch processing para pocos textos (≤ 100)
+
+  # Estrategia 1: Batch processing para pocos textos (<= 100)
   if (n_textos <= 100) {
     if (show_progress) {
       message("Usando batch processing (todos los textos juntos)")
@@ -276,61 +276,61 @@ acep_postag <- function(texto,
   # Convertir a tokenindex
   texto_tag <- rsyntax::as_tokenindex(texto_tag)
   
-  # Geocodificación con caché
+  # Geocodificacion con cache
   texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
-  
+
   if (nrow(texto_only_entity_loc) > 0) {
     texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
     unique_locations <- unique(texto_only_entity_loc$entity_)
-    
+
     if (show_progress) {
-      message(sprintf("Geocodificando %d ubicaciones únicas...", length(unique_locations)))
+      message(sprintf("Geocodificando %d ubicaciones unicas...", length(unique_locations)))
     }
-    
-    # Cargar caché existente si está habilitado
+
+    # Cargar cache existente si esta habilitado
     if (use_cache && file.exists(geocode_cache_file)) {
       if (show_progress) {
-        message(sprintf("Cargando caché desde: %s", geocode_cache_file))
+        message(sprintf("Cargando cache desde: %s", geocode_cache_file))
       }
       cached_geocoder <- jsonlite::read_json(geocode_cache_file, simplifyVector = TRUE)
     } else {
-      cached_geocoder <- data.frame(entity_ = character(), 
-                                     lat = numeric(), 
+      cached_geocoder <- data.frame(entity_ = character(),
+                                     lat = numeric(),
                                      long = numeric(),
                                      stringsAsFactors = FALSE)
     }
-    
-    # Identificar ubicaciones que necesitan geocodificación
+
+    # Identificar ubicaciones que necesitan geocodificacion
     new_locations <- setdiff(unique_locations, cached_geocoder$entity_)
-    
+
     if (length(new_locations) > 0) {
       if (show_progress) {
-        message(sprintf("Geocodificando %d ubicaciones nuevas (usando caché para %d)...", 
-                       length(new_locations), 
+        message(sprintf("Geocodificando %d ubicaciones nuevas (usando cache para %d)...",
+                       length(new_locations),
                        length(unique_locations) - length(new_locations)))
       }
-      
+
       # Geocodificar solo ubicaciones nuevas
       new_geocoder <- tidygeocoder::geo(new_locations, method = "osm")
       names(new_geocoder) <- c("entity_", "lat", "long")
-      
-      # Combinar con caché
+
+      # Combinar con cache
       cached_geocoder <- rbind(cached_geocoder, new_geocoder)
-      
-      # Guardar caché actualizado
+
+      # Guardar cache actualizado
       if (use_cache) {
         jsonlite::write_json(cached_geocoder, geocode_cache_file, pretty = TRUE)
         if (show_progress) {
-          message(sprintf("Caché actualizado: %s", geocode_cache_file))
+          message(sprintf("Cache actualizado: %s", geocode_cache_file))
         }
       }
     } else {
       if (show_progress) {
-        message("Todas las ubicaciones encontradas en caché")
+        message("Todas las ubicaciones encontradas en cache")
       }
     }
-    
-    # Usar caché para merge
+
+    # Usar cache para merge
     texto_geocoder <- cached_geocoder[cached_geocoder$entity_ %in% unique_locations, ]
     
     # Merge con entidades

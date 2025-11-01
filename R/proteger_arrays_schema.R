@@ -1,4 +1,4 @@
-# Función auxiliar para proteger arrays en esquemas
+# Funcion auxiliar para proteger arrays en esquemas
 proteger_arrays_schema <- function(schema) {
   if (is.list(schema)) {
     # Proteger el campo 'required' si existe
@@ -15,12 +15,12 @@ proteger_arrays_schema <- function(schema) {
   return(schema)
 }
 
-# Actualizar acep_gpt_schema para usar la función auxiliar
+# Actualizar acep_gpt_schema para usar la funcion auxiliar
 acep_gpt_schema <- function(tipo = "extraccion_entidades") {
-  
+
   esquemas <- list(
-    
-    # Esquema para extracción de entidades
+
+    # Esquema para extraccion de entidades
     extraccion_entidades = list(
       type = "object",
       properties = list(
@@ -53,14 +53,14 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("personas", "organizaciones", "lugares", "fechas", "eventos"),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para clasificación
+
+    # Esquema para clasificacion
     clasificacion = list(
       type = "object",
       properties = list(
         categoria = list(
           type = "string",
-          description = "Categoría principal del texto"
+          description = "Categoria principal del texto"
         ),
         confianza = list(
           type = "number",
@@ -68,14 +68,14 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         ),
         justificacion = list(
           type = "string",
-          description = "Breve justificación de la clasificación"
+          description = "Breve justificacion de la clasificacion"
         )
       ),
       required = c("categoria", "confianza", "justificacion"),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para análisis de sentimiento
+
+    # Esquema para analisis de sentimiento
     sentimiento = list(
       type = "object",
       properties = list(
@@ -86,7 +86,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         ),
         puntuacion = list(
           type = "number",
-          description = "Puntuación de sentimiento de -1 (muy negativo) a 1 (muy positivo)"
+          description = "Puntuacion de sentimiento de -1 (muy negativo) a 1 (muy positivo)"
         ),
         aspectos = list(
           type = "array",
@@ -99,20 +99,20 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
             required = c("aspecto", "sentimiento"),
             additionalProperties = FALSE
           ),
-          description = "Sentimientos por aspecto específico"
+          description = "Sentimientos por aspecto especifico"
         )
       ),
       required = c("sentimiento_general", "puntuacion", "aspectos"),
       additionalProperties = FALSE
     ),
-    
+
     # Esquema para resumen
     resumen = list(
       type = "object",
       properties = list(
         resumen_corto = list(
           type = "string",
-          description = "Resumen en una oración"
+          description = "Resumen en una oracion"
         ),
         resumen_detallado = list(
           type = "string",
@@ -127,7 +127,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("resumen_corto", "resumen_detallado", "puntos_clave"),
       additionalProperties = FALSE
     ),
-    
+
     # Esquema para pregunta-respuesta
     qa = list(
       type = "object",
@@ -149,8 +149,8 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("respuesta", "confianza", "cita_textual"),
       additionalProperties = FALSE
     ),
-    
-    # Esquema para extracción de tripletes
+
+    # Esquema para extraccion de tripletes
     tripletes = list(
       type = "object",
       properties = list(
@@ -166,18 +166,18 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
             required = c("sujeto", "predicado", "objeto"),
             additionalProperties = FALSE
           ),
-          description = "Lista de tripletes extraídos del texto"
+          description = "Lista de tripletes extraidos del texto"
         )
       ),
       required = c("tripletes"),
       additionalProperties = FALSE
     )
   )
-  
+
   if (!tipo %in% names(esquemas)) {
-    stop(sprintf("Tipo de esquema no válido. Opciones: %s", paste(names(esquemas), collapse = ", ")))
+    stop(sprintf("Tipo de esquema no valido. Opciones: %s", paste(names(esquemas), collapse = ", ")))
   }
-  
+
   # Proteger arrays antes de devolver
   return(proteger_arrays_schema(esquemas[[tipo]]))
 }
