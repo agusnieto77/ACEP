@@ -28,6 +28,8 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_load_base.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_may.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_min.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_ollama.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_ollama_setup.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_pipeline.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_st.html</loc></url>
@@ -51,5 +53,6 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_count.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_intensity.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_timeseries.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/proteger_arrays_schema.html</loc></url>
 </urlset>
 
