@@ -29,7 +29,7 @@
 #' \dontrun{
 #' # Primero, instalar Ollama y descargar un modelo:
 #' # Terminal: ollama pull llama3.1
-#' 
+#'
 #' # Extraer entidades de un texto
 #' texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
 #' instrucciones <- "Extrae todas las entidades nombradas del texto."
@@ -52,12 +52,12 @@ acep_ollama <- function(texto,
                         temperature = 0,
                         host = "http://localhost:11434",
                         seed = 123456) {
-  
+
   # Verificar que ollamar este instalado
   if (!requireNamespace("ollamar", quietly = TRUE)) {
     stop("El paquete 'ollamar' no esta instalado. Instalalo con: install.packages('ollamar')")
   }
-  
+
   # Validaciones
   if (!is.character(texto) || nchar(texto) == 0) {
     stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
@@ -65,7 +65,7 @@ acep_ollama <- function(texto,
   if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
     stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
   }
-  
+
   # Verificar que Ollama este corriendo
   tryCatch({
     ollamar::list_models(host = host)
@@ -76,7 +76,7 @@ acep_ollama <- function(texto,
       "Puedes iniciarlo con 'ollama serve' en la terminal."
     ))
   })
-  
+
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
     schema <- list(
@@ -91,10 +91,10 @@ acep_ollama <- function(texto,
       additionalProperties = FALSE
     )
   }
-  
+
   # Construir prompt del sistema
-  system_prompt <- acep_prompt_gpt$system_prompt_01_es
-  
+  system_prompt <- ACEP::acep_prompt_gpt$system_prompt_01_es
+
   # Construir prompt del usuario con el esquema
   user_prompt <- sprintf(
     "Texto a analizar:\n%s\n\nInstrucciones:\n%s\n\nDebes responder en formato JSON siguiendo este esquema:\n%s",
@@ -102,7 +102,7 @@ acep_ollama <- function(texto,
     instrucciones,
     jsonlite::toJSON(schema, auto_unbox = TRUE, pretty = TRUE)
   )
-  
+
   # Realizar peticion a Ollama con structured output
   tryCatch({
     # Usar ollamar::chat con formato estructurado
@@ -118,20 +118,20 @@ acep_ollama <- function(texto,
       output = "structured",
       host = host
     )
-    
+
     # Verificar respuesta vacia
     if (is.null(respuesta)) {
       stop("Ollama devolvio una respuesta vacia. Verifica tu prompt y esquema.")
     }
-    
+
     # Si parse_json es FALSE, convertir a JSON string
     if (!parse_json && is.list(respuesta)) {
       return(jsonlite::toJSON(respuesta, auto_unbox = TRUE, pretty = TRUE))
     }
-    
+
     # Si ya es una lista estructurada, devolverla directamente
     return(respuesta)
-    
+
   }, error = function(e) {
     stop(sprintf("Error al interactuar con Ollama: %s", conditionMessage(e)))
   })
@@ -144,30 +144,30 @@ acep_ollama <- function(texto,
 #' @export
 acep_ollama_setup <- function() {
   cat("=== GUIA DE INSTALACION DE OLLAMA ===\n\n")
-  
+
   cat("1. INSTALAR OLLAMA:\n")
   cat("   - Linux/Mac: curl -fsSL https://ollama.com/install.sh | sh\n")
   cat("   - Windows: Descargar desde https://ollama.com/download\n\n")
-  
+
   cat("2. INICIAR OLLAMA:\n")
   cat("   - Terminal: ollama serve\n")
   cat("   - (En Windows, Ollama se inicia automaticamente)\n\n")
-  
+
   cat("3. DESCARGAR MODELOS:\n")
   cat("   - Terminal: ollama pull llama3.1\n")
   cat("   - Otros modelos: llama3.2, mistral, phi3, gemma2\n")
   cat("   - Ver todos: https://ollama.com/search \n\n")
-  
+
   cat("4. INSTALAR OLLAMAR EN R:\n")
   cat("   install.packages('ollamar')  # Recomendado para structured outputs\n")
-  
+
   cat("5. VERIFICAR INSTALACION:\n")
   cat("   ollamar::list_models()  # Debe mostrar los modelos descargados\n\n")
-  
+
   cat("6. EJEMPLO DE USO:\n")
   cat('   texto <- "El SUTEBA convoco a un paro en Buenos Aires."\n')
   cat('   schema <- acep_gpt_schema("extraccion_entidades")\n')
   cat('   resultado <- acep_ollama(texto, "Extrae entidades", schema = schema)\n\n')
-  
+
   invisible(NULL)
 }
