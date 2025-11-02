@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_postag_hibrido.R
 \name{acep_postag_hibrido}
 \alias{acep_postag_hibrido}
-\title{Etiquetado POS, lematización y extracción de entidades con spacyr}
+\title{Etiquetado POS, lematizacion y extraccion de entidades con spacyr}
 \usage{
 acep_postag_hibrido(
   texto,
@@ -23,60 +23,60 @@ acep_postag_hibrido(
 \item{texto}{Vector de caracteres con los textos a analizar.}
 
 \item{core}{Modelo de lenguaje de spaCy a utilizar. Opciones: `"es_core_news_sm"`,
-`"es_core_news_md"`, `"es_core_news_lg"` (español), `"en_core_web_sm"`,
-`"en_core_web_md"`, `"en_core_web_lg"` (inglés), `"pt_core_news_sm"`,
-`"pt_core_news_md"`, `"pt_core_news_lg"` (portugués). Por defecto: `"es_core_news_lg"`.}
+`"es_core_news_md"`, `"es_core_news_lg"` (espanol), `"en_core_web_sm"`,
+`"en_core_web_md"`, `"en_core_web_lg"` (ingles), `"pt_core_news_sm"`,
+`"pt_core_news_md"`, `"pt_core_news_lg"` (portugues). Por defecto: `"es_core_news_lg"`.}
 
-\item{bajar_core}{Lógico. Si `TRUE`, descarga automáticamente el modelo si no está instalado.}
+\item{bajar_core}{Logico. Si `TRUE`, descarga automaticamente el modelo si no esta instalado.}
 
-\item{inst_spacy}{Lógico. Si `TRUE`, instala la biblioteca spaCy en el entorno Python.}
+\item{inst_spacy}{Logico. Si `TRUE`, instala la biblioteca spaCy en el entorno Python.}
 
-\item{inst_miniconda}{Lógico. Si `TRUE`, instala Miniconda (necesario para spaCy).}
+\item{inst_miniconda}{Logico. Si `TRUE`, instala Miniconda (necesario para spaCy).}
 
-\item{inst_reticulate}{Lógico. Si `TRUE`, instala el paquete reticulate de R.}
+\item{inst_reticulate}{Logico. Si `TRUE`, instala el paquete reticulate de R.}
 
-\item{chunk_size}{Número de textos a procesar por lote. Valores más bajos consumen
-menos memoria pero tardan más. Por defecto: 1000.}
+\item{chunk_size}{Numero de textos a procesar por lote. Valores mas bajos consumen
+menos memoria pero tardan mas. Por defecto: 1000.}
 
-\item{parallel_chunks}{Lógico. Si `TRUE`, procesa los lotes en paralelo usando
-múltiples núcleos del CPU. Requiere los paquetes `future` y `furrr`. Por defecto: `FALSE`.}
+\item{parallel_chunks}{Logico. Si `TRUE`, procesa los lotes en paralelo usando
+multiples nucleos del CPU. Requiere los paquetes `future` y `furrr`. Por defecto: `FALSE`.}
 
-\item{n_cores}{Número de núcleos de CPU a usar en modo paralelo. Si es `NULL`,
-detecta automáticamente el número de núcleos disponibles menos uno.}
+\item{n_cores}{Numero de nucleos de CPU a usar en modo paralelo. Si es `NULL`,
+detecta automaticamente el numero de nucleos disponibles menos uno.}
 
-\item{geocode_cache_file}{Ruta al archivo JSON donde se almacena el caché de
-geocodificación para evitar consultas repetidas. Por defecto: `"geocode_cache.json"`.}
+\item{geocode_cache_file}{Ruta al archivo JSON donde se almacena el cache de
+geocodificacion para evitar consultas repetidas. Por defecto: `"geocode_cache.json"`.}
 
-\item{use_cache}{Lógico. Si `TRUE`, usa y actualiza el caché de geocodificación.}
+\item{use_cache}{Logico. Si `TRUE`, usa y actualiza el cache de geocodificacion.}
 
-\item{show_progress}{Lógico. Si `TRUE`, muestra mensajes de progreso en la consola.}
+\item{show_progress}{Logico. Si `TRUE`, muestra mensajes de progreso en la consola.}
 }
 \value{
-Lista con 6 data frames que contienen diferentes niveles de análisis:
+Lista con 6 data frames que contienen diferentes niveles de analisis:
 \itemize{
-  \item \code{texto_tag}: Tokenización completa con etiquetas POS, lemas, dependencias
-    sintácticas y atributos morfológicos para cada token
+  \item \code{texto_tag}: Tokenizacion completa con etiquetas POS, lemas, dependencias
+    sintacticas y atributos morfologicos para cada token
   \item \code{texto_tag_entity}: Tokens con entidades nombradas consolidadas
     (ej: "Mar del Plata" como una sola entidad en lugar de 3 tokens separados)
-  \item \code{texto_only_entity}: Solo las entidades nombradas extraídas
+  \item \code{texto_only_entity}: Solo las entidades nombradas extraidas
     (personas, organizaciones, ubicaciones, fechas, etc.)
-  \item \code{texto_only_entity_loc}: Entidades de tipo ubicación (LOC)
-    con coordenadas geográficas (latitud/longitud) obtenidas mediante geocodificación
+  \item \code{texto_only_entity_loc}: Entidades de tipo ubicacion (LOC)
+    con coordenadas geograficas (latitud/longitud) obtenidas mediante geocodificacion
   \item \code{texto_nounphrase}: Tokens con frases nominales consolidadas
-  \item \code{texto_only_nounphrase}: Solo las frases nominales extraídas
+  \item \code{texto_only_nounphrase}: Solo las frases nominales extraidas
 }
 }
 \description{
-Realiza análisis lingüístico completo de textos usando la biblioteca spaCy a través
-de spacyr. Incluye: etiquetado POS (Part-of-Speech), lematización, tokenización,
-extracción de entidades nombradas, frases nominales y geocodificación de ubicaciones.
-La función procesa automáticamente grandes volúmenes de texto dividiéndolos en lotes
-(chunks) y soporta procesamiento paralelo para acelerar el análisis
+Realiza analisis linguistico completo de textos usando la biblioteca spaCy a traves
+de spacyr. Incluye: etiquetado POS (Part-of-Speech), lematizacion, tokenizacion,
+extraccion de entidades nombradas, frases nominales y geocodificacion de ubicaciones.
+La funcion procesa automaticamente grandes volumenes de texto dividiendolos en lotes
+(chunks) y soporta procesamiento paralelo para acelerar el analisis
 }
 \examples{
 \dontrun{
-# Análisis básico de un texto
-texto <- "El SUTEBA convocó a un paro en Mar del Plata el 15 de marzo."
+# Analisis basico de un texto
+texto <- "El SUTEBA convoco a un paro en Mar del Plata el 15 de marzo."
 resultado <- acep_postag_hibrido(texto)
 
 # Ver tokens con etiquetas POS
@@ -88,7 +88,7 @@ print(resultado$texto_only_entity)
 # Ver ubicaciones geocodificadas
 print(resultado$texto_only_entity_loc)
 
-# Procesar múltiples textos con procesamiento paralelo
+# Procesar multiples textos con procesamiento paralelo
 textos <- c("Primera noticia sobre conflictos.",
             "Segunda noticia sobre protestas.",
             "Tercera noticia sobre reclamos.")

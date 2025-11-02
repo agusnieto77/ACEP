@@ -15,33 +15,33 @@ acep_process_chunks(
 \arguments{
 \item{texto}{Vector de caracteres con los textos a procesar.}
 
-\item{funcion}{Función de ACEP a aplicar a cada lote. Ejemplos: `acep_clean`,
-`acep_token`, `acep_count`, `acep_upos`, etc. Debe ser una función que acepte
+\item{funcion}{Funcion de ACEP a aplicar a cada lote. Ejemplos: `acep_clean`,
+`acep_token`, `acep_count`, `acep_upos`, etc. Debe ser una funcion que acepte
 un vector de textos como primer argumento.}
 
-\item{chunk_size}{Número de textos por lote. Valores más bajos reducen el consumo
+\item{chunk_size}{Numero de textos por lote. Valores mas bajos reducen el consumo
 de memoria pero aumentan el tiempo total de procesamiento. Por defecto: 1000.}
 
-\item{show_progress}{Lógico. Si `TRUE`, muestra mensajes informativos sobre el
-progreso del procesamiento (qué lote se está procesando). Por defecto: `TRUE`.}
+\item{show_progress}{Logico. Si `TRUE`, muestra mensajes informativos sobre el
+progreso del procesamiento (que lote se esta procesando). Por defecto: `TRUE`.}
 
-\item{...}{Argumentos adicionales que se pasan directamente a la función especificada
-en el parámetro `funcion`. Ejemplo: si `funcion = acep_clean`, puede pasar
+\item{...}{Argumentos adicionales que se pasan directamente a la funcion especificada
+en el parametro `funcion`. Ejemplo: si `funcion = acep_clean`, puede pasar
 `rm_stopwords = TRUE`, `tolower = TRUE`, etc.}
 }
 \value{
-El tipo de resultado depende de la función aplicada:
+El tipo de resultado depende de la funcion aplicada:
 \itemize{
-  \item Si la función retorna un vector, devuelve un vector combinado
-  \item Si la función retorna un data frame, devuelve un data frame combinado (rbind)
-  \item Si la función retorna una lista, devuelve una lista de listas
+  \item Si la funcion retorna un vector, devuelve un vector combinado
+  \item Si la funcion retorna un data frame, devuelve un data frame combinado (rbind)
+  \item Si la funcion retorna una lista, devuelve una lista de listas
 }
 }
 \description{
-Divide un vector grande de textos en lotes (chunks) más pequeños y los procesa
-secuencialmente aplicando una función de ACEP. Esta estrategia permite analizar
+Divide un vector grande de textos en lotes (chunks) mas pequenos y los procesa
+secuencialmente aplicando una funcion de ACEP. Esta estrategia permite analizar
 corpus extensos (millones de documentos) sin superar la capacidad de memoria RAM
-disponible. La función combina automáticamente los resultados de todos los lotes.
+disponible. La funcion combina automaticamente los resultados de todos los lotes.
 }
 \examples{
 \dontrun{

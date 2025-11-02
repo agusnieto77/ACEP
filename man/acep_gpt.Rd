@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_gpt.R
 \name{acep_gpt}
 \alias{acep_gpt}
-\title{Interacción con modelos GPT usando Structured Outputs}
+\title{Interaccion con modelos GPT usando Structured Outputs}
 \usage{
 acep_gpt(
   texto,
@@ -21,11 +21,11 @@ acep_gpt(
 \arguments{
 \item{texto}{Texto a analizar con GPT. Puede ser una noticia, tweet, documento, etc.}
 
-\item{instrucciones}{Instrucciones en lenguaje natural que indican al modelo qué hacer
+\item{instrucciones}{Instrucciones en lenguaje natural que indican al modelo que hacer
 con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".}
 
-\item{modelo}{Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (más rápido y económico),
-`"gpt-4o"` (más potente), `"gpt-4o-2024-08-06"`, `"gpt-4o-2024-11-20"`. Por defecto: `"gpt-4o-mini"`.}
+\item{modelo}{Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (mas rapido y economico),
+`"gpt-4o"` (mas potente), `"gpt-5-nano"`, `"gpt-5-mini"`, entre otros. Por defecto: `"gpt-4o-mini"`.}
 
 \item{api_key}{Clave de API de OpenAI. Si no se proporciona, busca la variable de
 entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys}
@@ -34,46 +34,46 @@ entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/ap
 `acep_gpt_schema()` para obtener esquemas predefinidos o crear uno personalizado.
 Si es `NULL`, usa un esquema simple con campo "respuesta".}
 
-\item{parse_json}{Lógico. Si `TRUE` (por defecto), parsea automáticamente el JSON
+\item{parse_json}{Logico. Si `TRUE` (por defecto), parsea automaticamente el JSON
 a un objeto R (lista o data frame). Si `FALSE`, devuelve el JSON como string.}
 
-\item{temperature}{Parámetro de temperatura (0-2). Valores bajos (0-0.3) generan
-respuestas más deterministas y consistentes. Valores altos (0.7-1) más creativas.
-Por defecto: 0 (máxima determinismo).}
+\item{temperature}{Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
+respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas creativas.
+Por defecto: 0 (maxima determinismo).}
 
-\item{max_tokens}{Número máximo de tokens en la respuesta. Por defecto: 2000.}
+\item{max_tokens}{Numero maximo de tokens en la respuesta. Por defecto: 2000.}
 
-\item{top_p}{Parámetro top-p para nucleus sampling (0-1). Controla la diversidad
+\item{top_p}{Parametro top-p para nucleus sampling (0-1). Controla la diversidad
 de la respuesta. Por defecto: 0.2.}
 
-\item{frequency_penalty}{Penalización por repetición de tokens frecuentes (-2 a 2).
+\item{frequency_penalty}{Penalizacion por repeticion de tokens frecuentes (-2 a 2).
 Por defecto: 0.2.}
 
-\item{seed}{Semilla numérica para reproducibilidad. Usar el mismo seed con los
-mismos parámetros genera respuestas idénticas. Por defecto: 123456.}
+\item{seed}{Semilla numerica para reproducibilidad. Usar el mismo seed con los
+mismos parametros genera respuestas identicas. Por defecto: 123456.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
-  estructurada según el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
+  estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 }
 \description{
-Función para interactuar con la API de OpenAI utilizando Structured Outputs,
+Funcion para interactuar con la API de OpenAI utilizando Structured Outputs,
 una funcionalidad que garantiza respuestas en formato JSON que cumplen estrictamente
-con un esquema predefinido. Esto elimina la necesidad de parseo y validación manual,
-haciendo las respuestas más confiables y estructuradas. Compatible con modelos
+con un esquema predefinido. Esto elimina la necesidad de parseo y validacion manual,
+haciendo las respuestas mas confiables y estructuradas. Compatible con modelos
 `gpt-4o` y `gpt-4o-mini`.
 }
 \examples{
 \dontrun{
 # Extraer entidades de un texto
-texto <- "El SUTEBA convocó a un paro en Buenos Aires el 15 de marzo."
+texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
 instrucciones <- "Extrae todas las entidades nombradas del texto."
 schema <- acep_gpt_schema("extraccion_entidades")
 resultado <- acep_gpt(texto, instrucciones, schema = schema)
 print(resultado)
 
-# Análisis de sentimiento
-texto <- "La protesta fue pacífica y bien organizada."
+# Analisis de sentimiento
+texto <- "La protesta fue pacifica y bien organizada."
 schema <- acep_gpt_schema("sentimiento")
 resultado <- acep_gpt(texto, "Analiza el sentimiento del texto", schema = schema)
 print(resultado$sentimiento_general)

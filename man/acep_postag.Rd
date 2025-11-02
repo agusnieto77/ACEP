@@ -21,37 +21,37 @@ acep_postag(
 \item{texto}{Vector de caracteres con los textos a procesar.}
 
 \item{core}{Idioma del modelo de etiquetado POS del paquete \code{spacyr}. Opciones disponibles:
-'es_core_news_sm', 'es_core_news_md', 'es_core_news_lg' (español),
-'pt_core_news_sm', 'pt_core_news_md', 'pt_core_news_lg' (portugués),
-'en_core_web_sm', 'en_core_web_md', 'en_core_web_lg', 'en_core_web_trf' (inglés).
+'es_core_news_sm', 'es_core_news_md', 'es_core_news_lg' (espanol),
+'pt_core_news_sm', 'pt_core_news_md', 'pt_core_news_lg' (portugues),
+'en_core_web_sm', 'en_core_web_md', 'en_core_web_lg', 'en_core_web_trf' (ingles).
 Default: "es_core_news_lg".}
 
-\item{bajar_core}{Parámetro booleano que define si descargar o no el modelo de etiquetado POS.
+\item{bajar_core}{Parametro booleano que define si descargar o no el modelo de etiquetado POS.
 Default: TRUE.}
 
-\item{inst_spacy}{Parámetro booleano que define si instalar o no spacy (Python).
+\item{inst_spacy}{Parametro booleano que define si instalar o no spacy (Python).
 Default: FALSE.}
 
-\item{inst_miniconda}{Parámetro booleano que define si instalar o no miniconda.
+\item{inst_miniconda}{Parametro booleano que define si instalar o no miniconda.
 Default: FALSE.}
 
-\item{inst_reticulate}{Parámetro booleano que define si instalar o no el paquete \code{reticulate}.
+\item{inst_reticulate}{Parametro booleano que define si instalar o no el paquete \code{reticulate}.
 Default: FALSE.}
 
-\item{chunk_size}{Tamaño de los lotes para procesamiento chunking. Ajustar según RAM disponible:
+\item{chunk_size}{Tamano de los lotes para procesamiento chunking. Ajustar segun RAM disponible:
 500 para sistemas con 2-4 GB RAM, 1000 para 8 GB RAM (default), 2000-5000 para 16+ GB RAM.
 Default: 1000.}
 
-\item{geocode_cache_file}{Ruta del archivo JSON para guardar caché de geocodificación.
-Permite evitar consultas repetidas a la API de Nominatim y compartir caché entre proyectos.
+\item{geocode_cache_file}{Ruta del archivo JSON para guardar cache de geocodificacion.
+Permite evitar consultas repetidas a la API de Nominatim y compartir cache entre proyectos.
 Default: "geocode_cache.json".}
 
-\item{use_cache}{Parámetro booleano que activa/desactiva el sistema de caché de geocodificación.
-Desactivar para forzar re-geocodificación de todas las ubicaciones.
+\item{use_cache}{Parametro booleano que activa/desactiva el sistema de cache de geocodificacion.
+Desactivar para forzar re-geocodificacion de todas las ubicaciones.
 Default: TRUE.}
 
-\item{show_progress}{Parámetro booleano que controla la visualización de mensajes de progreso
-durante el procesamiento. Útil para operaciones largas.
+\item{show_progress}{Parametro booleano que controla la visualizacion de mensajes de progreso
+durante el procesamiento. Util para operaciones largas.
 Default: TRUE.}
 }
 \value{
@@ -59,46 +59,46 @@ Lista con seis elementos en formato tabular:
 \itemize{
   \item \code{texto_tag}: Data frame con tokens etiquetados (POS, lemas, dependencias, etc.)
   \item \code{texto_tag_entity}: Data frame con entidades nombradas consolidadas
-  \item \code{texto_only_entity}: Data frame con solo las entidades extraídas
+  \item \code{texto_only_entity}: Data frame con solo las entidades extraidas
   \item \code{texto_only_entity_loc}: Data frame con entidades de tipo LOC geocodificadas (lat/long)
   \item \code{texto_nounphrase}: Data frame con frases nominales consolidadas
-  \item \code{texto_only_nounphrase}: Data frame con solo las frases nominales extraídas
+  \item \code{texto_only_nounphrase}: Data frame con solo las frases nominales extraidas
 }
 }
 \description{
-Versión optimizada de acep_postag que se adapta automáticamente al tamaño del input.
-Implementa procesamiento por lotes (chunking) para grandes volúmenes, caché de geocodificación
-para evitar consultas repetidas, y estrategias de procesamiento adaptativas según la cantidad
+Version optimizada de acep_postag que se adapta automaticamente al tamano del input.
+Implementa procesamiento por lotes (chunking) para grandes volumenes, cache de geocodificacion
+para evitar consultas repetidas, y estrategias de procesamiento adaptativas segun la cantidad
 de textos. Puede procesar desde 10 hasta millones de textos de forma eficiente.
 }
 \details{
-La función implementa dos estrategias de procesamiento automáticas:
+La funcion implementa dos estrategias de procesamiento automaticas:
 \itemize{
-  \item \strong{Batch Processing} (≤ 100 textos): Procesa todos los textos en una sola llamada
-  para máxima velocidad.
-  \item \strong{Chunking} (> 100 textos): Divide los textos en lotes del tamaño especificado
-  en \code{chunk_size} para controlar el uso de memoria y permitir procesamiento de grandes volúmenes.
+  \item \strong{Batch Processing} (<= 100 textos): Procesa todos los textos en una sola llamada
+  para maxima velocidad.
+  \item \strong{Chunking} (> 100 textos): Divide los textos en lotes del tamano especificado
+  en \code{chunk_size} para controlar el uso de memoria y permitir procesamiento de grandes volumenes.
 }
 
-El sistema de caché de geocodificación guarda las coordenadas de ubicaciones ya consultadas
-en formato JSON, evitando consultas repetidas a la API de Nominatim (que tiene límite de 1 req/seg).
+El sistema de cache de geocodificacion guarda las coordenadas de ubicaciones ya consultadas
+en formato JSON, evitando consultas repetidas a la API de Nominatim (que tiene limite de 1 req/seg).
 Esto puede reducir el tiempo de procesamiento en 50-90% en ejecuciones posteriores con ubicaciones repetidas.
 
-Para datasets muy grandes (>100,000 textos), se recomienda procesar en lotes usando la función
+Para datasets muy grandes (>100,000 textos), se recomienda procesar en lotes usando la funcion
 auxiliar proporcionada en los ejemplos y guardar resultados incrementalmente.
 }
 \examples{
 \dontrun{
-# Ejemplo básico con pocos textos
+# Ejemplo basico con pocos textos
 textos <- c(
   "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.",
-  "La manifestación se realizó en Buenos Aires el 15 de marzo.",
-  "El presidente visitó Córdoba para inaugurar la nueva planta."
+  "La manifestacion se realizo en Buenos Aires el 15 de marzo.",
+  "El presidente visito Cordoba para inaugurar la nueva planta."
 )
 resultado <- acep_postag(texto = textos, bajar_core = FALSE)
 head(resultado$texto_tag)
 
-# Ejemplo con dataset mediano y configuración personalizada
+# Ejemplo con dataset mediano y configuracion personalizada
 resultado <- acep_postag(
   texto = mis_1000_textos,
   bajar_core = FALSE,
@@ -133,12 +133,12 @@ procesar_incremental <- function(textos, batch_size = 10000) {
   }
 }
 
-# Usar función incremental
+# Usar funcion incremental
 procesar_incremental(mis_millones_de_textos, batch_size = 10000)
 
-# Ver contenido del caché
+# Ver contenido del cache
 cache <- jsonlite::read_json("geocode_cache.json", simplifyVector = TRUE)
-print(paste("Ubicaciones en caché:", nrow(cache)))
+print(paste("Ubicaciones en cache:", nrow(cache)))
 }
 }
 \keyword{cache}

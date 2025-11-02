@@ -13,6 +13,8 @@
 * Se agregó `acep_postag_hibrido()`: etiquetado POS, lematización y extracción de entidades con spacyr.
 * Se agregó `acep_process_chunks()`: procesamiento de textos en lotes para gestionar grandes volúmenes de datos.
 * Se agregó `acep_gpt_schema()`: esquemas JSON predefinidos para análisis de texto con GPT.
+* Se agregó `acep_ollama()`: interacción con modelos de lenguaje locales usando Ollama con soporte para structured outputs. Permite ejecutar análisis de texto sin costos ni API keys, manteniendo privacidad total de los datos.
+* Se agregó `acep_ollama_setup()`: guía de instalación y configuración de Ollama.
 * Se agregaron funciones auxiliares para gestión de caché:
   - `acep_clear_regex_cache()`: limpia el caché de expresiones regulares
   - `acep_regex_cache_size()`: consulta el tamaño del caché
@@ -27,14 +29,8 @@
 
 * Se mejoró la documentación de todas las funciones nuevas y modificadas.
 * Se agregaron ejemplos prácticos a todas las funciones operativas.
-* Se actualizó README.Rmd con la lista completa de 33 funciones del paquete.
+* Se actualizó README.Rmd con la lista completa de funciones del paquete.
 * Se actualizaron todas las viñetas para usar las nuevas funciones.
-
-## Funciones deprecadas
-
-* `acep_cleaning()` → usar `acep_clean()`
-* `acep_men()` → usar `acep_count()`
-* `acep_rst()` → funcionalidad integrada en otras funciones
 
 # ACEP 0.0.2.9005 (versión en desarrollo)
 

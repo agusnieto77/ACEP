@@ -2,7 +2,7 @@
 % Please edit documentation in R/acep_gpt.R
 \name{acep_gpt_schema}
 \alias{acep_gpt_schema}
-\title{Esquemas JSON predefinidos para análisis de texto con GPT}
+\title{Esquemas JSON predefinidos para analisis de texto con GPT}
 \usage{
 acep_gpt_schema(tipo = "extraccion_entidades")
 }
@@ -10,36 +10,44 @@ acep_gpt_schema(tipo = "extraccion_entidades")
 \item{tipo}{Tipo de esquema a devolver. Opciones:
 \itemize{
   \item \code{"extraccion_entidades"}: Extrae personas, organizaciones, lugares, fechas y eventos
-  \item \code{"clasificacion"}: Clasifica el texto en categorías con nivel de confianza
-  \item \code{"sentimiento"}: Analiza sentimiento general y por aspectos específicos
-  \item \code{"resumen"}: Genera resúmenes cortos y detallados con puntos clave
+  \item \code{"clasificacion"}: Clasifica el texto en categorias con nivel de confianza
+  \item \code{"sentimiento"}: Analiza sentimiento general y por aspectos especificos
+  \item \code{"resumen"}: Genera resumenes cortos y detallados con puntos clave
   \item \code{"qa"}: Responde preguntas con citas textuales y nivel de confianza
   \item \code{"tripletes"}: Extrae relaciones sujeto-predicado-objeto
+  \item \code{"protesta_breve"}: Extrae informacion basica de acciones de protesta (fecha, sujeto, accion, objeto, lugar)
+  \item \code{"protesta_detallada"}: Extrae informacion detallada de multiples acciones de protesta con 9 campos por accion
 }}
 }
 \value{
 Lista con esquema JSON compatible con OpenAI Structured Outputs.
-  Puede usarse directamente en el parámetro `schema` de `acep_gpt()`.
+  Puede usarse directamente en el parametro `schema` de `acep_gpt()` o `acep_ollama()`.
 }
 \description{
 Proporciona esquemas JSON predefinidos y validados para casos de uso comunes
-en análisis de texto con GPT. Estos esquemas garantizan respuestas estructuradas
-y consistentes para tareas como extracción de entidades, clasificación, análisis
-de sentimiento, resumen, pregunta-respuesta y extracción de tripletes.
+en analisis de texto con GPT. Estos esquemas garantizan respuestas estructuradas
+y consistentes para tareas como extraccion de entidades, clasificacion, analisis
+de sentimiento, resumen, pregunta-respuesta, extraccion de tripletes y analisis
+de acciones de protesta.
 }
 \examples{
-# Obtener esquema para extracción de entidades
+# Obtener esquema para extraccion de entidades
 schema_entidades <- acep_gpt_schema("extraccion_entidades")
 names(schema_entidades$properties)  # personas, organizaciones, lugares, fechas, eventos
 
-# Obtener esquema para clasificación
+# Obtener esquema para clasificacion
 schema_clasif <- acep_gpt_schema("clasificacion")
 names(schema_clasif$properties)  # categoria, confianza, justificacion
 
-# Obtener esquema para análisis de sentimiento
+# Obtener esquema para analisis de sentimiento
 schema_sent <- acep_gpt_schema("sentimiento")
 names(schema_sent$properties)  # sentimiento_general, puntuacion, aspectos
 
-# Ver todos los tipos disponibles
-# extraccion_entidades, clasificacion, sentimiento, resumen, qa, tripletes
+# Obtener esquema para analisis breve de protestas
+schema_protesta <- acep_gpt_schema("protesta_breve")
+names(schema_protesta$properties)  # fecha, sujeto, accion, objeto, lugar
+
+# Obtener esquema para analisis detallado de protestas
+schema_protesta_det <- acep_gpt_schema("protesta_detallada")
+names(schema_protesta_det$properties)  # acciones (array con 9 campos cada una)
 }

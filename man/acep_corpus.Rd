@@ -2,17 +2,17 @@
 % Please edit documentation in R/acep_classes.R
 \name{acep_corpus}
 \alias{acep_corpus}
-\title{Constructor de corpus para análisis de texto}
+\title{Constructor de corpus para analisis de texto}
 \usage{
 acep_corpus(texto, metadata = NULL, id = NULL)
 }
 \arguments{
 \item{texto}{Vector de caracteres con los textos a almacenar en el corpus.}
 
-\item{metadata}{Lista opcional con información adicional sobre el corpus
-(ej: fuente, fecha de recolección, categorías temáticas).}
+\item{metadata}{Lista opcional con informacion adicional sobre el corpus
+(ej: fuente, fecha de recoleccion, categorias tematicas).}
 
-\item{id}{Vector opcional de identificadores únicos para cada texto.
+\item{id}{Vector opcional de identificadores unicos para cada texto.
 Si no se proporciona, se asignan IDs secuenciales (1, 2, 3, ...).}
 }
 \value{
@@ -26,8 +26,8 @@ Objeto de clase `acep_corpus` con la siguiente estructura:
 }
 }
 \description{
-Crea un objeto de clase `acep_corpus` que encapsula una colección de textos
-junto con su metadata asociada. Este objeto está diseñado para trabajar
+Crea un objeto de clase `acep_corpus` que encapsula una coleccion de textos
+junto con su metadata asociada. Este objeto esta disenado para trabajar
 con las funciones pipeline de ACEP (`pipe_clean`, `pipe_count`, etc.),
 permitiendo un flujo de trabajo encadenado y manteniendo trazabilidad
 de las transformaciones aplicadas.
@@ -41,7 +41,7 @@ print(corpus)
 # Crear corpus con metadata e IDs personalizados
 corpus <- acep_corpus(
   texto = c("Noticia 1", "Noticia 2"),
-  metadata = list(fuente = "Diario La Nación", año = 2024),
+  metadata = list(fuente = "Diario La Nacion", year = 2024),
   id = c("LN001", "LN002")
 )
 }

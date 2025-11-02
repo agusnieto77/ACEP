@@ -2,37 +2,37 @@
 % Please edit documentation in R/acep_classes.R
 \name{acep_result}
 \alias{acep_result}
-\title{Constructor de resultados de análisis}
+\title{Constructor de resultados de analisis}
 \usage{
 acep_result(data, tipo = "general", metadata = NULL)
 }
 \arguments{
-\item{data}{Data frame con los resultados del análisis.}
+\item{data}{Data frame con los resultados del analisis.}
 
 \item{tipo}{Tipo de resultado que contiene el objeto. Valores comunes:
 `"frecuencia"`, `"intensidad"`, `"svo"`, `"serie_temporal"`, `"general"`.
-Este parámetro determina el comportamiento de los métodos de impresión y visualización.}
+Este parametro determina el comportamiento de los metodos de impresion y visualizacion.}
 
-\item{metadata}{Lista opcional con información sobre el análisis realizado
-(ej: diccionario utilizado, parámetros aplicados, corpus de origen).}
+\item{metadata}{Lista opcional con informacion sobre el analisis realizado
+(ej: diccionario utilizado, parametros aplicados, corpus de origen).}
 }
 \value{
 Objeto de clase `acep_result` con la siguiente estructura:
 \itemize{
-  \item \code{data}: Data frame con los resultados del análisis
+  \item \code{data}: Data frame con los resultados del analisis
   \item \code{tipo}: Etiqueta del tipo de resultado
-  \item \code{metadata}: Información adicional del análisis
-  \item \code{fecha_creacion}: Timestamp de creación del objeto
+  \item \code{metadata}: Informacion adicional del analisis
+  \item \code{fecha_creacion}: Timestamp de creacion del objeto
 }
 }
 \description{
 Crea un objeto de clase `acep_result` que encapsula los resultados de
-un análisis de texto realizado con funciones de ACEP. Este objeto
-proporciona métodos especializados para visualización (`plot()`),
-resumen (`summary()`) y conversión a data frame (`as.data.frame()`).
+un analisis de texto realizado con funciones de ACEP. Este objeto
+proporciona metodos especializados para visualizacion (`plot()`),
+resumen (`summary()`) y conversion a data frame (`as.data.frame()`).
 }
 \examples{
-# Crear resultado de análisis de frecuencias
+# Crear resultado de analisis de frecuencias
 datos <- data.frame(
   texto = c("El SUTEBA va al paro", "SOIP protesta"),
   frecuencia = c(5, 3)

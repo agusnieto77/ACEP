@@ -29,6 +29,7 @@ Imports:
     spacyr,
     udpipe,
     stringr,
+    ollamar,
     reticulate,
     tidygeocoder,
     utils,

@@ -1,3 +1,26 @@
+#' @title Funcion auxiliar para proteger arrays en esquemas JSON
+#' @description
+#' Protege arrays en esquemas JSON para evitar que jsonlite::toJSON los convierta
+#' incorrectamente. Aplica I() a campos 'required' y 'enum' recursivamente.
+#' @param schema Esquema JSON como lista de R
+#' @return Esquema con arrays protegidos
+#' @keywords internal
+proteger_arrays_schema <- function(schema) {
+  if (is.list(schema)) {
+    # Proteger el campo 'required' si existe
+    if ("required" %in% names(schema)) {
+      schema$required <- I(schema$required)
+    }
+    # Proteger el campo 'enum' si existe
+    if ("enum" %in% names(schema)) {
+      schema$enum <- I(schema$enum)
+    }
+    # Recursivamente proteger subesquemas
+    schema <- lapply(schema, proteger_arrays_schema)
+  }
+  return(schema)
+}
+
 #' @title Interaccion con modelos GPT usando Structured Outputs
 #' @description
 #' Funcion para interactuar con la API de OpenAI utilizando Structured Outputs,
@@ -10,7 +33,7 @@
 #' @param instrucciones Instrucciones en lenguaje natural que indican al modelo que hacer
 #'   con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".
 #' @param modelo Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (mas rapido y economico),
-#'   `"gpt-4o"` (mas potente), `"gpt-4o-2024-08-06"`, `"gpt-4o-2024-11-20"`. Por defecto: `"gpt-4o-mini"`.
+#'   `"gpt-4o"` (mas potente), `"gpt-5-nano"`, `"gpt-5-mini"`, entre otros. Por defecto: `"gpt-4o-mini"`.
 #' @param api_key Clave de API de OpenAI. Si no se proporciona, busca la variable de
 #'   entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys
 #' @param schema Esquema JSON que define la estructura de la respuesta. Puede usar
@@ -94,9 +117,10 @@ acep_gpt <- function(texto,
           description = "Respuesta principal a la pregunta o instruccion"
         )
       ),
-      required = I(c("respuesta")),  # Usar I() para proteger el array de auto_unbox
+      required = c("respuesta"),
       additionalProperties = FALSE
     )
+    schema <- proteger_arrays_schema(schema)
   }
   
   # Construir prompt del sistema
@@ -135,7 +159,7 @@ acep_gpt <- function(texto,
         "Content-Type" = "application/json",
         "Authorization" = paste("Bearer", api_key)
       ),
-      body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),  # Serializar con auto_unbox pero protegiendo arrays con I()
+      body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
       encode = "raw"
     )
 
@@ -174,7 +198,8 @@ acep_gpt <- function(texto,
 #' Proporciona esquemas JSON predefinidos y validados para casos de uso comunes
 #' en analisis de texto con GPT. Estos esquemas garantizan respuestas estructuradas
 #' y consistentes para tareas como extraccion de entidades, clasificacion, analisis
-#' de sentimiento, resumen, pregunta-respuesta y extraccion de tripletes.
+#' de sentimiento, resumen, pregunta-respuesta, extraccion de tripletes y analisis
+#' de acciones de protesta.
 #'
 #' @param tipo Tipo de esquema a devolver. Opciones:
 #' \itemize{
@@ -184,10 +209,12 @@ acep_gpt <- function(texto,
 #'   \item \code{"resumen"}: Genera resumenes cortos y detallados con puntos clave
 #'   \item \code{"qa"}: Responde preguntas con citas textuales y nivel de confianza
 #'   \item \code{"tripletes"}: Extrae relaciones sujeto-predicado-objeto
+#'   \item \code{"protesta_breve"}: Extrae informacion basica de acciones de protesta (fecha, sujeto, accion, objeto, lugar)
+#'   \item \code{"protesta_detallada"}: Extrae informacion detallada de multiples acciones de protesta con 9 campos por accion
 #' }
 #'
 #' @return Lista con esquema JSON compatible con OpenAI Structured Outputs.
-#'   Puede usarse directamente en el parametro `schema` de `acep_gpt()`.
+#'   Puede usarse directamente en el parametro `schema` de `acep_gpt()` o `acep_ollama()`.
 #'
 #' @export
 #' @examples
@@ -203,8 +230,13 @@ acep_gpt <- function(texto,
 #' schema_sent <- acep_gpt_schema("sentimiento")
 #' names(schema_sent$properties)  # sentimiento_general, puntuacion, aspectos
 #'
-#' # Ver todos los tipos disponibles
-#' # extraccion_entidades, clasificacion, sentimiento, resumen, qa, tripletes
+#' # Obtener esquema para analisis breve de protestas
+#' schema_protesta <- acep_gpt_schema("protesta_breve")
+#' names(schema_protesta$properties)  # fecha, sujeto, accion, objeto, lugar
+#'
+#' # Obtener esquema para analisis detallado de protestas
+#' schema_protesta_det <- acep_gpt_schema("protesta_detallada")
+#' names(schema_protesta_det$properties)  # acciones (array con 9 campos cada una)
 acep_gpt_schema <- function(tipo = "extraccion_entidades") {
   
   esquemas <- list(
@@ -239,7 +271,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
           description = "Lista de eventos mencionados"
         )
       ),
-      required = I(c("personas", "organizaciones", "lugares", "fechas", "eventos")),
+      required = c("personas", "organizaciones", "lugares", "fechas", "eventos"),
       additionalProperties = FALSE
     ),
 
@@ -260,7 +292,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
           description = "Breve justificacion de la clasificacion"
         )
       ),
-      required = I(c("categoria", "confianza", "justificacion")),
+      required = c("categoria", "confianza", "justificacion"),
       additionalProperties = FALSE
     ),
 
@@ -270,7 +302,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       properties = list(
         sentimiento_general = list(
           type = "string",
-          enum = I(c("positivo", "negativo", "neutral")),
+          enum = c("positivo", "negativo", "neutral"),
           description = "Sentimiento general del texto"
         ),
         puntuacion = list(
@@ -283,15 +315,15 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
             type = "object",
             properties = list(
               aspecto = list(type = "string"),
-              sentimiento = list(type = "string", enum = I(c("positivo", "negativo", "neutral")))
+              sentimiento = list(type = "string", enum = c("positivo", "negativo", "neutral"))
             ),
-            required = I(c("aspecto", "sentimiento")),
+            required = c("aspecto", "sentimiento"),
             additionalProperties = FALSE
           ),
           description = "Sentimientos por aspecto especifico"
         )
       ),
-      required = I(c("sentimiento_general", "puntuacion", "aspectos")),
+      required = c("sentimiento_general", "puntuacion", "aspectos"),
       additionalProperties = FALSE
     ),
 
@@ -313,7 +345,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
           description = "Lista de puntos clave del texto"
         )
       ),
-      required = I(c("resumen_corto", "resumen_detallado", "puntos_clave")),
+      required = c("resumen_corto", "resumen_detallado", "puntos_clave"),
       additionalProperties = FALSE
     ),
 
@@ -327,7 +359,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         ),
         confianza = list(
           type = "string",
-          enum = I(c("alta", "media", "baja")),
+          enum = c("alta", "media", "baja"),
           description = "Nivel de confianza en la respuesta"
         ),
         cita_textual = list(
@@ -335,7 +367,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
           description = "Cita textual del texto que respalda la respuesta"
         )
       ),
-      required = I(c("respuesta", "confianza", "cita_textual")),
+      required = c("respuesta", "confianza", "cita_textual"),
       additionalProperties = FALSE
     ),
 
@@ -352,13 +384,98 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
               predicado = list(type = "string"),
               objeto = list(type = "string")
             ),
-            required = I(c("sujeto", "predicado", "objeto")),
+            required = c("sujeto", "predicado", "objeto"),
             additionalProperties = FALSE
           ),
           description = "Lista de tripletes extraidos del texto"
         )
       ),
-      required = I(c("tripletes")),
+      required = c("tripletes"),
+      additionalProperties = FALSE
+    ),
+    
+    # Esquema para analisis breve de protestas
+    protesta_breve = list(
+      type = "object",
+      properties = list(
+        fecha = list(
+          type = "string",
+          description = "Fecha de la accion de protesta en formato yyyy-mm-dd"
+        ),
+        sujeto = list(
+          type = "string",
+          description = "Quien realiza la accion de protesta (maximo 5 palabras)"
+        ),
+        accion = list(
+          type = "string",
+          description = "Formato de la accion de protesta (maximo 3 palabras)"
+        ),
+        objeto = list(
+          type = "string",
+          description = "Contra quien o que se realiza la accion de protesta (maximo 6 palabras). Usar null si no hay informacion"
+        ),
+        lugar = list(
+          type = "string",
+          description = "Localizacion geografica de la accion de protesta (maximo 4 palabras). Usar null si no hay informacion"
+        )
+      ),
+      required = c("fecha", "sujeto", "accion", "objeto", "lugar"),
+      additionalProperties = FALSE
+    ),
+
+    # Esquema para analisis detallado de protestas
+    protesta_detallada = list(
+      type = "object",
+      properties = list(
+        acciones = list(
+          type = "array",
+          items = list(
+            type = "object",
+            properties = list(
+              id = list(
+                type = "number",
+                description = "Identificador unico del texto en formato numerico. Se repite para todas las acciones"
+              ),
+              cronica = list(
+                type = "string",
+                description = "Resumen de la accion identificada en una frase"
+              ),
+              fecha = list(
+                type = "string",
+                description = "Fecha de la accion de protesta en formato yyyy-mm-dd. Se repite para todas las acciones"
+              ),
+              sujeto = list(
+                type = "string",
+                description = "Quien realiza la accion de protesta (maximo 5 palabras)"
+              ),
+              organizacion = list(
+                type = "string",
+                description = "Organizaciones participantes en la accion de protesta. Si no hay informacion, repetir el valor de sujeto"
+              ),
+              participacion = list(
+                type = "number",
+                description = "Numero de individuos que participaron en la accion de protesta. Si no hay informacion, usar 0"
+              ),
+              accion = list(
+                type = "string",
+                description = "Descripcion de la accion de protesta (maximo 3 palabras)"
+              ),
+              objeto = list(
+                type = "string",
+                description = "Contra quien o que se lleva a cabo la accion de protesta (maximo 6 palabras). Usar null si no hay informacion"
+              ),
+              lugar = list(
+                type = "string",
+                description = "Localidad o ubicacion geografica de la accion de protesta (maximo 4 palabras)"
+              )
+            ),
+            required = c("id", "cronica", "fecha", "sujeto", "organizacion", "participacion", "accion", "objeto", "lugar"),
+            additionalProperties = FALSE
+          ),
+          description = "Lista de acciones de protesta identificadas en el texto. Cada accion es una unidad de analisis independiente"
+        )
+      ),
+      required = c("acciones"),
       additionalProperties = FALSE
     )
   )
@@ -367,5 +484,5 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
     stop(sprintf("Tipo de esquema no valido. Opciones: %s", paste(names(esquemas), collapse = ", ")))
   }
   
-  return(esquemas[[tipo]])
+  return(proteger_arrays_schema(esquemas[[tipo]]))
 }
