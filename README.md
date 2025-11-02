@@ -70,6 +70,8 @@ devtools::install_github("agusnieto77/ACEP")
 | `acep_gpt()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con los modelos de OpenAI. |
 | `acep_gpt_schema()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Define esquemas para respuestas estructuradas de GPT. |
 | `acep_int()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Índice de intensidad. |
+| `acep_ollama()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Ollama locales. |
+| `acep_ollama_setup()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Configuración y verificación del entorno Ollama. |
 | `acep_load_base()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Carga bases de datos creadas por el Observatorio. |
 | `acep_may()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a mayúsculas. |
 | `acep_min()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a minúsculas. |
