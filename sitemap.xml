@@ -12,6 +12,7 @@
 <url><loc>https://agusnieto77.github.io/ACEP/index.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/news/index.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_bases.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_claude.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_clean.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_clear_regex_cache.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_context.html</loc></url>
@@ -22,6 +23,7 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_diccionarios.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_extract.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_frec.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_gemini.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_gpt.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_gpt_schema.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_int.html</loc></url>
@@ -30,6 +32,7 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_min.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_ollama.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_ollama_setup.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/acep_openrouter.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_pipeline.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_plot_st.html</loc></url>

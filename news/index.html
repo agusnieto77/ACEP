@@ -61,6 +61,15 @@
 <li>Se agregó <code><a href="../reference/acep_gpt_schema.html">acep_gpt_schema()</a></code>: esquemas JSON predefinidos para análisis de texto con GPT.</li>
 <li>Se agregó <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>: interacción con modelos de lenguaje locales usando Ollama con soporte para structured outputs. Permite ejecutar análisis de texto sin costos ni API keys, manteniendo privacidad total de los datos.</li>
 <li>Se agregó <code><a href="../reference/acep_ollama_setup.html">acep_ollama_setup()</a></code>: guía de instalación y configuración de Ollama.</li>
+<li>
+<strong>Nuevas funciones de IA con Structured Outputs</strong>:
+<ul><li>
+<code><a href="../reference/acep_claude.html">acep_claude()</a></code>: interacción con modelos Anthropic Claude (Sonnet 4.5, Claude 3.5, Claude 3) usando tool calling forzado para structured outputs</li>
+<li>
+<code><a href="../reference/acep_gemini.html">acep_gemini()</a></code>: interacción con modelos Google Gemini (2.5 y 2.0) usando responseSchema con OpenAPI 3.0. Incluye acceso gratuito limitado</li>
+<li>
+<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>: gateway unificado para acceder a 400+ modelos de 60+ proveedores (OpenAI, Anthropic, Google, Meta, Qwen, DeepSeek) con una sola API. Soporta modelos gratuitos y fallback automático</li>
+</ul></li>
 <li>Se agregaron funciones auxiliares para gestión de caché:
 <ul><li>
 <code><a href="../reference/acep_clear_regex_cache.html">acep_clear_regex_cache()</a></code>: limpia el caché de expresiones regulares</li>
@@ -73,7 +82,12 @@
 <ul><li>
 <code><a href="../reference/acep_count.html">acep_count()</a></code>: se incorporó sistema de caché de expresiones regulares para mejorar rendimiento.</li>
 <li>
-<code><a href="../reference/acep_gpt.html">acep_gpt()</a></code>: se actualizó para usar Structured Outputs de OpenAI con esquemas JSON.</li>
+<code><a href="../reference/acep_gpt.html">acep_gpt()</a></code>: se actualizó completamente para soportar Structured Outputs de OpenAI con esquemas JSON. Ahora incluye:
+<ul><li>Soporte para modelos GPT-4o, GPT-4.1, GPT-5, o1 y o4</li>
+<li>Detección automática de parámetro correcto (<code>max_tokens</code> vs <code>max_completion_tokens</code>) según el modelo</li>
+<li>Validación flexible con patrones regex para modelos futuros</li>
+<li>Compatibilidad con todos los modelos que soporten Structured Outputs</li>
+</ul></li>
 <li>
 <code><a href="../reference/acep_clean.html">acep_clean()</a></code>: renombrada desde <code>acep_cleaning()</code> para mayor consistencia.</li>
 </ul></div>
@@ -81,8 +95,14 @@
 <h3 id="documentación-0-1-0-9000">Documentación<a class="anchor" aria-label="anchor" href="#documentaci%C3%B3n-0-1-0-9000"></a></h3>
 <ul><li>Se mejoró la documentación de todas las funciones nuevas y modificadas.</li>
 <li>Se agregaron ejemplos prácticos a todas las funciones operativas.</li>
-<li>Se actualizó README.Rmd con la lista completa de funciones del paquete.</li>
+<li>Se actualizó README.Rmd con la lista completa de funciones del paquete, incluyendo las 4 nuevas funciones de IA.</li>
 <li>Se actualizaron todas las viñetas para usar las nuevas funciones.</li>
+<li>Se agregó documentación completa para las funciones de IA:
+<ul><li>Guías de uso con ejemplos para cada proveedor (OpenAI, Anthropic, Google, OpenRouter)</li>
+<li>Tabla comparativa de características entre proveedores</li>
+<li>Instrucciones para configuración de API keys</li>
+<li>Ejemplos de uso intercambiable entre diferentes APIs manteniendo la misma interfaz</li>
+</ul></li>
 </ul></div>
 </div>
     <div class="section level2">
