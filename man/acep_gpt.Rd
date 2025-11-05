@@ -24,8 +24,10 @@ acep_gpt(
 \item{instrucciones}{Instrucciones en lenguaje natural que indican al modelo que hacer
 con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".}
 
-\item{modelo}{Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (mas rapido y economico),
-`"gpt-4o"` (mas potente), `"gpt-5-nano"`, `"gpt-5-mini"`, entre otros. Por defecto: `"gpt-4o-mini"`.}
+\item{modelo}{Modelo de OpenAI a utilizar. Compatible con Structured Outputs:
+`"gpt-4o-mini"` (mas rapido y economico), `"gpt-4o"`, `"gpt-4o-2024-08-06"` (mas potente),
+`"gpt-4.1"`, `"gpt-5-nano"`, `"gpt-5-mini"`, `"o1-mini"`, `"o4-mini"`, entre otros.
+Por defecto: `"gpt-4o-mini"`. Ver: https://platform.openai.com/docs/guides/structured-outputs}
 
 \item{api_key}{Clave de API de OpenAI. Si no se proporciona, busca la variable de
 entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys}
@@ -39,18 +41,21 @@ a un objeto R (lista o data frame). Si `FALSE`, devuelve el JSON como string.}
 
 \item{temperature}{Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
 respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas creativas.
-Por defecto: 0 (maxima determinismo).}
+Por defecto: 0 (maxima determinismo).
+NOTA: Los modelos gpt-5, o1 y o4 solo aceptan temperature = 1 (default de OpenAI).}
 
 \item{max_tokens}{Numero maximo de tokens en la respuesta. Por defecto: 2000.}
 
 \item{top_p}{Parametro top-p para nucleus sampling (0-1). Controla la diversidad
-de la respuesta. Por defecto: 0.2.}
+de la respuesta. Por defecto: 0.2.
+NOTA: Ignorado en modelos gpt-5, o1 y o4.}
 
 \item{frequency_penalty}{Penalizacion por repeticion de tokens frecuentes (-2 a 2).
-Por defecto: 0.2.}
+Por defecto: 0.2. NOTA: Ignorado en modelos gpt-5, o1 y o4.}
 
 \item{seed}{Semilla numerica para reproducibilidad. Usar el mismo seed con los
-mismos parametros genera respuestas identicas. Por defecto: 123456.}
+mismos parametros genera respuestas identicas. Por defecto: 123456.
+NOTA: Ignorado en modelos gpt-5, o1 y o4.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
@@ -62,6 +67,18 @@ una funcionalidad que garantiza respuestas en formato JSON que cumplen estrictam
 con un esquema predefinido. Esto elimina la necesidad de parseo y validacion manual,
 haciendo las respuestas mas confiables y estructuradas. Compatible con modelos
 `gpt-4o` y `gpt-4o-mini`.
+}
+\details{
+**Diferencias entre modelos:**
+
+- **Modelos GPT-4o/GPT-4.1**: Soportan todos los parametros (temperature, top_p,
+  frequency_penalty, seed). Usan `max_tokens`.
+
+- **Modelos GPT-5/o1/o4**: Solo aceptan temperature = 1 (default). Los parametros
+  temperature, top_p, frequency_penalty y seed son automaticamente omitidos.
+  Usan `max_completion_tokens` en lugar de `max_tokens`.
+
+La funcion maneja estas diferencias automaticamente segun el modelo especificado.
 }
 \examples{
 \dontrun{

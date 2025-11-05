@@ -32,8 +32,10 @@ proteger_arrays_schema <- function(schema) {
 #' @param texto Texto a analizar con GPT. Puede ser una noticia, tweet, documento, etc.
 #' @param instrucciones Instrucciones en lenguaje natural que indican al modelo que hacer
 #'   con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sentimiento".
-#' @param modelo Modelo de OpenAI a utilizar. Opciones: `"gpt-4o-mini"` (mas rapido y economico),
-#'   `"gpt-4o"` (mas potente), `"gpt-5-nano"`, `"gpt-5-mini"`, entre otros. Por defecto: `"gpt-4o-mini"`.
+#' @param modelo Modelo de OpenAI a utilizar. Compatible con Structured Outputs:
+#'   `"gpt-4o-mini"` (mas rapido y economico), `"gpt-4o"`, `"gpt-4o-2024-08-06"` (mas potente),
+#'   `"gpt-4.1"`, `"gpt-5-nano"`, `"gpt-5-mini"`, `"o1-mini"`, `"o4-mini"`, entre otros.
+#'   Por defecto: `"gpt-4o-mini"`. Ver: https://platform.openai.com/docs/guides/structured-outputs
 #' @param api_key Clave de API de OpenAI. Si no se proporciona, busca la variable de
 #'   entorno `OPENAI_API_KEY`. Para obtener una clave: https://platform.openai.com/api-keys
 #' @param schema Esquema JSON que define la estructura de la respuesta. Puede usar
@@ -44,16 +46,31 @@ proteger_arrays_schema <- function(schema) {
 #' @param temperature Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
 #'   respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas creativas.
 #'   Por defecto: 0 (maxima determinismo).
+#'   NOTA: Los modelos gpt-5, o1 y o4 solo aceptan temperature = 1 (default de OpenAI).
 #' @param max_tokens Numero maximo de tokens en la respuesta. Por defecto: 2000.
 #' @param top_p Parametro top-p para nucleus sampling (0-1). Controla la diversidad
 #'   de la respuesta. Por defecto: 0.2.
+#'   NOTA: Ignorado en modelos gpt-5, o1 y o4.
 #' @param frequency_penalty Penalizacion por repeticion de tokens frecuentes (-2 a 2).
-#'   Por defecto: 0.2.
+#'   Por defecto: 0.2. NOTA: Ignorado en modelos gpt-5, o1 y o4.
 #' @param seed Semilla numerica para reproducibilidad. Usar el mismo seed con los
 #'   mismos parametros genera respuestas identicas. Por defecto: 123456.
+#'   NOTA: Ignorado en modelos gpt-5, o1 y o4.
 #'
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
+#'
+#' @details
+#' **Diferencias entre modelos:**
+#'
+#' - **Modelos GPT-4o/GPT-4.1**: Soportan todos los parametros (temperature, top_p,
+#'   frequency_penalty, seed). Usan `max_tokens`.
+#'
+#' - **Modelos GPT-5/o1/o4**: Solo aceptan temperature = 1 (default). Los parametros
+#'   temperature, top_p, frequency_penalty y seed son automaticamente omitidos.
+#'   Usan `max_completion_tokens` en lugar de `max_tokens`.
+#'
+#' La funcion maneja estas diferencias automaticamente segun el modelo especificado.
 #'
 #' @export
 #' @examples
@@ -101,11 +118,43 @@ acep_gpt <- function(texto,
   }
   
   # Validar modelo compatible con Structured Outputs
-  modelos_compatibles <- c("gpt-4o-mini", "gpt-4o", "gpt-4o-2024-08-06", "gpt-4o-2024-11-20")
-  if (!modelo %in% modelos_compatibles) {
-    warning(sprintf("El modelo '%s' puede no ser compatible con Structured Outputs. Modelos recomendados: %s",
-                    modelo, paste(modelos_compatibles, collapse = ", ")))
+  # Segun https://platform.openai.com/docs/guides/structured-outputs
+  # Structured Outputs funciona con: gpt-4o-mini, gpt-4o-2024-08-06 y versiones posteriores
+  modelos_compatibles <- c(
+    # Serie gpt-4o
+    "gpt-4o-mini", "gpt-4o-mini-2024-07-18", "gpt-4o", "gpt-4o-2024-08-06", "gpt-4o-2024-11-20",
+    # Serie gpt-4.1 (mencionado en docs de streaming)
+    "gpt-4.1",
+    # Serie gpt-5
+    "gpt-5-nano", "gpt-5-mini",
+    # Serie o1 y o4 (modelos de razonamiento)
+    "o1", "o1-mini", "o1-preview", "o4-mini"
+  )
+
+  # Verificar compatibilidad - pero permitir cualquier modelo que empiece con patrones conocidos
+  es_compatible <- modelo %in% modelos_compatibles ||
+                   grepl("^gpt-4o", modelo) ||
+                   grepl("^gpt-4\\.1", modelo) ||
+                   grepl("^gpt-5", modelo) ||
+                   grepl("^o1", modelo) ||
+                   grepl("^o4", modelo)
+
+  if (!es_compatible) {
+    warning(sprintf("El modelo '%s' puede no ser compatible con Structured Outputs. Modelos recomendados: gpt-4o-mini, gpt-4o-2024-08-06 y versiones posteriores",
+                    modelo))
   }
+
+  # Determinar si el modelo usa max_completion_tokens en lugar de max_tokens
+  # Los modelos de razonamiento (o1, o4) y gpt-5 usan max_completion_tokens
+  usa_max_completion_tokens <- grepl("^gpt-5", modelo) ||
+                                grepl("^o1", modelo) ||
+                                grepl("^o4", modelo)
+
+  # Determinar si el modelo solo acepta temperature = 1 (valor por defecto)
+  # Los modelos gpt-5 y o1/o4 no permiten temperature = 0
+  solo_temperatura_default <- grepl("^gpt-5", modelo) ||
+                               grepl("^o1", modelo) ||
+                               grepl("^o4", modelo)
   
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
@@ -143,13 +192,24 @@ acep_gpt <- function(texto,
         strict = TRUE,
         schema = schema
       )
-    ),
-    temperature = temperature,
-    max_tokens = max_tokens,
-    top_p = top_p,
-    frequency_penalty = frequency_penalty,
-    seed = seed
+    )
   )
+
+  # Agregar parametros de generacion solo si el modelo los acepta
+  # Los modelos gpt-5 y o1/o4 solo aceptan temperature = 1 (default)
+  if (!solo_temperatura_default) {
+    body$temperature <- temperature
+    body$top_p <- top_p
+    body$frequency_penalty <- frequency_penalty
+    body$seed <- seed
+  }
+
+  # Agregar el parametro correcto segun el modelo
+  if (usa_max_completion_tokens) {
+    body$max_completion_tokens <- max_tokens
+  } else {
+    body$max_tokens <- max_tokens
+  }
   
   # Realizar peticion a la API
   tryCatch({

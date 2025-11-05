@@ -66,8 +66,11 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_detect()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Detección de menciones de palabras.|
 |`acep_extract()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Extraer palabras de un texto.|
 |`acep_frec()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Frecuencia de palabras totales.|
-|`acep_gpt()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con los modelos de OpenAI.|
+|`acep_gpt()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos OpenAI GPT.|
 |`acep_gpt_schema()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Define esquemas para respuestas estructuradas de GPT.|
+|`acep_claude()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Anthropic Claude.|
+|`acep_gemini()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Google Gemini.|
+|`acep_openrouter()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con 400+ modelos vía OpenRouter.|
 |`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Índice de intensidad.|
 |`acep_ollama()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Ollama locales.|
 |`acep_ollama_setup()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Configuración y verificación del entorno Ollama.|

@@ -15,6 +15,10 @@
 * Se agregó `acep_gpt_schema()`: esquemas JSON predefinidos para análisis de texto con GPT.
 * Se agregó `acep_ollama()`: interacción con modelos de lenguaje locales usando Ollama con soporte para structured outputs. Permite ejecutar análisis de texto sin costos ni API keys, manteniendo privacidad total de los datos.
 * Se agregó `acep_ollama_setup()`: guía de instalación y configuración de Ollama.
+* **Nuevas funciones de IA con Structured Outputs**:
+  - `acep_claude()`: interacción con modelos Anthropic Claude (Sonnet 4.5, Claude 3.5, Claude 3) usando tool calling forzado para structured outputs
+  - `acep_gemini()`: interacción con modelos Google Gemini (2.5 y 2.0) usando responseSchema con OpenAPI 3.0. Incluye acceso gratuito limitado
+  - `acep_openrouter()`: gateway unificado para acceder a 400+ modelos de 60+ proveedores (OpenAI, Anthropic, Google, Meta, Qwen, DeepSeek) con una sola API. Soporta modelos gratuitos y fallback automático
 * Se agregaron funciones auxiliares para gestión de caché:
   - `acep_clear_regex_cache()`: limpia el caché de expresiones regulares
   - `acep_regex_cache_size()`: consulta el tamaño del caché
@@ -22,15 +26,24 @@
 ## Mejoras en funciones existentes
 
 * `acep_count()`: se incorporó sistema de caché de expresiones regulares para mejorar rendimiento.
-* `acep_gpt()`: se actualizó para usar Structured Outputs de OpenAI con esquemas JSON.
+* `acep_gpt()`: se actualizó completamente para soportar Structured Outputs de OpenAI con esquemas JSON. Ahora incluye:
+  - Soporte para modelos GPT-4o, GPT-4.1, GPT-5, o1 y o4
+  - Detección automática de parámetro correcto (`max_tokens` vs `max_completion_tokens`) según el modelo
+  - Validación flexible con patrones regex para modelos futuros
+  - Compatibilidad con todos los modelos que soporten Structured Outputs
 * `acep_clean()`: renombrada desde `acep_cleaning()` para mayor consistencia.
 
 ## Documentación
 
 * Se mejoró la documentación de todas las funciones nuevas y modificadas.
 * Se agregaron ejemplos prácticos a todas las funciones operativas.
-* Se actualizó README.Rmd con la lista completa de funciones del paquete.
+* Se actualizó README.Rmd con la lista completa de funciones del paquete, incluyendo las 4 nuevas funciones de IA.
 * Se actualizaron todas las viñetas para usar las nuevas funciones.
+* Se agregó documentación completa para las funciones de IA:
+  - Guías de uso con ejemplos para cada proveedor (OpenAI, Anthropic, Google, OpenRouter)
+  - Tabla comparativa de características entre proveedores
+  - Instrucciones para configuración de API keys
+  - Ejemplos de uso intercambiable entre diferentes APIs manteniendo la misma interfaz
 
 # ACEP 0.0.2.9005 (versión en desarrollo)
 
