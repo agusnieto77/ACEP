@@ -271,6 +271,7 @@ acep_gpt <- function(texto,
 #'   \item \code{"tripletes"}: Extrae relaciones sujeto-predicado-objeto
 #'   \item \code{"protesta_breve"}: Extrae informacion basica de acciones de protesta (fecha, sujeto, accion, objeto, lugar)
 #'   \item \code{"protesta_detallada"}: Extrae informacion detallada de multiples acciones de protesta con 9 campos por accion
+#'   \item \code{"verdadero_falso"}: Devuelve una respuesta booleana simple (TRUE o FALSE) con nivel de confianza (0 a 1) y justificacion opcional
 #' }
 #'
 #' @return Lista con esquema JSON compatible con OpenAI Structured Outputs.
@@ -297,6 +298,10 @@ acep_gpt <- function(texto,
 #' # Obtener esquema para analisis detallado de protestas
 #' schema_protesta_det <- acep_gpt_schema("protesta_detallada")
 #' names(schema_protesta_det$properties)  # acciones (array con 9 campos cada una)
+#'
+#' # Obtener esquema para respuesta verdadero/falso
+#' schema_bool <- acep_gpt_schema("verdadero_falso")
+#' names(schema_bool$properties)  # respuesta, nivel_confianza, justificacion
 acep_gpt_schema <- function(tipo = "extraccion_entidades") {
   
   esquemas <- list(
@@ -334,7 +339,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("personas", "organizaciones", "lugares", "fechas", "eventos"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para clasificacion
     clasificacion = list(
       type = "object",
@@ -355,7 +360,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("categoria", "confianza", "justificacion"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para analisis de sentimiento
     sentimiento = list(
       type = "object",
@@ -386,7 +391,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("sentimiento_general", "puntuacion", "aspectos"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para resumen
     resumen = list(
       type = "object",
@@ -408,7 +413,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("resumen_corto", "resumen_detallado", "puntos_clave"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para pregunta-respuesta
     qa = list(
       type = "object",
@@ -430,7 +435,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("respuesta", "confianza", "cita_textual"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para extraccion de tripletes (sujeto-predicado-objeto)
     tripletes = list(
       type = "object",
@@ -482,7 +487,7 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
       required = c("fecha", "sujeto", "accion", "objeto", "lugar"),
       additionalProperties = FALSE
     ),
-
+    
     # Esquema para analisis detallado de protestas
     protesta_detallada = list(
       type = "object",
@@ -536,6 +541,29 @@ acep_gpt_schema <- function(tipo = "extraccion_entidades") {
         )
       ),
       required = c("acciones"),
+      additionalProperties = FALSE
+    ),
+    
+    # Esquema para respuesta verdadero/falso simple
+    verdadero_falso = list(
+      type = "object",
+      properties = list(
+        respuesta = list(
+          type = "boolean",
+          description = "Respuesta booleana: TRUE o FALSE"
+        ),
+        nivel_confianza = list(
+          type = "number",
+          minimum = 0,
+          maximum = 1,
+          description = "Nivel de confianza de la respuesta, de 0 (ninguna confianza) a 1 (confianza total)"
+        ),
+        justificacion = list(
+          type = "string",
+          description = "Breve justificacion de la respuesta (opcional pero recomendado)"
+        )
+      ),
+      required = c("respuesta", "nivel_confianza"),
       additionalProperties = FALSE
     )
   )
