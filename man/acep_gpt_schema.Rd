@@ -17,6 +17,7 @@ acep_gpt_schema(tipo = "extraccion_entidades")
   \item \code{"tripletes"}: Extrae relaciones sujeto-predicado-objeto
   \item \code{"protesta_breve"}: Extrae informacion basica de acciones de protesta (fecha, sujeto, accion, objeto, lugar)
   \item \code{"protesta_detallada"}: Extrae informacion detallada de multiples acciones de protesta con 9 campos por accion
+  \item \code{"verdadero_falso"}: Devuelve una respuesta booleana simple (TRUE o FALSE) con nivel de confianza (0 a 1) y justificacion opcional
 }}
 }
 \value{
@@ -50,4 +51,8 @@ names(schema_protesta$properties)  # fecha, sujeto, accion, objeto, lugar
 # Obtener esquema para analisis detallado de protestas
 schema_protesta_det <- acep_gpt_schema("protesta_detallada")
 names(schema_protesta_det$properties)  # acciones (array con 9 campos cada una)
+
+# Obtener esquema para respuesta verdadero/falso
+schema_bool <- acep_gpt_schema("verdadero_falso")
+names(schema_bool$properties)  # respuesta, nivel_confianza, justificacion
 }
