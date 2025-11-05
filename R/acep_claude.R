@@ -1,3 +1,26 @@
+#' @title Funcion auxiliar para proteger arrays en esquemas JSON
+#' @description
+#' Protege arrays en esquemas JSON para evitar que jsonlite::toJSON los convierta
+#' incorrectamente. Aplica I() a campos 'required' y 'enum' recursivamente.
+#' @param schema Esquema JSON como lista de R
+#' @return Esquema con arrays protegidos
+#' @keywords internal
+proteger_arrays_schema <- function(schema) {
+  if (is.list(schema)) {
+    # Proteger el campo 'required' si existe
+    if ("required" %in% names(schema)) {
+      schema$required <- I(schema$required)
+    }
+    # Proteger el campo 'enum' si existe
+    if ("enum" %in% names(schema)) {
+      schema$enum <- I(schema$enum)
+    }
+    # Recursivamente proteger subesquemas
+    schema <- lapply(schema, proteger_arrays_schema)
+  }
+  return(schema)
+}
+
 #' @title Interaccion con modelos Claude usando Structured Outputs
 #' @description
 #' Funcion para interactuar con la API de Anthropic Claude utilizando Tool Calling
@@ -130,8 +153,10 @@ acep_claude <- function(texto,
           description = "Respuesta principal a la pregunta o instruccion"
         )
       ),
-      required = c("respuesta")
+      required = c("respuesta"),
+      additionalProperties = FALSE
     )
+    schema <- proteger_arrays_schema(schema)
   }
 
   # Remover additionalProperties si existe (no es necesario para Anthropic)
