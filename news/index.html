@@ -59,8 +59,9 @@
 <li>Se agregó <code><a href="../reference/acep_postag_hibrido.html">acep_postag_hibrido()</a></code>: etiquetado POS, lematización y extracción de entidades con spacyr.</li>
 <li>Se agregó <code><a href="../reference/acep_process_chunks.html">acep_process_chunks()</a></code>: procesamiento de textos en lotes para gestionar grandes volúmenes de datos.</li>
 <li>Se agregó <code><a href="../reference/acep_gpt_schema.html">acep_gpt_schema()</a></code>: esquemas JSON predefinidos para análisis de texto con GPT.</li>
-<li>Se agregó <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>: interacción con modelos de lenguaje locales usando Ollama con soporte para structured outputs. Permite ejecutar análisis de texto sin costos ni API keys, manteniendo privacidad total de los datos.</li>
+<li>Se agregó <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>: interacción con modelos de lenguaje de Ollama tanto locales como cloud usando structured outputs. Permite ejecutar análisis sin costos en local y activar modelos gigantes (DeepSeek 671B, Kimi 1T, Qwen3 Coder) con una API key opcional.</li>
 <li>Se agregó <code><a href="../reference/acep_ollama_setup.html">acep_ollama_setup()</a></code>: guía de instalación y configuración de Ollama.</li>
+<li>Se agregó <code><a href="../reference/acep_together.html">acep_together()</a></code>: integración con TogetherAI para acceder a modelos open source (Llama, Qwen, DeepSeek, Moonshot) con JSON mode, esquemas validados y postprocesamiento automático.</li>
 <li>
 <strong>Nuevas funciones de IA con Structured Outputs</strong>:
 <ul><li>
@@ -68,7 +69,7 @@
 <li>
 <code><a href="../reference/acep_gemini.html">acep_gemini()</a></code>: interacción con modelos Google Gemini (2.5 y 2.0) usando responseSchema con OpenAPI 3.0. Incluye acceso gratuito limitado</li>
 <li>
-<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>: gateway unificado para acceder a 400+ modelos de 60+ proveedores (OpenAI, Anthropic, Google, Meta, Qwen, DeepSeek) con una sola API. Soporta modelos gratuitos y fallback automático</li>
+<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>: gateway unificado para acceder a 400+ modelos de 60+ proveedores (OpenAI, Anthropic, Google, Meta, Qwen, DeepSeek) con una sola API y soporte de fallback automático</li>
 </ul></li>
 <li>Se agregaron funciones auxiliares para gestión de caché:
 <ul><li>
@@ -90,6 +91,15 @@
 </ul></li>
 <li>
 <code><a href="../reference/acep_clean.html">acep_clean()</a></code>: renombrada desde <code>acep_cleaning()</code> para mayor consistencia.</li>
+<li>
+<code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>: ahora detecta el tipo de endpoint (localhost o cloud), permite fijar <code>max_tokens</code>, usa hosts remotos con autenticación mediante <code>OLLAMA_API_KEY</code> y elimina la dependencia obligatoria de <code>ollamar</code>.</li>
+<li>
+<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>: agrega listado actualizado de modelos GPT-5, Grok 4, DeepSeek V3/R1, Llama 4 y Mixtral, aplica fallback inteligente entre candidatos, refuerza la validación JSON y reporta el detalle de errores por intento.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="datos-y-recursos-0-1-0-9000">Datos y recursos<a class="anchor" aria-label="anchor" href="#datos-y-recursos-0-1-0-9000"></a></h3>
+<ul><li>
+<code>acep_bases</code>: se reorganizó la documentación e incorpora el data frame <code>lc_720</code> con 720 notas anotadas manualmente para evaluar diccionarios y extracción estructurada de eventos de protesta.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentación-0-1-0-9000">Documentación<a class="anchor" aria-label="anchor" href="#documentaci%C3%B3n-0-1-0-9000"></a></h3>
@@ -97,8 +107,9 @@
 <li>Se agregaron ejemplos prácticos a todas las funciones operativas.</li>
 <li>Se actualizó README.Rmd con la lista completa de funciones del paquete, incluyendo las 4 nuevas funciones de IA.</li>
 <li>Se actualizaron todas las viñetas para usar las nuevas funciones.</li>
+<li>Se documentó <code><a href="../reference/acep_together.html">acep_together()</a></code> y las mejoras de <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>/<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>, con ejemplos para modo cloud, fallback y JSON mode.</li>
 <li>Se agregó documentación completa para las funciones de IA:
-<ul><li>Guías de uso con ejemplos para cada proveedor (OpenAI, Anthropic, Google, OpenRouter)</li>
+<ul><li>Guías de uso con ejemplos para cada proveedor (OpenAI, Anthropic, Google, OpenRouter, TogetherAI, Ollama cloud)</li>
 <li>Tabla comparativa de características entre proveedores</li>
 <li>Instrucciones para configuración de API keys</li>
 <li>Ejemplos de uso intercambiable entre diferentes APIs manteniendo la misma interfaz</li>
@@ -158,7 +169,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

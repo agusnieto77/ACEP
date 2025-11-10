@@ -1,0 +1,139 @@
+# Interaccion con modelos Claude usando Structured Outputs
+
+Funcion para interactuar con la API de Anthropic Claude utilizando Tool
+Calling para garantizar respuestas en formato JSON que cumplen
+estrictamente con un esquema predefinido. A diferencia de OpenAI,
+Anthropic utiliza "forced tool use" para lograr structured outputs,
+definiendo el esquema deseado como input_schema de una herramienta y
+forzando al modelo a usarla. Compatible con todos los modelos Claude.
+
+## Usage
+
+``` r
+acep_claude(
+  texto,
+  instrucciones,
+  modelo = "claude-sonnet-4-20250514",
+  api_key = Sys.getenv("ANTHROPIC_API_KEY"),
+  schema = NULL,
+  parse_json = TRUE,
+  temperature = 0,
+  max_tokens = 2000,
+  top_p = 0.2,
+  top_k = NULL
+)
+```
+
+## Arguments
+
+- texto:
+
+  Texto a analizar con Claude. Puede ser una noticia, tweet, documento,
+  etc.
+
+- instrucciones:
+
+  Instrucciones en lenguaje natural que indican al modelo que hacer con
+  el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica
+  el sentimiento".
+
+- modelo:
+
+  Modelo de Claude a utilizar. Modelos disponibles (ordenados por
+  potencia): - Claude 4.5: \`"claude-sonnet-4-5-20250929"\` (mas
+  reciente y potente), \`"claude-haiku-4-5-20251001"\` (rapido) - Claude
+  4.1: \`"claude-opus-4-1-20250805"\` (razonamiento excepcional) -
+  Claude 4: \`"claude-opus-4-20250514"\`,
+  \`"claude-sonnet-4-20250514"\` - Claude 3.7:
+  \`"claude-3-7-sonnet-20250219"\` - Claude 3.5:
+  \`"claude-3-5-haiku-20241022"\` (rapido y economico) - Claude 3:
+  \`"claude-3-opus-20240229"\`, \`"claude-3-haiku-20240307"\` Por
+  defecto: \`"claude-sonnet-4-20250514"\`. Ver:
+  https://docs.anthropic.com/en/docs/about-claude/models
+
+- api_key:
+
+  Clave de API de Anthropic. Si no se proporciona, busca la variable de
+  entorno \`ANTHROPIC_API_KEY\`. Para obtener una clave:
+  https://console.anthropic.com/
+
+- schema:
+
+  Esquema JSON que define la estructura de la respuesta. Puede usar
+  \`acep_gpt_schema()\` para obtener esquemas predefinidos o crear uno
+  personalizado. Si es \`NULL\`, usa un esquema simple con campo
+  "respuesta".
+
+- parse_json:
+
+  Logico. Si \`TRUE\` (por defecto), parsea automaticamente el JSON a un
+  objeto R (lista o data frame). Si \`FALSE\`, devuelve el JSON como
+  string.
+
+- temperature:
+
+  Parametro de temperatura (0-1). Valores bajos (0-0.3) generan
+  respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas
+  creativas. Por defecto: 0 (maxima determinismo). NOTA: Anthropic no
+  permite usar \`temperature\` y \`top_p\` simultaneamente.
+
+- max_tokens:
+
+  Numero maximo de tokens en la respuesta. Por defecto: 2000.
+
+- top_p:
+
+  Parametro top-p para nucleus sampling (0-1). Controla la diversidad de
+  la respuesta. Por defecto: 0.2. NOTA: Solo se usa si \`temperature\`
+  es 0 (valor por defecto).
+
+- top_k:
+
+  Parametro top-k (solo disponible en Claude). Limita la seleccion a los
+  K tokens mas probables. Por defecto: NULL (deshabilitado).
+
+## Value
+
+Si \`parse_json=TRUE\`, devuelve una lista o data frame con la respuesta
+estructurada segun el esquema. Si \`parse_json=FALSE\`, devuelve un
+string JSON.
+
+## Details
+
+\*\*Diferencias importantes entre modelos Claude:\*\*
+
+\- \*\*Claude Sonnet 4.5\*\* (\`claude-sonnet-4-5\`): NO permite
+\`temperature\` y \`top_p\` simultaneamente. La funcion solo envia uno
+de los dos si fue modificado del default.
+
+\- \*\*Otros modelos Claude\*\* (\`claude-sonnet-4-20250514\`,
+\`claude-3-5-haiku-20241022\`, \`claude-3-opus-20240229\`, etc.): SI
+permiten ambos parametros simultaneamente.
+
+La funcion detecta automaticamente el modelo y aplica la logica
+correcta.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Extraer entidades de un texto
+texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
+instrucciones <- "Extrae todas las entidades nombradas del texto."
+schema <- acep_gpt_schema("extraccion_entidades")
+resultado <- acep_claude(texto, instrucciones, schema = schema)
+print(resultado)
+
+# Analisis de sentimiento
+texto <- "La protesta fue pacifica y bien organizada."
+schema <- acep_gpt_schema("sentimiento")
+resultado <- acep_claude(texto, "Analiza el sentimiento del texto", schema = schema)
+print(resultado$sentimiento_general)
+
+# Clasificar noticia
+texto <- "Trabajadores reclamaron mejoras salariales."
+schema <- acep_gpt_schema("clasificacion")
+resultado <- acep_claude(texto, "Clasifica esta noticia", schema = schema)
+print(resultado$categoria)
+} # }
+```

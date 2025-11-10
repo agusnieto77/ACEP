@@ -1,0 +1,125 @@
+# Interaccion con modelos Ollama locales y cloud usando Structured Outputs
+
+Funcion para interactuar con modelos de lenguaje usando Ollama. Soporta
+tanto modelos locales (ejecutados en tu computadora sin costos) como
+modelos cloud de Ollama (modelos grandes como DeepSeek 671B, Qwen3 Coder
+480B, Kimi 1T que se ejecutan en la nube sin necesidad de GPU local).
+Utiliza structured outputs para garantizar respuestas en formato JSON
+que cumplen con un esquema predefinido.
+
+## Usage
+
+``` r
+acep_ollama(
+  texto,
+  instrucciones,
+  modelo = "qwen3:1.7b",
+  schema = NULL,
+  parse_json = TRUE,
+  temperature = 0,
+  max_tokens = 4000,
+  host = "http://localhost:11434",
+  api_key = Sys.getenv("OLLAMA_API_KEY"),
+  seed = 123456
+)
+```
+
+## Arguments
+
+- texto:
+
+  Texto a analizar. Puede ser una noticia, tweet, documento, etc.
+
+- instrucciones:
+
+  Instrucciones en lenguaje natural que indican al modelo que hacer con
+  el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica
+  el sentimiento".
+
+- modelo:
+
+  Modelo de Ollama a utilizar. - Para Ollama local: "qwen3:1.7b",
+  "llama3.2:latest", "mistral", "phi3", "gemma2" (debe estar previamente
+  descargado con \`ollama pull nombre_modelo\`) - Para Ollama Cloud API:
+  modelos cloud especificos disponibles sin GPU local:
+  "deepseek-v3.1:671b-cloud", "gpt-oss:20b-cloud", "gpt-oss:120b-cloud",
+  "kimi-k2:1t-cloud", "qwen3-coder:480b-cloud", "glm-4.6:cloud",
+  "minimax-m2:cloud" Por defecto: "qwen3:1.7b"
+
+- schema:
+
+  Esquema JSON que define la estructura de la respuesta. Puede usar
+  \`acep_gpt_schema()\` para obtener esquemas predefinidos o crear uno
+  personalizado. Si es NULL, usa un esquema simple con campo
+  "respuesta".
+
+- parse_json:
+
+  Logico. Si TRUE (por defecto), parsea automaticamente el JSON a un
+  objeto R (lista o data frame). Si FALSE, devuelve el JSON como string.
+
+- temperature:
+
+  Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
+  respuestas mas deterministas. Valores altos (0.7-1) mas creativas. Por
+  defecto: 0.
+
+- max_tokens:
+
+  Numero maximo de tokens en la respuesta. Por defecto: 4000.
+
+- host:
+
+  URL del servidor Ollama. Por defecto: "http://localhost:11434" para
+  uso local. Para usar Ollama Cloud API, especificar
+  "https://ollama.com" (sin /api, se agrega automaticamente).
+
+- api_key:
+
+  API key para Ollama API remota. Solo requerido si usas un servidor
+  remoto. Por defecto busca la variable de entorno OLLAMA_API_KEY. Para
+  uso local (localhost) no es necesario.
+
+- seed:
+
+  Semilla numerica para reproducibilidad. Por defecto: 123456.
+
+## Value
+
+Si parse_json=TRUE, devuelve una lista o data frame con la respuesta
+estructurada segun el esquema. Si parse_json=FALSE, devuelve un string
+JSON.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Primero, instalar Ollama y descargar un modelo:
+# Terminal: ollama pull llama3.1
+
+# Extraer entidades de un texto
+texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
+instrucciones <- "Extrae todas las entidades nombradas del texto."
+schema <- acep_gpt_schema("extraccion_entidades")
+resultado <- acep_ollama(texto, instrucciones, schema = schema)
+print(resultado)
+
+# Analisis de sentimiento
+texto <- "La protesta fue pacifica y bien organizada."
+schema <- acep_gpt_schema("sentimiento")
+resultado <- acep_ollama(texto, "Analiza el sentimiento del texto", schema = schema)
+print(resultado$sentimiento_general)
+
+# Usar Ollama Cloud API (requiere API key)
+# Los modelos cloud se ejecutan sin necesidad de GPU local
+Sys.setenv(OLLAMA_API_KEY = "tu-api-key")
+resultado_remoto <- acep_ollama(
+  texto = texto,
+  instrucciones = "Extrae entidades",
+  modelo = "deepseek-v3.1:671b-cloud",  # Modelo cloud de 671B parametros
+  host = "https://ollama.com",
+  schema = acep_gpt_schema("extraccion_entidades")
+)
+
+} # }
+```

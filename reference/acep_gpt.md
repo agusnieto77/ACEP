@@ -1,0 +1,141 @@
+# Interaccion con modelos GPT usando Structured Outputs
+
+Funcion para interactuar con la API de OpenAI utilizando Structured
+Outputs, una funcionalidad que garantiza respuestas en formato JSON que
+cumplen estrictamente con un esquema predefinido. Esto elimina la
+necesidad de parseo y validacion manual, haciendo las respuestas mas
+confiables y estructuradas. Compatible con modelos \`gpt-4o\` y
+\`gpt-4o-mini\`.
+
+## Usage
+
+``` r
+acep_gpt(
+  texto,
+  instrucciones,
+  modelo = "gpt-4o-mini",
+  api_key = Sys.getenv("OPENAI_API_KEY"),
+  schema = NULL,
+  parse_json = TRUE,
+  temperature = 0,
+  max_tokens = 2000,
+  top_p = 0.2,
+  frequency_penalty = 0.2,
+  seed = 123456
+)
+```
+
+## Arguments
+
+- texto:
+
+  Texto a analizar con GPT. Puede ser una noticia, tweet, documento,
+  etc.
+
+- instrucciones:
+
+  Instrucciones en lenguaje natural que indican al modelo que hacer con
+  el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica
+  el sentimiento".
+
+- modelo:
+
+  Modelo de OpenAI a utilizar. Compatible con Structured Outputs:
+  \`"gpt-4o-mini"\` (mas rapido y economico), \`"gpt-4o"\`,
+  \`"gpt-4o-2024-08-06"\` (mas potente), \`"gpt-4.1"\`,
+  \`"gpt-5-nano"\`, \`"gpt-5-mini"\`, \`"o1-mini"\`, \`"o4-mini"\`,
+  entre otros. Por defecto: \`"gpt-4o-mini"\`. Ver:
+  https://platform.openai.com/docs/guides/structured-outputs
+
+- api_key:
+
+  Clave de API de OpenAI. Si no se proporciona, busca la variable de
+  entorno \`OPENAI_API_KEY\`. Para obtener una clave:
+  https://platform.openai.com/api-keys
+
+- schema:
+
+  Esquema JSON que define la estructura de la respuesta. Puede usar
+  \`acep_gpt_schema()\` para obtener esquemas predefinidos o crear uno
+  personalizado. Si es \`NULL\`, usa un esquema simple con campo
+  "respuesta".
+
+- parse_json:
+
+  Logico. Si \`TRUE\` (por defecto), parsea automaticamente el JSON a un
+  objeto R (lista o data frame). Si \`FALSE\`, devuelve el JSON como
+  string.
+
+- temperature:
+
+  Parametro de temperatura (0-2). Valores bajos (0-0.3) generan
+  respuestas mas deterministas y consistentes. Valores altos (0.7-1) mas
+  creativas. Por defecto: 0 (maxima determinismo). NOTA: Los modelos
+  gpt-5, o1 y o4 solo aceptan temperature = 1 (default de OpenAI).
+
+- max_tokens:
+
+  Numero maximo de tokens en la respuesta. Por defecto: 2000.
+
+- top_p:
+
+  Parametro top-p para nucleus sampling (0-1). Controla la diversidad de
+  la respuesta. Por defecto: 0.2. NOTA: Ignorado en modelos gpt-5, o1 y
+  o4.
+
+- frequency_penalty:
+
+  Penalizacion por repeticion de tokens frecuentes (-2 a 2). Por
+  defecto: 0.2. NOTA: Ignorado en modelos gpt-5, o1 y o4.
+
+- seed:
+
+  Semilla numerica para reproducibilidad. Usar el mismo seed con los
+  mismos parametros genera respuestas identicas. Por defecto: 123456.
+  NOTA: Ignorado en modelos gpt-5, o1 y o4.
+
+## Value
+
+Si \`parse_json=TRUE\`, devuelve una lista o data frame con la respuesta
+estructurada segun el esquema. Si \`parse_json=FALSE\`, devuelve un
+string JSON.
+
+## Details
+
+\*\*Diferencias entre modelos:\*\*
+
+\- \*\*Modelos GPT-4o/GPT-4.1\*\*: Soportan todos los parametros
+(temperature, top_p, frequency_penalty, seed). Usan \`max_tokens\`.
+
+\- \*\*Modelos GPT-5/o1/o4\*\*: Solo aceptan temperature = 1 (default).
+Los parametros temperature, top_p, frequency_penalty y seed son
+automaticamente omitidos. Usan \`max_completion_tokens\` en lugar de
+\`max_tokens\`.
+
+La funcion maneja estas diferencias automaticamente segun el modelo
+especificado.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Extraer entidades de un texto
+texto <- "El SUTEBA convoco a un paro en Buenos Aires el 15 de marzo."
+instrucciones <- "Extrae todas las entidades nombradas del texto."
+schema <- acep_gpt_schema("extraccion_entidades")
+resultado <- acep_gpt(texto, instrucciones, schema = schema)
+print(resultado)
+
+# Analisis de sentimiento
+texto <- "La protesta fue pacifica y bien organizada."
+schema <- acep_gpt_schema("sentimiento")
+resultado <- acep_gpt(texto, "Analiza el sentimiento del texto", schema = schema)
+print(resultado$sentimiento_general)
+
+# Clasificar noticia
+texto <- "Trabajadores reclamaron mejoras salariales."
+schema <- acep_gpt_schema("clasificacion")
+resultado <- acep_gpt(texto, "Clasifica esta noticia", schema = schema)
+print(resultado$categoria)
+} # }
+```

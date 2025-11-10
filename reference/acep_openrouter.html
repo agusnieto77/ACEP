@@ -70,7 +70,9 @@ Ideal para comparar modelos o usar fallbacks automaticos.</p>
 <span>  top_p <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  app_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  site_url <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  use_fallback <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  use_fallback <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  fallback_provider_order <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fallback_models <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -90,7 +92,7 @@ con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sen
 <dt id="arg-modelo">modelo<a class="anchor" aria-label="anchor" href="#arg-modelo"></a></dt>
 <dd><p>Modelo a utilizar con formato "proveedor/modelo". Ejemplos populares:
 - OpenAI: `"openai/gpt-4o-mini"` (rapido y economico), `"openai/gpt-4o"` (potente)
-- Anthropic: `"anthropic/claude-sonnet-4-5"`, `"anthropic/claude-3-5-haiku-20241022"`
+- Anthropic: `"anthropic/claude-sonnet-4.5"`, `"anthropic/claude-3.5-haiku"`
 - Google: `"google/gemini-2.5-flash"`, `"google/gemini-2.0-flash-001"`
 - Meta: `"meta-llama/llama-3.3-70b-instruct"`, `"meta-llama/llama-4-maverick:free"`
 - Qwen: `"qwen/qwen3-next-80b-a3b-instruct-2509"`
@@ -139,7 +141,20 @@ respuestas mas deterministas. Valores altos (0.7-1) mas creativas. Por defecto: 
 
 <dt id="arg-use-fallback">use_fallback<a class="anchor" aria-label="anchor" href="#arg-use-fallback"></a></dt>
 <dd><p>Logico. Si `TRUE`, OpenRouter usara modelos alternativos si el
-modelo solicitado no esta disponible. Por defecto: FALSE.</p></dd>
+proveedor primario falla. Por defecto: FALSE (sin fallbacks).</p></dd>
+
+
+<dt id="arg-fallback-provider-order">fallback_provider_order<a class="anchor" aria-label="anchor" href="#arg-fallback-provider-order"></a></dt>
+<dd><p>Vector opcional de slugs de proveedores para forzar
+un orden especifico de enrutamiento (ej.: `c("openai", "anthropic")`). Requiere
+`use_fallback = TRUE` para habilitar intentos sucesivos.</p></dd>
+
+
+<dt id="arg-fallback-models">fallback_models<a class="anchor" aria-label="anchor" href="#arg-fallback-models"></a></dt>
+<dd><p>Vector opcional de modelos alternativos (en formato
+`"proveedor/modelo"`) que se probaran en orden si el modelo principal devuelve un
+error recuperable (429, 5xx, timeouts). Ideal para definir variantes pagas cuando
+la version `:free` alcance su limite.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -153,8 +168,224 @@ modelo solicitado no esta disponible. Por defecto: FALSE.</p></dd>
 parametros a la interfaz nativa de cada modelo. Los parametros no soportados por un
 modelo son ignorados silenciosamente. Esto permite usar la misma funcion para
 cualquier modelo sin preocuparse por las especificidades de cada API.</p>
+<p>Cuando `use_fallback = TRUE`, la funcion configura el objeto `provider` de OpenRouter
+para conservar la resiliencia ante errores transitorios y, si se define
+`fallback_models`, intenta llamar secuencialmente a cada modelo alternativo ante
+codigos recuperables (429, 5xx, timeouts). Esto evita depender del campo `route`,
+ya deprecado en la API.</p>
 <p>Para Structured Outputs estrictos, recomendamos usar modelos OpenAI (gpt-4o+) o
 Fireworks. Otros modelos intentaran seguir el esquema pero sin garantias estrictas.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="modelos-compatibles-y-probados-actualizado-">MODELOS COMPATIBLES Y PROBADOS (ACTUALIZADO)<a class="anchor" aria-label="anchor" href="#modelos-compatibles-y-probados-actualizado-"></a></h2>
+
+
+<div class="section">
+<h3 id="openai-familia-gpt-ultima-generacion-">OpenAI - Familia GPT-5 (Ultima Generacion)<a class="anchor" aria-label="anchor" href="#openai-familia-gpt-ultima-generacion-"></a></h3>
+
+<ul><li><p><code>openai/gpt-5</code> - Modelo principal GPT-5</p></li>
+<li><p><code>openai/gpt-5-pro</code> - Version Pro, maxima precision</p></li>
+<li><p><code>openai/gpt-5-mini</code> - Version mini, economica</p></li>
+<li><p><code>openai/gpt-5-nano</code> - Version nano, ultrarrapida</p></li>
+<li><p><code>openai/gpt-5-chat</code> - Optimizado para chat</p></li>
+</ul></div>
+<div class="section">
+<h3 id="openai-familia-gpt-">OpenAI - Familia GPT-4.1<a class="anchor" aria-label="anchor" href="#openai-familia-gpt-"></a></h3>
+
+<ul><li><p><code>openai/gpt-4.1</code> - Modelo principal GPT-4.1</p></li>
+<li><p><code>openai/gpt-4.1-mini</code> - Version mini</p></li>
+<li><p><code>openai/gpt-4.1-nano</code> - Version nano</p></li>
+</ul></div>
+<div class="section">
+<h3 id="openai-familia-gpt--1">OpenAI - Familia GPT-4<a class="anchor" aria-label="anchor" href="#openai-familia-gpt--1"></a></h3>
+
+<ul><li><p><code>openai/gpt-4o</code> - GPT-4 optimizado</p></li>
+<li><p><code>openai/gpt-4o-mini</code> - Economico, rapido, ideal para produccion</p></li>
+<li><p><code>openai/gpt-4-turbo</code> - Version turbo</p></li>
+<li><p><code>openai/gpt-4</code> - Modelo base GPT-4</p></li>
+</ul></div>
+<div class="section">
+<h3 id="openai-familia-gpt--2">OpenAI - Familia GPT-3.5<a class="anchor" aria-label="anchor" href="#openai-familia-gpt--2"></a></h3>
+
+<ul><li><p><code>openai/gpt-3.5-turbo</code> - Version turbo, economica</p></li>
+</ul></div>
+<div class="section">
+<h3 id="openai-modelos-oss-open-source-style-">OpenAI - Modelos OSS (Open Source Style)<a class="anchor" aria-label="anchor" href="#openai-modelos-oss-open-source-style-"></a></h3>
+
+<ul><li><p><code>openai/gpt-oss-120b</code> - Modelo grande (120B parametros)</p></li>
+<li><p><code>openai/gpt-oss-120b:exacto</code> - Version exacta</p></li>
+<li><p><code>openai/gpt-oss-20b</code> - Modelo pequeno (20B parametros)</p></li>
+<li><p><code>openai/gpt-oss-20b:free</code> - Version gratuita</p></li>
+</ul></div>
+<div class="section">
+<h3 id="xai-familia-grok-ultima-generacion-">xAI - Familia Grok 4 (Ultima Generacion)<a class="anchor" aria-label="anchor" href="#xai-familia-grok-ultima-generacion-"></a></h3>
+
+<ul><li><p><code>x-ai/grok-4</code> - Modelo principal Grok 4</p></li>
+<li><p><code>x-ai/grok-4-fast</code> - Version rapida, optimizada</p></li>
+</ul></div>
+<div class="section">
+<h3 id="xai-familia-grok-">xAI - Familia Grok 3<a class="anchor" aria-label="anchor" href="#xai-familia-grok-"></a></h3>
+
+<ul><li><p><code>x-ai/grok-3</code> - Modelo principal Grok 3</p></li>
+<li><p><code>x-ai/grok-3-mini</code> - Version mini, economica</p></li>
+<li><p><code>x-ai/grok-3-beta</code> - Version beta</p></li>
+<li><p><code>x-ai/grok-3-mini-beta</code> - Version mini beta</p></li>
+</ul></div>
+<div class="section">
+<h3 id="deepseek-familia-v-ultima-generacion-">DeepSeek - Familia V3 (Ultima Generacion)<a class="anchor" aria-label="anchor" href="#deepseek-familia-v-ultima-generacion-"></a></h3>
+
+<ul><li><p><code>deepseek/deepseek-v3.2-exp</code> - Version experimental 3.2</p></li>
+<li><p><code>deepseek/deepseek-v3.1-terminus</code> - Version terminus 3.1</p></li>
+<li><p><code>deepseek/deepseek-v3.1-terminus:exacto</code> - Version terminus exacta</p></li>
+</ul></div>
+<div class="section">
+<h3 id="deepseek-familia-r-razonamiento-">DeepSeek - Familia R1 (Razonamiento)<a class="anchor" aria-label="anchor" href="#deepseek-familia-r-razonamiento-"></a></h3>
+
+<ul><li><p><code>deepseek/deepseek-r1-0528</code> - Version R1 de mayo 2028</p></li>
+<li><p><code>deepseek/deepseek-r1</code> - Modelo principal R1</p></li>
+<li><p><code>deepseek/deepseek-r1:free</code> - Version R1 gratuita</p></li>
+</ul></div>
+<div class="section">
+<h3 id="deepseek-r-distilled-basado-en-llama-">DeepSeek - R1 Distilled (Basado en Llama)<a class="anchor" aria-label="anchor" href="#deepseek-r-distilled-basado-en-llama-"></a></h3>
+
+<ul><li><p><code>deepseek/deepseek-r1-distill-llama-70b</code> - R1 destilado en Llama 70B</p></li>
+<li><p><code>deepseek/deepseek-r1-distill-llama-70b:free</code> - Version gratuita</p></li>
+</ul></div>
+<div class="section">
+<h3 id="deepseek-chat-y-otros">DeepSeek - Chat y Otros<a class="anchor" aria-label="anchor" href="#deepseek-chat-y-otros"></a></h3>
+
+<ul><li><p><code>deepseek/deepseek-chat</code> - Optimizado para chat</p></li>
+</ul></div>
+<div class="section">
+<h3 id="deepcogito-modelos-especializados">DeepCogito - Modelos Especializados<a class="anchor" aria-label="anchor" href="#deepcogito-modelos-especializados"></a></h3>
+
+<ul><li><p><code>deepcogito/cogito-v2-preview-deepseek-671b</code> - Modelo cogito 671B basado en DeepSeek</p></li>
+</ul></div>
+<div class="section">
+<h3 id="meta-llama-familia-">Meta Llama - Familia 4<a class="anchor" aria-label="anchor" href="#meta-llama-familia-"></a></h3>
+
+<ul><li><p><code>meta-llama/llama-4-maverick</code> - Llama 4 Maverick</p></li>
+</ul></div>
+<div class="section">
+<h3 id="meta-llama-familia--1">Meta Llama - Familia 3.3<a class="anchor" aria-label="anchor" href="#meta-llama-familia--1"></a></h3>
+
+<ul><li><p><code>meta-llama/llama-3.3-70b-instruct</code> - Version de pago</p></li>
+<li><p><code>meta-llama/llama-3.3-70b-instruct:free</code> - Version gratuita</p></li>
+</ul></div>
+<div class="section">
+<h3 id="meta-llama-familia--2">Meta Llama - Familia 3.2<a class="anchor" aria-label="anchor" href="#meta-llama-familia--2"></a></h3>
+
+<ul><li><p><code>meta-llama/llama-3.2-90b-vision-instruct</code> - Con capacidades de vision</p></li>
+</ul></div>
+<div class="section">
+<h3 id="meta-llama-familia--3">Meta Llama - Familia 3.1<a class="anchor" aria-label="anchor" href="#meta-llama-familia--3"></a></h3>
+
+<ul><li><p><code>meta-llama/llama-3.1-405b-instruct</code> - Modelo grande 405B</p></li>
+<li><p><code>meta-llama/llama-3.1-70b-instruct</code> - Modelo mediano 70B</p></li>
+</ul></div>
+<div class="section">
+<h3 id="nousresearch-modelos-hermes">NousResearch - Modelos Hermes<a class="anchor" aria-label="anchor" href="#nousresearch-modelos-hermes"></a></h3>
+
+<ul><li><p><code>nousresearch/hermes-3-llama-3.1-405b</code> - Hermes 3 basado en Llama 405B</p></li>
+</ul></div>
+<div class="section">
+<h3 id="mistral-ai-familia-magistral">Mistral AI - Familia Magistral<a class="anchor" aria-label="anchor" href="#mistral-ai-familia-magistral"></a></h3>
+
+<ul><li><p><code>mistralai/magistral-medium-2506</code> - Magistral medium</p></li>
+<li><p><code>mistralai/magistral-medium-2506:thinking</code> - Con razonamiento extendido</p></li>
+</ul></div>
+<div class="section">
+<h3 id="mistral-ai-otros-modelos">Mistral AI - Otros Modelos<a class="anchor" aria-label="anchor" href="#mistral-ai-otros-modelos"></a></h3>
+
+<ul><li><p><code>mistralai/mistral-large-2407</code> - Mistral large</p></li>
+<li><p><code>mistralai/mixtral-8x22b-instruct</code> - Mixtral 8x22B (MoE)</p></li>
+</ul></div>
+<div class="section">
+<h3 id="moonshotai-familia-kimi-k-">MoonshotAI - Familia Kimi K2<a class="anchor" aria-label="anchor" href="#moonshotai-familia-kimi-k-"></a></h3>
+
+<ul><li><p><code>moonshotai/kimi-k2</code> - Modelo principal Kimi K2</p></li>
+<li><p><code>moonshotai/kimi-k2-0905</code> - Version 09/05</p></li>
+<li><p><code>moonshotai/kimi-k2-0905:exacto</code> - Version exacta</p></li>
+<li><p><code>moonshotai/kimi-k2-thinking</code> - Con razonamiento extendido</p></li>
+</ul></div>
+<div class="section">
+<h3 id="qwen-familia-qwen-b-modelos-grandes-">Qwen - Familia Qwen3 (235B - Modelos Grandes)<a class="anchor" aria-label="anchor" href="#qwen-familia-qwen-b-modelos-grandes-"></a></h3>
+
+<ul><li><p><code>qwen/qwen3-235b-a22b-2507</code> - Modelo grande 235B (version 2507)</p></li>
+<li><p><code>qwen/qwen3-235b-a22b</code> - Modelo grande 235B</p></li>
+<li><p><code>qwen/qwen3-235b-a22b-thinking-2507</code> - Con razonamiento extendido</p></li>
+<li><p><code>qwen/qwen3-max</code> - Version maxima</p></li>
+</ul></div>
+<div class="section">
+<h3 id="qwen-familia-qwen-b-b-modelos-medianos-">Qwen - Familia Qwen3 (30B-80B - Modelos Medianos)<a class="anchor" aria-label="anchor" href="#qwen-familia-qwen-b-b-modelos-medianos-"></a></h3>
+
+<ul><li><p><code>qwen/qwen3-next-80b-a3b-instruct</code> - Modelo next 80B</p></li>
+<li><p><code>qwen/qwen3-32b</code> - Modelo 32B</p></li>
+<li><p><code>qwen/qwen3-30b-a3b</code> - Modelo 30B</p></li>
+<li><p><code>qwen/qwen3-30b-a3b-instruct-2507</code> - Version instruct 2507</p></li>
+<li><p><code>qwen/qwen3-30b-a3b:free</code> - Version 30B gratuita</p></li>
+</ul></div>
+<div class="section">
+<h3 id="qwen-familia-qwen-modelos-pequenos-">Qwen - Familia Qwen3 (Modelos Pequenos)<a class="anchor" aria-label="anchor" href="#qwen-familia-qwen-modelos-pequenos-"></a></h3>
+
+<ul><li><p><code>qwen/qwen3-14b:free</code> - Modelo 14B gratuito</p></li>
+<li><p><code>qwen/qwen3-4b:free</code> - Modelo 4B gratuito, ultrarrapido</p></li>
+</ul></div>
+<div class="section">
+<h3 id="qwen-familia-qwen-">Qwen - Familia Qwen 2.5<a class="anchor" aria-label="anchor" href="#qwen-familia-qwen-"></a></h3>
+
+<ul><li><p><code>qwen/qwen-2.5-72b-instruct</code> - Modelo 2.5 generacion anterior</p></li>
+<li><p><code>qwen/qwen-plus</code> - Version plus</p></li>
+</ul></div>
+<div class="section">
+<h3 id="google-gemini-familia-ultima-generacion-">Google Gemini - Familia 2.5 (Ultima Generacion)<a class="anchor" aria-label="anchor" href="#google-gemini-familia-ultima-generacion-"></a></h3>
+
+<ul><li><p><code>google/gemini-2.5-flash</code> - Rapido, ultima generacion</p></li>
+<li><p><code>google/gemini-2.5-pro</code> - Mayor precision, ultima generacion</p></li>
+<li><p><code>google/gemini-2.5-flash-lite</code> - Ultrarrapido, ligero</p></li>
+<li><p><code>google/gemini-2.5-flash-preview-09-2025</code> - Preview version septiembre</p></li>
+<li><p><code>google/gemini-2.5-flash-lite-preview-09-2025</code> - Preview lite septiembre</p></li>
+</ul></div>
+<div class="section">
+<h3 id="google-gemini-familia-">Google Gemini - Familia 2.0<a class="anchor" aria-label="anchor" href="#google-gemini-familia-"></a></h3>
+
+<ul><li><p><code>google/gemini-2.0-flash-001</code> - Version estable 2.0</p></li>
+<li><p><code>google/gemini-2.0-flash-lite-001</code> - Version ligera 2.0</p></li>
+</ul></div>
+<div class="section">
+<h3 id="google-gemini-familia--1">Google Gemini - Familia 1.5<a class="anchor" aria-label="anchor" href="#google-gemini-familia--1"></a></h3>
+
+<ul><li><p><code>google/gemini-pro-1.5</code> - Version anterior, estable</p></li>
+</ul></div>
+<div class="section">
+<h3 id="anthropic-claude-familia-haiku-rapidos-y-economicos-">Anthropic Claude - Familia Haiku (Rapidos y Economicos)<a class="anchor" aria-label="anchor" href="#anthropic-claude-familia-haiku-rapidos-y-economicos-"></a></h3>
+
+<ul><li><p><code>anthropic/claude-3.5-haiku</code> - Version 3.5, muy rapido</p></li>
+<li><p><code>anthropic/claude-3-haiku</code> - Version 3, economico</p></li>
+<li><p><code>anthropic/claude-haiku-4.5</code> - Ultima version, mas preciso</p></li>
+</ul></div>
+<div class="section">
+<h3 id="anthropic-claude-familia-sonnet-equilibrados-">Anthropic Claude - Familia Sonnet (Equilibrados)<a class="anchor" aria-label="anchor" href="#anthropic-claude-familia-sonnet-equilibrados-"></a></h3>
+
+<ul><li><p><code>anthropic/claude-3.5-sonnet</code> - Popular, buen balance</p></li>
+<li><p><code>anthropic/claude-3.7-sonnet</code> - Version mejorada</p></li>
+<li><p><code>anthropic/claude-3.7-sonnet:thinking</code> - Con razonamiento extendido</p></li>
+<li><p><code>anthropic/claude-sonnet-4</code> - Generacion 4</p></li>
+<li><p><code>anthropic/claude-sonnet-4.5</code> - Ultima version, mas preciso</p></li>
+</ul></div>
+<div class="section">
+<h3 id="anthropic-claude-familia-opus-maxima-precision-">Anthropic Claude - Familia Opus (Maxima Precision)<a class="anchor" aria-label="anchor" href="#anthropic-claude-familia-opus-maxima-precision-"></a></h3>
+
+<ul><li><p><code>anthropic/claude-3-opus</code> - Version 3, muy preciso</p></li>
+<li><p><code>anthropic/claude-opus-4</code> - Generacion 4</p></li>
+<li><p><code>anthropic/claude-opus-4.1</code> - Ultima version disponible</p></li>
+</ul></div><p>**Importante:** los modelos etiquetados como `:free` operan con cuotas comunitarias
+y suelen estar sometidos a limites de tasa estrictos por parte de OpenRouter. Es
+frecuente recibir respuestas HTTP 429 (Too Many Requests) cuando la demanda supera
+la cuota disponible; este codigo indica que el proveedor rechazo la peticion para
+proteger la infraestructura compartida. Si ocurre, espera unos segundos y reintenta,
+o selecciona la variante de pago equivalente (sin sufijo `:free`) o activa `use_fallback`
+para que OpenRouter cambie automaticamente a un modelo disponible.</p>
     </div>
 
     <div class="section level2">
@@ -171,7 +402,7 @@ Fireworks. Otros modelos intentaran seguir el esquema pero sin garantias estrict
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Comparar con Claude</span></span></span>
 <span class="r-in"><span><span class="va">resultado_claude</span> <span class="op">&lt;-</span> <span class="fu">acep_openrouter</span><span class="op">(</span><span class="va">texto</span>, <span class="st">"Extrae las entidades nombradas"</span>,</span></span>
-<span class="r-in"><span>                                     modelo <span class="op">=</span> <span class="st">"anthropic/claude-sonnet-4-5"</span>,</span></span>
+<span class="r-in"><span>                                     modelo <span class="op">=</span> <span class="st">"anthropic/claude-sonnet-4.5"</span>,</span></span>
 <span class="r-in"><span>                                     schema <span class="op">=</span> <span class="fu"><a href="acep_gpt_schema.html">acep_gpt_schema</a></span><span class="op">(</span><span class="st">"extraccion_entidades"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Usar modelo gratuito</span></span></span>
@@ -179,10 +410,16 @@ Fireworks. Otros modelos intentaran seguir el esquema pero sin garantias estrict
 <span class="r-in"><span>                                   modelo <span class="op">=</span> <span class="st">"meta-llama/llama-4-maverick:free"</span>,</span></span>
 <span class="r-in"><span>                                   schema <span class="op">=</span> <span class="fu"><a href="acep_gpt_schema.html">acep_gpt_schema</a></span><span class="op">(</span><span class="st">"sentimiento"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Con metadata de aplicacion</span></span></span>
-<span class="r-in"><span><span class="va">resultado</span> <span class="op">&lt;-</span> <span class="fu">acep_openrouter</span><span class="op">(</span><span class="va">texto</span>, <span class="st">"Analiza el texto"</span>,</span></span>
-<span class="r-in"><span>                              app_name <span class="op">=</span> <span class="st">"Mi App de Analisis"</span>,</span></span>
-<span class="r-in"><span>                              site_url <span class="op">=</span> <span class="st">"https://miapp.com"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Definir fallback hacia variantes pagas o proveedores alternativos</span></span></span>
+<span class="r-in"><span><span class="va">resultado_resiliente</span> <span class="op">&lt;-</span> <span class="fu">acep_openrouter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">texto</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Extrae las entidades nombradas"</span>,</span></span>
+<span class="r-in"><span>  modelo <span class="op">=</span> <span class="st">"meta-llama/llama-4-maverick:free"</span>,</span></span>
+<span class="r-in"><span>  schema <span class="op">=</span> <span class="fu"><a href="acep_gpt_schema.html">acep_gpt_schema</a></span><span class="op">(</span><span class="st">"extraccion_entidades"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  use_fallback <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  fallback_models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"meta-llama/llama-4-maverick"</span>, <span class="st">"openai/gpt-4o-mini"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -195,7 +432,7 @@ Fireworks. Otros modelos intentaran seguir el esquema pero sin garantias estrict
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
