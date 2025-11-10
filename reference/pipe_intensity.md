@@ -42,7 +42,7 @@ print(resultado_intensidad)
 #> Tipo: intensidad 
 #> Filas: 2 
 #> Columnas: 5 
-#> Creado: 2025-11-10 00:42:22 
+#> Creado: 2025-11-10 02:23:49 
 #> 
 #> Primeras filas:
 #>   id                texto frecuencia n_palabras intensidad
