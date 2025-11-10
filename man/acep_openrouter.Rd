@@ -16,7 +16,9 @@ acep_openrouter(
   top_p = 0.2,
   app_name = NULL,
   site_url = NULL,
-  use_fallback = FALSE
+  use_fallback = FALSE,
+  fallback_provider_order = NULL,
+  fallback_models = NULL
 )
 }
 \arguments{
@@ -27,7 +29,7 @@ con el texto. Ejemplo: "Extrae todas las entidades nombradas", "Clasifica el sen
 
 \item{modelo}{Modelo a utilizar con formato "proveedor/modelo". Ejemplos populares:
 - OpenAI: `"openai/gpt-4o-mini"` (rapido y economico), `"openai/gpt-4o"` (potente)
-- Anthropic: `"anthropic/claude-sonnet-4-5"`, `"anthropic/claude-3-5-haiku-20241022"`
+- Anthropic: `"anthropic/claude-sonnet-4.5"`, `"anthropic/claude-3.5-haiku"`
 - Google: `"google/gemini-2.5-flash"`, `"google/gemini-2.0-flash-001"`
 - Meta: `"meta-llama/llama-3.3-70b-instruct"`, `"meta-llama/llama-4-maverick:free"`
 - Qwen: `"qwen/qwen3-next-80b-a3b-instruct-2509"`
@@ -58,7 +60,16 @@ respuestas mas deterministas. Valores altos (0.7-1) mas creativas. Por defecto: 
 \item{site_url}{URL de tu aplicacion (opcional). Para estadisticas en OpenRouter.}
 
 \item{use_fallback}{Logico. Si `TRUE`, OpenRouter usara modelos alternativos si el
-modelo solicitado no esta disponible. Por defecto: FALSE.}
+proveedor primario falla. Por defecto: FALSE (sin fallbacks).}
+
+\item{fallback_provider_order}{Vector opcional de slugs de proveedores para forzar
+un orden especifico de enrutamiento (ej.: `c("openai", "anthropic")`). Requiere
+`use_fallback = TRUE` para habilitar intentos sucesivos.}
+
+\item{fallback_models}{Vector opcional de modelos alternativos (en formato
+`"proveedor/modelo"`) que se probaran en orden si el modelo principal devuelve un
+error recuperable (429, 5xx, timeouts). Ideal para definir variantes pagas cuando
+la version `:free` alcance su limite.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
@@ -77,9 +88,226 @@ parametros a la interfaz nativa de cada modelo. Los parametros no soportados por
 modelo son ignorados silenciosamente. Esto permite usar la misma funcion para
 cualquier modelo sin preocuparse por las especificidades de cada API.
 
+Cuando `use_fallback = TRUE`, la funcion configura el objeto `provider` de OpenRouter
+para conservar la resiliencia ante errores transitorios y, si se define
+`fallback_models`, intenta llamar secuencialmente a cada modelo alternativo ante
+codigos recuperables (429, 5xx, timeouts). Esto evita depender del campo `route`,
+ya deprecado en la API.
+
 Para Structured Outputs estrictos, recomendamos usar modelos OpenAI (gpt-4o+) o
 Fireworks. Otros modelos intentaran seguir el esquema pero sin garantias estrictas.
 }
+\section{MODELOS COMPATIBLES Y PROBADOS (ACTUALIZADO)}{
+
+\subsection{OpenAI - Familia GPT-5 (Ultima Generacion)}{
+\itemize{
+  \item \code{openai/gpt-5} - Modelo principal GPT-5
+  \item \code{openai/gpt-5-pro} - Version Pro, maxima precision
+  \item \code{openai/gpt-5-mini} - Version mini, economica
+  \item \code{openai/gpt-5-nano} - Version nano, ultrarrapida
+  \item \code{openai/gpt-5-chat} - Optimizado para chat
+}
+}
+\subsection{OpenAI - Familia GPT-4.1}{
+\itemize{
+  \item \code{openai/gpt-4.1} - Modelo principal GPT-4.1
+  \item \code{openai/gpt-4.1-mini} - Version mini
+  \item \code{openai/gpt-4.1-nano} - Version nano
+}
+}
+\subsection{OpenAI - Familia GPT-4}{
+\itemize{
+  \item \code{openai/gpt-4o} - GPT-4 optimizado
+  \item \code{openai/gpt-4o-mini} - Economico, rapido, ideal para produccion
+  \item \code{openai/gpt-4-turbo} - Version turbo
+  \item \code{openai/gpt-4} - Modelo base GPT-4
+}
+}
+\subsection{OpenAI - Familia GPT-3.5}{
+\itemize{
+  \item \code{openai/gpt-3.5-turbo} - Version turbo, economica
+}
+}
+\subsection{OpenAI - Modelos OSS (Open Source Style)}{
+\itemize{
+  \item \code{openai/gpt-oss-120b} - Modelo grande (120B parametros)
+  \item \code{openai/gpt-oss-120b:exacto} - Version exacta
+  \item \code{openai/gpt-oss-20b} - Modelo pequeno (20B parametros)
+  \item \code{openai/gpt-oss-20b:free} - Version gratuita
+}
+}
+\subsection{xAI - Familia Grok 4 (Ultima Generacion)}{
+\itemize{
+  \item \code{x-ai/grok-4} - Modelo principal Grok 4
+  \item \code{x-ai/grok-4-fast} - Version rapida, optimizada
+}
+}
+\subsection{xAI - Familia Grok 3}{
+\itemize{
+  \item \code{x-ai/grok-3} - Modelo principal Grok 3
+  \item \code{x-ai/grok-3-mini} - Version mini, economica
+  \item \code{x-ai/grok-3-beta} - Version beta
+  \item \code{x-ai/grok-3-mini-beta} - Version mini beta
+}
+}
+\subsection{DeepSeek - Familia V3 (Ultima Generacion)}{
+\itemize{
+  \item \code{deepseek/deepseek-v3.2-exp} - Version experimental 3.2
+  \item \code{deepseek/deepseek-v3.1-terminus} - Version terminus 3.1
+  \item \code{deepseek/deepseek-v3.1-terminus:exacto} - Version terminus exacta
+}
+}
+\subsection{DeepSeek - Familia R1 (Razonamiento)}{
+\itemize{
+  \item \code{deepseek/deepseek-r1-0528} - Version R1 de mayo 2028
+  \item \code{deepseek/deepseek-r1} - Modelo principal R1
+  \item \code{deepseek/deepseek-r1:free} - Version R1 gratuita
+}
+}
+\subsection{DeepSeek - R1 Distilled (Basado en Llama)}{
+\itemize{
+  \item \code{deepseek/deepseek-r1-distill-llama-70b} - R1 destilado en Llama 70B
+  \item \code{deepseek/deepseek-r1-distill-llama-70b:free} - Version gratuita
+}
+}
+\subsection{DeepSeek - Chat y Otros}{
+\itemize{
+  \item \code{deepseek/deepseek-chat} - Optimizado para chat
+}
+}
+\subsection{DeepCogito - Modelos Especializados}{
+\itemize{
+  \item \code{deepcogito/cogito-v2-preview-deepseek-671b} - Modelo cogito 671B basado en DeepSeek
+}
+}
+\subsection{Meta Llama - Familia 4}{
+\itemize{
+  \item \code{meta-llama/llama-4-maverick} - Llama 4 Maverick
+}
+}
+\subsection{Meta Llama - Familia 3.3}{
+\itemize{
+  \item \code{meta-llama/llama-3.3-70b-instruct} - Version de pago
+  \item \code{meta-llama/llama-3.3-70b-instruct:free} - Version gratuita
+}
+}
+\subsection{Meta Llama - Familia 3.2}{
+\itemize{
+  \item \code{meta-llama/llama-3.2-90b-vision-instruct} - Con capacidades de vision
+}
+}
+\subsection{Meta Llama - Familia 3.1}{
+\itemize{
+  \item \code{meta-llama/llama-3.1-405b-instruct} - Modelo grande 405B
+  \item \code{meta-llama/llama-3.1-70b-instruct} - Modelo mediano 70B
+}
+}
+\subsection{NousResearch - Modelos Hermes}{
+\itemize{
+  \item \code{nousresearch/hermes-3-llama-3.1-405b} - Hermes 3 basado en Llama 405B
+}
+}
+\subsection{Mistral AI - Familia Magistral}{
+\itemize{
+  \item \code{mistralai/magistral-medium-2506} - Magistral medium
+  \item \code{mistralai/magistral-medium-2506:thinking} - Con razonamiento extendido
+}
+}
+\subsection{Mistral AI - Otros Modelos}{
+\itemize{
+  \item \code{mistralai/mistral-large-2407} - Mistral large
+  \item \code{mistralai/mixtral-8x22b-instruct} - Mixtral 8x22B (MoE)
+}
+}
+\subsection{MoonshotAI - Familia Kimi K2}{
+\itemize{
+  \item \code{moonshotai/kimi-k2} - Modelo principal Kimi K2
+  \item \code{moonshotai/kimi-k2-0905} - Version 09/05
+  \item \code{moonshotai/kimi-k2-0905:exacto} - Version exacta
+  \item \code{moonshotai/kimi-k2-thinking} - Con razonamiento extendido
+}
+}
+\subsection{Qwen - Familia Qwen3 (235B - Modelos Grandes)}{
+\itemize{
+  \item \code{qwen/qwen3-235b-a22b-2507} - Modelo grande 235B (version 2507)
+  \item \code{qwen/qwen3-235b-a22b} - Modelo grande 235B
+  \item \code{qwen/qwen3-235b-a22b-thinking-2507} - Con razonamiento extendido
+  \item \code{qwen/qwen3-max} - Version maxima
+}
+}
+\subsection{Qwen - Familia Qwen3 (30B-80B - Modelos Medianos)}{
+\itemize{
+  \item \code{qwen/qwen3-next-80b-a3b-instruct} - Modelo next 80B
+  \item \code{qwen/qwen3-32b} - Modelo 32B
+  \item \code{qwen/qwen3-30b-a3b} - Modelo 30B
+  \item \code{qwen/qwen3-30b-a3b-instruct-2507} - Version instruct 2507
+  \item \code{qwen/qwen3-30b-a3b:free} - Version 30B gratuita
+}
+}
+\subsection{Qwen - Familia Qwen3 (Modelos Pequenos)}{
+\itemize{
+  \item \code{qwen/qwen3-14b:free} - Modelo 14B gratuito
+  \item \code{qwen/qwen3-4b:free} - Modelo 4B gratuito, ultrarrapido
+}
+}
+\subsection{Qwen - Familia Qwen 2.5}{
+\itemize{
+  \item \code{qwen/qwen-2.5-72b-instruct} - Modelo 2.5 generacion anterior
+  \item \code{qwen/qwen-plus} - Version plus
+}
+}
+\subsection{Google Gemini - Familia 2.5 (Ultima Generacion)}{
+\itemize{
+  \item \code{google/gemini-2.5-flash} - Rapido, ultima generacion
+  \item \code{google/gemini-2.5-pro} - Mayor precision, ultima generacion
+  \item \code{google/gemini-2.5-flash-lite} - Ultrarrapido, ligero
+  \item \code{google/gemini-2.5-flash-preview-09-2025} - Preview version septiembre
+  \item \code{google/gemini-2.5-flash-lite-preview-09-2025} - Preview lite septiembre
+}
+}
+\subsection{Google Gemini - Familia 2.0}{
+\itemize{
+  \item \code{google/gemini-2.0-flash-001} - Version estable 2.0
+  \item \code{google/gemini-2.0-flash-lite-001} - Version ligera 2.0
+}
+}
+\subsection{Google Gemini - Familia 1.5}{
+\itemize{
+  \item \code{google/gemini-pro-1.5} - Version anterior, estable
+}
+}
+\subsection{Anthropic Claude - Familia Haiku (Rapidos y Economicos)}{
+\itemize{
+  \item \code{anthropic/claude-3.5-haiku} - Version 3.5, muy rapido
+  \item \code{anthropic/claude-3-haiku} - Version 3, economico
+  \item \code{anthropic/claude-haiku-4.5} - Ultima version, mas preciso
+}
+}
+\subsection{Anthropic Claude - Familia Sonnet (Equilibrados)}{
+\itemize{
+  \item \code{anthropic/claude-3.5-sonnet} - Popular, buen balance
+  \item \code{anthropic/claude-3.7-sonnet} - Version mejorada
+  \item \code{anthropic/claude-3.7-sonnet:thinking} - Con razonamiento extendido
+  \item \code{anthropic/claude-sonnet-4} - Generacion 4
+  \item \code{anthropic/claude-sonnet-4.5} - Ultima version, mas preciso
+}
+}
+\subsection{Anthropic Claude - Familia Opus (Maxima Precision)}{
+\itemize{
+  \item \code{anthropic/claude-3-opus} - Version 3, muy preciso
+  \item \code{anthropic/claude-opus-4} - Generacion 4
+  \item \code{anthropic/claude-opus-4.1} - Ultima version disponible
+}
+}
+**Importante:** los modelos etiquetados como `:free` operan con cuotas comunitarias
+y suelen estar sometidos a limites de tasa estrictos por parte de OpenRouter. Es
+frecuente recibir respuestas HTTP 429 (Too Many Requests) cuando la demanda supera
+la cuota disponible; este codigo indica que el proveedor rechazo la peticion para
+proteger la infraestructura compartida. Si ocurre, espera unos segundos y reintenta,
+o selecciona la variante de pago equivalente (sin sufijo `:free`) o activa `use_fallback`
+para que OpenRouter cambie automaticamente a un modelo disponible.
+}
+
 \examples{
 \dontrun{
 # Configurar API key
@@ -93,7 +321,7 @@ resultado <- acep_openrouter(texto, "Extrae las entidades nombradas",
 
 # Comparar con Claude
 resultado_claude <- acep_openrouter(texto, "Extrae las entidades nombradas",
-                                     modelo = "anthropic/claude-sonnet-4-5",
+                                     modelo = "anthropic/claude-sonnet-4.5",
                                      schema = acep_gpt_schema("extraccion_entidades"))
 
 # Usar modelo gratuito
@@ -101,9 +329,15 @@ resultado_free <- acep_openrouter(texto, "Clasifica el sentimiento",
                                    modelo = "meta-llama/llama-4-maverick:free",
                                    schema = acep_gpt_schema("sentimiento"))
 
-# Con metadata de aplicacion
-resultado <- acep_openrouter(texto, "Analiza el texto",
-                              app_name = "Mi App de Analisis",
-                              site_url = "https://miapp.com")
+# Definir fallback hacia variantes pagas o proveedores alternativos
+resultado_resiliente <- acep_openrouter(
+  texto,
+  "Extrae las entidades nombradas",
+  modelo = "meta-llama/llama-4-maverick:free",
+  schema = acep_gpt_schema("extraccion_entidades"),
+  use_fallback = TRUE,
+  fallback_models = c("meta-llama/llama-4-maverick", "openai/gpt-4o-mini")
+)
+
 }
 }

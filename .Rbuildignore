@@ -12,3 +12,5 @@
 ^docs$
 ^pkgdown$
 ^\.travis\.yml$
+^README\.html$
+^geocode_cache\.json$

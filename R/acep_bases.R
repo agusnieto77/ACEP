@@ -1,35 +1,43 @@
-#' @title Colección de notas.
-#' @description Contiene colecciones de notas de distintos
-#' portales noticiosos (una muestra corta).
-#' Una segunda colección es de notas del periódico bahiense La Nueva.
-#' También tiene resúmenes estadísticos de las bases completas
-#' para el desarrollo de los ejemplos de las funciones.
-#' @format Es una lista con 8 objetos.
+#' @title Coleccion de notas y recursos de prueba
+#' @description Lista con fuentes de datos y muestras preprocesadas
+#' utilizadas en los ejemplos del paquete. Incluye enlaces de descarga
+#' para distintos portales, resumenes estadisticos y conjuntos anotados
+#' manualmente que permiten evaluar diccionarios, extraccion de tripletes
+#' y desempeno de modelos generativos.
+#' @format Lista con 11 objetos:
 #'\describe{
-#' \item{la_nueva}{es una url para la descarga de una muestra del
-#' corpus de notas de La Nueva Provincia de Bahía Blanca}
-#' \item{rev_puerto}{es una url para la descarga del corpus de notas
-#' de la Revista Puerto}
-#' \item{rp_procesada}{es un data frame con indicadores de
-#' conflictividad basados en los datos de la Revista Puerto}
-#' \item{lc_mdp}{es una url para la descarga del corpus
-#' de notas de La Capital}
-#' \item{rp_mdp}{es una url para la descarga del corpus de notas
-#' de la Revista Puerto}
-#' \item{ed_neco}{es una url para la descarga del corpus de notas
-#' de Ecos Diarios}
-#' \item{ln_bb}{es una url para la descarga del corpus de
-#' notas de La Nueva}
-#' \item{ln_arg}{es una url para la descarga del corpus de
-#' notas de La Nación}
-#' \item{spacy_postag}{es un data.frame con una oración procesada con spacyr}
-#' \item{titulares}{es un vector con titulares de notas referidas a conflictos sociales}
+#' \item{la_nueva}{URL para descargar una muestra del corpus de notas
+#' del diario La Nueva Provincia de Bahia Blanca.}
+#' \item{rev_puerto}{URL para descargar el corpus de notas
+#' de Revista Puerto.}
+#' \item{rp_procesada}{data frame con indicadores de conflictividad
+#' construidos a partir de Revista Puerto.}
+#' \item{lc_mdp}{URL para descargar el corpus de notas
+#' del diario La Capital (Mar del Plata).}
+#' \item{rp_mdp}{URL para descargar el corpus de notas
+#' de Revista Puerto (edicion Mar del Plata).}
+#' \item{ed_neco}{URL para descargar el corpus de notas
+#' del diario Ecos Diarios (Necochea).}
+#' \item{ln_bb}{URL para descargar el corpus de notas
+#' de La Nueva (Bahia Blanca).}
+#' \item{ln_arg}{URL para descargar un subconjunto de notas
+#' de La Nacion.}
+#' \item{lc_720}{data frame con 720 notas de La Capital publicadas entre
+#' 2016 y 2019, curado y documentado por Guillermina Laitano. Contiene
+#' etiquetas binarias manuales que permiten evaluar el diccionario de
+#' conflictividad, la extraccion de tripletes semanticos y la capacidad
+#' de distintos modelos generativos para tareas de clasificacion binaria
+#' y extraccion estructurada de eventos de protesta.}
+#' \item{spacy_postag}{data frame con una oracion procesada con \pkg{spacyr}
+#' que sirve como ejemplo para funciones de dependencias y SVO.}
+#' \item{titulares}{vector con titulares sinteticos referidos a
+#' conflictos sociales.}
 #'}
 #' @docType data
 #' @usage data(acep_bases)
-#' @references Nieto, Agustín 2020 «Intersecciones entre historia digital e
+#' @references Nieto, Agustin 2020 "Intersecciones entre historia digital e
 #' historia social: un ejercicio de lectura distante sobre la
-#' conflictividad marítima en la historia argentina reciente».
+#' conflictividad maritima en la historia argentina reciente".
 #' Drassana: revista del Museu Maritim (28):122-42.
 #' (\href{https://observatoriodeconflictividad.org/nietohd.pdf}{Revista Drassana})
 #' @source \href{https://revistapuerto.com.ar/}{Revista Puerto}

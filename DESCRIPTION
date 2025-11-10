@@ -31,13 +31,13 @@ Imports:
     spacyr,
     udpipe,
     stringr,
-    ollamar,
     reticulate,
     tidygeocoder,
     utils,
     magrittr
 Suggests:
     furrr,
+    ollamar,
     future,
     covr,
     knitr,
