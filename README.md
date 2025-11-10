@@ -72,6 +72,7 @@ devtools::install_github("agusnieto77/ACEP")
 | `acep_claude()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Anthropic Claude. |
 | `acep_gemini()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Google Gemini. |
 | `acep_openrouter()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con 400+ modelos vía OpenRouter. |
+| `acep_together()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos TogetherAI mediante JSON mode o texto libre. |
 | `acep_int()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg) | Índice de intensidad. |
 | `acep_ollama()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Ollama locales. |
 | `acep_ollama_setup()` | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Configuración y verificación del entorno Ollama. |
@@ -101,7 +102,7 @@ devtools::install_github("agusnieto77/ACEP")
 
 | Nombre | Descripción |
 |:---|:---|
-| `acep_bases` | Colección de notas. |
+| `acep_bases` | Colección de notas y recursos de prueba (incluye la muestra etiquetada `lc_720`). |
 | `acep_diccionarios` | Colección de diccionarios. |
 | `acep_prompt_gpt` | Colección de instrucciones. |
 | `acep_rs` | Cadenas de caracteres para limpiar y normalizar textos. |
@@ -194,14 +195,14 @@ head(rev_puerto)
 ```
 
     #> # A tibble: 6 × 7
-    #>   fecha      titulo                         bajada nota  imagen link  n_palabras
-    #>   <date>     <chr>                          <chr>  <chr> <chr>  <chr>      <int>
-    #> 1 2020-12-29 ¡Feliz Año 2021 para todos nu… Con m… "Con… https… http…         28
-    #> 2 2020-12-28 Mapa del trabajo esclavo en a… Un re… "El … https… http…       1142
-    #> 3 2020-12-24 Plantas piden tener garantiza… En Ch… "El … https… http…        536
-    #> 4 2020-12-24 Los obreros navales despiden … En Ma… "El … https… http…        489
-    #> 5 2020-12-23 El incumplimiento del régimen… Se ll… "Las… https… http…        529
-    #> 6 2020-12-23 Otro fallo ratifica cautelar … La Cá… "La … https… http…        467
+    #>   fecha      titulo                                                                   bajada       nota  imagen link  n_palabras
+    #>   <date>     <chr>                                                                    <chr>        <chr> <chr>  <chr>      <int>
+    #> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!                              Con motivo … "Con… https… http…         28
+    #> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales                        Un reciente… "El … https… http…       1142
+    #> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia prima            En Chubut p… "El … https… http…        536
+    #> 4 2020-12-24 Los obreros navales despiden el año analizando medidas de fuerza         En Mar del … "El … https… http…        489
+    #> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una política de Estado Se llevan o… "Las… https… http…        529
+    #> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP                               La Cámara d… "La … https… http…        467
 
 ``` r
 # Ahora con la función acep_count() contamos la frecuencia de menciones de
@@ -217,14 +218,14 @@ head(rev_puerto)
 ```
 
     #> # A tibble: 6 × 8
-    #>   fecha      titulo              bajada nota  imagen link  n_palabras conflictos
-    #>   <date>     <chr>               <chr>  <chr> <chr>  <chr>      <int>      <int>
-    #> 1 2020-12-29 ¡Feliz Año 2021 pa… Con m… "Con… https… http…         28          0
-    #> 2 2020-12-28 Mapa del trabajo e… Un re… "El … https… http…       1142          0
-    #> 3 2020-12-24 Plantas piden tene… En Ch… "El … https… http…        536          0
-    #> 4 2020-12-24 Los obreros navale… En Ma… "El … https… http…        489          0
-    #> 5 2020-12-23 El incumplimiento … Se ll… "Las… https… http…        529          0
-    #> 6 2020-12-23 Otro fallo ratific… La Cá… "La … https… http…        467          0
+    #>   fecha      titulo                                                              bajada nota  imagen link  n_palabras conflictos
+    #>   <date>     <chr>                                                               <chr>  <chr> <chr>  <chr>      <int>      <int>
+    #> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!                         Con m… "Con… https… http…         28          0
+    #> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales                   Un re… "El … https… http…       1142          0
+    #> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia prima       En Ch… "El … https… http…        536          0
+    #> 4 2020-12-24 Los obreros navales despiden el año analizando medidas de fuerza    En Ma… "El … https… http…        489          0
+    #> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una política de … Se ll… "Las… https… http…        529          0
+    #> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP                          La Cá… "La … https… http…        467          0
 
 ``` r
 # Ahora con la función acep_int() calculamos un índice de intensidad de
@@ -239,14 +240,14 @@ head(rev_puerto)
 ```
 
     #> # A tibble: 6 × 9
-    #>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
-    #>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
-    #> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         28          0          0
-    #> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1142          0          0
-    #> 3 2020-12-24 Plantas… En Ch… "El … https… http…        536          0          0
-    #> 4 2020-12-24 Los obr… En Ma… "El … https… http…        489          0          0
-    #> 5 2020-12-23 El incu… Se ll… "Las… https… http…        529          0          0
-    #> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        467          0          0
+    #>   fecha      titulo                                                   bajada nota  imagen link  n_palabras conflictos intensidad
+    #>   <date>     <chr>                                                    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+    #> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!              Con m… "Con… https… http…         28          0          0
+    #> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales        Un re… "El … https… http…       1142          0          0
+    #> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia… En Ch… "El … https… http…        536          0          0
+    #> 4 2020-12-24 Los obreros navales despiden el año analizando medidas … En Ma… "El … https… http…        489          0          0
+    #> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una p… Se ll… "Las… https… http…        529          0          0
+    #> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP               La Cá… "La … https… http…        467          0          0
 
 ``` r
 # Volvemos a cargar la base de notas de la Revista Puerto sin procesar
@@ -266,14 +267,14 @@ head(rp_procesada)
 ```
 
     #> # A tibble: 6 × 9
-    #>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
-    #>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
-    #> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         28          0          0
-    #> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1142          0          0
-    #> 3 2020-12-24 Plantas… En Ch… "El … https… http…        536          0          0
-    #> 4 2020-12-24 Los obr… En Ma… "El … https… http…        489          0          0
-    #> 5 2020-12-23 El incu… Se ll… "Las… https… http…        529          0          0
-    #> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        467          0          0
+    #>   fecha      titulo                                                   bajada nota  imagen link  n_palabras conflictos intensidad
+    #>   <date>     <chr>                                                    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+    #> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!              Con m… "Con… https… http…         28          0          0
+    #> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales        Un re… "El … https… http…       1142          0          0
+    #> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia… En Ch… "El … https… http…        536          0          0
+    #> 4 2020-12-24 Los obreros navales despiden el año analizando medidas … En Ma… "El … https… http…        489          0          0
+    #> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una p… Se ll… "Las… https… http…        529          0          0
+    #> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP               La Cá… "La … https… http…        467          0          0
 
 ``` r
 # Cargamos los datos procesados

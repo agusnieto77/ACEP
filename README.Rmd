@@ -71,6 +71,7 @@ devtools::install_github("agusnieto77/ACEP")
 |`acep_claude()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Anthropic Claude.|
 |`acep_gemini()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Google Gemini.|
 |`acep_openrouter()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con 400+ modelos vía OpenRouter.|
+|`acep_together()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos TogetherAI mediante JSON mode o texto libre.|
 |`acep_int()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)|Índice de intensidad.|
 |`acep_ollama()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Función para interactuar con modelos Ollama locales.|
 |`acep_ollama_setup()`|![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)|Configuración y verificación del entorno Ollama.|
@@ -100,7 +101,7 @@ devtools::install_github("agusnieto77/ACEP")
 
 | Nombre | Descripción |
 |:---|:------|
-|`acep_bases`|Colección de notas.|
+|`acep_bases`|Colección de notas y recursos de prueba (incluye la muestra etiquetada `lc_720`).|
 |`acep_diccionarios`|Colección de diccionarios.|
 |`acep_prompt_gpt`|Colección de instrucciones.|
 |`acep_rs`|Cadenas de caracteres para limpiar y normalizar textos.|
