@@ -34,6 +34,7 @@ devtools::install_github("agusnieto77/ACEP")
 | Nombre                                                                                               | Ciclo                                                                        | Descripción                                                                       |
 |:-----------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
 | [`acep_clean()`](https://agusnieto77.github.io/ACEP/reference/acep_clean.md)                         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Limpieza de texto.                                                                |
+| [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Anthropic Claude.                            |
 | [`acep_clear_regex_cache()`](https://agusnieto77.github.io/ACEP/reference/acep_clear_regex_cache.md) | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Limpia la caché de expresiones regulares compiladas.                              |
 | [`acep_context()`](https://agusnieto77.github.io/ACEP/reference/acep_context.md)                     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer contexto de palabras o frases.                               |
 | [`acep_corpus()`](https://agusnieto77.github.io/ACEP/reference/acep_corpus.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Constructor de objetos acep_corpus para pipelines.                                |
@@ -42,18 +43,16 @@ devtools::install_github("agusnieto77/ACEP")
 | [`acep_detect()`](https://agusnieto77.github.io/ACEP/reference/acep_detect.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Detección de menciones de palabras.                                               |
 | [`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md)                     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Extraer palabras de un texto.                                                     |
 | [`acep_frec()`](https://agusnieto77.github.io/ACEP/reference/acep_frec.md)                           | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Frecuencia de palabras totales.                                                   |
+| [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Google Gemini.                               |
 | [`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos OpenAI GPT.                                  |
 | [`acep_gpt_schema()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt_schema.md)               | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Define esquemas para respuestas estructuradas de GPT.                             |
-| [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Anthropic Claude.                            |
-| [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Google Gemini.                               |
-| [`acep_openrouter()`](https://agusnieto77.github.io/ACEP/reference/acep_openrouter.md)               | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con 400+ modelos vía OpenRouter.                         |
-| [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md)                   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos TogetherAI mediante JSON mode o texto libre. |
 | [`acep_int()`](https://agusnieto77.github.io/ACEP/reference/acep_int.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Índice de intensidad.                                                             |
-| [`acep_ollama()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Ollama locales.                              |
-| [`acep_ollama_setup()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama_setup.md)           | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Configuración y verificación del entorno Ollama.                                  |
 | [`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md)                 | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Carga bases de datos creadas por el Observatorio.                                 |
 | [`acep_may()`](https://agusnieto77.github.io/ACEP/reference/acep_may.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a mayúsculas.                                                  |
 | [`acep_min()`](https://agusnieto77.github.io/ACEP/reference/acep_min.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Convierte el texto a minúsculas.                                                  |
+| [`acep_ollama()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos Ollama locales.                              |
+| [`acep_ollama_setup()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama_setup.md)           | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Configuración y verificación del entorno Ollama.                                  |
+| [`acep_openrouter()`](https://agusnieto77.github.io/ACEP/reference/acep_openrouter.md)               | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con 400+ modelos vía OpenRouter.                         |
 | [`acep_pipeline()`](https://agusnieto77.github.io/ACEP/reference/acep_pipeline.md)                   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Pipeline composable para procesamiento de texto.                                  |
 | [`acep_plot_rst()`](https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.md)                   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Resumen visual de la serie temporal de los índices de conflictividad.             |
 | [`acep_plot_st()`](https://agusnieto77.github.io/ACEP/reference/acep_plot_st.md)                     | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Gráfico de barras de la serie temporal de índices de conflictividad.              |
@@ -64,6 +63,7 @@ devtools::install_github("agusnieto77/ACEP")
 | [`acep_result()`](https://agusnieto77.github.io/ACEP/reference/acep_result.md)                       | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Constructor de objetos acep_result para resultados de análisis.                   |
 | [`acep_sst()`](https://agusnieto77.github.io/ACEP/reference/acep_sst.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)       | Serie temporal de índices de conflictividad.                                      |
 | [`acep_svo()`](https://agusnieto77.github.io/ACEP/reference/acep_svo.md)                             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).                         |
+| [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md)                   | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para interactuar con modelos TogetherAI mediante JSON mode o texto libre. |
 | [`acep_token()`](https://agusnieto77.github.io/ACEP/reference/acep_token.md)                         | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Función para tokenizar.                                                           |
 | [`acep_token_plot()`](https://agusnieto77.github.io/ACEP/reference/acep_token_plot.md)               | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Gráfico de barras de palabras más recurrentes en un corpus.                       |
 | [`acep_token_table()`](https://agusnieto77.github.io/ACEP/reference/acep_token_table.md)             | ![](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg) | Tabla de frecuencia de palabras tokenizadas.                                      |
@@ -171,14 +171,14 @@ head(rev_puerto)
 
 ``` R
 #> # A tibble: 6 × 7
-#>   fecha      titulo                                                                   bajada       nota  imagen link  n_palabras
-#>   <date>     <chr>                                                                    <chr>        <chr> <chr>  <chr>      <int>
-#> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!                              Con motivo … "Con… https… http…         28
-#> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales                        Un reciente… "El … https… http…       1142
-#> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia prima            En Chubut p… "El … https… http…        536
-#> 4 2020-12-24 Los obreros navales despiden el año analizando medidas de fuerza         En Mar del … "El … https… http…        489
-#> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una política de Estado Se llevan o… "Las… https… http…        529
-#> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP                               La Cámara d… "La … https… http…        467
+#>   fecha      titulo                         bajada nota  imagen link  n_palabras
+#>   <date>     <chr>                          <chr>  <chr> <chr>  <chr>      <int>
+#> 1 2020-12-29 ¡Feliz Año 2021 para todos nu… Con m… "Con… https… http…         28
+#> 2 2020-12-28 Mapa del trabajo esclavo en a… Un re… "El … https… http…       1142
+#> 3 2020-12-24 Plantas piden tener garantiza… En Ch… "El … https… http…        536
+#> 4 2020-12-24 Los obreros navales despiden … En Ma… "El … https… http…        489
+#> 5 2020-12-23 El incumplimiento del régimen… Se ll… "Las… https… http…        529
+#> 6 2020-12-23 Otro fallo ratifica cautelar … La Cá… "La … https… http…        467
 ```
 
 ``` r
@@ -196,14 +196,14 @@ head(rev_puerto)
 
 ``` R
 #> # A tibble: 6 × 8
-#>   fecha      titulo                                                              bajada nota  imagen link  n_palabras conflictos
-#>   <date>     <chr>                                                               <chr>  <chr> <chr>  <chr>      <int>      <int>
-#> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!                         Con m… "Con… https… http…         28          0
-#> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales                   Un re… "El … https… http…       1142          0
-#> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia prima       En Ch… "El … https… http…        536          0
-#> 4 2020-12-24 Los obreros navales despiden el año analizando medidas de fuerza    En Ma… "El … https… http…        489          0
-#> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una política de … Se ll… "Las… https… http…        529          0
-#> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP                          La Cá… "La … https… http…        467          0
+#>   fecha      titulo              bajada nota  imagen link  n_palabras conflictos
+#>   <date>     <chr>               <chr>  <chr> <chr>  <chr>      <int>      <int>
+#> 1 2020-12-29 ¡Feliz Año 2021 pa… Con m… "Con… https… http…         28          0
+#> 2 2020-12-28 Mapa del trabajo e… Un re… "El … https… http…       1142          0
+#> 3 2020-12-24 Plantas piden tene… En Ch… "El … https… http…        536          0
+#> 4 2020-12-24 Los obreros navale… En Ma… "El … https… http…        489          0
+#> 5 2020-12-23 El incumplimiento … Se ll… "Las… https… http…        529          0
+#> 6 2020-12-23 Otro fallo ratific… La Cá… "La … https… http…        467          0
 ```
 
 ``` r
@@ -220,14 +220,14 @@ head(rev_puerto)
 
 ``` R
 #> # A tibble: 6 × 9
-#>   fecha      titulo                                                   bajada nota  imagen link  n_palabras conflictos intensidad
-#>   <date>     <chr>                                                    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!              Con m… "Con… https… http…         28          0          0
-#> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales        Un re… "El … https… http…       1142          0          0
-#> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia… En Ch… "El … https… http…        536          0          0
-#> 4 2020-12-24 Los obreros navales despiden el año analizando medidas … En Ma… "El … https… http…        489          0          0
-#> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una p… Se ll… "Las… https… http…        529          0          0
-#> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP               La Cá… "La … https… http…        467          0          0
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         28          0          0
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1142          0          0
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        536          0          0
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        489          0          0
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        529          0          0
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        467          0          0
 ```
 
 ``` r
@@ -249,14 +249,14 @@ head(rp_procesada)
 
 ``` R
 #> # A tibble: 6 × 9
-#>   fecha      titulo                                                   bajada nota  imagen link  n_palabras conflictos intensidad
-#>   <date>     <chr>                                                    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
-#> 1 2020-12-29 ¡Feliz Año 2021 para todos nuestros amigos!              Con m… "Con… https… http…         28          0          0
-#> 2 2020-12-28 Mapa del trabajo esclavo en aguas internacionales        Un re… "El … https… http…       1142          0          0
-#> 3 2020-12-24 Plantas piden tener garantizada la provisión de materia… En Ch… "El … https… http…        536          0          0
-#> 4 2020-12-24 Los obreros navales despiden el año analizando medidas … En Ma… "El … https… http…        489          0          0
-#> 5 2020-12-23 El incumplimiento del régimen de cuotificación es una p… Se ll… "Las… https… http…        529          0          0
-#> 6 2020-12-23 Otro fallo ratifica cautelar contra el FAP               La Cá… "La … https… http…        467          0          0
+#>   fecha      titulo   bajada nota  imagen link  n_palabras conflictos intensidad
+#>   <date>     <chr>    <chr>  <chr> <chr>  <chr>      <int>      <int>      <dbl>
+#> 1 2020-12-29 ¡Feliz … Con m… "Con… https… http…         28          0          0
+#> 2 2020-12-28 Mapa de… Un re… "El … https… http…       1142          0          0
+#> 3 2020-12-24 Plantas… En Ch… "El … https… http…        536          0          0
+#> 4 2020-12-24 Los obr… En Ma… "El … https… http…        489          0          0
+#> 5 2020-12-23 El incu… Se ll… "Las… https… http…        529          0          0
+#> 6 2020-12-23 Otro fa… La Cá… "La … https… http…        467          0          0
 ```
 
 ``` r
