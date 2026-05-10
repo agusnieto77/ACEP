@@ -1,26 +1,3 @@
-#' @title Funcion auxiliar para proteger arrays en esquemas JSON
-#' @description
-#' Protege arrays en esquemas JSON para evitar que jsonlite::toJSON los convierta
-#' incorrectamente. Aplica I() a campos 'required' y 'enum' recursivamente.
-#' @param schema Esquema JSON como lista de R
-#' @return Esquema con arrays protegidos
-#' @keywords internal
-proteger_arrays_schema <- function(schema) {
-  if (is.list(schema)) {
-    # Proteger el campo 'required' si existe
-    if ("required" %in% names(schema)) {
-      schema$required <- I(schema$required)
-    }
-    # Proteger el campo 'enum' si existe
-    if ("enum" %in% names(schema)) {
-      schema$enum <- I(schema$enum)
-    }
-    # Recursivamente proteger subesquemas
-    schema <- lapply(schema, proteger_arrays_schema)
-  }
-  return(schema)
-}
-
 #' @title Interaccion con modelos GPT usando Structured Outputs
 #' @description
 #' Funcion para interactuar con la API de OpenAI utilizando Structured Outputs,
@@ -106,16 +83,7 @@ acep_gpt <- function(texto,
                       frequency_penalty = 0.2,
                       seed = 123456) {
   
-  # Validaciones
-  if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
-  }
-  if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
-  }
-  if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno OPENAI_API_KEY o pasa el parametro api_key")
-  }
+  .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENAI_API_KEY")
   
   # Validar modelo compatible con Structured Outputs
   # Segun https://platform.openai.com/docs/guides/structured-outputs
@@ -146,9 +114,7 @@ acep_gpt <- function(texto,
 
   # Determinar si el modelo usa max_completion_tokens en lugar de max_tokens
   # Los modelos de razonamiento (o1, o4) y gpt-5 usan max_completion_tokens
-  usa_max_completion_tokens <- grepl("^gpt-5", modelo) ||
-                                grepl("^o1", modelo) ||
-                                grepl("^o4", modelo)
+  token_limit_field <- .acep_openai_token_limit_field(modelo)
 
   # Determinar si el modelo solo acepta temperature = 1 (valor por defecto)
   # Los modelos gpt-5 y o1/o4 no permiten temperature = 0
@@ -158,25 +124,14 @@ acep_gpt <- function(texto,
   
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
-    schema <- list(
-      type = "object",
-      properties = list(
-        respuesta = list(
-          type = "string",
-          description = "Respuesta principal a la pregunta o instruccion"
-        )
-      ),
-      required = c("respuesta"),
-      additionalProperties = FALSE
-    )
-    schema <- proteger_arrays_schema(schema)
+    schema <- .acep_provider_default_schema()
   }
   
   # Construir prompt del sistema
   system_prompt <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
 
   # Construir prompt del usuario
-  user_prompt <- sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
+  user_prompt <- .acep_provider_user_prompt(texto, instrucciones)
   
   # Construir body de la peticion
   body <- list(
@@ -205,7 +160,7 @@ acep_gpt <- function(texto,
   }
 
   # Agregar el parametro correcto segun el modelo
-  if (usa_max_completion_tokens) {
+  if (token_limit_field == "max_completion_tokens") {
     body$max_completion_tokens <- max_tokens
   } else {
     body$max_tokens <- max_tokens
@@ -214,11 +169,8 @@ acep_gpt <- function(texto,
   # Realizar peticion a la API
   tryCatch({
     output <- httr::POST(
-      url = "https://api.openai.com/v1/chat/completions",
-      httr::add_headers(
-        "Content-Type" = "application/json",
-        "Authorization" = paste("Bearer", api_key)
-      ),
+      url = .acep_provider_endpoint("openai"),
+      do.call(httr::add_headers, .acep_provider_auth_headers("openai", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
       encode = "raw"
     )
@@ -232,12 +184,7 @@ acep_gpt <- function(texto,
     }
 
     # Extraer respuesta
-    respuesta_json <- httr::content(output, as = "parsed")$choices[[1]]$message$content
-
-    # Verificar respuesta vacia
-    if (is.null(respuesta_json) || nchar(respuesta_json) == 0) {
-      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
-    }
+    respuesta_json <- .acep_provider_extract_chat_content(httr::content(output, as = "parsed"))
 
     # Parsear JSON si se solicita
     if (parse_json) {

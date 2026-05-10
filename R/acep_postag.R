@@ -1,3 +1,52 @@
+.acep_postag_normalize_parse <- function(texto_tag, doc_id_offset = 0L) {
+  texto_tag$morph <- sapply(texto_tag$morph, as.character)
+  texto_tag$sent <- sapply(texto_tag$sent, as.character)
+  texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id)) + doc_id_offset
+  texto_tag$sent <- trimws(gsub("\\n+", "", texto_tag$sent))
+  texto_tag[texto_tag$sent != "", ]
+}
+
+.acep_postag_text_chunks <- function(texto, chunk_size) {
+  n_textos <- length(texto)
+  n_chunks <- ceiling(n_textos / chunk_size)
+
+  lapply(seq_len(n_chunks), function(i) {
+    start_idx <- (i - 1L) * chunk_size + 1L
+    end_idx <- min(i * chunk_size, n_textos)
+
+    list(
+      start_idx = start_idx,
+      end_idx = end_idx,
+      texto = texto[start_idx:end_idx]
+    )
+  })
+}
+
+.acep_postag_empty_loc_frame <- function() {
+  data.frame(entity_ = character(),
+             doc_id = integer(),
+             sentence = integer(),
+             entity = character(),
+             entity_type = character(),
+             lat = numeric(),
+             long = numeric(),
+             stringsAsFactors = FALSE)
+}
+
+.acep_postag_prepare_loc_entities <- function(texto_only_entity, texto_tag) {
+  texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
+
+  if (nrow(texto_only_entity_loc) == 0L) {
+    return(.acep_postag_empty_loc_frame())
+  }
+
+  texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
+  texto_only_entity_loc <- merge(texto_only_entity_loc,
+                                 unique(texto_tag[, c("doc_id", "sentence")]),
+                                 by = c("doc_id", "sentence"))
+  unique(texto_only_entity_loc[, c("entity_", "doc_id", "sentence", "entity", "entity_type")])
+}
+
 #' @title Etiquetado POS adaptativo con optimizaciones avanzadas
 #' @description Version optimizada de acep_postag que se adapta automaticamente al tamano del input.
 #' Implementa procesamiento por lotes (chunking) para grandes volumenes, cache de geocodificacion
@@ -30,10 +79,6 @@
 #' durante el procesamiento. Util para operaciones largas.
 #' Default: TRUE.
 #' @importFrom utils install.packages
-#' @importFrom spacyr spacy_install spacy_download_langmodel spacy_initialize spacy_parse entity_consolidate entity_extract nounphrase_consolidate nounphrase_extract spacy_finalize
-#' @importFrom rsyntax as_tokenindex
-#' @importFrom tidygeocoder geo
-#' @importFrom reticulate install_miniconda
 #' @importFrom jsonlite read_json write_json
 #' @return Lista con seis elementos en formato tabular:
 #' \itemize{
@@ -150,6 +195,12 @@ acep_postag <- function(texto,
   if (!is.numeric(chunk_size) || chunk_size < 1) {
     stop("El parametro 'chunk_size' debe ser un numero entero positivo")
   }
+  acep_require_namespace("spacyr", "acep_postag")
+  acep_require_namespace("rsyntax", "acep_postag")
+  acep_require_namespace("tidygeocoder", "acep_postag")
+  if (inst_miniconda) {
+    acep_require_namespace("reticulate", "acep_postag")
+  }
   
   available_models <- c('es_core_news_sm','es_core_news_md','es_core_news_lg',
                         'pt_core_news_sm','pt_core_news_md','pt_core_news_lg',
@@ -204,10 +255,7 @@ acep_postag <- function(texto,
                                                    "is_right_punct", "morph", "sent"))
     })
     
-    # Convertir columnas especiales
-    texto_tag$morph <- sapply(texto_tag$morph, as.character)
-    texto_tag$sent <- sapply(texto_tag$sent, as.character)
-    texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
+    texto_tag <- .acep_postag_normalize_parse(texto_tag)
     
   } else {
     # Estrategia 2: Chunking para muchos textos (> 100)
@@ -215,21 +263,18 @@ acep_postag <- function(texto,
       message(sprintf("Usando chunking (lotes de %d textos)", chunk_size))
     }
     
-    # Dividir en chunks
-    n_chunks <- ceiling(n_textos / chunk_size)
-    texto_tag_list <- vector("list", n_chunks)
+    texto_chunks <- .acep_postag_text_chunks(texto, chunk_size)
+    texto_tag_list <- vector("list", length(texto_chunks))
     
-    for (i in 1:n_chunks) {
-      start_idx <- (i - 1) * chunk_size + 1
-      end_idx <- min(i * chunk_size, n_textos)
-      chunk_textos <- texto[start_idx:end_idx]
+    for (i in seq_along(texto_chunks)) {
+      chunk <- texto_chunks[[i]]
       
       if (show_progress) {
-        message(sprintf("Procesando chunk %d/%d (textos %d-%d)", i, n_chunks, start_idx, end_idx))
+        message(sprintf("Procesando chunk %d/%d (textos %d-%d)", i, length(texto_chunks), chunk$start_idx, chunk$end_idx))
       }
       
       chunk_tag <- suppressWarnings({
-        spacyr::spacy_parse(chunk_textos,
+        spacyr::spacy_parse(chunk$texto,
                             pos = TRUE,
                             tag = FALSE,
                             lemma = TRUE,
@@ -242,12 +287,7 @@ acep_postag <- function(texto,
                                                      "is_right_punct", "morph", "sent"))
       })
       
-      # Convertir columnas especiales inmediatamente
-      chunk_tag$morph <- sapply(chunk_tag$morph, as.character)
-      chunk_tag$sent <- sapply(chunk_tag$sent, as.character)
-      
-      # Ajustar doc_id para que sea continuo
-      chunk_tag$doc_id <- as.integer(gsub("text", "", chunk_tag$doc_id)) + start_idx - 1
+      chunk_tag <- .acep_postag_normalize_parse(chunk_tag, chunk$start_idx - 1L)
       
       texto_tag_list[[i]] <- chunk_tag
     }
@@ -255,10 +295,6 @@ acep_postag <- function(texto,
     # Combinar todos los chunks
     texto_tag <- do.call(rbind, texto_tag_list)
   }
-  
-  # Limpiar columna sent
-  texto_tag$sent <- trimws(gsub("\\n+", "", texto_tag$sent))
-  texto_tag <- texto_tag[texto_tag$sent != "", ]
   
   # Procesamiento de entidades y frases nominales
   if (show_progress) {
@@ -277,10 +313,9 @@ acep_postag <- function(texto,
   texto_tag <- rsyntax::as_tokenindex(texto_tag)
   
   # Geocodificacion con cache
-  texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
+  texto_only_entity_loc <- .acep_postag_prepare_loc_entities(texto_only_entity, texto_tag)
 
   if (nrow(texto_only_entity_loc) > 0) {
-    texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
     unique_locations <- unique(texto_only_entity_loc$entity_)
 
     if (show_progress) {
@@ -339,19 +374,9 @@ acep_postag <- function(texto,
     names(texto_only_entity_loc) <- c("entity_", "doc_id", "sentence", "entity", 
                                       "entity_type", "lat", "long")
     
-    texto_only_entity_loc <- merge(texto_only_entity_loc, 
-                                   unique(texto_tag[, c("doc_id", "sentence")]), 
-                                   by = c("doc_id", "sentence"))
     texto_only_entity_loc <- unique(texto_only_entity_loc[!is.na(texto_only_entity_loc$lat), ])
   } else {
-    texto_only_entity_loc <- data.frame(entity_ = character(),
-                                        doc_id = integer(),
-                                        sentence = integer(),
-                                        entity = character(),
-                                        entity_type = character(),
-                                        lat = numeric(),
-                                        long = numeric(),
-                                        stringsAsFactors = FALSE)
+    texto_only_entity_loc <- .acep_postag_empty_loc_frame()
   }
   
   if (show_progress) {
