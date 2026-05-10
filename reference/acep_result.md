@@ -56,7 +56,7 @@ print(resultado)
 #> Tipo: frecuencia 
 #> Filas: 2 
 #> Columnas: 2 
-#> Creado: 2026-05-10 20:54:11 
+#> Creado: 2026-05-10 20:57:43 
 #> 
 #> Primeras filas:
 #>                  texto frecuencia

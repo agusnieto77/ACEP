@@ -153,7 +153,7 @@ CRAN release: 2026-05-10
 - Se mejoraron las nuevas funciones para contexto de texto y
   tokenización.
 
-## ACEP 0.0.21 (versión CRAN vigente)
+## ACEP 0.0.21 (versión CRAN anterior)
 
 CRAN release: 2022-11-05
 
