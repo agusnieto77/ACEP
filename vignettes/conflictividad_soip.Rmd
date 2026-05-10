@@ -48,7 +48,7 @@ Una vez descargada la base de notas vamos a crear variables numéricas que conte
 rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
 
 # Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
+dicc_conflictos <- acep_diccionarios$dicc_confl_sismos
 
 # Creamos la variable con la frecuencia de palabras que refieren a conflictividad
 rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)

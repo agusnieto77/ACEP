@@ -417,13 +417,13 @@ test_that("optional dependency entry points guard their package-specific paths",
 })
 
 test_that("provider wrappers keep only core HTTP/JSON dependencies mandatory", {
-  provider_files <- c(
-    "acep_claude.R", "acep_gemini.R", "acep_gpt.R", "acep_ollama.R",
-    "acep_openrouter.R", "acep_together.R"
+  provider_functions <- c(
+    "acep_claude", "acep_gemini", "acep_gpt", "acep_ollama",
+    "acep_openrouter", "acep_together"
   )
   provider_sources <- vapply(
-    provider_files,
-    function(file) paste(readLines(testthat::test_path("..", "..", "R", file), warn = FALSE), collapse = "\n"),
+    provider_functions,
+    function(name) paste(deparse(body(get(name, envir = asNamespace("ACEP")))), collapse = "\n"),
     character(1)
   )
 
