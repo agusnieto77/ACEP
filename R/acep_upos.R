@@ -5,8 +5,6 @@
 #' procesamiento con la función acep_postag.
 #' @param texto vector con los textos a procesar.
 #' @param modelo idioma del modelo de etiquetado POS del paquete \code{udpipe}.
-#' @importFrom udpipe udpipe
-#' @importFrom rsyntax as_tokenindex
 #' @return Si todas las entradas son correctas, la salida sera un marco de datos con 17 variables.
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax: An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
 #' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
@@ -31,6 +29,8 @@ acep_upos <- function(texto, modelo = "spanish"
       message(
         "El par\u00e1metro 'core' debe ser un modelo 'udpipe' v\u00e1lido del espa\u00f1ol, ingl\u00e9s o portugu\u00e9s"))
   }
+  acep_require_namespace("udpipe", "acep_upos")
+  acep_require_namespace("rsyntax", "acep_upos")
   texto <- gsub(",\\S", ", ", texto)
   texto <- gsub("(\\s[A-Z])\\.\\s", "\\1 ", texto)
   texto <- gsub("(\\s[A-Z][a-zA-Z]*);\\s", "\\1, ", texto)

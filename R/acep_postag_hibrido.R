@@ -1,3 +1,49 @@
+.acep_postag_hibrido_normalize_parse <- function(texto_tag, doc_id_offset = 0L) {
+  texto_tag$morph <- sapply(texto_tag$morph, as.character)
+  texto_tag$sent <- sapply(texto_tag$sent, as.character)
+  texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id)) + doc_id_offset
+  texto_tag$sent <- trimws(gsub("\\n+", "", texto_tag$sent))
+  texto_tag[texto_tag$sent != "", ]
+}
+
+.acep_postag_hibrido_text_chunks <- function(texto, chunk_size) {
+  n_textos <- length(texto)
+  n_chunks <- ceiling(n_textos / chunk_size)
+
+  lapply(seq_len(n_chunks), function(i) {
+    start_idx <- (i - 1L) * chunk_size + 1L
+    end_idx <- min(i * chunk_size, n_textos)
+
+    list(
+      start_idx = start_idx,
+      end_idx = end_idx,
+      texto = texto[start_idx:end_idx]
+    )
+  })
+}
+
+.acep_postag_hibrido_empty_loc_frame <- function() {
+  data.frame(entity_ = character(),
+             doc_id = integer(),
+             sentence = integer(),
+             entity = character(),
+             entity_type = character(),
+             lat = numeric(),
+             long = numeric(),
+             stringsAsFactors = FALSE)
+}
+
+.acep_postag_hibrido_prepare_loc_entities <- function(texto_only_entity) {
+  texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
+
+  if (nrow(texto_only_entity_loc) == 0L) {
+    return(.acep_postag_hibrido_empty_loc_frame())
+  }
+
+  texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
+  unique(texto_only_entity_loc)
+}
+
 #' @title Etiquetado POS, lematizacion y extraccion de entidades con spacyr
 #' @description
 #' Realiza analisis linguistico completo de textos usando la biblioteca spaCy a traves
@@ -110,6 +156,12 @@ acep_postag_hibrido <- function(texto,
     stop("El parametro 'core' debe ser un modelo 'core' valido del espanol, ingles o portugues: ",
          paste0(available_models, collapse = ", "))
   }
+  acep_require_namespace("spacyr", "acep_postag_hibrido")
+  acep_require_namespace("rsyntax", "acep_postag_hibrido")
+  acep_require_namespace("tidygeocoder", "acep_postag_hibrido")
+  if (inst_miniconda) {
+    acep_require_namespace("reticulate", "acep_postag_hibrido")
+  }
   
   # Instalaciones
   if (inst_reticulate) {
@@ -151,10 +203,7 @@ acep_postag_hibrido <- function(texto,
                                                     "is_right_punct", "morph", "sent"))
     })
     
-    # Convertir columnas especiales
-    texto_tag$morph <- sapply(texto_tag$morph, as.character)
-    texto_tag$sent <- sapply(texto_tag$sent, as.character)
-    texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
+    texto_tag <- .acep_postag_hibrido_normalize_parse(texto_tag)
     
   } else {
     # Chunking para muchos textos
@@ -171,12 +220,8 @@ acep_postag_hibrido <- function(texto,
     
     if (parallel_chunks && n_chunks >= 2) {
       # Modo paralelo: paralelizar chunks
-      if (!requireNamespace("future", quietly = TRUE)) {
-        stop("El paquete 'future' es necesario para paralelizacion. Instalalo con: install.packages('future')")
-      }
-      if (!requireNamespace("furrr", quietly = TRUE)) {
-        stop("El paquete 'furrr' es necesario para paralelizacion. Instalalo con: install.packages('furrr')")
-      }
+      acep_require_namespace("future", "acep_postag_hibrido con parallel_chunks = TRUE")
+      acep_require_namespace("furrr", "acep_postag_hibrido con parallel_chunks = TRUE")
       
       # Configurar plan paralelo
       if (is.null(n_cores)) {
@@ -184,11 +229,10 @@ acep_postag_hibrido <- function(texto,
       }
       future::plan(future::multisession, workers = n_cores)
       
-      # Crear indices de chunks
-      chunk_indices <- split(1:n_textos, ceiling(seq_along(texto) / chunk_size))
+      texto_chunks <- .acep_postag_hibrido_text_chunks(texto, chunk_size)
 
-      texto_tag_list <- furrr::future_map(seq_along(chunk_indices), function(chunk_num) {
-        indices <- chunk_indices[[chunk_num]]
+      texto_tag_list <- furrr::future_map(seq_along(texto_chunks), function(chunk_num) {
+        chunk <- texto_chunks[[chunk_num]]
 
         # Cada worker inicializa su propia sesion de spaCy
         tryCatch({
@@ -197,10 +241,8 @@ acep_postag_hibrido <- function(texto,
           # Si ya esta inicializado, continuar
         })
         
-        chunk_textos <- texto[indices]
-        
         postag <- suppressWarnings({
-          spacyr::spacy_parse(chunk_textos,
+          spacyr::spacy_parse(chunk$texto,
                               pos = TRUE,
                               tag = FALSE,
                               lemma = TRUE,
@@ -213,18 +255,7 @@ acep_postag_hibrido <- function(texto,
                                                         "is_right_punct", "morph", "sent"))
         })
         
-        # Convertir columnas especiales ANTES de devolver
-        postag$morph <- sapply(postag$morph, as.character)
-        postag$sent <- sapply(postag$sent, as.character)
-
-        # Extraer numero de doc_id original (text1 -> 1, text2 -> 2, etc.)
-        original_doc_nums <- as.integer(gsub("text", "", postag$doc_id))
-        # Calcular offset basado en el chunk
-        offset <- (chunk_num - 1) * chunk_size
-        # Asignar nuevos doc_ids unicos
-        postag$doc_id <- paste0("text", original_doc_nums + offset)
-        
-        return(postag)
+        .acep_postag_hibrido_normalize_parse(postag, chunk$start_idx - 1L)
       }, .progress = show_progress, .options = furrr::furrr_options(seed = TRUE))
       
       # Restaurar plan secuencial
@@ -232,24 +263,21 @@ acep_postag_hibrido <- function(texto,
       
       # Combinar resultados
       texto_tag <- do.call(rbind, texto_tag_list)
-      texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
       
     } else {
       # Modo secuencial: procesar chunks uno por uno
-      texto_tag_list <- vector("list", n_chunks)
+      texto_chunks <- .acep_postag_hibrido_text_chunks(texto, chunk_size)
+      texto_tag_list <- vector("list", length(texto_chunks))
       
-      for (i in seq_len(n_chunks)) {
-        start_idx <- (i - 1) * chunk_size + 1
-        end_idx <- min(i * chunk_size, n_textos)
+      for (i in seq_along(texto_chunks)) {
+        chunk <- texto_chunks[[i]]
         
         if (show_progress) {
-          message(sprintf("Procesando chunk %d/%d (textos %d-%d)", i, n_chunks, start_idx, end_idx))
+          message(sprintf("Procesando chunk %d/%d (textos %d-%d)", i, length(texto_chunks), chunk$start_idx, chunk$end_idx))
         }
-        
-        chunk_textos <- texto[start_idx:end_idx]
-        
+
         postag <- suppressWarnings({
-          spacyr::spacy_parse(chunk_textos,
+          spacyr::spacy_parse(chunk$texto,
                               pos = TRUE,
                               tag = FALSE,
                               lemma = TRUE,
@@ -262,18 +290,7 @@ acep_postag_hibrido <- function(texto,
                                                         "is_right_punct", "morph", "sent"))
         })
         
-        # Convertir columnas especiales
-        postag$morph <- sapply(postag$morph, as.character)
-        postag$sent <- sapply(postag$sent, as.character)
-
-        # Extraer numero de doc_id original
-        original_doc_nums <- as.integer(gsub("text", "", postag$doc_id))
-        # Calcular offset basado en el chunk
-        offset <- (i - 1) * chunk_size
-        # Asignar nuevos doc_ids unicos
-        postag$doc_id <- paste0("text", original_doc_nums + offset)
-        
-        texto_tag_list[[i]] <- postag
+        texto_tag_list[[i]] <- .acep_postag_hibrido_normalize_parse(postag, chunk$start_idx - 1L)
         
         # Liberar memoria cada 10 chunks
         if (i %% 10 == 0) {
@@ -283,13 +300,8 @@ acep_postag_hibrido <- function(texto,
       
       # Combinar resultados
       texto_tag <- do.call(rbind, texto_tag_list)
-      texto_tag$doc_id <- as.integer(gsub("text", "", texto_tag$doc_id))
     }
   }
-  
-  # Limpiar texto
-  texto_tag$sent <- trimws(gsub("\\n+", "", texto_tag$sent))
-  texto_tag <- texto_tag[texto_tag$sent != "", ]
   
   # Procesamiento de entidades y frases nominales
   if (show_progress) {
@@ -309,10 +321,9 @@ acep_postag_hibrido <- function(texto,
   texto_tag <- rsyntax::as_tokenindex(texto_tag)
 
   # Geocodificacion con cache
-  texto_only_entity_loc <- unique(texto_only_entity[texto_only_entity$entity_type == "LOC", ])
+  texto_only_entity_loc <- .acep_postag_hibrido_prepare_loc_entities(texto_only_entity)
   
   if (nrow(texto_only_entity_loc) > 0) {
-    texto_only_entity_loc$entity_ <- gsub("_", " ", texto_only_entity_loc$entity)
     unique_locations <- unique(texto_only_entity_loc$entity_)
     
     # Cargar cache si existe
@@ -363,13 +374,7 @@ acep_postag_hibrido <- function(texto,
                                    by = c("doc_id", "sentence"))
     texto_only_entity_loc <- unique(texto_only_entity_loc[!is.na(texto_only_entity_loc$lat), ])
   } else {
-    texto_only_entity_loc <- data.frame(entity_ = character(),
-                                        doc_id = integer(),
-                                        sentence = integer(),
-                                        entity = character(),
-                                        entity_type = character(),
-                                        lat = numeric(),
-                                        long = numeric())
+    texto_only_entity_loc <- .acep_postag_hibrido_empty_loc_frame()
   }
   
   # Retornar lista de resultados

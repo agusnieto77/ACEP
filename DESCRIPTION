@@ -27,12 +27,7 @@ Imports:
     stats,
     httr,
     jsonlite,
-    rsyntax,
-    spacyr,
-    udpipe,
     stringr,
-    reticulate,
-    tidygeocoder,
     utils,
     magrittr
 Suggests:
@@ -42,6 +37,11 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
+    reticulate,
+    rsyntax,
+    spacyr,
+    tidygeocoder,
+    udpipe,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8

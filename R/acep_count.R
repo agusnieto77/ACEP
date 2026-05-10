@@ -2,6 +2,19 @@
 #' @keywords internal
 .acep_regex_cache <- new.env(parent = emptyenv())
 
+#' Crear una clave de caché estable para diccionarios de conteo
+#' @keywords internal
+.acep_count_cache_key <- function(dic) {
+  dic <- unique(dic)
+  paste0(nchar(dic, type = "chars"), ":", dic, collapse = "\r")
+}
+
+#' Crear patrón regex para diccionarios de conteo
+#' @keywords internal
+.acep_count_pattern <- function(dic) {
+  paste0(gsub("^ | $", "\\\\b", unique(dic)), collapse = "|")
+}
+
 #' @title Conteo de menciones de palabras de un diccionario
 #' @description
 #' Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
@@ -27,18 +40,18 @@ acep_count <- function(texto, dic, use_cache = TRUE) {
 
   # Crear hash del diccionario para caché
   if (use_cache) {
-    dic_hash <- paste0(sort(dic), collapse = "")
+    dic_hash <- .acep_count_cache_key(dic)
 
     # Buscar en caché
     if (exists(dic_hash, envir = .acep_regex_cache)) {
       dicc <- get(dic_hash, envir = .acep_regex_cache)
     } else {
       # Compilar y guardar en caché
-      dicc <- paste0(gsub("^ | $", "\\\\b", dic), collapse = "|")
+      dicc <- .acep_count_pattern(dic)
       assign(dic_hash, dicc, envir = .acep_regex_cache)
     }
   } else {
-    dicc <- paste0(gsub("^ | $", "\\\\b", dic), collapse = "|")
+    dicc <- .acep_count_pattern(dic)
   }
 
   stringr::str_count(texto, dicc)

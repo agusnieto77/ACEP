@@ -144,16 +144,7 @@ acep_together <- function(texto,
                           stop = NULL,
                           prompt_system = "json") {
 
-  # Validaciones
-  if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
-  }
-  if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
-  }
-  if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno TOGETHER_API_KEY o pasa el parametro api_key")
-  }
+  .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "TOGETHER_API_KEY")
 
   # Construir prompt del sistema segun el tipo especificado
   if (prompt_system == "json") {
@@ -161,30 +152,12 @@ acep_together <- function(texto,
 
     # Esquema por defecto si no se proporciona uno
     if (is.null(schema)) {
-      schema <- list(
-        type = "object",
-        properties = list(
-          respuesta = list(
-            type = "string",
-            description = "Respuesta principal a la pregunta o instruccion"
-          )
-        ),
-        required = c("respuesta"),
-        additionalProperties = FALSE
-      )
-      schema <- proteger_arrays_schema(schema)
+      schema <- .acep_provider_default_schema()
     }
 
     # Construir descripcion de campos esperados del esquema
     # Extraer nombres y descripciones de los campos del schema
-    campos_descripciones <- sapply(names(schema$properties), function(campo) {
-      desc <- schema$properties[[campo]]$description
-      if (!is.null(desc)) {
-        sprintf("- %s: %s", campo, desc)
-      } else {
-        sprintf("- %s", campo)
-      }
-    })
+    campos_descripciones <- .acep_provider_schema_field_descriptions(schema)
     campos_texto <- paste(campos_descripciones, collapse = "\n")
 
     # Prompt del sistema con instrucciones para JSON
@@ -205,7 +178,7 @@ acep_together <- function(texto,
   }
 
   # Construir prompt del usuario
-  user_prompt <- sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
+  user_prompt <- .acep_provider_user_prompt(texto, instrucciones)
 
   # Construir body de la peticion
   body <- list(
@@ -235,15 +208,12 @@ acep_together <- function(texto,
   }
 
   # Construir headers
-  headers_call <- list(
-    "Content-Type" = "application/json",
-    "Authorization" = paste("Bearer", api_key)
-  )
+  headers_call <- .acep_provider_auth_headers("together", api_key)
 
   # Realizar peticion a la API
   tryCatch({
     output <- httr::POST(
-      url = "https://api.together.xyz/v1/chat/completions",
+      url = .acep_provider_endpoint("together"),
       do.call(httr::add_headers, headers_call),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
       encode = "raw"
@@ -264,11 +234,7 @@ acep_together <- function(texto,
 
     # Extraer respuesta
     respuesta_parsed <- httr::content(output, as = "parsed")
-
-    # Verificar que hay contenido
-    if (is.null(respuesta_parsed$choices) || length(respuesta_parsed$choices) == 0) {
-      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
-    }
+    respuesta_json <- .acep_provider_extract_chat_content(respuesta_parsed)
 
     # Verificar si la respuesta fue truncada por limite de tokens
     finish_reason <- respuesta_parsed$choices[[1]]$finish_reason
@@ -276,38 +242,12 @@ acep_together <- function(texto,
       stop("La respuesta fue truncada debido al limite de max_tokens. Se necesitan mas tokens para obtener una respuesta valida. Aumenta el valor de max_tokens.")
     }
 
-    respuesta_json <- respuesta_parsed$choices[[1]]$message$content
-
-    # Verificar respuesta vacia
-    if (is.null(respuesta_json) || nchar(respuesta_json) == 0) {
-      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
-    }
-
     # Procesar respuesta segun el modo
     if (prompt_system == "json") {
       # Modo JSON: Limpiar markdown y parsear
       # Algunos modelos envuelven el JSON en ```json...``` o ```...```
-      respuesta_json <- gsub("^```json\\s*", "", respuesta_json, perl = TRUE)
-      respuesta_json <- gsub("^```\\s*", "", respuesta_json, perl = TRUE)
-      respuesta_json <- gsub("\\s*```$", "", respuesta_json, perl = TRUE)
-      respuesta_json <- trimws(respuesta_json)
-
       # Parsear JSON si se solicita
-      if (parse_json) {
-        tryCatch({
-          resultado <- jsonlite::fromJSON(respuesta_json, simplifyVector = TRUE)
-          return(resultado)
-        }, error = function(e) {
-          # Si falla el parseo, informar con el contenido original
-          stop(sprintf(
-            "Error al parsear JSON de la respuesta. Contenido recibido (primeros 200 chars):\n%s\n\nError de parseo: %s",
-            substr(respuesta_json, 1, 200),
-            conditionMessage(e)
-          ))
-        })
-      } else {
-        return(respuesta_json)
-      }
+      return(.acep_provider_parse_json_response(respuesta_json, parse_json = parse_json))
     } else {
       # Modo texto plano o personalizado: Limpiar y devolver
       # Eliminar contenido de pensamiento (thinking) si existe
