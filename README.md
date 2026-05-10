@@ -12,7 +12,8 @@ coverage](https://codecov.io/gh/agusnieto77/ACEP/branch/master/graph/badge.svg)]
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![](https://www.r-pkg.org/badges/version/ACEP)](https://cran.r-project.org/package=ACEP)
+[![CRAN
+version](https://img.shields.io/cran/v/ACEP?label=CRAN)](https://cran.r-project.org/package=ACEP)
 [![](https://img.shields.io/badge/devel%20version-0.1.0.9000-blue.svg)](https://github.com/agusnieto77/ACEP)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
@@ -37,7 +38,7 @@ de protesta.
 
 ### Instalacion de la version estable
 
-Puedes instalar la versión estable de ACEP desde
+La versión estable actual de ACEP es `0.1.0` y se instala desde
 [CRAN](https://CRAN.R-project.org/package=ACEP) con:
 
 ``` r

@@ -82,7 +82,7 @@
 
 * Se mejoraron las nuevas funciones para contexto de texto y tokenización.
 
-# ACEP 0.0.21 (versión CRAN vigente)
+# ACEP 0.0.21 (versión CRAN anterior)
 
 * Se mejoraron las nuevas funciones para limpieza de texto, tokenización y detección de menciones.
 
