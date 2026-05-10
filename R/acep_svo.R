@@ -1,3 +1,23 @@
+.acep_svo_collapse_tokens <- function(tokens, fallback_tokens, value_name, group_cols = c("doc_id", "sentence")) {
+  tokens <- as.data.frame(tokens)
+  fallback_tokens <- as.data.frame(fallback_tokens)
+  source_tokens <- if (nrow(tokens) > 0) tokens else fallback_tokens
+
+  collapsed <- stats::aggregate(
+    source_tokens[["token"]],
+    source_tokens[group_cols],
+    paste0,
+    collapse = " "
+  )
+  names(collapsed) <- c(group_cols, value_name)
+
+  if (nrow(tokens) == 0) {
+    collapsed[[value_name]] <- NA_character_
+  }
+
+  collapsed
+}
+
 #' @title Función para extraer tripletes SVO (Sujeto-Verbo-Objeto).
 #' @description
 #' Función que devuelve seis objetos data.frame con
@@ -17,7 +37,6 @@
 #' del paquete \{rsyntax\}. Se recomienda no superar el valor 2.
 #' @param u numero entero que indica el umbral de palabras del objeto en la reconstrucción SVO.
 #' @importFrom stats ave setNames
-#' @importFrom rsyntax as_tokenindex custom_fill tquery children annotate_tqueries
 #' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax:
 #' An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
@@ -61,6 +80,7 @@ acep_svo <- function(acep_tokenindex,
       message(
         "El par\u00e1metro 'u' debe ser de un n\u00famero entero positivo entre 1 y 5"))
   }
+  acep_require_namespace("rsyntax", "acep_svo")
 
   fill <- rsyntax::custom_fill(relation = relaciones, min_window = c(1,1), connected = conexiones)
 
@@ -94,25 +114,9 @@ acep_svo <- function(acep_tokenindex,
 
   sust_pred <- subset(acep_annotate, s_p == "predicado" & (pos == "PROPN" | pos == "NOUN"))
 
-  if (nrow(sust_pred) > 0) {
-    sust_pred <- setNames(
-      subset(
-        aggregate(
-          token ~ doc_id + sentence,
-          sust_pred,
-          paste0, collapse = " | "),
-        select = c(doc_id, sentence, token)),
-      c("doc_id", "sentence", "sust_pred"))
-  } else {
-    sust_pred <- setNames(
-      subset(
-        aggregate(
-          token ~ doc_id + sentence,
-          acep_annotate,
-          paste0, collapse = " "),
-        select = c(doc_id, sentence, token)),
-      c("doc_id", "sentence", "sust_pred"))
-    sust_pred$sust_pred <- NA
+  sust_pred <- .acep_svo_collapse_tokens(sust_pred, acep_annotate, "sust_pred")
+  if (any(!is.na(sust_pred$sust_pred))) {
+    sust_pred$sust_pred <- gsub(" ", " | ", sust_pred$sust_pred, fixed = TRUE)
   }
 
   acep_return <-  subset(acep_annotate, !is.na(s_v_o_fill))
@@ -121,193 +125,43 @@ acep_svo <- function(acep_tokenindex,
   sujetos <- subset(acep_return, s_p == "sujeto" & relation == "nsubj" |
                       s_p == "sujeto" & relation == rel_evs)
 
-  if (nrow(sujetos) > 0) {
-    sujetos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        sujetos,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sujetos"))
-  } else {
-    sujetos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sujetos"))
-    sujetos$sujetos <- NA
-  }
+  sujetos <- .acep_svo_collapse_tokens(sujetos, acep_annotate, "sujetos")
 
   verbos <- subset(acep_return, relation == "ROOT")
 
-  if (nrow(verbos) > 0) {
-    verbos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        verbos,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "verbos"))
-  } else {
-    verbos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "verbos"))
-    verbos$verbos <- NA
-  }
+  verbos <- .acep_svo_collapse_tokens(verbos, acep_annotate, "verbos")
 
   predicados <- subset(acep_return, relation == "obj" | relation == "obl")
 
-  if (nrow(predicados) > 0) {
-    predicados <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        predicados,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "predicados"))
-  } else {
-    predicados <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "predicados"))
-    predicados$predicados <- NA
-  }
+  predicados <- .acep_svo_collapse_tokens(predicados, acep_annotate, "predicados")
 
   sujeto <- subset(acep_return, s_p == "sujeto")
 
-  if (nrow(sujeto) > 0) {
-    sujeto <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        sujeto,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sujeto"))
-  } else {
-    sujeto <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sujeto"))
-    sujeto$sujeto <- NA
-  }
+  sujeto <- .acep_svo_collapse_tokens(sujeto, acep_annotate, "sujeto")
 
   predicado <- subset(acep_return, s_p == "predicado")
 
-  if (nrow(predicado) > 0) {
-    predicado <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        predicado,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "predicado"))
-  } else {
-    predicado <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "predicado"))
-    predicado$predicado <- NA
-  }
+  predicado <- .acep_svo_collapse_tokens(predicado, acep_annotate, "predicado")
 
   verbo <- subset(acep_return, relation == "ROOT")
 
-  if (nrow(verbo) > 0) {
-    verbo <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        verbo,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "verbo"))
-  } else {
-    verbo <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "verbo"))
-    verbo$verbo <- NA
-  }
+  verbo <- .acep_svo_collapse_tokens(verbo, acep_annotate, "verbo")
 
   conjugaciones <- subset(acep_return, s_v_o == "verbo")
 
-  if (nrow(conjugaciones) > 0) {
-    conjugaciones <- setNames(
-      aggregate(
-        token ~ doc_id + sentence + sent,
-        conjugaciones,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sent", "conjugaciones"))
-  } else {
-    conjugaciones <- setNames(
-      aggregate(
-        token ~ doc_id + sentence + sent,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "sent", "conjugaciones"))
-    conjugaciones$conjugaciones <- NA
-  }
+  conjugaciones <- .acep_svo_collapse_tokens(conjugaciones, acep_annotate, "conjugaciones", c("doc_id", "sentence", "sent"))
 
   lemma_verb <- subset(acep_return, relation == "ROOT")
 
-  if (nrow(lemma_verb) > 0) {
-    lemma_verb <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        lemma_verb,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "lemma_verb"))
-  } else {
-    lemma_verb <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "lemma_verb"))
-    lemma_verb$lemma_verb <- NA
-  }
+  lemma_verb <- .acep_svo_collapse_tokens(lemma_verb, acep_annotate, "lemma_verb")
 
   aux_verbos <- subset(acep_return, pos == "VERB" & !is.na(parent))
 
-  if (nrow(aux_verbos) > 0) {
-    aux_verbos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        aux_verbos,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "aux_verbos"))
-  } else {
-    aux_verbos <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "aux_verbos"))
-    aux_verbos$aux_verbos <- NA
-  }
+  aux_verbos <- .acep_svo_collapse_tokens(aux_verbos, acep_annotate, "aux_verbos")
 
   entidades <- subset(acep_return, pos == "PROPN")
 
-  if (nrow(entidades) > 0) {
-    entidades <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        entidades,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "entidades"))
-  } else {
-    entidades <- setNames(
-      aggregate(
-        token ~ doc_id + sentence,
-        acep_annotate,
-        paste0, collapse = " "),
-      c("doc_id", "sentence", "entidades"))
-    entidades$entidades <- NA
-  }
+  entidades <- .acep_svo_collapse_tokens(entidades, acep_annotate, "entidades")
 
   acep_return <-
     merge(
