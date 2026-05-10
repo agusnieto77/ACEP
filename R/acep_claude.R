@@ -1,26 +1,3 @@
-#' @title Funcion auxiliar para proteger arrays en esquemas JSON
-#' @description
-#' Protege arrays en esquemas JSON para evitar que jsonlite::toJSON los convierta
-#' incorrectamente. Aplica I() a campos 'required' y 'enum' recursivamente.
-#' @param schema Esquema JSON como lista de R
-#' @return Esquema con arrays protegidos
-#' @keywords internal
-proteger_arrays_schema <- function(schema) {
-  if (is.list(schema)) {
-    # Proteger el campo 'required' si existe
-    if ("required" %in% names(schema)) {
-      schema$required <- I(schema$required)
-    }
-    # Proteger el campo 'enum' si existe
-    if ("enum" %in% names(schema)) {
-      schema$enum <- I(schema$enum)
-    }
-    # Recursivamente proteger subesquemas
-    schema <- lapply(schema, proteger_arrays_schema)
-  }
-  return(schema)
-}
-
 #' @title Interaccion con modelos Claude usando Structured Outputs
 #' @description
 #' Funcion para interactuar con la API de Anthropic Claude utilizando Tool Calling
@@ -106,16 +83,7 @@ acep_claude <- function(texto,
                         top_p = 0.2,
                         top_k = NULL) {
 
-  # Validaciones
-  if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
-  }
-  if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
-  }
-  if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno ANTHROPIC_API_KEY o pasa el parametro api_key")
-  }
+  .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "ANTHROPIC_API_KEY")
 
   # Validar modelos compatibles (listado oficial de la API de Anthropic)
   modelos_compatibles <- c(
@@ -145,18 +113,7 @@ acep_claude <- function(texto,
 
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
-    schema <- list(
-      type = "object",
-      properties = list(
-        respuesta = list(
-          type = "string",
-          description = "Respuesta principal a la pregunta o instruccion"
-        )
-      ),
-      required = c("respuesta"),
-      additionalProperties = FALSE
-    )
-    schema <- proteger_arrays_schema(schema)
+    schema <- .acep_provider_default_schema()
   }
 
   # Remover additionalProperties si existe (no es necesario para Anthropic)
@@ -166,7 +123,7 @@ acep_claude <- function(texto,
   system_prompt <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE usando la herramienta proporcionada siguiendo exactamente el esquema especificado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
 
   # Construir prompt del usuario
-  user_prompt <- sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
+  user_prompt <- .acep_provider_user_prompt(texto, instrucciones)
 
   # Definir la herramienta con el esquema como input_schema
   # Esto es el "truco" de Anthropic para structured outputs
@@ -228,12 +185,8 @@ acep_claude <- function(texto,
   # Realizar peticion a la API
   tryCatch({
     output <- httr::POST(
-      url = "https://api.anthropic.com/v1/messages",
-      httr::add_headers(
-        "Content-Type" = "application/json",
-        "x-api-key" = api_key,
-        "anthropic-version" = "2023-06-01"
-      ),
+      url = .acep_provider_endpoint("anthropic"),
+      do.call(httr::add_headers, .acep_provider_auth_headers("anthropic", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
       encode = "raw"
     )
