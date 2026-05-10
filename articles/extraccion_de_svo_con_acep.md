@@ -548,7 +548,7 @@ str(titulares_svo)
     #>   ..$ s_v_o_fill   : num [1:153] 0 NA 0 0 NA NA 1 0 NA 1 ...
     #>   ..$ s_p          : chr [1:153] "sujeto" "sujeto" "sujeto" "predicado" ...
     #>   ..$ conjugaciones: chr [1:153] NA NA NA "presente" ...
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x5613255abef0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x5617f8700ef0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ acep_pro_svo      :'data.frame':  10 obs. of  13 variables:
     #>   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7
@@ -588,7 +588,7 @@ str(titulares_svo)
     #>   ..$ doc_id    : int [1:2] 8 9
     #>   ..$ oracion_id: int [1:2] 1 1
     #>   ..$ oracion   : chr [1:2] "Conciliación obligatoria en el conflicto del neumático." "Hola mundo."
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x5613255abef0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x5617f8700ef0> 
     #>   ..- attr(*, "sorted")= chr [1:2] "doc_id" "oracion_id"
 
 Veamos con un poco más de detalle cada uno de los marcos de datos

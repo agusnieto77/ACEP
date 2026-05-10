@@ -18,8 +18,7 @@ acep_svo(acep_tokenindex, prof_s = 3, prof_o = 3, u = 1)
 [Dependencias Universales para taggeo
 POS](https://universaldependencies.org/)
 
-[Sobre el paquete
-rsyntax](https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf)
+[Sobre el paquete rsyntax](https://CRAN.R-project.org/package=rsyntax)
 
 ## Arguments
 
@@ -57,8 +56,7 @@ bases de datos en formato tabular.
 Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting
 semantic relations using syntax: An R package for querying and reshaping
 dependency trees. Computational Communication Research, 3-2, 1-16.
-[(link al
-articulo)](https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK)
+[doi:10.5117/CCR2021.2.003.WELB](https://doi.org/10.5117/CCR2021.2.003.WELB)
 
 ## Examples
 

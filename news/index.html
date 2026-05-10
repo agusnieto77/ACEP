@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0.9000" id="acep-0109000-versión-en-desarrollo">ACEP 0.1.0.9000 (versión en desarrollo)<a class="anchor" aria-label="anchor" href="#acep-0109000-versi%C3%B3n-en-desarrollo"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="acep-010">ACEP 0.1.0<a class="anchor" aria-label="anchor" href="#acep-010"></a></h2>
 <div class="section level3">
-<h3 id="nuevas-funcionalidades-0-1-0-9000">Nuevas funcionalidades<a class="anchor" aria-label="anchor" href="#nuevas-funcionalidades-0-1-0-9000"></a></h3>
+<h3 id="nuevas-funcionalidades-0-1-0">Nuevas funcionalidades<a class="anchor" aria-label="anchor" href="#nuevas-funcionalidades-0-1-0"></a></h3>
 <ul><li>Se agregó <code><a href="../reference/acep_corpus.html">acep_corpus()</a></code>: constructor de objetos corpus para trabajar con pipelines de procesamiento de texto.</li>
 <li>Se agregó <code><a href="../reference/acep_result.html">acep_result()</a></code>: constructor de objetos resultado con métodos de impresión y resumen.</li>
 <li>Se agregó <code><a href="../reference/acep_pipeline.html">acep_pipeline()</a></code>: pipeline completo que integra limpieza, conteo e intensidad.</li>
@@ -79,7 +79,7 @@
 </ul></li>
 </ul></div>
 <div class="section level3">
-<h3 id="mejoras-en-funciones-existentes-0-1-0-9000">Mejoras en funciones existentes<a class="anchor" aria-label="anchor" href="#mejoras-en-funciones-existentes-0-1-0-9000"></a></h3>
+<h3 id="mejoras-en-funciones-existentes-0-1-0">Mejoras en funciones existentes<a class="anchor" aria-label="anchor" href="#mejoras-en-funciones-existentes-0-1-0"></a></h3>
 <ul><li>
 <code><a href="../reference/acep_count.html">acep_count()</a></code>: se incorporó sistema de caché de expresiones regulares para mejorar rendimiento.</li>
 <li>
@@ -97,15 +97,16 @@
 <code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>: agrega listado actualizado de modelos GPT-5, Grok 4, DeepSeek V3/R1, Llama 4 y Mixtral, aplica fallback inteligente entre candidatos, refuerza la validación JSON y reporta el detalle de errores por intento.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="datos-y-recursos-0-1-0-9000">Datos y recursos<a class="anchor" aria-label="anchor" href="#datos-y-recursos-0-1-0-9000"></a></h3>
+<h3 id="datos-y-recursos-0-1-0">Datos y recursos<a class="anchor" aria-label="anchor" href="#datos-y-recursos-0-1-0"></a></h3>
 <ul><li>
 <code>acep_bases</code>: se reorganizó la documentación e incorpora el data frame <code>lc_720</code> con 720 notas anotadas manualmente para evaluar diccionarios y extracción estructurada de eventos de protesta.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentación-0-1-0-9000">Documentación<a class="anchor" aria-label="anchor" href="#documentaci%C3%B3n-0-1-0-9000"></a></h3>
+<h3 id="documentación-0-1-0">Documentación<a class="anchor" aria-label="anchor" href="#documentaci%C3%B3n-0-1-0"></a></h3>
 <ul><li>Se mejoró la documentación de todas las funciones nuevas y modificadas.</li>
 <li>Se agregaron ejemplos prácticos a todas las funciones operativas.</li>
 <li>Se actualizó README.Rmd con la lista completa de funciones del paquete, incluyendo las 4 nuevas funciones de IA.</li>
+<li>Se documentó la instalación base liviana y las dependencias opcionales para NLP/geocodificación.</li>
 <li>Se actualizaron todas las viñetas para usar las nuevas funciones.</li>
 <li>Se documentó <code><a href="../reference/acep_together.html">acep_together()</a></code> y las mejoras de <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>/<code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>, con ejemplos para modo cloud, fallback y JSON mode.</li>
 <li>Se agregó documentación completa para las funciones de IA:
