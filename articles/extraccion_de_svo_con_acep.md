@@ -25,6 +25,7 @@ con la función
 [`acep_svo()`](https://agusnieto77.github.io/ACEP/reference/acep_svo.md).
 
 ``` r
+
 library(ACEP)
 
 titulares <- c(acep_bases$titulares, "Hola mundo.")
@@ -92,6 +93,7 @@ Cabe mencionar que los textos ingresados son tokenizados, es decir, cada
 palabra es un token.
 
 ``` r
+
 titulares_tags <- acep_postag(
   texto = titulares,
   core = "es_core_news_lg", # valor por defecto
@@ -127,7 +129,7 @@ str(titulares_tags)
     #>   ..$ is_right_punct: logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...
     #>   ..$ morph         : chr [1:153] "" "" "Number=Plur" "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin" ...
     #>   ..$ sent          : chr [1:153] "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ ...
-    #>   ..- attr(*, ".internal.selfref")=<externalptr> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: (nil)> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>   ..- attr(*, "index")= int(0) 
     #>   .. ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 21 5 6 7 ...
@@ -180,80 +182,75 @@ estructurado para servir de input de la función
 [`acep_svo()`](https://agusnieto77.github.io/ACEP/reference/acep_svo.md).
 
 ``` r
+
 head(titulares_tags$texto_tag[43:54, ], n = 12)
 ```
 
-    #> Key: <doc_id, sentence, token_id>
-    #>     doc_id sentence token_id      token     lemma    pos parent relation entity
-    #>      <int>    <int>    <num>     <char>    <char> <char>  <num>   <char> <char>
-    #>  1:      2        1        1        Los        el    DET      2      det       
-    #>  2:      2        1        2    gremios    gremio   NOUN      4    nsubj       
-    #>  3:      2        1        3   docentes   docente    ADJ      2     amod       
-    #>  4:      2        1        4   rechazan  rechazar   VERB     NA     ROOT       
-    #>  5:      2        1        5     volver    volver   VERB      4    xcomp       
-    #>  6:      2        1        6          a         a    ADP      8     case       
-    #>  7:      2        1        7        las        el    DET      8      det       
-    #>  8:      2        1        8      aulas      aula   NOUN      5      obl       
-    #>  9:      2        1        9        sin       sin    ADP     10     case       
-    #> 10:      2        1       10  garantías  garantía   NOUN      5      obl       
-    #> 11:      2        1       11 sanitarias sanitario    ADJ     10     amod       
-    #> 12:      2        1       12          .         .  PUNCT      4    punct       
-    #>     nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
-    #>         <char>     <lgcl>   <lgcl>   <lgcl>   <lgcl>   <char>   <int>
-    #>  1:        beg       TRUE    FALSE     TRUE    FALSE        O       2
-    #>  2:   end_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #>  3:                  TRUE    FALSE    FALSE    FALSE        O       2
-    #>  4:                  TRUE    FALSE    FALSE    FALSE        O       2
-    #>  5:                  TRUE    FALSE    FALSE    FALSE        O       2
-    #>  6:                  TRUE    FALSE    FALSE    FALSE        O       2
-    #>  7:        beg       TRUE    FALSE    FALSE    FALSE        O       2
-    #>  8:   end_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #>  9:                  TRUE    FALSE    FALSE    FALSE        O       2
-    #> 10:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 11:                 FALSE    FALSE    FALSE    FALSE        O       2
-    #> 12:                 FALSE    FALSE    FALSE    FALSE        O       2
-    #>     is_left_punct is_right_punct
-    #>            <lgcl>         <lgcl>
-    #>  1:         FALSE          FALSE
-    #>  2:         FALSE          FALSE
-    #>  3:         FALSE          FALSE
-    #>  4:         FALSE          FALSE
-    #>  5:         FALSE          FALSE
-    #>  6:         FALSE          FALSE
-    #>  7:         FALSE          FALSE
-    #>  8:         FALSE          FALSE
-    #>  9:         FALSE          FALSE
-    #> 10:         FALSE          FALSE
-    #> 11:         FALSE          FALSE
-    #> 12:         FALSE          FALSE
-    #>                                                     morph
-    #>                                                    <char>
-    #>  1:     Definite=Def|Gender=Masc|Number=Plur|PronType=Art
-    #>  2:                               Gender=Masc|Number=Plur
-    #>  3:                                           Number=Plur
-    #>  4: Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin
-    #>  5:                                          VerbForm=Inf
-    #>  6:                                          AdpType=Prep
-    #>  7:      Definite=Def|Gender=Fem|Number=Plur|PronType=Art
-    #>  8:                                Gender=Fem|Number=Plur
-    #>  9:                                          AdpType=Prep
-    #> 10:                                Gender=Fem|Number=Plur
-    #> 11:                                Gender=Fem|Number=Plur
-    #> 12:                                        PunctType=Peri
-    #>                                                                           sent
-    #>                                                                         <char>
-    #>  1: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  2: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  3: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  4: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  5: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  6: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  7: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  8: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #>  9: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #> 10: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #> 11: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
-    #> 12: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #>    doc_id sentence token_id      token     lemma   pos parent relation entity
+    #> 43      2        1        1        Los        el   DET      2      det       
+    #> 44      2        1        2    gremios    gremio  NOUN      4    nsubj       
+    #> 45      2        1        3   docentes   docente   ADJ      2     amod       
+    #> 46      2        1        4   rechazan  rechazar  VERB     NA     ROOT       
+    #> 47      2        1        5     volver    volver  VERB      4    xcomp       
+    #> 48      2        1        6          a         a   ADP      8     case       
+    #> 49      2        1        7        las        el   DET      8      det       
+    #> 50      2        1        8      aulas      aula  NOUN      5      obl       
+    #> 51      2        1        9        sin       sin   ADP     10     case       
+    #> 52      2        1       10  garantías  garantía  NOUN      5      obl       
+    #> 53      2        1       11 sanitarias sanitario   ADJ     10     amod       
+    #> 54      2        1       12          .         . PUNCT      4    punct       
+    #>    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
+    #> 43        beg       TRUE    FALSE     TRUE    FALSE        O       2
+    #> 44   end_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 45                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 46                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 47                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 48                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 49        beg       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 50   end_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 51                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 52   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 53                 FALSE    FALSE    FALSE    FALSE        O       2
+    #> 54                 FALSE    FALSE    FALSE    FALSE        O       2
+    #>    is_left_punct is_right_punct
+    #> 43         FALSE          FALSE
+    #> 44         FALSE          FALSE
+    #> 45         FALSE          FALSE
+    #> 46         FALSE          FALSE
+    #> 47         FALSE          FALSE
+    #> 48         FALSE          FALSE
+    #> 49         FALSE          FALSE
+    #> 50         FALSE          FALSE
+    #> 51         FALSE          FALSE
+    #> 52         FALSE          FALSE
+    #> 53         FALSE          FALSE
+    #> 54         FALSE          FALSE
+    #>                                                    morph
+    #> 43     Definite=Def|Gender=Masc|Number=Plur|PronType=Art
+    #> 44                               Gender=Masc|Number=Plur
+    #> 45                                           Number=Plur
+    #> 46 Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin
+    #> 47                                          VerbForm=Inf
+    #> 48                                          AdpType=Prep
+    #> 49      Definite=Def|Gender=Fem|Number=Plur|PronType=Art
+    #> 50                                Gender=Fem|Number=Plur
+    #> 51                                          AdpType=Prep
+    #> 52                                Gender=Fem|Number=Plur
+    #> 53                                Gender=Fem|Number=Plur
+    #> 54                                        PunctType=Peri
+    #>                                                                          sent
+    #> 43 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 44 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 45 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 46 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 47 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 48 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 49 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 50 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 51 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 52 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 53 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
+    #> 54 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.
 
 ### texto_tag_entity
 
@@ -265,6 +262,7 @@ entidad en una sola celda de la columna token. Ejemplo:
 ‘Ciudad_de_Buenos_Aires’.
 
 ``` r
+
 head(titulares_tags$texto_tag_entity[52:65, ], n = 14)
 ```
 
@@ -290,6 +288,7 @@ El tercer objeto de la lista es el marco de datos ‘texto_tag_entity’
 filtrado por el valor ‘ENTITY’ de la columna ‘pos’.
 
 ``` r
+
 head(titulares_tags$texto_only_entity, n = 10)
 ```
 
@@ -312,6 +311,7 @@ filtrado por el valor ‘LOC’ de la columna ‘entity_type’ y procesado con
 la función ‘geo()’ del paquete *tidygeocoder*.
 
 ``` r
+
 head(titulares_tags$texto_only_entity_loc[ , c(1:3, 6:7)], n = 4)
 ```
 
@@ -330,6 +330,7 @@ referidos a ese sustantivo en una sola celda de la columna token.
 Ejemplo: ‘las_principales_ciudades’.
 
 ``` r
+
 head(titulares_tags$texto_nounphrase[ , c(1:2, 4, 6)], n = 10)
 ```
 
@@ -351,6 +352,7 @@ El sexto objeto de la lista es el marco de datos ‘texto_nounphrase’
 filtrado por el valor ‘nounphrase’ de la columna ‘pos’.
 
 ``` r
+
 head(titulares_tags$texto_only_nounphrase, n = 10)
 ```
 
@@ -386,6 +388,7 @@ no procesable con la función
 [`acep_svo()`](https://agusnieto77.github.io/ACEP/reference/acep_svo.md).
 
 ``` r
+
 library(ACEP)
 
 titulares <- c(acep_bases$titulares, "Hola mundo.")
@@ -429,6 +432,7 @@ Cabe mencionar que, al igual que acep_postag, los textos ingresados son
 tokenizados, es decir, cada palabra es un token.
 
 ``` r
+
 titulares_utags <- acep_upos(
   texto = titulares,
   modelo = "spanish" # valor por defecto
@@ -456,7 +460,7 @@ str(titulares_utags)
     #>   ..- attr(*, "levels")= chr "ROOT"
     #>  $ deps        : chr  NA NA NA NA ...
     #>  $ misc        : chr  NA NA NA NA ...
-    #>  - attr(*, ".internal.selfref")=<externalptr> 
+    #>  - attr(*, ".internal.selfref")=<pointer: (nil)> 
     #>  - attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  - attr(*, "index")= int(0) 
     #>   ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 22 5 6 7 ...
@@ -513,6 +517,7 @@ proveerá la siguiente información:
   palabras lemmatizadas presentes en el corpus analizado.
 
 ``` r
+
 titulares_svo <- acep_svo(titulares_utags)
 
 str(titulares_svo)
@@ -543,7 +548,7 @@ str(titulares_svo)
     #>   ..$ s_v_o_fill   : num [1:153] 0 NA 0 0 NA NA 1 0 NA 1 ...
     #>   ..$ s_p          : chr [1:153] "sujeto" "sujeto" "sujeto" "predicado" ...
     #>   ..$ conjugaciones: chr [1:153] NA NA NA "presente" ...
-    #>   ..- attr(*, ".internal.selfref")=<externalptr> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x556e507dcef0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ acep_pro_svo      :'data.frame':  10 obs. of  13 variables:
     #>   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7
@@ -583,7 +588,7 @@ str(titulares_svo)
     #>   ..$ doc_id    : int [1:2] 8 9
     #>   ..$ oracion_id: int [1:2] 1 1
     #>   ..$ oracion   : chr [1:2] "Conciliación obligatoria en el conflicto del neumático." "Hola mundo."
-    #>   ..- attr(*, ".internal.selfref")=<externalptr> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x556e507dcef0> 
     #>   ..- attr(*, "sorted")= chr [1:2] "doc_id" "oracion_id"
 
 Veamos con un poco más de detalle cada uno de los marcos de datos
@@ -596,6 +601,7 @@ Es el marco de datos inicial procesado con las funciones del paquete
 *rsyntax*.
 
 ``` r
+
 head(titulares_svo$acep_annotate_svo[98:106, ], n=20)
 ```
 
@@ -651,6 +657,7 @@ Este marco de datos contiene las oraciones procesables con la
 identificación y extracción de sujeto-verbo-objeto y contexto.
 
 ``` r
+
 head(titulares_svo$acep_pro_svo, n=10)
 ```
 
@@ -730,6 +737,7 @@ separada (una columna para ‘sujeto’, otra para ‘verbo’ y otra para
 ‘objeto’).
 
 ``` r
+
 head(titulares_svo$acep_list_svo, n=10)
 ```
 
@@ -764,6 +772,7 @@ identificados en cada oración y una aproximación a ‘entidades’,
 extracción de sujetos y objetos de la acción.
 
 ``` r
+
 head(titulares_svo$acep_sp, n=10)
 ```
 
@@ -829,6 +838,7 @@ Este marco de datos es un análisis de frecuencias absolutas de lemmas
 presentes en el corpus procesado.
 
 ``` r
+
 head(titulares_svo$acep_lista_lemmas, n=10)
 ```
 
@@ -850,6 +860,7 @@ Este marco de datos contiene las oraciones que no pudieron ser
 procesadas por no ser posible identificar sujeto y predicado.
 
 ``` r
+
 head(titulares_svo$acep_no_procesadas, n=10)
 ```
 

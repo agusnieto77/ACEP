@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2025-11-11</h4>
+            <h4 data-toc-skip class="date">2026-05-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/master/vignettes/extraccion_de_svo_con_acep.Rmd" class="external-link"><code>vignettes/extraccion_de_svo_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>extraccion_de_svo_con_acep.Rmd</code></div>
@@ -189,7 +189,7 @@ cada palabra es un token.</p>
 <span><span class="co">#&gt;   ..$ is_right_punct: logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
 <span><span class="co">#&gt;   ..$ morph         : chr [1:153] "" "" "Number=Plur" "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin" ...</span></span>
 <span><span class="co">#&gt;   ..$ sent          : chr [1:153] "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: (nil)&gt; </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "index")= int(0) </span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 21 5 6 7 ...</span></span>
@@ -239,77 +239,71 @@ estructurado para servir de input de la función
 <code><a href="../reference/acep_svo.html">acep_svo()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag</span><span class="op">[</span><span class="fl">43</span><span class="op">:</span><span class="fl">54</span>, <span class="op">]</span>, n <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Key: &lt;doc_id, sentence, token_id&gt;</span></span>
-<span><span class="co">#&gt;     doc_id sentence token_id      token     lemma    pos parent relation entity</span></span>
-<span><span class="co">#&gt;      &lt;int&gt;    &lt;int&gt;    &lt;num&gt;     &lt;char&gt;    &lt;char&gt; &lt;char&gt;  &lt;num&gt;   &lt;char&gt; &lt;char&gt;</span></span>
-<span><span class="co">#&gt;  1:      2        1        1        Los        el    DET      2      det       </span></span>
-<span><span class="co">#&gt;  2:      2        1        2    gremios    gremio   NOUN      4    nsubj       </span></span>
-<span><span class="co">#&gt;  3:      2        1        3   docentes   docente    ADJ      2     amod       </span></span>
-<span><span class="co">#&gt;  4:      2        1        4   rechazan  rechazar   VERB     NA     ROOT       </span></span>
-<span><span class="co">#&gt;  5:      2        1        5     volver    volver   VERB      4    xcomp       </span></span>
-<span><span class="co">#&gt;  6:      2        1        6          a         a    ADP      8     case       </span></span>
-<span><span class="co">#&gt;  7:      2        1        7        las        el    DET      8      det       </span></span>
-<span><span class="co">#&gt;  8:      2        1        8      aulas      aula   NOUN      5      obl       </span></span>
-<span><span class="co">#&gt;  9:      2        1        9        sin       sin    ADP     10     case       </span></span>
-<span><span class="co">#&gt; 10:      2        1       10  garantías  garantía   NOUN      5      obl       </span></span>
-<span><span class="co">#&gt; 11:      2        1       11 sanitarias sanitario    ADJ     10     amod       </span></span>
-<span><span class="co">#&gt; 12:      2        1       12          .         .  PUNCT      4    punct       </span></span>
-<span><span class="co">#&gt;     nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
-<span><span class="co">#&gt;         &lt;char&gt;     &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;char&gt;   &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1:        beg       TRUE    FALSE     TRUE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  2:   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  3:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  4:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  5:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  6:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  7:        beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  8:   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;  9:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 10:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 11:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 12:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt;     is_left_punct is_right_punct</span></span>
-<span><span class="co">#&gt;            &lt;lgcl&gt;         &lt;lgcl&gt;</span></span>
-<span><span class="co">#&gt;  1:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  2:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  3:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  4:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  5:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  6:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  7:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  8:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;  9:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 10:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 11:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 12:         FALSE          FALSE</span></span>
-<span><span class="co">#&gt;                                                     morph</span></span>
-<span><span class="co">#&gt;                                                    &lt;char&gt;</span></span>
-<span><span class="co">#&gt;  1:     Definite=Def|Gender=Masc|Number=Plur|PronType=Art</span></span>
-<span><span class="co">#&gt;  2:                               Gender=Masc|Number=Plur</span></span>
-<span><span class="co">#&gt;  3:                                           Number=Plur</span></span>
-<span><span class="co">#&gt;  4: Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin</span></span>
-<span><span class="co">#&gt;  5:                                          VerbForm=Inf</span></span>
-<span><span class="co">#&gt;  6:                                          AdpType=Prep</span></span>
-<span><span class="co">#&gt;  7:      Definite=Def|Gender=Fem|Number=Plur|PronType=Art</span></span>
-<span><span class="co">#&gt;  8:                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt;  9:                                          AdpType=Prep</span></span>
-<span><span class="co">#&gt; 10:                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt; 11:                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt; 12:                                        PunctType=Peri</span></span>
-<span><span class="co">#&gt;                                                                           sent</span></span>
-<span><span class="co">#&gt;                                                                         &lt;char&gt;</span></span>
-<span><span class="co">#&gt;  1: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  2: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  3: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  4: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  5: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  6: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  7: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  8: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt;  9: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 10: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 11: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 12: Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;    doc_id sentence token_id      token     lemma   pos parent relation entity</span></span>
+<span><span class="co">#&gt; 43      2        1        1        Los        el   DET      2      det       </span></span>
+<span><span class="co">#&gt; 44      2        1        2    gremios    gremio  NOUN      4    nsubj       </span></span>
+<span><span class="co">#&gt; 45      2        1        3   docentes   docente   ADJ      2     amod       </span></span>
+<span><span class="co">#&gt; 46      2        1        4   rechazan  rechazar  VERB     NA     ROOT       </span></span>
+<span><span class="co">#&gt; 47      2        1        5     volver    volver  VERB      4    xcomp       </span></span>
+<span><span class="co">#&gt; 48      2        1        6          a         a   ADP      8     case       </span></span>
+<span><span class="co">#&gt; 49      2        1        7        las        el   DET      8      det       </span></span>
+<span><span class="co">#&gt; 50      2        1        8      aulas      aula  NOUN      5      obl       </span></span>
+<span><span class="co">#&gt; 51      2        1        9        sin       sin   ADP     10     case       </span></span>
+<span><span class="co">#&gt; 52      2        1       10  garantías  garantía  NOUN      5      obl       </span></span>
+<span><span class="co">#&gt; 53      2        1       11 sanitarias sanitario   ADJ     10     amod       </span></span>
+<span><span class="co">#&gt; 54      2        1       12          .         . PUNCT      4    punct       </span></span>
+<span><span class="co">#&gt;    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
+<span><span class="co">#&gt; 43        beg       TRUE    FALSE     TRUE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 44   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 45                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 46                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 47                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 48                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 49        beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 50   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 51                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 52   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 53                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 54                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;    is_left_punct is_right_punct</span></span>
+<span><span class="co">#&gt; 43         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 44         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 45         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 46         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 47         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 48         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 49         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 50         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 51         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 52         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 53         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 54         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;                                                    morph</span></span>
+<span><span class="co">#&gt; 43     Definite=Def|Gender=Masc|Number=Plur|PronType=Art</span></span>
+<span><span class="co">#&gt; 44                               Gender=Masc|Number=Plur</span></span>
+<span><span class="co">#&gt; 45                                           Number=Plur</span></span>
+<span><span class="co">#&gt; 46 Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin</span></span>
+<span><span class="co">#&gt; 47                                          VerbForm=Inf</span></span>
+<span><span class="co">#&gt; 48                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt; 49      Definite=Def|Gender=Fem|Number=Plur|PronType=Art</span></span>
+<span><span class="co">#&gt; 50                                Gender=Fem|Number=Plur</span></span>
+<span><span class="co">#&gt; 51                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt; 52                                Gender=Fem|Number=Plur</span></span>
+<span><span class="co">#&gt; 53                                Gender=Fem|Number=Plur</span></span>
+<span><span class="co">#&gt; 54                                        PunctType=Peri</span></span>
+<span><span class="co">#&gt;                                                                          sent</span></span>
+<span><span class="co">#&gt; 43 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 44 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 45 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 46 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 47 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 48 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 49 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 50 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 51 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 52 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 53 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
+<span><span class="co">#&gt; 54 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_tag_entity">texto_tag_entity<a class="anchor" aria-label="anchor" href="#texto_tag_entity"></a>
@@ -488,7 +482,7 @@ son tokenizados, es decir, cada palabra es un token.</p>
 <span><span class="co">#&gt;   ..- attr(*, "levels")= chr "ROOT"</span></span>
 <span><span class="co">#&gt;  $ deps        : chr  NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ misc        : chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
+<span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: (nil)&gt; </span></span>
 <span><span class="co">#&gt;  - attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
 <span><span class="co">#&gt;  - attr(*, "index")= int(0) </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 22 5 6 7 ...</span></span>
@@ -565,7 +559,7 @@ las palabras lemmatizadas presentes en el corpus analizado.</p></li>
 <span><span class="co">#&gt;   ..$ s_v_o_fill   : num [1:153] 0 NA 0 0 NA NA 1 0 NA 1 ...</span></span>
 <span><span class="co">#&gt;   ..$ s_p          : chr [1:153] "sujeto" "sujeto" "sujeto" "predicado" ...</span></span>
 <span><span class="co">#&gt;   ..$ conjugaciones: chr [1:153] NA NA NA "presente" ...</span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x556e507dcef0&gt; </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
 <span><span class="co">#&gt;  $ acep_pro_svo      :'data.frame':  10 obs. of  13 variables:</span></span>
 <span><span class="co">#&gt;   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7</span></span>
@@ -605,7 +599,7 @@ las palabras lemmatizadas presentes en el corpus analizado.</p></li>
 <span><span class="co">#&gt;   ..$ doc_id    : int [1:2] 8 9</span></span>
 <span><span class="co">#&gt;   ..$ oracion_id: int [1:2] 1 1</span></span>
 <span><span class="co">#&gt;   ..$ oracion   : chr [1:2] "Conciliación obligatoria en el conflicto del neumático." "Hola mundo."</span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x556e507dcef0&gt; </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:2] "doc_id" "oracion_id"</span></span></code></pre>
 <p>Veamos con un poco más de detalle cada uno de los marcos de datos
 creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a></code>.</p>

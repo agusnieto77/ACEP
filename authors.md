@@ -10,13 +10,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/agusnieto77/ACEP/blob/master/DESCRIPTION)
 
-Nieto A (2025). *ACEP: Análisis Computacional de Eventos de Protesta*. R
+Nieto A (2026). *ACEP: Análisis Computacional de Eventos de Protesta*. R
 package version 0.1.0.9000, <https://github.com/agusnieto77/ACEP>.
 
     @Manual{,
       title = {ACEP: Análisis Computacional de Eventos de Protesta},
       author = {Agustín Nieto},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.0.9000},
       url = {https://github.com/agusnieto77/ACEP},
     }

@@ -20,6 +20,7 @@ cargar todas las notas haremos uso de la función
 [`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md).
 
 ``` r
+
 # Cargamos la librería ACEP
 library(ACEP)
 
@@ -65,20 +66,21 @@ con un doble objetivo: 1) identificar las notas que refieran a huelgas;
 procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
 ``` r
+
 # Creamos la variable con la frecuencia de palabras por nota
 rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
-
-# Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
-
-# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
-rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "paro de actividades", "conciliación obligatoria", "un paro", 
                   "paro total", "paro parcial", "trabajo a reglamento", 
                   "el paro", "de brazos caídos")
+
+# Cargamos el diccionario de palabras que refieren a conflictividad
+dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+
+# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
+rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
@@ -102,15 +104,15 @@ rev_puerto
     #>    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos
     #>    <date>     <chr>      <chr>  <chr> <chr>  <chr>         <int>           <int>
     #>  1 2020-12-29 ¡Feliz Añ… Con m… "Con… https… http…            28               0
-    #>  2 2020-12-28 Mapa del … Un re… "El … https… http…          1142               3
-    #>  3 2020-12-24 Plantas p… En Ch… "El … https… http…           536               3
-    #>  4 2020-12-24 Los obrer… En Ma… "El … https… http…           489               7
-    #>  5 2020-12-23 El incump… Se ll… "Las… https… http…           529               4
-    #>  6 2020-12-23 Otro fall… La Cá… "La … https… http…           467               6
+    #>  2 2020-12-28 Mapa del … Un re… "El … https… http…          1142               0
+    #>  3 2020-12-24 Plantas p… En Ch… "El … https… http…           536               0
+    #>  4 2020-12-24 Los obrer… En Ma… "El … https… http…           489               0
+    #>  5 2020-12-23 El incump… Se ll… "Las… https… http…           529               1
+    #>  6 2020-12-23 Otro fall… La Cá… "La … https… http…           467               0
     #>  7 2020-12-22 Recomenda… Desde… "En … https… http…           661               0
-    #>  8 2020-12-22 Trelew co… En 20… "Ins… https… http…           844               4
-    #>  9 2020-12-21 El CFP pr… En la… "Ant… https… http…          1454               4
-    #> 10 2020-12-21 La flota … Puert… "El … https… http…          1073               5
+    #>  8 2020-12-22 Trelew co… En 20… "Ins… https… http…           844               0
+    #>  9 2020-12-21 El CFP pr… En la… "Ant… https… http…          1454               0
+    #> 10 2020-12-21 La flota … Puert… "El … https… http…          1073               0
     #> # ℹ 7,806 more rows
     #> # ℹ 2 more variables: frec_huelgas <int>, frec_soip <int>
 
@@ -125,6 +127,7 @@ huelgas. Para la elaboración de estos índices haremos uso de la función
 del paquete ACEP.
 
 ``` r
+
 # Creamos la variable con el índice de conflictividad general
 rev_puerto$i_conf_gral <- acep_int(rev_puerto$frec_conflictos, 
                                    rev_puerto$frec_palabras)
@@ -150,24 +153,24 @@ rev_puerto <- rev_puerto[rev_puerto$i_soip > 0, ]
 rev_puerto
 ```
 
-    #> # A tibble: 387 × 13
+    #> # A tibble: 77 × 13
     #>    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos
     #>    <date>     <chr>      <chr>  <chr> <chr>  <chr>         <int>           <int>
-    #>  1 2020-11-24 Mardi, la… "Con … "Tra… https… http…          1140               1
-    #>  2 2020-11-16 Cierran l… "El v… "Des… https… http…           384               3
-    #>  3 2020-11-13 CaIPA-SOI… "Las … "Lo … https… http…           380               3
-    #>  4 2020-10-30 Conflicto… "El S… "La … https… http…           689               4
-    #>  5 2020-10-12 Obreros r… "Pert… "Un … https… http…           425               6
-    #>  6 2020-10-07 Langostin… "El m… "El … https… http…          1120               4
-    #>  7 2020-09-15 Corvina: … "Áfri… "La … https… http…           669               4
-    #>  8 2020-08-31 Peón de u… "Es u… "Víc… https… http…           759               5
-    #>  9 2020-08-26 “La salid… "Lo d… "Due… https… http…          1624               4
-    #> 10 2020-08-11 Los comed… "Aume… "Es … https… http…          1272               3
-    #> # ℹ 377 more rows
+    #>  1 2020-07-14 Se levant… El Mi… "Cua… https… http…           743               1
+    #>  2 2020-07-14 Conciliac… El di… "En … https… http…           862               5
+    #>  3 2020-03-13 Conciliac… Perte… "Un … https… http…           489               2
+    #>  4 2019-12-11 Lo que di… En la… "En … https… http…           903               1
+    #>  5 2019-03-22 Trabajado… Obrer… "Tra… https… http…           551               1
+    #>  6 2018-08-14 Devolució… Ferna… "“Ar… https… http…          1134               1
+    #>  7 2018-06-26 Dispar ac… No sa… "El … https… http…           527               5
+    #>  8 2018-02-02 70 obrero… Son t… "Los… https… http…           462               1
+    #>  9 2017-09-27 “Se paró … Duran… "Aye… https… http…          1078               1
+    #> 10 2017-04-24 Se sigue … El te… "El … https… http…           997               1
+    #> # ℹ 67 more rows
     #> # ℹ 5 more variables: frec_huelgas <int>, frec_soip <int>, i_conf_gral <dbl>,
     #> #   i_soip <dbl>, i_huelgas <dbl>
 
-Al realizar los filtros la base se redujo a 387 notas que presentan al
+Al realizar los filtros la base se redujo a 77 notas que presentan al
 menos una mención de una palabra que refiere a conflicto y al menos un
 término que refiere a lxs trabajadorxs del pescado.
 
@@ -179,6 +182,7 @@ para calcular los índices agrupados por año y mes. Primero construimos
 la serie de tiempo para la conflictividad general.
 
 ``` r
+
 # Calculamos el índice anual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -207,14 +211,15 @@ conf_gral_anio |> head()
 ```
 
     #>     st frecn csn frecp frecm  intac intensidad int_notas_confl
-    #> 1 2009    33  24 26169   161 0.2256     0.0062          0.7273
-    #> 2 2010    30  21 27950   219 0.2873     0.0078          0.7000
-    #> 3 2011    44  32 31273   277 0.4344     0.0089          0.7273
-    #> 4 2012    77  70 67922   713 0.8519     0.0105          0.9091
-    #> 5 2013    27  16 19783   168 0.2273     0.0085          0.5926
-    #> 6 2014    17  11 12944    88 0.1173     0.0068          0.6471
+    #> 1 2009     2   1  1255     8 0.0122     0.0064          0.5000
+    #> 2 2010    12   2  9224    22 0.0296     0.0024          0.1667
+    #> 3 2011     5   1  3820     9 0.0118     0.0024          0.2000
+    #> 4 2012    33   4 29636    57 0.0660     0.0019          0.1212
+    #> 5 2013     5   2  5056     9 0.0095     0.0018          0.4000
+    #> 6 2014     3   1  2366     8 0.0088     0.0034          0.3333
 
 ``` r
+
 # Calculamos el índice mensual de conflictividad general en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -243,17 +248,18 @@ conf_gral |> head()
 ```
 
     #>        st frecn csn frecp frecm  intac intensidad int_notas_confl
-    #> 1 2012-01     4   2  3407    17 0.0233     0.0050          0.5000
-    #> 2 2012-02     3   2  1991    11 0.0175     0.0055          0.6667
-    #> 3 2012-03     5   4  4994    16 0.0183     0.0032          0.8000
-    #> 4 2012-04     6   6  5426    52 0.0661     0.0096          1.0000
-    #> 5 2012-05     7   7  5982    83 0.0991     0.0139          1.0000
-    #> 6 2012-06    12  12 11100   158 0.1692     0.0142          1.0000
+    #> 1 2012-04     4   0  2721     5 0.0073     0.0018          0.0000
+    #> 2 2012-05     4   1  3370     9 0.0108     0.0027          0.2500
+    #> 3 2012-06     7   2  7276    17 0.0158     0.0023          0.2857
+    #> 4 2012-07    11   1  9759    16 0.0202     0.0016          0.0909
+    #> 5 2012-08     4   0  4365     6 0.0054     0.0014          0.0000
+    #> 6 2012-09     1   0  1003     1 0.0010     0.0010          0.0000
 
 En la siguiente parte del código construimos la serie de tiempo para la
 conflictividad huelguística.
 
 ``` r
+
 # Calculamos el índice mensual de conflictividad huelguística en el
 # ámbito de la industrial del procesado de pescado en tierra
 # Pero primero preparamos el marcos de datos para ser procesado 
@@ -281,13 +287,13 @@ huelgas <- acep_sst(datosh)
 huelgas |> head()
 ```
 
-    #>        st frecn csn frecp frecm  intac intensidad int_notas_confl
-    #> 1 2012-01     4   0  3407     0 0.0000     0.0000          0.0000
-    #> 2 2012-02     3   0  1991     0 0.0000     0.0000          0.0000
-    #> 3 2012-03     5   0  4994     0 0.0000     0.0000          0.0000
-    #> 4 2012-04     6   0  5426     5 0.5219     0.0009          0.0000
-    #> 5 2012-05     7   1  5982     9 0.5396     0.0015          0.1429
-    #> 6 2012-06    12   2 11100    17 0.9302     0.0015          0.1667
+    #>        st frecn csn frecp frecm intac intensidad int_notas_confl
+    #> 1 2012-04     4   0  2721     5     4     0.0018          0.0000
+    #> 2 2012-05     4   1  3370     9     4     0.0027          0.2500
+    #> 3 2012-06     7   2  7276    17     7     0.0023          0.2857
+    #> 4 2012-07    11   1  9759    16    11     0.0016          0.0909
+    #> 5 2012-08     4   0  4365     6     4     0.0014          0.0000
+    #> 6 2012-09     1   0  1003     1     1     0.0010          0.0000
 
 ## Las visualizaciones
 
@@ -301,6 +307,7 @@ diciembre de 2020. También visualizaremos la variación mensual durante
 el año 2012, el más conflictivo de período bajo análisis.
 
 ``` r
+
 # Visualizaremos el índice de conflictividad general 
 # agrupado por año para el período 2009-2020
 acep_plot_st(
@@ -321,6 +328,7 @@ acep_plot_st(
 ![](plot_vignette.png)
 
 ``` r
+
 # Visualizaremos el índice de conflictividad general 
 # agrupado por mes para el 2012
 acep_plot_st(
@@ -335,6 +343,7 @@ acep_plot_st(
 ![](conflictividad_soip_files/figure-html/plot01-1.png)
 
 ``` r
+
 # Visualizaremos el índice de conflictividad huelguística 
 # agrupado por mes para el 2012
 acep_plot_st(

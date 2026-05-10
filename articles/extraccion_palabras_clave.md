@@ -19,6 +19,7 @@ cargar todas las notas haremos uso de la función
 [`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md).
 
 ``` r
+
 # Cargamos la librería ACEP
 library(ACEP)
 
@@ -67,17 +68,18 @@ con un doble objetivo: 1) identificar las notas que refieran a huelgas;
 procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
 ``` r
-# Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
-
-# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
-rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "paro de actividades", "conciliación obligatoria", "un paro", 
                   "paro total", "paro parcial", "trabajo a reglamento", 
                   "el paro", "de brazos caídos")
+
+# Cargamos el diccionario de palabras que refieren a conflictividad
+dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+
+# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
+rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
@@ -101,15 +103,15 @@ rev_puerto
     #>    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas
     #>    <date>     <chr>       <chr>  <chr> <chr>  <chr>           <int>        <int>
     #>  1 2020-12-29 ¡Feliz Año… Con m… "Con… https… http…               0            0
-    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               3            0
-    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               3            0
-    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               7            0
-    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               4            1
-    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               6            0
+    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               0            0
+    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               0            0
+    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               0            0
+    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               1            1
+    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               0            0
     #>  7 2020-12-22 Recomendac… Desde… "En … https… http…               0            0
-    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               4            0
-    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               4            0
-    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               5            0
+    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               0            0
+    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               0            0
+    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               0            0
     #> # ℹ 7,806 more rows
     #> # ℹ 1 more variable: frec_soip <int>
 
@@ -120,6 +122,7 @@ huelgas y SOIP que aparecen en cada una de las notas de la *Revista
 Puerto*.
 
 ``` r
+
 # Creamos la variable con las palabras que refieren a conflictividad
 rev_puerto$extract_conflictos <- acep_extract(rev_puerto$nota, dicc_conflictos, izq = "")
 
@@ -138,15 +141,15 @@ rev_puerto
     #>    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas
     #>    <date>     <chr>       <chr>  <chr> <chr>  <chr>           <int>        <int>
     #>  1 2020-12-29 ¡Feliz Año… Con m… "Con… https… http…               0            0
-    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               3            0
-    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               3            0
-    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               7            0
-    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               4            1
-    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               6            0
+    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               0            0
+    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               0            0
+    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               0            0
+    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               1            1
+    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               0            0
     #>  7 2020-12-22 Recomendac… Desde… "En … https… http…               0            0
-    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               4            0
-    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               4            0
-    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               5            0
+    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               0            0
+    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               0            0
+    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               0            0
     #> # ℹ 7,806 more rows
     #> # ℹ 4 more variables: frec_soip <int>, extract_conflictos <chr>,
     #> #   extract_huelgas <chr>, extract_soip <chr>
@@ -160,6 +163,7 @@ Seleccionaremos las columnas referidas a las extracciones de conflictos
 y huelgas. Veamos.
 
 ``` r
+
 # Seleccionamos las variables de extracción de palabras clave
 rev_puerto_huelgas <- rev_puerto[rev_puerto$extract_huelgas != "",]
 rev_puerto_soip <- rev_puerto_huelgas[rev_puerto_huelgas$extract_soip != "",]
@@ -172,16 +176,16 @@ rev_puerto_seleccion
     #> # A tibble: 76 × 3
     #>    extract_conflictos                               extract_huelgas extract_soip
     #>    <chr>                                            <chr>           <chr>       
-    #>  1 amenazaba; conflicto; conciliación obligatoria;… conciliación o… obreros del…
-    #>  2 piquete; conciliación obligatoria; conflictos; … conciliación o… obreros del…
-    #>  3 reclama; reclamo; reclamando; retención de tare… conciliación o… fileteros; …
-    #>  4 concentración; quema; paro; exigiera; concentra… un paro         fileteros   
-    #>  5 se manifestaron; reclamaron; denunciaron; manif… conciliación o… fileteros   
-    #>  6 paro                                             un paro         obreros del…
-    #>  7 paro; rechazo; acatamiento; medida de fuerza; p… al paro; al pa… fileteros   
-    #>  8 reclaman; reclamo; se manifestaron; exigir; con… conciliación o… fileteros   
-    #>  9 paro; paró; paró; lucha; paró; lucha; reclamo    del paro        fileteros   
-    #> 10 reclamaban; paro                                 el paro         fileteros   
+    #>  1 conciliación obligatoria                         conciliación o… obreros del…
+    #>  2 conciliación obligatoria; huelguistas; concilia… conciliación o… obreros del…
+    #>  3 conciliación obligatoria; huelga                 conciliación o… fileteros; …
+    #>  4 un paro                                          un paro         fileteros   
+    #>  5 conciliación obligatoria                         conciliación o… fileteros   
+    #>  6 un paro                                          un paro         obreros del…
+    #>  7 al paro; al paro; el paro; al paro; al paro      al paro; al pa… fileteros   
+    #>  8 conciliación obligatoria                         conciliación o… fileteros   
+    #>  9 el paro                                          del paro        fileteros   
+    #> 10 el paro                                          el paro         fileteros   
     #> # ℹ 66 more rows
 
 ## Nota final

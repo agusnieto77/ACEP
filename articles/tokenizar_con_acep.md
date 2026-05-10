@@ -16,6 +16,7 @@ En primer lugar cargamos la librería *ACEP*. Luego, cargamos una base de
 tweets para su prueba.
 
 ``` r
+
 library(ACEP)
 
 url <- "https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"
@@ -46,6 +47,7 @@ Cabe mencionar que los tokens quedarán identificados a través de los
 espacios en blanco, es decir, cada palabra es un token.
 
 ``` r
+
 tweets <- acep_token(base[1:2])
 
 head(tweets)
@@ -83,6 +85,7 @@ lugar la función
 para deshacernos de los stopwords, urls, menciones, hashtags, etc.
 
 ``` r
+
 base_limpia <- acep_clean(base)
 ```
 
@@ -93,6 +96,7 @@ que nos devuelve, como vimos previamente, una tabla con la información
 de cada token.
 
 ``` r
+
 tabla_tokenizada <- acep_token(base_limpia)
 head(tabla_tokenizada)
 ```
@@ -121,6 +125,7 @@ Suponiendo que queremos obtener los 20 token de mayor frecuencia:
 `acep_token_table(tabla_tokenizada$token, u = 20)`
 
 ``` r
+
 acep_token_table(tabla_tokenizada$tokens, u = 15)
 ```
 
@@ -158,6 +163,7 @@ En este ejemplo, tomamos la tabla tokenizada y le indicamos la columna
 “token” a visualizar.
 
 ``` r
+
 acep_token_plot(tabla_tokenizada$tokens, u = 15)
 ```
 

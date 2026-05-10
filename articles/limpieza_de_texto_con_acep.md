@@ -34,6 +34,7 @@ FALSE a excepción del que queremos probar.
 En primer lugar cargamos la base de ejemplo:
 
 ``` r
+
 library(ACEP)
 
 url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
@@ -44,6 +45,7 @@ base <- base::subset(acep_load_base(url), select = text)$text
 Seleccionemos ahora tan sólo un tweet:
 
 ``` r
+
 primer_tweet <- base[2]
 
 primer_tweet
@@ -57,6 +59,7 @@ tolower de la función
 y verificamos el resultado.
 
 ``` r
+
 minus <- acep_clean(primer_tweet,
                tolower = TRUE,
                rm_cesp = FALSE,
@@ -82,6 +85,7 @@ cat(paste("****SIN tolower****\n", primer_tweet, "****\n", sep=""))
     #> https://t.co/644Ak0HZ7I****
 
 ``` r
+
 cat(paste("****CON tolower****\n", minus, "****\n", sep=""))
 ```
 
@@ -101,6 +105,7 @@ removerlos. Al igual que el caso anterior, aislamos el parámetro
 rm_cesp.
 
 ``` r
+
 cesp <- acep_clean(primer_tweet,
                      tolower = FALSE,
                      rm_cesp = TRUE,
@@ -126,6 +131,7 @@ cat(paste("****SIN rm_cesp****\n", primer_tweet, "****\n", sep=""))
     #> https://t.co/644Ak0HZ7I****
 
 ``` r
+
 cat(paste("****CON rm_cesp****\n", cesp, "****\n", sep=""))
 ```
 
@@ -143,6 +149,7 @@ análisis de texto y por este motivo se remueven con el parámetro
 rm_emoji.
 
 ``` r
+
 emoji <- acep_clean(primer_tweet,
                      tolower = FALSE,
                      rm_cesp = FALSE,
@@ -168,6 +175,7 @@ cat(paste("****SIN rm_emoji****\n", primer_tweet, "***\n", sep=""))
     #> https://t.co/644Ak0HZ7I***
 
 ``` r
+
 cat(paste("****CON rm_emoji****\n", emoji, "****\n", sep=""))
 ```
 
@@ -183,6 +191,7 @@ semántico. Para removerlos, utilizamos el parámetro rm_hashtag.
 Utilizamos otro tweet de la base que contiene \#hashtag
 
 ``` r
+
 con_hash <- base[40]
 hash <- acep_clean(base[40],
                      tolower = FALSE,
@@ -209,6 +218,7 @@ cat(paste("****SIN rm_hashtag****\n", con_hash, "****\n", sep=""))
     #> https://t.co/1bHDoEVS76****
 
 ``` r
+
 cat(paste("****CON rm_hashtag****\n", hash, "****\n", sep=""))
 ```
 
@@ -225,6 +235,7 @@ en redes. Respuestas a otros tweets o menciones a usuarios que queremos
 remover. Para esto utilizamos el parámetro rm_users
 
 ``` r
+
 con_user <- base[12]
 user <- acep_clean(base[12],
                      tolower = FALSE,
@@ -250,6 +261,7 @@ cat(paste("****SIN rm_users****\n", con_user, "****\n", sep=""))
     #> @TrenesArg Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****
 
 ``` r
+
 cat(paste("****CON rm_users****\n", user, "****\n", sep=""))
 ```
 
@@ -266,6 +278,7 @@ palabras o análisis semántica. La podemos remover con el parámetro
 rm_punt.
 
 ``` r
+
 punt <- base[13]
 s_punt <- acep_clean(base[13],
                      tolower = FALSE,
@@ -294,6 +307,7 @@ cat(paste("****SIN rm_punt****\n", punt, "****\n", sep=""))
     #> #InformacionEsPoder****
 
 ``` r
+
 cat(paste("****CON rm_punt****\n", s_punt, "****\n", sep=""))
 ```
 
@@ -312,6 +326,7 @@ información codificada, aparece una gran cantidad de números. Se remueve
 con el parámetro rm_num.
 
 ``` r
+
 num <- base[70]
 num_s <- acep_clean(base[70],
                      tolower = FALSE,
@@ -343,6 +358,7 @@ cat(paste("****SIN rm_num****\n", num, "****\n", sep=""))
     #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
 
 ``` r
+
 cat(paste("****CON rm_num****\n", num_s, "****\n", sep=""))
 ```
 
@@ -361,6 +377,7 @@ Las URLs aparecen comúnmente, links o imágenes que se codifican como
 urls. Para removerlas usamos el parámetro rm_url
 
 ``` r
+
 num <- base[70]
 num_s <- acep_clean(base[70],
                      tolower = FALSE,
@@ -392,6 +409,7 @@ cat(paste("****SIN rm_url****\n", num, "****\n", sep=""))
     #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
 
 ``` r
+
 cat(paste("****CON rm_url****\n", num_s,  "****\n", sep=""))
 ```
 
@@ -410,6 +428,7 @@ En el caso de querer remover meses del año, podemos utilizar el
 parámetro rm_meses. En este caso, el tweet tiene la palabra “noviembre”
 
 ``` r
+
 meses <- base[70]
 meses_s <- acep_clean(base[70],
                      tolower = FALSE,
@@ -441,6 +460,7 @@ cat(paste("****SIN rm_mes****\n", meses, "****\n", sep=""))
     #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
 
 ``` r
+
 cat(paste("****CON rm_mes****\n", meses_s, "****\n", sep=""))
 ```
 
@@ -459,6 +479,7 @@ En el caso de querer remover días de la semana, podemos utilizar el
 parámetro rm_dias. En este caso, el tweet tiene la palabra “martes”
 
 ``` r
+
 dia <- base[429]
 dia_s <- acep_clean(base[429],
                      tolower = FALSE,
@@ -484,6 +505,7 @@ cat(paste("****SIN rm_dias****\n", dia, "****\n", sep=""))
     #> Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****
 
 ``` r
+
 cat(paste("****CON rm_dias****\n", dia_s, "****\n", sep=""))
 ```
 
@@ -502,6 +524,7 @@ el siguiente link: stopwords \<-
 readRDS(url(“<https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds>”))
 
 ``` r
+
 url <- "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"
 stopwords <- acep_clean(url)
 stopw <- base[429]
@@ -529,6 +552,7 @@ cat(paste("****SIN rm_stopwords****\n", stopw, "****\n", sep=""))
     #> Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****
 
 ``` r
+
 cat(paste("****CON rm_stopwords****\n", stopw_w, "****\n", sep=""))
 ```
 
@@ -542,6 +566,7 @@ quedar como “residuos” de limpiezas previas y que probablemente no
 tengan contenido útil, lo hacemos con el parámetro rm_shortwords.
 
 ``` r
+
 short <- base[97]
 short_s <- acep_clean(base[97],
                      tolower = FALSE,
@@ -567,6 +592,7 @@ cat(paste("****SIN rm_shortwords****\n", short, "****\n", sep=""))
     #> @GusDeheza @PolloSobrero NO es un paro de la Fraternidad y x primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo a los JUBILADOS.para q le den un bono a fin de año...jamás nadie se acordó de apoyar a los jubilados x primera vez un gremio rompe un pacto con la CGT..ya q no querían .****
 
 ``` r
+
 cat(paste("****CON rm_shortwords****\n", short_s, "****\n", sep=""))
 ```
 
@@ -580,6 +606,7 @@ de línea. En este ejemplo hay un salgo de línea antes del link del final
 del tweet.
 
 ``` r
+
 newl <- base[2]
 newl_s <- acep_clean(base[2],
                      tolower = FALSE,
@@ -606,6 +633,7 @@ cat(paste("****SIN rm_newline****\n",newl, "****\n", sep=""))
     #> https://t.co/644Ak0HZ7I****
 
 ``` r
+
 cat(paste("****CON rm_newline****\n",newl_s, "****\n", sep=""))
 ```
 
@@ -622,6 +650,7 @@ los espacios en blanco.
 En este ejemplo, entre “en nuestro” hay un doble espacio.
 
 ``` r
+
 white <- base[60]
 white_s <- acep_clean(base[60],
                      tolower = FALSE,
@@ -649,6 +678,7 @@ cat(paste("****SIN rm_whitespace****\n", white, "****\n", sep=""))
     #> Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****
 
 ``` r
+
 cat(paste("****CON rm_whitespace****\n", white_s, "****\n", sep=""))
 ```
 
@@ -670,6 +700,7 @@ vector string con cada una de las palabras separadas por coma. En este
 caso se agregan las palabras “conciliación” y “Fraternidad”.
 
 ``` r
+
 osw <- base[2]
 osw_s <- acep_clean(base[2],
                      tolower = FALSE,
@@ -696,6 +727,7 @@ cat(paste("****SIN other_sw****\n", osw, "****\n", sep=""))
     #> https://t.co/644Ak0HZ7I****
 
 ``` r
+
 cat(paste("****CON other_sw****\n", osw_s, "****\n", sep=""))
 ```
 
