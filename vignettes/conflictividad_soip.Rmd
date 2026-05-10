@@ -47,17 +47,17 @@ Una vez descargada la base de notas vamos a crear variables numéricas que conte
 # Creamos la variable con la frecuencia de palabras por nota
 rev_puerto$frec_palabras <- acep_frec(rev_puerto$nota)
 
-# Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
-
-# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
-rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
-
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "paro de actividades", "conciliación obligatoria", "un paro", 
                   "paro total", "paro parcial", "trabajo a reglamento", 
                   "el paro", "de brazos caídos")
+
+# Cargamos el diccionario de palabras que refieren a conflictividad
+dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+
+# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
+rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)

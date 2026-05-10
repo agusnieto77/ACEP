@@ -317,16 +317,7 @@ acep_openrouter <- function(texto,
                             fallback_provider_order = NULL,
                             fallback_models = NULL) {
 
-  # Validaciones
-  if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
-  }
-  if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
-  }
-  if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno OPENROUTER_API_KEY o pasa el parametro api_key")
-  }
+  .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENROUTER_API_KEY")
   if (!is.logical(use_fallback) || length(use_fallback) != 1 || is.na(use_fallback)) {
     stop("El parametro 'use_fallback' debe ser TRUE o FALSE")
   }
@@ -354,41 +345,14 @@ acep_openrouter <- function(texto,
   # Segun https://openrouter.ai/docs/features/structured-outputs
   # OpenAI GPT-4o+, Google Gemini y Fireworks tienen soporte completo
   # Para otros modelos (Anthropic, Meta, etc.) usar JSON mode básico
-  modelo_soporta_structured <- function(modelo_slug) {
-    grepl("^openai/gpt-4o", modelo_slug) ||
-      grepl("^openai/gpt-5", modelo_slug) ||
-      grepl("^openai/o1", modelo_slug) ||
-      grepl("^openai/o4", modelo_slug) ||
-      grepl("^google/gemini", modelo_slug) ||
-      grepl("^fireworks/", modelo_slug)
-  }
-
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
-    schema <- list(
-      type = "object",
-      properties = list(
-        respuesta = list(
-          type = "string",
-          description = "Respuesta principal a la pregunta o instruccion"
-        )
-      ),
-      required = c("respuesta"),
-      additionalProperties = FALSE
-    )
-    schema <- proteger_arrays_schema(schema)
+    schema <- .acep_provider_default_schema()
   }
 
   # Prompts predefinidos (structured vs JSON mode basico)
   system_prompt_structured <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
-  campos_descripciones <- sapply(names(schema$properties), function(campo) {
-    desc <- schema$properties[[campo]]$description
-    if (!is.null(desc)) {
-      sprintf("- %s: %s", campo, desc)
-    } else {
-      sprintf("- %s", campo)
-    }
-  })
+  campos_descripciones <- .acep_provider_schema_field_descriptions(schema)
   campos_texto <- paste(campos_descripciones, collapse = "\n")
   system_prompt_json <- sprintf(
     "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE en formato JSON valido con los siguientes campos:\n\n%s\n\nSe preciso, conciso y basa tus respuestas unicamente en el texto proporcionado. Responde UNICAMENTE con el JSON de datos, sin texto adicional antes o despues.",
@@ -402,7 +366,7 @@ acep_openrouter <- function(texto,
   }
 
   # Construir prompt del usuario
-  user_prompt <- sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
+  user_prompt <- .acep_provider_user_prompt(texto, instrucciones)
 
   # Construir body de la peticion
   body <- list(
@@ -427,18 +391,7 @@ acep_openrouter <- function(texto,
   }
 
   # Construir headers - httr::add_headers necesita argumentos nombrados, no una lista
-  headers_call <- list(
-    "Content-Type" = "application/json",
-    "Authorization" = paste("Bearer", api_key)
-  )
-
-  if (!is.null(site_url)) {
-    headers_call$`HTTP-Referer` <- site_url
-  }
-
-  if (!is.null(app_name)) {
-    headers_call$`X-Title` <- app_name
-  }
+  headers_call <- .acep_provider_auth_headers("openrouter", api_key, site_url = site_url, app_name = app_name)
 
   # Realizar peticion a la API con soporte de fallbacks
   fallback_retryable_codes <- c(408L, 409L, 425L, 429L, 500:599)
@@ -450,7 +403,7 @@ acep_openrouter <- function(texto,
 
   for (i in seq_along(modelos_candidatos)) {
     modelo_actual <- modelos_candidatos[[i]]
-    soporta_structured_actual <- modelo_soporta_structured(modelo_actual)
+    soporta_structured_actual <- .acep_openrouter_model_supports_structured_outputs(modelo_actual)
 
     body$model <- modelo_actual
     body$messages[[1]]$content <- if (soporta_structured_actual) system_prompt_structured else system_prompt_json
@@ -471,7 +424,7 @@ acep_openrouter <- function(texto,
       list(
         ok = TRUE,
         result = httr::POST(
-          url = "https://openrouter.ai/api/v1/chat/completions",
+          url = .acep_provider_endpoint("openrouter"),
           do.call(httr::add_headers, headers_call),
           body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
           encode = "raw"
@@ -516,35 +469,9 @@ acep_openrouter <- function(texto,
 
     respuesta_parsed <- httr::content(output, as = "parsed")
 
-    if (is.null(respuesta_parsed$choices) || length(respuesta_parsed$choices) == 0) {
-      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
-    }
+    respuesta_json <- .acep_provider_extract_chat_content(respuesta_parsed)
 
-    respuesta_json <- respuesta_parsed$choices[[1]]$message$content
-
-    if (is.null(respuesta_json) || nchar(respuesta_json) == 0) {
-      stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
-    }
-
-    respuesta_json <- gsub("^```json\\s*", "", respuesta_json, perl = TRUE)
-    respuesta_json <- gsub("^```\\s*", "", respuesta_json, perl = TRUE)
-    respuesta_json <- gsub("\\s*```$", "", respuesta_json, perl = TRUE)
-    respuesta_json <- trimws(respuesta_json)
-
-    if (parse_json) {
-      tryCatch({
-        resultado <- jsonlite::fromJSON(respuesta_json, simplifyVector = TRUE)
-        return(resultado)
-      }, error = function(e) {
-        stop(sprintf(
-          "Error al parsear JSON de la respuesta. Contenido recibido (primeros 200 chars):\n%s\n\nError de parseo: %s",
-          substr(respuesta_json, 1, 200),
-          conditionMessage(e)
-        ))
-      })
-    } else {
-      return(respuesta_json)
-    }
+    return(.acep_provider_parse_json_response(respuesta_json, parse_json = parse_json))
   }
 
   if (length(errores_detalle) > 0) {

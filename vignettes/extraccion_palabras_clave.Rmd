@@ -43,17 +43,17 @@ rev_puerto
 Una vez descargada la base de notas vamos a crear variables numéricas y una de carácter que contenga las frecuencias de palabras totales, la frecuencia de palabras de cada diccionario usado para cada una de las notas y las palabras clave mencionadas en cada nota. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_count()`, `acep_extract()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en las funciones `acep_count()` y `acep_extract()`, con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
 
 ```{r diccionarios0, eval=require("tibble"), message=FALSE}
-# Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
-
-# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
-rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
-
 # Creamos el diccionario de palabras que refieren a huelgas
 dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "paro de actividades", "conciliación obligatoria", "un paro", 
                   "paro total", "paro parcial", "trabajo a reglamento", 
                   "el paro", "de brazos caídos")
+
+# Cargamos el diccionario de palabras que refieren a conflictividad
+dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+
+# Creamos la variable con la frecuencia de palabras que refieren a conflictividad
+rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)

@@ -78,16 +78,7 @@ acep_gemini <- function(texto,
                         top_p = 0.95,
                         top_k = 40) {
 
-  # Validaciones
-  if (!is.character(texto) || nchar(texto) == 0) {
-    stop("El parametro 'texto' debe ser una cadena de caracteres no vacia")
-  }
-  if (!is.character(instrucciones) || nchar(instrucciones) == 0) {
-    stop("El parametro 'instrucciones' debe ser una cadena de caracteres no vacia")
-  }
-  if (api_key == "") {
-    stop("API key no encontrada. Define la variable de entorno GEMINI_API_KEY o pasa el parametro api_key")
-  }
+  .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "GEMINI_API_KEY")
 
   # Validar modelos compatibles
   modelos_compatibles <- c(
@@ -111,16 +102,7 @@ acep_gemini <- function(texto,
 
   # Esquema por defecto si no se proporciona uno
   if (is.null(schema)) {
-    schema <- list(
-      type = "object",
-      properties = list(
-        respuesta = list(
-          type = "string",
-          description = "Respuesta principal a la pregunta o instruccion"
-        )
-      ),
-      required = c("respuesta")
-    )
+    schema <- .acep_provider_default_schema(additional_properties = FALSE, protect_arrays = FALSE)
   }
 
   # Convertir esquema al formato de Gemini (OpenAPI 3.0 Schema)
@@ -155,19 +137,13 @@ acep_gemini <- function(texto,
   )
 
   # Construir URL con el modelo y accion
-  url <- sprintf(
-    "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent",
-    modelo
-  )
+  url <- .acep_provider_endpoint("gemini", modelo = modelo)
 
   # Realizar peticion a la API
   tryCatch({
     output <- httr::POST(
       url = url,
-      httr::add_headers(
-        "Content-Type" = "application/json",
-        "x-goog-api-key" = api_key
-      ),
+      do.call(httr::add_headers, .acep_provider_auth_headers("gemini", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
       encode = "raw"
     )
