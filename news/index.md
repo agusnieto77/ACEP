@@ -2,6 +2,15 @@
 
 ## ACEP 0.1.0
 
+CRAN release: 2026-05-10
+
+### Lanzamiento
+
+- ACEP 0.1.0 fue publicado en CRAN el 2026-05-10.
+- Esta versión consolida la optimización del paquete, reduce
+  dependencias obligatorias y deja como opcionales varias integraciones
+  NLP/geocodificación.
+
 ### Nuevas funcionalidades
 
 - Se agregó
