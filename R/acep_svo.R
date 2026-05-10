@@ -40,9 +40,9 @@
 #' @return Si todas las entradas son correctas, la salida sera una lista con tres bases de datos en formato tabular.
 #' @references Welbers, K., Atteveldt, W. van, & Kleinnijenhuis, J. 2021. Extracting semantic relations using syntax:
 #' An R package for querying and reshaping dependency trees. Computational Communication Research, 3-2, 1-16.
-#' \href{https://www.aup-online.com/content/journals/10.5117/CCR2021.2.003.WELB?TRACK}{(link al articulo)}
+#' \doi{10.5117/CCR2021.2.003.WELB}
 #' @source \href{https://universaldependencies.org/}{Dependencias Universales para taggeo POS}
-#' @source \href{https://cran.r-project.org/web/packages/rsyntax/rsyntax.pdf}{Sobre el paquete rsyntax}
+#' @source \href{https://CRAN.R-project.org/package=rsyntax}{Sobre el paquete rsyntax}
 #' @keywords tripletes sintaxis
 #' @examples
 #'\dontrun{

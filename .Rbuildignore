@@ -13,7 +13,10 @@
 ^pkgdown$
 ^\.travis\.yml$
 ^README\.html$
+^\.atl$
+^tests/testthat/Rplots\.pdf$
 ^geocode_cache\.json$
+^bench$
 ^vignettes/.*\.udpipe$
 ^bench/.*\.csv$
 ^bench/.*\.rds$

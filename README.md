@@ -155,11 +155,9 @@ Event Data Project.
 [GPT](https://carnegieendowment.org/publications/interactive/protest-tracker#):
 Global Protest Tracker.
 
-[MMPD](https://dataverse.harvard.edu/dataverse/MMdata): Mass
-Mobilization Protest Data Project.
+MMPD: Mass Mobilization Protest Data Project.
 
-[NAVCO](https://dataverse.harvard.edu/dataverse/navco): Nonviolent and
-Violent Campaigns and Outcomes data project.
+NAVCO: Nonviolent and Violent Campaigns and Outcomes data project.
 
 [NVCO](https://nvdatabase.swarthmore.edu/): Global Nonviolent Action
 Database.
@@ -170,8 +168,8 @@ Social Conflict Analysis Database.
 [SPEED](https://clinecenter.illinois.edu/project/human-loop-event-data-projects/SPEED):
 The Social, Political and Economic Event Database Project.
 
-[UCDP](https://www.pcr.uu.se/research/ucdp/): Uppsala Conflict Data
-Program.
+[UCDP](https://www.uu.se/en/department/peace-and-conflict-research/research/ucdp/):
+Uppsala Conflict Data Program.
 
 ### Bases de datos de interes general
 
@@ -181,16 +179,16 @@ FMI Data.
 [BM](https://datos.bancomundial.org/): Datos de libre acceso del Banco
 Mundial.
 
-[OIT](https://www.ilo.org/global/statistics-and-databases/lang--es/index.htm):
-Estadísticas y bases de datos.
+[OIT](https://www.ilo.org/es/datos-y-estadisticas): Estadísticas y bases
+de datos.
 
-[CEPAL](https://www.cepal.org/es/datos-y-estadisticas): Datos y
+[CEPAL](https://www.cepal.org/es/dados-estatisticas-espanhol): Datos y
 estadísticas.
 
 [DARG](https://www.datos.gob.ar/): Datos abiertos de Argentina.
 
-[MGP](https://datos.mardelplata.gob.ar/): Datos abiertos del Municipio
-de Gral. Pueyrredon, Buenos Aires, Argentina.
+MGP: Datos abiertos del Municipio de Gral. Pueyrredon, Buenos Aires,
+Argentina.
 
 ### Uso de las funciones del paquete ACEP: un ejemplo.
 

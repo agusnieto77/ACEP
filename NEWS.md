@@ -1,4 +1,4 @@
-# ACEP 0.1.0.9000 (versión en desarrollo)
+# ACEP 0.1.0
 
 ## Nuevas funcionalidades
 
@@ -46,6 +46,7 @@
 * Se mejoró la documentación de todas las funciones nuevas y modificadas.
 * Se agregaron ejemplos prácticos a todas las funciones operativas.
 * Se actualizó README.Rmd con la lista completa de funciones del paquete, incluyendo las 4 nuevas funciones de IA.
+* Se documentó la instalación base liviana y las dependencias opcionales para NLP/geocodificación.
 * Se actualizaron todas las viñetas para usar las nuevas funciones.
 * Se documentó `acep_together()` y las mejoras de `acep_ollama()`/`acep_openrouter()`, con ejemplos para modo cloud, fallback y JSON mode.
 * Se agregó documentación completa para las funciones de IA:

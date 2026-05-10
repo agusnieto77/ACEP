@@ -10,7 +10,7 @@
 #' acep_min(vector_numeros)
 #' vector_mezclado <- c("Soip", 123, "CGT")
 #' acep_min(vector_mezclado)
-#' @keywords caracteres, texto
+#' @keywords caracteres texto
 #' @export
 acep_min <- function(x) {
   if (is.character(x)) {

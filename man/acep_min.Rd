@@ -24,5 +24,5 @@ acep_min(vector_numeros)
 vector_mezclado <- c("Soip", 123, "CGT")
 acep_min(vector_mezclado)
 }
-\keyword{caracteres,}
+\keyword{caracteres}
 \keyword{texto}
