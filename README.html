@@ -635,6 +635,17 @@ version en desarrollo</h3>
 <p>Puedes instalar la versión de desarrollo de ACEP desde <a href="https://github.com/agusnieto77/ACEP">GitHub</a> con:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;agusnieto77/ACEP&quot;</span>)</span></code></pre></div>
+<h3 id="dependencias-opcionales">Dependencias opcionales</h3>
+<p>ACEP mantiene una instalación base liviana. Las funciones principales
+de limpieza, conteo, diccionarios, series temporales y proveedores LLM
+HTTP/JSON se instalan con las dependencias obligatorias del paquete.</p>
+<p>Algunas funciones de NLP, etiquetado gramatical y geocodificación
+requieren paquetes opcionales. Si vas a usar <code>acep_postag()</code>,
+<code>acep_postag_hibrido()</code>, <code>acep_upos()</code> o flujos que
+dependan de esas capacidades, instalá los paquetes necesarios con:</p>
+<div class="sourceCode" id="cb-optional-deps"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb-optional-deps-1"><a href="#cb-optional-deps-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;spacyr&quot;</span>, <span class="st">&quot;reticulate&quot;</span>, <span class="st">&quot;rsyntax&quot;</span>, <span class="st">&quot;tidygeocoder&quot;</span>, <span class="st">&quot;udpipe&quot;</span>))</span></code></pre></div>
+<p>Si falta una dependencia opcional, ACEP muestra un mensaje indicando
+qué paquete instalar para esa funcionalidad.</p>
 <h3 id="funciones">Funciones</h3>
 <table>
 <thead>

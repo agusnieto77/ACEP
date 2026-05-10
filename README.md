@@ -54,6 +54,24 @@ Puedes instalar la versión de desarrollo de ACEP desde
 devtools::install_github("agusnieto77/ACEP")
 ```
 
+### Dependencias opcionales
+
+ACEP mantiene una instalación base liviana. Las funciones principales de
+limpieza, conteo, diccionarios, series temporales y proveedores LLM
+HTTP/JSON se instalan con las dependencias obligatorias del paquete.
+
+Algunas funciones de NLP, etiquetado gramatical y geocodificación
+requieren paquetes opcionales. Si vas a usar `acep_postag()`,
+`acep_postag_hibrido()`, `acep_upos()` o flujos que dependan de esas
+capacidades, instalá los paquetes necesarios con:
+
+``` r
+install.packages(c("spacyr", "reticulate", "rsyntax", "tidygeocoder", "udpipe"))
+```
+
+Si falta una dependencia opcional, ACEP muestra un mensaje indicando qué
+paquete instalar para esa funcionalidad.
+
 ### Funciones
 
 | Nombre | Ciclo | Descripción |
