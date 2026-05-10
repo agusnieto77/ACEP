@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/agusnieto77/ACEP/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/agusnieto77/ACEP/blob/v0.1.0/DESCRIPTION)
 
 Nieto A (2026). *ACEP: Análisis Computacional de Eventos de Protesta*. R
 package version 0.1.0, <https://github.com/agusnieto77/ACEP>.
