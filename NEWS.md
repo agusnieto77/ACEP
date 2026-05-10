@@ -1,5 +1,10 @@
 # ACEP 0.1.0
 
+## Lanzamiento
+
+* ACEP 0.1.0 fue publicado en CRAN el 2026-05-10.
+* Esta versión consolida la optimización del paquete, reduce dependencias obligatorias y deja como opcionales varias integraciones NLP/geocodificación.
+
 ## Nuevas funcionalidades
 
 * Se agregó `acep_corpus()`: constructor de objetos corpus para trabajar con pipelines de procesamiento de texto.
