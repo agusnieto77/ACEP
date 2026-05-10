@@ -1,3 +1,23 @@
+acep_source_path <- function(...) {
+  relative_path <- file.path(...)
+  candidates <- unique(c(
+    getwd(),
+    testthat::test_path("..", ".."),
+    testthat::test_path("..", "..", "..")
+  ))
+  paths <- file.path(candidates, relative_path)
+  existing <- paths[file.exists(paths)]
+
+  if (length(existing) > 0) {
+    return(existing[[1]])
+  }
+
+  testthat::skip(sprintf(
+    "Source file not available in installed-package test environment: %s",
+    relative_path
+  ))
+}
+
 test_that("optimization fixtures provide offline clean inputs", {
   inputs <- acep_fixture_clean_text()
 
@@ -313,14 +333,14 @@ test_that("public exports and hot-path formals are snapshotted", {
 })
 
 test_that("manual optimization baseline script is present but not CI-wired", {
-  baseline_path <- testthat::test_path("..", "..", "bench", "optimization-baseline.R")
+  baseline_path <- acep_source_path("bench", "optimization-baseline.R")
 
   expect_true(file.exists(baseline_path))
   expect_equal(basename(baseline_path), "optimization-baseline.R")
 })
 
 test_that("package footprint artifacts are excluded from source builds", {
-  buildignore_path <- testthat::test_path("..", "..", ".Rbuildignore")
+  buildignore_path <- acep_source_path(".Rbuildignore")
   buildignore <- readLines(buildignore_path, warn = FALSE)
 
   expect_true("^vignettes/.*\\.udpipe$" %in% buildignore)
@@ -345,8 +365,8 @@ test_that("acep_bases canonical data file exposes stable object names and metada
     )
   }
 
-  rdata_path <- testthat::test_path("..", "..", "data", "acep_bases.RData")
-  rda_path <- testthat::test_path("..", "..", "data", "acep_bases.rda")
+  rda_path <- acep_source_path("data", "acep_bases.rda")
+  rdata_path <- file.path(dirname(rda_path), "acep_bases.RData")
   rda_metadata <- describe_data_file(rda_path)
 
   expect_false(file.exists(rdata_path))
@@ -380,7 +400,7 @@ test_that("optional dependency helper reports clear Spanish installation guidanc
 })
 
 test_that("heavy NLP and geocoding dependencies are optional in DESCRIPTION", {
-  description_path <- testthat::test_path("..", "..", "DESCRIPTION")
+  description_path <- acep_source_path("DESCRIPTION")
   description <- read.dcf(description_path)[1, ]
   imports <- trimws(unlist(strsplit(description[["Imports"]], ",")))
   suggests <- trimws(unlist(strsplit(description[["Suggests"]], ",")))
