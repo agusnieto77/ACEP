@@ -1,36 +1,40 @@
 ## R CMD check results
 
-0 errors | 1 warning | 2 notes
+Pending final `R CMD check --as-cran` before submission.
 
-The warning and one note are local environment limitations:
+Local lightweight verification for this patch:
 
-* `qpdf` is not installed locally, so PDF size reduction checks could not run.
-* HTML validation was skipped because the `tidy` command is not installed locally.
+* Changed Rd files parse successfully.
+* Changed R source files parse successfully.
+* Executable R chunks extracted from changed vignettes parse successfully.
 
-The remaining note is the CRAN incoming maintainer spelling note: the
-maintainer email is unchanged, but the maintainer name now includes the accent
-used elsewhere in the package metadata (`Agustín Nieto`).
+No package build was run while preparing this patch.
+
+## Resubmission
+
+This is a patch release addressing a CRAN check failure on
+`r-devel-windows-x86_64` caused by transient SSL/network errors while examples
+and vignettes downloaded external resources from GitHub.
+
+The package code was not changed. The release only makes examples and vignettes
+CRAN-safe by avoiding executable external downloads during checks.
 
 ## Release summary
 
-This is a major update release of ACEP.
+This is a CRAN hotfix release of ACEP.
 
 Key changes:
 
-* Added composable text-processing pipeline helpers.
-* Added and improved structured-output LLM provider wrappers.
-* Reduced mandatory dependency footprint by moving heavy NLP/geocoding
-  packages to Suggests with explicit runtime guidance.
-* Improved `acep_count()` performance with regex caching.
-* Added characterization tests and offline safety fixtures.
-* Updated README and vignettes for current install and usage guidance.
+* Marked external-download examples as non-executable.
+* Replaced executable vignette downloads with bundled data or synthetic examples.
+* Preserved interactive guidance for users who want to load external datasets.
 
 ## Test environments
 
 * GitHub Actions, R-CMD-check, Ubuntu latest, R release
 * GitHub Actions, test-coverage, Ubuntu latest, R release
 * GitHub Actions, pkgdown, Ubuntu latest, R release
-* Local, Pop!_OS 22.04, R 4.5.1, `R CMD check --as-cran`
+* Local, Pop!_OS 22.04, R 4.5.1, lightweight parse checks only
 
 ## Downstream dependencies
 

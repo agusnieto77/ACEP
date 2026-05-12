@@ -29,14 +29,15 @@ En este artículo se explicarán los procesos que realizan las funciones:
 
 ## Función `acep_token()`
 
-En primer lugar cargamos la librería *ACEP*. Luego, cargamos una base de tweets para su prueba.
+En primer lugar cargamos la librería *ACEP*. Luego, usamos textos incluidos en el ejemplo para que la vignette no dependa de descargas externas.
 
 ```{r cargar base,results = FALSE, warning = FALSE, message = FALSE, eval=require("tibble")}
 library(ACEP)
 
-url <- "https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"
-
-base <- subset(acep_load_base(url), select = text)$text
+base <- c(
+  "La Fraternidad anunció un paro de trenes en noviembre.",
+  "Trabajadores del transporte reclamaron mejoras salariales."
+)
 ```
 
 Ejecutamos la función `acep_token()` para los primeros dos elementos de la base.

@@ -12,8 +12,10 @@
 #' @return Si todas las entradas son correctas,
 #' la salida sera una base de datos en formato tabular con un corpus de notas.
 #' @examples
+#' \dontrun{
 #' bd_sismos <- acep_bases$rev_puerto
 #' head(acep_load_base(tag = bd_sismos))
+#' }
 #' @export
 acep_load_base <- function(tag) {
   if (httr::GET(tag)$status_code != 200){

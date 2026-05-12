@@ -31,8 +31,10 @@ Los diccionarios dicc_confl_gp y dicc_viol_gp fueron extraídos de
 Albrieu y Palazzo (2020).
 }
 \examples{
+\dontrun{
 diccionario <- acep_load_base(acep_diccionarios$dicc_viol_gp)
 diccionario
+}
 }
 \references{
 Albrieu, Ramiro y Gabriel Palazzo 2020 «Categorización de

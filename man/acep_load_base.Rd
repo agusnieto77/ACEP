@@ -22,7 +22,9 @@ La Nueva 'ln_bb', La Capital 'lc_mdp', Ecos Diarios 'ed_neco',
 La Nación 'ln_arg'
 }
 \examples{
+\dontrun{
 bd_sismos <- acep_bases$rev_puerto
 head(acep_load_base(tag = bd_sismos))
+}
 }
 \keyword{datos}

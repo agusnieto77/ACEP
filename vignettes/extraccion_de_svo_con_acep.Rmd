@@ -83,7 +83,28 @@ str(titulares_tags)
 ```
 
 ```{r postag00, eval=require("tibble"), message=FALSE, warning=FALSE, echo=FALSE}
-titulares_tags <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/titulares_spacy.rds")
+texto_entity <- subset(acep_bases$spacy_postag, entity != "")
+titulares_tags <- list(
+  texto_tag = acep_bases$spacy_postag,
+  texto_tag_entity = texto_entity,
+  texto_only_entity = data.frame(
+    entity = texto_entity$token,
+    entity_type = sub("_.*", "", texto_entity$entity),
+    doc_id = texto_entity$doc_id,
+    sentence = texto_entity$sentence
+  ),
+  texto_only_entity_loc = data.frame(
+    entity_ = "Mar del Plata",
+    doc_id = 1L,
+    sentence = 1L,
+    entity = "Mar_del_Plata",
+    entity_type = "LOC",
+    lat = -38.0055,
+    long = -57.5426
+  ),
+  texto_nounphrase = acep_bases$spacy_postag,
+  texto_only_nounphrase = subset(acep_bases$spacy_postag, nounphrase != "")
+)
 str(titulares_tags)
 ```
 
@@ -97,7 +118,7 @@ Veamos con un poco más de detalle cada uno de los marcos de datos creados con l
 Como adelantamos, el primer objeto de la lista es un marco de datos estructurado para servir de input de la función `acep_svo()`.
 
 ```{r postag01}
-head(titulares_tags$texto_tag[43:54, ], n = 12)
+head(titulares_tags$texto_tag, n = 12)
 ```
 
 ### texto_tag_entity
@@ -105,7 +126,7 @@ head(titulares_tags$texto_tag[43:54, ], n = 12)
 El segundo objeto de la lista es un marco de datos que reescribe la columna 'pos' con la etiqueta 'ENTITY' e identifica el tipo de entidad en la columna 'entity_type'. Si la entidad detectada está compuesta por más de un token, la función colapsa todos los tokens referidos a esa entidad en una sola celda de la columna token. Ejemplo: 'Ciudad_de_Buenos_Aires'.
 
 ```{r postag02}
-head(titulares_tags$texto_tag_entity[52:65, ], n = 14)
+head(titulares_tags$texto_tag_entity, n = 14)
 ```
 
 ### texto_only_entity
@@ -179,7 +200,7 @@ str(titulares_utags)
 ```
 
 ```{r upos, eval=require("tibble"), message=FALSE, warning=FALSE, echo=FALSE}
-titulares_utags <- acep_load_base("https://github.com/HDyCSC/datos/raw/main/titulares_udpipe.rds")
+titulares_utags <- acep_bases$spacy_postag
 str(titulares_utags)
 ```
 
@@ -214,7 +235,7 @@ Veamos con un poco más de detalle cada uno de los marcos de datos creados con l
 Es el marco de datos inicial procesado con las funciones del paquete *rsyntax*.
 
 ```{r svo02, eval=require("tibble")}
-head(titulares_svo$acep_annotate_svo[98:106, ], n=20)
+head(titulares_svo$acep_annotate_svo, n=20)
 ```
 
 ### acep_annotate_svo

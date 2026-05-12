@@ -23,7 +23,7 @@ Tolower, rm_cesp, rm_emoji, rm_hashtag, rm_users, rm_punt, rm_num, rm_url, rm_me
 Por defecto, todos los parámetros están seteados con el valor TRUE, es decir que están activados a excepción de other_sw. Este parámetro está marcado como NULL.
 
 Para comprender el funcionamiento de `acep_clean()`, repasaremos cada uno de los parámetros con ejemplos.
-Utilizaremos una base de tweets sobre el paro de trenes realizado el día 08/11/2022 que contienen las palabras "La Fraternidad" que refieren al sindicato argentino de maquinistas de locomotoras y trenes.
+Utilizaremos una base sintética de textos breves sobre protestas y reclamos para que la vignette pueda reconstruirse sin depender de descargas externas.
 
 ## to lower
 
@@ -36,9 +36,13 @@ En primer lugar cargamos la base de ejemplo:
 ```{r setup, results = FALSE, warning = FALSE, message = FALSE}
 library(ACEP)
 
-url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
-
-base <- base::subset(acep_load_base(url), select = text)$text
+base <- rep(c(
+  "La Fraternidad anunció un paro de trenes en noviembre.\nMás información en https://example.com",
+  "@usuario reclamó mejoras salariales!!! #Transporte 😊",
+  "Martes 08 de noviembre: trabajadores en paro total.",
+  "El sindicato pidió 123 respuestas al gobierno municipal.",
+  "A b c de la protesta"
+), length.out = 500)
 
 ```
 
@@ -352,12 +356,10 @@ cat(paste("****CON rm_dias****\n", dia_s, "****\n", sep=""))
 
 Las stopwords son palabras que tienen distintas funciones aportando a la comprensión del texto. Sin embargo, si buscamos realizar un conteo de palabras, resultan contraproducentes ya que se repiten muchas veces y no aportan al contenido. Se pueden remover con el parámetro rm_stopwords.
 
-La lista de las palabras consideradas "stop words" puede verificarse en el siguiente link:
-stopwords <- readRDS(url("https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"))
+La lista de palabras consideradas "stop words" depende del idioma y del dominio del corpus. En este ejemplo usamos la configuración interna de `acep_clean()`.
 
 ```{r stop, message=FALSE}
-url <- "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"
-stopwords <- acep_clean(url)
+stopwords <- c("de", "la", "el")
 stopw <- base[429]
 stopw_w <- acep_clean(base[429],
                      tolower = FALSE,
@@ -502,4 +504,3 @@ cat(paste("****SIN other_sw****\n", osw, "****\n", sep=""))
 cat(paste("****CON other_sw****\n", osw_s, "****\n", sep=""))
 
 ```
-

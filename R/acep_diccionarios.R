@@ -30,6 +30,8 @@
 #' @source \href{https://www.lanueva.com/}{La Nueva}
 #' @keywords diccionarios
 #' @examples
+#' \dontrun{
 #' diccionario <- acep_load_base(acep_diccionarios$dicc_viol_gp)
 #' diccionario
+#' }
 "acep_diccionarios"

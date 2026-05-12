@@ -22,17 +22,14 @@ En este artículo desarrollaremos una introducción al análisis de la conflicti
 
 ## El corpus de notas
 
-Las notas que componen el corpus utilizado en este ejercicio fueron raspadas del sitio  [revistapuerto.com.ar](https://revistapuerto.com.ar) con las funciones del paquete `rvest`. Se compone de `r nrow(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` notas y `r length(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp))` variables: `r paste0(names(ACEP::acep_load_base(ACEP::acep_bases$rp_mdp)), collapse = ', ')`. El corpus de notas cubre desde el 2 de marzo de 2009 hasta el 29 de diciembre de 2020. Para cargar todas las notas haremos uso de la función `acep_load_base()`.
+Para que este artículo pueda reconstruirse en CRAN sin depender de descargas externas, los ejemplos ejecutables usan `ACEP::acep_bases$lc_720`, una muestra incluida en el paquete. Se compone de `r nrow(ACEP::acep_bases$lc_720)` notas y `r length(ACEP::acep_bases$lc_720)` variables: `r paste0(names(ACEP::acep_bases$lc_720), collapse = ', ')`. En una sesión interactiva con conexión también se puede cargar el corpus completo de Revista Puerto con `acep_load_base(acep_bases$rp_mdp)`.
 
 ```{r setup, eval=require("tibble"), message=FALSE}
 # Cargamos la librería ACEP
 library(ACEP)
 
-# Definimos la url
-url <- acep_bases$rp_mdp
-
-# Descargamos el corpus de notas de la Revista Puerto
-rev_puerto <- acep_load_base(url)
+# Cargamos una muestra incluida en el paquete
+rev_puerto <- acep_bases$lc_720
 
 # Imprimimos la base en consola
 rev_puerto
@@ -41,7 +38,7 @@ rev_puerto
 
 ##  Los diccionarios
 
-Una vez descargada la base de notas vamos a crear variables numéricas que contenga las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de tres funciones y un diccionario del paquete ACEP: `acep_frec()`, `acep_count()`, `acep_load_base()` y `acep_diccionarios`. También crearemos dos diccionarios breves para usarlos en la función `acep_count()` con un doble objetivo: 1) identificar las notas que refieran a huelgas; 2) identificar las notas que refieran a lxs trabajadorxs del procesamiento de pescado en tierra en la ciudad de Mar del Plata.
+Una vez cargada la base de notas vamos a crear variables numéricas que contengan las frecuencias de palabras totales y de cada diccionario usado para cada una de las notas. En esta parte del código haremos uso de dos funciones del paquete ACEP: `acep_frec()` y `acep_count()`. También crearemos diccionarios breves para identificar menciones a conflictos, huelgas y actores colectivos.
 
 ```{r diccionarios, eval=require("tibble"), message=FALSE}
 # Creamos la variable con la frecuencia de palabras por nota
@@ -54,7 +51,10 @@ dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "el paro", "de brazos caídos")
 
 # Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+dicc_conflictos_base <- c("conflicto", "conflictos", "protesta", "protestas",
+                          "reclamo", "reclamos", "paro", "huelga",
+                          "movilización", "manifestación")
+dicc_conflictos <- unique(c(dicc_conflictos_base, dicc_huelgas))
 
 # Creamos la variable con la frecuencia de palabras que refieren a conflictividad
 rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
@@ -62,16 +62,13 @@ rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
 
-# Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
-dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
-               "sindicato de la industria del pescado", "huelguistas", 
-               "obreras de la industria del pescado", "obreras del pescado",
-               "obreros de la industria del pescado", "obreros del pescado",
-               "fileteros", "fileteras", "obreros del filet", "obreras del filet")
+# Creamos el diccionario de palabras que refieren a actores colectivos
+dicc_actores <- c("trabajadores", "docentes", "sindicato", "vecinos",
+                  "municipal", "gobierno")
 
 # Creamos la variable con la frecuencia de palabras que 
-# refieren a lxs obrerxs del pescado
-rev_puerto$frec_soip <- acep_count(rev_puerto$nota, dicc_soip)
+# refieren a actores colectivos
+rev_puerto$frec_actores <- acep_count(rev_puerto$nota, dicc_actores)
 
 # Imprimimos la base en consola
 rev_puerto
@@ -88,9 +85,9 @@ rev_puerto$i_conf_gral <- acep_int(rev_puerto$frec_conflictos,
                                    rev_puerto$frec_palabras)
 
 # Creamos la variable con el índice de incidencia 
-# de lxs trabajadorxs del pescado
-rev_puerto$i_soip <- acep_int(rev_puerto$frec_soip, 
-                              rev_puerto$frec_palabras)
+# de actores colectivos
+rev_puerto$i_actores <- acep_int(rev_puerto$frec_actores,
+                                 rev_puerto$frec_palabras)
 
 # Creamos la variable con el índice de huelgas
 rev_puerto$i_huelgas <- acep_int(rev_puerto$frec_huelgas, 
@@ -101,15 +98,15 @@ rev_puerto$i_huelgas <- acep_int(rev_puerto$frec_huelgas,
 rev_puerto <- rev_puerto[rev_puerto$i_conf_gral > 0, ]
 
 # Filtramos para quedarnos con los índices mayores a 0
-# en el índice de incidencia de lxs trabajadorxs del pescado
-rev_puerto <- rev_puerto[rev_puerto$i_soip > 0, ]
+# en el índice de incidencia de actores colectivos
+rev_puerto <- rev_puerto[rev_puerto$i_actores > 0, ]
 
 # Imprimimos la base en consola
 rev_puerto
 
 ```
 
-Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que presentan al menos una mención de una palabra que refiere a conflicto y al menos un término que refiere a lxs trabajadorxs del pescado.
+Al realizar los filtros la base se redujo a `r nrow(rev_puerto)` notas que presentan al menos una mención de una palabra que refiere a conflicto y al menos un término que refiere a actores colectivos.
 
 ## Serie temporal de índices
 
@@ -156,9 +153,10 @@ datos <- data.frame(
   intensidad = rev_puerto$i_conf_gral
 )
 
-# Nos quedamos con los datos del año 2012 
-datos <-  datos[datos$fecha < "2013-01-01", ]
-datos <-  datos[datos$fecha > "2011-12-31", ]
+# Nos quedamos con un año presente en la muestra incluida
+anio_ejemplo <- names(sort(table(format(as.Date(datos$fecha), "%Y")),
+                           decreasing = TRUE))[1]
+datos <- datos[format(as.Date(datos$fecha), "%Y") == anio_ejemplo, ]
 
 # Luego construimos los vectores
 fecha <- datos$fecha
@@ -187,9 +185,8 @@ datosh <- data.frame(
   intensidad = rev_puerto$i_huelgas
 )
 
-# Nos quedamos con los datos del año 2012  
-datosh <-  datosh[datosh$fecha < "2013-01-01", ]
-datosh <-  datosh[datosh$fecha > "2011-12-31", ]
+# Nos quedamos con el mismo año de ejemplo
+datosh <- datosh[format(as.Date(datosh$fecha), "%Y") == anio_ejemplo, ]
 
 # Luego construimos los vectores
 fechah <- datosh$fecha
@@ -206,7 +203,7 @@ huelgas |> head()
 
 ## Las visualizaciones
 
-En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación anual de la conflictividad general protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y diciembre de 2020. También visualizaremos la variación mensual durante el año 2012, el más conflictivo de período bajo análisis. 
+En este último apartado haremos uso de las funciones `acep_plot_st()` y `acep_plot_rst()` para visualizar la variación anual y mensual de la conflictividad general en la muestra incluida en el paquete.
 
 ```{r plot00, message=FALSE}
 # Visualizaremos el índice de conflictividad general 
@@ -256,7 +253,7 @@ acep_plot_st(
 
 ```
 
-Las distintas métricas nos ayudan a identificar al año 2012 como el más conflictivo del período en el ámbito de la industria pesquera de procesado en tierra en la ciudad de Mar del Plata, con epicentro en los meses de junio, julio y agosto para la conflictividad general y con epicentro en los meses de mayo, junio y julio para los movimientos huelguísticos. 
+Las distintas métricas permiten explorar la temporalidad de las menciones a conflictividad en el corpus de ejemplo sin depender de recursos externos durante la reconstrucción de la vignette.
 
 ## Comentarios finales
 
