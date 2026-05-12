@@ -15,7 +15,7 @@ Albrieu y Palazzo (2020)."><meta property="og:image" content="https://agusnieto7
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,67 +99,10 @@ Tandil, 2021.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">diccionario</span> <span class="op">&lt;-</span> <span class="fu"><a href="acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_viol_gp</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Descargando...</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="va">diccionario</span> <span class="op">&lt;-</span> <span class="fu"><a href="acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">acep_diccionarios</span><span class="op">$</span><span class="va">dicc_viol_gp</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">diccionario</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "agresivo"         "combativo"        "provocador"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [4] "violento"         "agresividad"      "belicosidad"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] "combatividad"     "provocación"      "emboscada"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [10] "celada"           "trampa"           "asechanza"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] "artería"          "artimaña"         "emboscar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "trampear"         "asechar"          "armas"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] "armamento"        "armado"           "asaltar"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [22] "atracar"          "robar"            "agredir"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "acometer"         "irrumpir"         "invadir"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [28] "ataque"           "embate"           "irrupción"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "combate"          "lucha"            "agresión"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [34] "golpear"          "golpe"            "sanguinario"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] "choque"           "asalto"           "atropello"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [40] "atentado"         "coletazo"         "bomba"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "explosivo"        "granada"          "munición"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "bala"             "brutalidad"       "bestialidad"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "ferocidad"        "crueldad"         "atrocidad"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [52] "monstruosidad"    "irracionalidad"   "vandalismo"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "salvajada"        "grosería"         "masacre"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [58] "matanza"          "mortandad"        "hecatombe"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "catástrofe"       "degollina"        "aplastar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [64] "triturar"         "reventar"         "destripar"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "moler"            "aplastamiento"    "mortal"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [70] "mortífero"        "letal"            "fatídico"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "fatal"            "funesto"          "disparar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "tirotear"         "ametrallar"       "despedir"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "expulsar"         "destituir"        "guerrilla"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [82] "guerrillero"      "milicia"          "arma"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "pistola"          "revólver"         "pistolete"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [88] "ametralladora"    "metralleta"       "pistolero"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "atracador"        "bandido"          "forajido"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [94] "delincuente"      "gánster"          "terrorista"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "asesino"          "matar"            "asesinar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [100] "ahorcar"          "ahogar"           "decapitar"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "desnucar"         "degollar"         "fusilar"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "guillotinar"      "asfixiar"         "electrocutar"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "envenenar"        "linchar"          "asesinato"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [112] "crimen"           "homicidio"        "delito"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [115] "muerte"           "parricidio"       "fratricidio"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [118] "magnicidio"       "regicidio"        "criminal"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "homicida"         "monstruo"         "engendro"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [124] "deforme"          "monstruosa"       "rebelarse"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127] "incitar"          "sublevarse"       "insubordinarse"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [130] "levantarse"       "alzarse"          "amotinarse"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [133] "insurreccionarse" "rebelión"         "levantamiento"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [136] "revuelta"         "alzamiento"       "revolución"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [139] "subversión"       "conspiración"     "conjuración"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [142] "sedición"         "insurrección"     "motín"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145] "acuchillar"       "apuñalar"         "lesionar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [148] "violencia"        "exabrupto"        "coacción"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "profanación"      "furia"            "ensañamiento"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [154] "violación"        "implacable"       "furioso"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [157] "guerrero"         "soldado"          "militar"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [160] "látigo"           "azote"            "fusta"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [163] "tralla"           "vergajo"          "flagelo"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [166] "zurriago"         "latigazos"        "azotando"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169] "litigar"          "azotar"           "fustigar"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [172] "flagelar"        </span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

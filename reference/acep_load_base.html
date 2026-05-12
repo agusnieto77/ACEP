@@ -13,7 +13,7 @@ La Nación 'ln_arg'"><meta property="og:image" content="https://agusnieto77.gith
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,18 +76,10 @@ la salida sera una base de datos en formato tabular con un corpus de notas.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">bd_sismos</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rev_puerto</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="va">bd_sismos</span> <span class="op">&lt;-</span> <span class="va">acep_bases</span><span class="op">$</span><span class="va">rev_puerto</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">acep_load_base</span><span class="op">(</span>tag <span class="op">=</span> <span class="va">bd_sismos</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Descargando...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   fecha      titulo                                                        nota </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2019-03-29 Astillero Contessi botó al Luca Santino, un fresquero de nue… <span style="color: #949494;">"</span>Tra…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2019-03-29 Di Leva despidió a trabajadores de El Marisco y Sebastián Ga… <span style="color: #949494;">"</span>Tra…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2019-03-29 El Consejo aprobó la apertura al norte para el calamar        <span style="color: #949494;">"</span>En …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2019-03-28 “Todos los empresarios me dicen que tendrían que achicarse”   <span style="color: #949494;">"</span>Cri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2019-03-28 En el Puerto de Montevideo siguen bajando un muerto por mes   <span style="color: #949494;">"</span>La …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2019-03-28 Habilitan el muelle Piedra Buena para descarga de congelador… <span style="color: #949494;">"</span>La …</span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

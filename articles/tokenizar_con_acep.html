@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Diego
 Pacheco</h4>
             
-            <h4 data-toc-skip class="date">2026-05-10</h4>
+            <h4 data-toc-skip class="date">2026-05-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/master/vignettes/tokenizar_con_acep.Rmd" class="external-link"><code>vignettes/tokenizar_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>tokenizar_con_acep.Rmd</code></div>
@@ -90,14 +90,16 @@ funciones:</p>
 <div class="section level2">
 <h2 id="función-acep_token">Función <code>acep_token()</code><a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token"></a>
 </h2>
-<p>En primer lugar cargamos la librería <em>ACEP</em>. Luego, cargamos
-una base de tweets para su prueba.</p>
+<p>En primer lugar cargamos la librería <em>ACEP</em>. Luego, usamos
+textos incluidos en el ejemplo para que la vignette no dependa de
+descargas externas.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agusnieto77/ACEP" class="external-link">ACEP</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"</span></span>
-<span></span>
-<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu"><a href="../reference/acep_load_base.html">acep_load_base</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>, select <span class="op">=</span> <span class="va">text</span><span class="op">)</span><span class="op">$</span><span class="va">text</span></span></code></pre></div>
+<span><span class="va">base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"La Fraternidad anunció un paro de trenes en noviembre."</span>,</span>
+<span>  <span class="st">"Trabajadores del transporte reclamaron mejoras salariales."</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Ejecutamos la función <code><a href="../reference/acep_token.html">acep_token()</a></code> para los primeros dos
 elementos de la base.</p>
 <p>¿Cuál es el resultado?</p>
@@ -122,12 +124,12 @@ espacios en blanco, es decir, cada palabra es un token.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   texto_id       tokens</span></span>
-<span><span class="co">#&gt; 1        1      googlea</span></span>
-<span><span class="co">#&gt; 2        1  fraternidad</span></span>
-<span><span class="co">#&gt; 3        2     protesta</span></span>
-<span><span class="co">#&gt; 4        2  fraternidad</span></span>
-<span><span class="co">#&gt; 5        2       desoye</span></span>
-<span><span class="co">#&gt; 6        2 conciliacion</span></span></code></pre>
+<span><span class="co">#&gt; 1        1  fraternidad</span></span>
+<span><span class="co">#&gt; 2        1      anuncio</span></span>
+<span><span class="co">#&gt; 3        1         paro</span></span>
+<span><span class="co">#&gt; 4        1       trenes</span></span>
+<span><span class="co">#&gt; 5        2 trabajadores</span></span>
+<span><span class="co">#&gt; 6        2   transporte</span></span></code></pre>
 <p>En este resultado podemos ver cómo la función identifica a cada
 observación como un documento aparte (en este caso, cada tweet es un
 documento identificado en la columna ‘texto_id’). Por su parte, la
@@ -159,12 +161,12 @@ previamente, una tabla con la información de cada token.</p>
 <code class="sourceCode R"><span><span class="va">tabla_tokenizada</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/acep_token.html">acep_token</a></span><span class="op">(</span><span class="va">base_limpia</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   texto_id       tokens</span></span>
-<span><span class="co">#&gt; 1        1      googlea</span></span>
-<span><span class="co">#&gt; 2        1  fraternidad</span></span>
-<span><span class="co">#&gt; 3        2     protesta</span></span>
-<span><span class="co">#&gt; 4        2  fraternidad</span></span>
-<span><span class="co">#&gt; 5        2       desoye</span></span>
-<span><span class="co">#&gt; 6        2 conciliacion</span></span></code></pre>
+<span><span class="co">#&gt; 1        1  fraternidad</span></span>
+<span><span class="co">#&gt; 2        1      anuncio</span></span>
+<span><span class="co">#&gt; 3        1         paro</span></span>
+<span><span class="co">#&gt; 4        1       trenes</span></span>
+<span><span class="co">#&gt; 5        2 trabajadores</span></span>
+<span><span class="co">#&gt; 6        2   transporte</span></span></code></pre>
 <p>Por último, aplicamos la función <code><a href="../reference/acep_token_table.html">acep_token_table()</a></code> a la
 columna ‘tokens’.</p>
 <p>Por defecto, <code><a href="../reference/acep_token_table.html">acep_token_table()</a></code> nos devuelve los 10
@@ -175,22 +177,16 @@ el parámetro ‘u’ =</p>
 <code>acep_token_table(tabla_tokenizada$token, u = 20)</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/acep_token_table.html">acep_token_table</a></span><span class="op">(</span><span class="va">tabla_tokenizada</span><span class="op">$</span><span class="va">tokens</span>, u <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;           token frec       prop</span></span>
-<span><span class="co">#&gt; 1   fraternidad 1956 0.47847358</span></span>
-<span><span class="co">#&gt; 2        trenes  264 0.06457926</span></span>
-<span><span class="co">#&gt; 3          paro  217 0.05308219</span></span>
-<span><span class="co">#&gt; 4  conciliacion  184 0.04500978</span></span>
-<span><span class="co">#&gt; 5           paz  175 0.04280822</span></span>
-<span><span class="co">#&gt; 6   obligatoria  163 0.03987280</span></span>
-<span><span class="co">#&gt; 7      libertad  160 0.03913894</span></span>
-<span><span class="co">#&gt; 8      igualdad  157 0.03840509</span></span>
-<span><span class="co">#&gt; 9            si  140 0.03424658</span></span>
-<span><span class="co">#&gt; 10         amor  120 0.02935421</span></span>
-<span><span class="co">#&gt; 11    universal  120 0.02935421</span></span>
-<span><span class="co">#&gt; 12       fuerza  117 0.02862035</span></span>
-<span><span class="co">#&gt; 13       medida  107 0.02617417</span></span>
-<span><span class="co">#&gt; 14        mundo  106 0.02592955</span></span>
-<span><span class="co">#&gt; 15          ser  102 0.02495108</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;          token frec      prop</span></span>
+<span><span class="co">#&gt; 1      anuncio    1 0.1111111</span></span>
+<span><span class="co">#&gt; 2  fraternidad    1 0.1111111</span></span>
+<span><span class="co">#&gt; 3      mejoras    1 0.1111111</span></span>
+<span><span class="co">#&gt; 4         paro    1 0.1111111</span></span>
+<span><span class="co">#&gt; 5   reclamaron    1 0.1111111</span></span>
+<span><span class="co">#&gt; 6   salariales    1 0.1111111</span></span>
+<span><span class="co">#&gt; 7 trabajadores    1 0.1111111</span></span>
+<span><span class="co">#&gt; 8   transporte    1 0.1111111</span></span>
+<span><span class="co">#&gt; 9       trenes    1 0.1111111</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="función-acep_token_plot">Función <code>acep_token_plot()</code><a class="anchor" aria-label="anchor" href="#funci%C3%B3n-acep_token_plot"></a>

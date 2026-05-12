@@ -12,16 +12,18 @@ En este artículo se explicarán los procesos que realizan las funciones:
 
 ## Función `acep_token()`
 
-En primer lugar cargamos la librería *ACEP*. Luego, cargamos una base de
-tweets para su prueba.
+En primer lugar cargamos la librería *ACEP*. Luego, usamos textos
+incluidos en el ejemplo para que la vignette no dependa de descargas
+externas.
 
 ``` r
 
 library(ACEP)
 
-url <- "https://github.com/HDyCSC/datos/raw/main/la_fraternidad.rds"
-
-base <- subset(acep_load_base(url), select = text)$text
+base <- c(
+  "La Fraternidad anunció un paro de trenes en noviembre.",
+  "Trabajadores del transporte reclamaron mejoras salariales."
+)
 ```
 
 Ejecutamos la función
@@ -54,12 +56,12 @@ head(tweets)
 ```
 
     #>   texto_id       tokens
-    #> 1        1      googlea
-    #> 2        1  fraternidad
-    #> 3        2     protesta
-    #> 4        2  fraternidad
-    #> 5        2       desoye
-    #> 6        2 conciliacion
+    #> 1        1  fraternidad
+    #> 2        1      anuncio
+    #> 3        1         paro
+    #> 4        1       trenes
+    #> 5        2 trabajadores
+    #> 6        2   transporte
 
 En este resultado podemos ver cómo la función identifica a cada
 observación como un documento aparte (en este caso, cada tweet es un
@@ -102,12 +104,12 @@ head(tabla_tokenizada)
 ```
 
     #>   texto_id       tokens
-    #> 1        1      googlea
-    #> 2        1  fraternidad
-    #> 3        2     protesta
-    #> 4        2  fraternidad
-    #> 5        2       desoye
-    #> 6        2 conciliacion
+    #> 1        1  fraternidad
+    #> 2        1      anuncio
+    #> 3        1         paro
+    #> 4        1       trenes
+    #> 5        2 trabajadores
+    #> 6        2   transporte
 
 Por último, aplicamos la función
 [`acep_token_table()`](https://agusnieto77.github.io/ACEP/reference/acep_token_table.md)
@@ -129,22 +131,16 @@ Suponiendo que queremos obtener los 20 token de mayor frecuencia:
 acep_token_table(tabla_tokenizada$tokens, u = 15)
 ```
 
-    #>           token frec       prop
-    #> 1   fraternidad 1956 0.47847358
-    #> 2        trenes  264 0.06457926
-    #> 3          paro  217 0.05308219
-    #> 4  conciliacion  184 0.04500978
-    #> 5           paz  175 0.04280822
-    #> 6   obligatoria  163 0.03987280
-    #> 7      libertad  160 0.03913894
-    #> 8      igualdad  157 0.03840509
-    #> 9            si  140 0.03424658
-    #> 10         amor  120 0.02935421
-    #> 11    universal  120 0.02935421
-    #> 12       fuerza  117 0.02862035
-    #> 13       medida  107 0.02617417
-    #> 14        mundo  106 0.02592955
-    #> 15          ser  102 0.02495108
+    #>          token frec      prop
+    #> 1      anuncio    1 0.1111111
+    #> 2  fraternidad    1 0.1111111
+    #> 3      mejoras    1 0.1111111
+    #> 4         paro    1 0.1111111
+    #> 5   reclamaron    1 0.1111111
+    #> 6   salariales    1 0.1111111
+    #> 7 trabajadores    1 0.1111111
+    #> 8   transporte    1 0.1111111
+    #> 9       trenes    1 0.1111111
 
 ## Función `acep_token_plot()`
 

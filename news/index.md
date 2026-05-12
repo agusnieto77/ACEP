@@ -1,5 +1,18 @@
 # Changelog
 
+## ACEP 0.1.1
+
+### Hotfix CRAN
+
+- Se actualizaron ejemplos y viñetas para evitar descargas externas
+  durante los checks de CRAN.
+- Los ejemplos de
+  [`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md)
+  y `acep_diccionarios` que requieren internet ahora quedan marcados
+  como no ejecutables.
+- Las viñetas usan datos incluidos en el paquete o ejemplos sintéticos,
+  reduciendo fallas por red/SSL en plataformas de CRAN.
+
 ## ACEP 0.1.0
 
 CRAN release: 2026-05-10

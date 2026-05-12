@@ -10,62 +10,53 @@ de diccionario.
 
 ## El corpus de notas
 
-Las notas que componen el corpus utilizado en este ejercicio fueron
-raspadas del sitio [revistapuerto.com.ar](https://revistapuerto.com.ar)
-con las funciones del paquete `rvest`. Se compone de 7816 notas y 6
-variables: fecha, titulo, bajada, nota, imagen, link. El corpus de notas
-cubre desde el 2 de marzo de 2009 hasta el 29 de diciembre de 2020. Para
-cargar todas las notas haremos uso de la función
-[`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md).
+Para que este artículo pueda reconstruirse en CRAN sin depender de
+descargas externas, los ejemplos ejecutables usan
+`ACEP::acep_bases$lc_720`, una muestra incluida en el paquete. Se
+compone de 720 notas y 9 variables: id, fecha, seccion, titulo, bajada,
+nota, nota_norm, link, clas_hum. En una sesión interactiva con conexión
+también se puede cargar el corpus completo de Revista Puerto con
+`acep_load_base(acep_bases$rp_mdp)`.
 
 ``` r
 
 # Cargamos la librería ACEP
 library(ACEP)
 
-# Definimos la url
-url <- acep_bases$rp_mdp
-
-# Descargamos el corpus de notas de la Revista Puerto
-rev_puerto <- acep_load_base(url)
+# Cargamos una muestra incluida en el paquete
+rev_puerto <- acep_bases$lc_720
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 7,816 × 6
-    #>    fecha      titulo                                   bajada nota  imagen link 
-    #>  * <date>     <chr>                                    <chr>  <chr> <chr>  <chr>
-    #>  1 2020-12-29 ¡Feliz Año 2021 para todos nuestros ami… Con m… "Con… https… http…
-    #>  2 2020-12-28 Mapa del trabajo esclavo en aguas inter… Un re… "El … https… http…
-    #>  3 2020-12-24 Plantas piden tener garantizada la prov… En Ch… "El … https… http…
-    #>  4 2020-12-24 Los obreros navales despiden el año ana… En Ma… "El … https… http…
-    #>  5 2020-12-23 El incumplimiento del régimen de cuotif… Se ll… "Las… https… http…
-    #>  6 2020-12-23 Otro fallo ratifica cautelar contra el … La Cá… "La … https… http…
-    #>  7 2020-12-22 Recomendaciones de SENASA para las expo… Desde… "En … https… http…
-    #>  8 2020-12-22 Trelew consolida su inserción en la ind… En 20… "Ins… https… http…
-    #>  9 2020-12-21 El CFP presentó el estado y la captura … En la… "Ant… https… http…
-    #> 10 2020-12-21 La flota amarilla cierra el año con sos… Puert… "El … https… http…
-    #> # ℹ 7,806 more rows
+    #> # A tibble: 720 × 9
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     1 2016-03-01 La Ciudad Emotivo: po… "Hace… "Los… "los dos… http… FALSE   
+    #>  2     2 2016-03-01 La Ciudad El oficiali… "En l… "La … "la decl… http… TRUE    
+    #>  3     3 2016-03-02 La Ciudad Rech tambié… "El r… "El … "el conc… http… TRUE    
+    #>  4     4 2016-03-02 La Ciudad Anuncian in… "El i… "El … "el inte… http… FALSE   
+    #>  5     5 2016-03-02 La Ciudad Video: la p… "El C… "De … "de mane… http… FALSE   
+    #>  6     6 2016-03-03 La Ciudad Nuevas inve… "Una … "Rep… "represe… http… FALSE   
+    #>  7     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  8     8 2016-03-03 La Ciudad Hoy en Mar … "Clas… "Yog… "yoga y … http… TRUE    
+    #>  9     9 2016-03-06 La Ciudad El Colegio … "Será… "El … "el cons… http… FALSE   
+    #> 10    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #> # ℹ 710 more rows
 
 ## Los diccionarios
 
-Una vez descargada la base de notas vamos a crear variables numéricas y
-una de carácter que contenga las frecuencias de palabras totales, la
+Una vez cargada la base de notas vamos a crear variables numéricas y una
+de carácter que contengan las frecuencias de palabras totales, la
 frecuencia de palabras de cada diccionario usado para cada una de las
 notas y las palabras clave mencionadas en cada nota. En esta parte del
-código haremos uso de tres funciones y un diccionario del paquete ACEP:
-[`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md),
-[`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md),
-[`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md)
-y `acep_diccionarios`. También crearemos dos diccionarios breves para
-usarlos en las funciones
+código haremos uso de las funciones
 [`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md)
 y
-[`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md),
-con un doble objetivo: 1) identificar las notas que refieran a huelgas;
-2) identificar las notas que refieran a lxs trabajadorxs del
-procesamiento de pescado en tierra en la ciudad de Mar del Plata.
+[`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md).
+También crearemos diccionarios breves para identificar menciones a
+conflictos, huelgas y actores colectivos.
 
 ``` r
 
@@ -76,7 +67,10 @@ dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "el paro", "de brazos caídos")
 
 # Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+dicc_conflictos_base <- c("conflicto", "conflictos", "protesta", "protestas",
+                          "reclamo", "reclamos", "paro", "huelga",
+                          "movilización", "manifestación")
+dicc_conflictos <- unique(c(dicc_conflictos_base, dicc_huelgas))
 
 # Creamos la variable con la frecuencia de palabras que refieren a conflictividad
 rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
@@ -84,42 +78,40 @@ rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
 
-# Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
-dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
-               "sindicato de la industria del pescado", "huelguistas", 
-               "obreras de la industria del pescado", "obreras del pescado",
-               "obreros de la industria del pescado", "obreros del pescado",
-               "fileteros", "fileteras", "obreros del filet", "obreras del filet")
+# Creamos el diccionario de palabras que refieren a actores colectivos
+dicc_actores <- c("trabajadores", "docentes", "sindicato", "vecinos",
+                  "municipal", "gobierno")
 
 # Creamos la variable con la frecuencia de palabras que 
-# refieren a lxs obrerxs del pescado
-rev_puerto$frec_soip <- acep_count(rev_puerto$nota, dicc_soip)
+# refieren a actores colectivos
+rev_puerto$frec_actores <- acep_count(rev_puerto$nota, dicc_actores)
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 7,816 × 9
-    #>    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas
-    #>    <date>     <chr>       <chr>  <chr> <chr>  <chr>           <int>        <int>
-    #>  1 2020-12-29 ¡Feliz Año… Con m… "Con… https… http…               0            0
-    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               0            0
-    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               0            0
-    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               0            0
-    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               1            1
-    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               0            0
-    #>  7 2020-12-22 Recomendac… Desde… "En … https… http…               0            0
-    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               0            0
-    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               0            0
-    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               0            0
-    #> # ℹ 7,806 more rows
-    #> # ℹ 1 more variable: frec_soip <int>
+    #> # A tibble: 720 × 12
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     1 2016-03-01 La Ciudad Emotivo: po… "Hace… "Los… "los dos… http… FALSE   
+    #>  2     2 2016-03-01 La Ciudad El oficiali… "En l… "La … "la decl… http… TRUE    
+    #>  3     3 2016-03-02 La Ciudad Rech tambié… "El r… "El … "el conc… http… TRUE    
+    #>  4     4 2016-03-02 La Ciudad Anuncian in… "El i… "El … "el inte… http… FALSE   
+    #>  5     5 2016-03-02 La Ciudad Video: la p… "El C… "De … "de mane… http… FALSE   
+    #>  6     6 2016-03-03 La Ciudad Nuevas inve… "Una … "Rep… "represe… http… FALSE   
+    #>  7     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  8     8 2016-03-03 La Ciudad Hoy en Mar … "Clas… "Yog… "yoga y … http… TRUE    
+    #>  9     9 2016-03-06 La Ciudad El Colegio … "Será… "El … "el cons… http… FALSE   
+    #> 10    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #> # ℹ 710 more rows
+    #> # ℹ 3 more variables: frec_conflictos <int>, frec_huelgas <int>,
+    #> #   frec_actores <int>
 
-Ahora vamos a usar las función
+Ahora vamos a usar la función
 [`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md)
 para extraer las palabras clave de los diccionarios de conflictividad,
-huelgas y SOIP que aparecen en cada una de las notas de la *Revista
-Puerto*.
+huelgas y actores colectivos que aparecen en cada una de las notas de la
+muestra.
 
 ``` r
 
@@ -130,29 +122,30 @@ rev_puerto$extract_conflictos <- acep_extract(rev_puerto$nota, dicc_conflictos, 
 rev_puerto$extract_huelgas <- acep_extract(rev_puerto$nota, dicc_huelgas)
 
 # Creamos la variable con las palabras que 
-# refieren a lxs obrerxs del pescado
-rev_puerto$extract_soip <- acep_extract(rev_puerto$nota, dicc_soip)
+# refieren a actores colectivos
+rev_puerto$extract_actores <- acep_extract(rev_puerto$nota, dicc_actores)
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 7,816 × 12
-    #>    fecha      titulo      bajada nota  imagen link  frec_conflictos frec_huelgas
-    #>    <date>     <chr>       <chr>  <chr> <chr>  <chr>           <int>        <int>
-    #>  1 2020-12-29 ¡Feliz Año… Con m… "Con… https… http…               0            0
-    #>  2 2020-12-28 Mapa del t… Un re… "El … https… http…               0            0
-    #>  3 2020-12-24 Plantas pi… En Ch… "El … https… http…               0            0
-    #>  4 2020-12-24 Los obrero… En Ma… "El … https… http…               0            0
-    #>  5 2020-12-23 El incumpl… Se ll… "Las… https… http…               1            1
-    #>  6 2020-12-23 Otro fallo… La Cá… "La … https… http…               0            0
-    #>  7 2020-12-22 Recomendac… Desde… "En … https… http…               0            0
-    #>  8 2020-12-22 Trelew con… En 20… "Ins… https… http…               0            0
-    #>  9 2020-12-21 El CFP pre… En la… "Ant… https… http…               0            0
-    #> 10 2020-12-21 La flota a… Puert… "El … https… http…               0            0
-    #> # ℹ 7,806 more rows
-    #> # ℹ 4 more variables: frec_soip <int>, extract_conflictos <chr>,
-    #> #   extract_huelgas <chr>, extract_soip <chr>
+    #> # A tibble: 720 × 15
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     1 2016-03-01 La Ciudad Emotivo: po… "Hace… "Los… "los dos… http… FALSE   
+    #>  2     2 2016-03-01 La Ciudad El oficiali… "En l… "La … "la decl… http… TRUE    
+    #>  3     3 2016-03-02 La Ciudad Rech tambié… "El r… "El … "el conc… http… TRUE    
+    #>  4     4 2016-03-02 La Ciudad Anuncian in… "El i… "El … "el inte… http… FALSE   
+    #>  5     5 2016-03-02 La Ciudad Video: la p… "El C… "De … "de mane… http… FALSE   
+    #>  6     6 2016-03-03 La Ciudad Nuevas inve… "Una … "Rep… "represe… http… FALSE   
+    #>  7     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  8     8 2016-03-03 La Ciudad Hoy en Mar … "Clas… "Yog… "yoga y … http… TRUE    
+    #>  9     9 2016-03-06 La Ciudad El Colegio … "Será… "El … "el cons… http… FALSE   
+    #> 10    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #> # ℹ 710 more rows
+    #> # ℹ 6 more variables: frec_conflictos <int>, frec_huelgas <int>,
+    #> #   frec_actores <int>, extract_conflictos <chr>, extract_huelgas <chr>,
+    #> #   extract_actores <chr>
 
 ## Las palabras clave extraídas
 
@@ -166,27 +159,27 @@ y huelgas. Veamos.
 
 # Seleccionamos las variables de extracción de palabras clave
 rev_puerto_huelgas <- rev_puerto[rev_puerto$extract_huelgas != "",]
-rev_puerto_soip <- rev_puerto_huelgas[rev_puerto_huelgas$extract_soip != "",]
-rev_puerto_seleccion <- rev_puerto_soip[ , c('extract_conflictos', 'extract_huelgas', 'extract_soip')]
+rev_puerto_actores <- rev_puerto_huelgas[rev_puerto_huelgas$extract_actores != "",]
+rev_puerto_seleccion <- rev_puerto_actores[ , c('extract_conflictos', 'extract_huelgas', 'extract_actores')]
 
 # Imprimimos la base en consola
 rev_puerto_seleccion
 ```
 
-    #> # A tibble: 76 × 3
-    #>    extract_conflictos                               extract_huelgas extract_soip
-    #>    <chr>                                            <chr>           <chr>       
-    #>  1 conciliación obligatoria                         conciliación o… obreros del…
-    #>  2 conciliación obligatoria; huelguistas; concilia… conciliación o… obreros del…
-    #>  3 conciliación obligatoria; huelga                 conciliación o… fileteros; …
-    #>  4 un paro                                          un paro         fileteros   
-    #>  5 conciliación obligatoria                         conciliación o… fileteros   
-    #>  6 un paro                                          un paro         obreros del…
-    #>  7 al paro; al paro; el paro; al paro; al paro      al paro; al pa… fileteros   
-    #>  8 conciliación obligatoria                         conciliación o… fileteros   
-    #>  9 el paro                                          del paro        fileteros   
-    #> 10 el paro                                          el paro         fileteros   
-    #> # ℹ 66 more rows
+    #> # A tibble: 84 × 3
+    #>    extract_conflictos                            extract_huelgas extract_actores
+    #>    <chr>                                         <chr>           <chr>          
+    #>  1 un paro; reclamo; protesta; reclamos          un paro         docentes; trab…
+    #>  2 conflicto; un paro                            un paro         gobierno; gobi…
+    #>  3 protestas; un paro; paro                      un paro         municipal; vec…
+    #>  4 al paro; reclamos; conflictos; conflicto; co… al paro         sindicato; vec…
+    #>  5 un paro                                       un paro         sindicato; gob…
+    #>  6 el paro; movilización                         el paro         gobierno; gobi…
+    #>  7 un paro; conciliación obligatoria; el paro; … un paro; conci… trabajadores; …
+    #>  8 huelga; un paro; paro; paro; huelga; un paro… huelga; un par… docentes; sind…
+    #>  9 un paro; un paro; paro                        un paro; un pa… municipales    
+    #> 10 un paro; reclamo; movilización; huelga; movi… un paro; huelg… sindicatos; go…
+    #> # ℹ 74 more rows
 
 ## Nota final
 

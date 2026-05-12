@@ -11,59 +11,52 @@ de Mar del Plata entre los años 2009 y 2020.
 
 ## El corpus de notas
 
-Las notas que componen el corpus utilizado en este ejercicio fueron
-raspadas del sitio [revistapuerto.com.ar](https://revistapuerto.com.ar)
-con las funciones del paquete `rvest`. Se compone de 7816 notas y 6
-variables: fecha, titulo, bajada, nota, imagen, link. El corpus de notas
-cubre desde el 2 de marzo de 2009 hasta el 29 de diciembre de 2020. Para
-cargar todas las notas haremos uso de la función
-[`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md).
+Para que este artículo pueda reconstruirse en CRAN sin depender de
+descargas externas, los ejemplos ejecutables usan
+`ACEP::acep_bases$lc_720`, una muestra incluida en el paquete. Se
+compone de 720 notas y 9 variables: id, fecha, seccion, titulo, bajada,
+nota, nota_norm, link, clas_hum. En una sesión interactiva con conexión
+también se puede cargar el corpus completo de Revista Puerto con
+`acep_load_base(acep_bases$rp_mdp)`.
 
 ``` r
 
 # Cargamos la librería ACEP
 library(ACEP)
 
-# Definimos la url
-url <- acep_bases$rp_mdp
-
-# Descargamos el corpus de notas de la Revista Puerto
-rev_puerto <- acep_load_base(url)
+# Cargamos una muestra incluida en el paquete
+rev_puerto <- acep_bases$lc_720
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 7,816 × 6
-    #>    fecha      titulo                                   bajada nota  imagen link 
-    #>  * <date>     <chr>                                    <chr>  <chr> <chr>  <chr>
-    #>  1 2020-12-29 ¡Feliz Año 2021 para todos nuestros ami… Con m… "Con… https… http…
-    #>  2 2020-12-28 Mapa del trabajo esclavo en aguas inter… Un re… "El … https… http…
-    #>  3 2020-12-24 Plantas piden tener garantizada la prov… En Ch… "El … https… http…
-    #>  4 2020-12-24 Los obreros navales despiden el año ana… En Ma… "El … https… http…
-    #>  5 2020-12-23 El incumplimiento del régimen de cuotif… Se ll… "Las… https… http…
-    #>  6 2020-12-23 Otro fallo ratifica cautelar contra el … La Cá… "La … https… http…
-    #>  7 2020-12-22 Recomendaciones de SENASA para las expo… Desde… "En … https… http…
-    #>  8 2020-12-22 Trelew consolida su inserción en la ind… En 20… "Ins… https… http…
-    #>  9 2020-12-21 El CFP presentó el estado y la captura … En la… "Ant… https… http…
-    #> 10 2020-12-21 La flota amarilla cierra el año con sos… Puert… "El … https… http…
-    #> # ℹ 7,806 more rows
+    #> # A tibble: 720 × 9
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     1 2016-03-01 La Ciudad Emotivo: po… "Hace… "Los… "los dos… http… FALSE   
+    #>  2     2 2016-03-01 La Ciudad El oficiali… "En l… "La … "la decl… http… TRUE    
+    #>  3     3 2016-03-02 La Ciudad Rech tambié… "El r… "El … "el conc… http… TRUE    
+    #>  4     4 2016-03-02 La Ciudad Anuncian in… "El i… "El … "el inte… http… FALSE   
+    #>  5     5 2016-03-02 La Ciudad Video: la p… "El C… "De … "de mane… http… FALSE   
+    #>  6     6 2016-03-03 La Ciudad Nuevas inve… "Una … "Rep… "represe… http… FALSE   
+    #>  7     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  8     8 2016-03-03 La Ciudad Hoy en Mar … "Clas… "Yog… "yoga y … http… TRUE    
+    #>  9     9 2016-03-06 La Ciudad El Colegio … "Será… "El … "el cons… http… FALSE   
+    #> 10    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #> # ℹ 710 more rows
 
 ## Los diccionarios
 
-Una vez descargada la base de notas vamos a crear variables numéricas
-que contenga las frecuencias de palabras totales y de cada diccionario
+Una vez cargada la base de notas vamos a crear variables numéricas que
+contengan las frecuencias de palabras totales y de cada diccionario
 usado para cada una de las notas. En esta parte del código haremos uso
-de tres funciones y un diccionario del paquete ACEP:
-[`acep_frec()`](https://agusnieto77.github.io/ACEP/reference/acep_frec.md),
-[`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md),
-[`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md)
-y `acep_diccionarios`. También crearemos dos diccionarios breves para
-usarlos en la función
-[`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md)
-con un doble objetivo: 1) identificar las notas que refieran a huelgas;
-2) identificar las notas que refieran a lxs trabajadorxs del
-procesamiento de pescado en tierra en la ciudad de Mar del Plata.
+de dos funciones del paquete ACEP:
+[`acep_frec()`](https://agusnieto77.github.io/ACEP/reference/acep_frec.md)
+y
+[`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md).
+También crearemos diccionarios breves para identificar menciones a
+conflictos, huelgas y actores colectivos.
 
 ``` r
 
@@ -77,7 +70,10 @@ dicc_huelgas <- c("en paro", "al paro", "huelga", "huelguistas", "paro y movil",
                   "el paro", "de brazos caídos")
 
 # Cargamos el diccionario de palabras que refieren a conflictividad
-dicc_conflictos <- unique(c(acep_diccionarios$dicc_confl_sismos, dicc_huelgas))
+dicc_conflictos_base <- c("conflicto", "conflictos", "protesta", "protestas",
+                          "reclamo", "reclamos", "paro", "huelga",
+                          "movilización", "manifestación")
+dicc_conflictos <- unique(c(dicc_conflictos_base, dicc_huelgas))
 
 # Creamos la variable con la frecuencia de palabras que refieren a conflictividad
 rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
@@ -85,36 +81,34 @@ rev_puerto$frec_conflictos <- acep_count(rev_puerto$nota, dicc_conflictos)
 # Creamos la variable con la frecuencia de palabras que refieren a huelgas
 rev_puerto$frec_huelgas <- acep_count(rev_puerto$nota, dicc_huelgas)
 
-# Creamos el diccionario de palabras que refieren a lxs obrerxs del pescado
-dicc_soip <- c("soip", "sindicato obrero de la industria del pescado", 
-               "sindicato de la industria del pescado", "huelguistas", 
-               "obreras de la industria del pescado", "obreras del pescado",
-               "obreros de la industria del pescado", "obreros del pescado",
-               "fileteros", "fileteras", "obreros del filet", "obreras del filet")
+# Creamos el diccionario de palabras que refieren a actores colectivos
+dicc_actores <- c("trabajadores", "docentes", "sindicato", "vecinos",
+                  "municipal", "gobierno")
 
 # Creamos la variable con la frecuencia de palabras que 
-# refieren a lxs obrerxs del pescado
-rev_puerto$frec_soip <- acep_count(rev_puerto$nota, dicc_soip)
+# refieren a actores colectivos
+rev_puerto$frec_actores <- acep_count(rev_puerto$nota, dicc_actores)
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 7,816 × 10
-    #>    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos
-    #>    <date>     <chr>      <chr>  <chr> <chr>  <chr>         <int>           <int>
-    #>  1 2020-12-29 ¡Feliz Añ… Con m… "Con… https… http…            28               0
-    #>  2 2020-12-28 Mapa del … Un re… "El … https… http…          1142               0
-    #>  3 2020-12-24 Plantas p… En Ch… "El … https… http…           536               0
-    #>  4 2020-12-24 Los obrer… En Ma… "El … https… http…           489               0
-    #>  5 2020-12-23 El incump… Se ll… "Las… https… http…           529               1
-    #>  6 2020-12-23 Otro fall… La Cá… "La … https… http…           467               0
-    #>  7 2020-12-22 Recomenda… Desde… "En … https… http…           661               0
-    #>  8 2020-12-22 Trelew co… En 20… "Ins… https… http…           844               0
-    #>  9 2020-12-21 El CFP pr… En la… "Ant… https… http…          1454               0
-    #> 10 2020-12-21 La flota … Puert… "El … https… http…          1073               0
-    #> # ℹ 7,806 more rows
-    #> # ℹ 2 more variables: frec_huelgas <int>, frec_soip <int>
+    #> # A tibble: 720 × 13
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     1 2016-03-01 La Ciudad Emotivo: po… "Hace… "Los… "los dos… http… FALSE   
+    #>  2     2 2016-03-01 La Ciudad El oficiali… "En l… "La … "la decl… http… TRUE    
+    #>  3     3 2016-03-02 La Ciudad Rech tambié… "El r… "El … "el conc… http… TRUE    
+    #>  4     4 2016-03-02 La Ciudad Anuncian in… "El i… "El … "el inte… http… FALSE   
+    #>  5     5 2016-03-02 La Ciudad Video: la p… "El C… "De … "de mane… http… FALSE   
+    #>  6     6 2016-03-03 La Ciudad Nuevas inve… "Una … "Rep… "represe… http… FALSE   
+    #>  7     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  8     8 2016-03-03 La Ciudad Hoy en Mar … "Clas… "Yog… "yoga y … http… TRUE    
+    #>  9     9 2016-03-06 La Ciudad El Colegio … "Será… "El … "el cons… http… FALSE   
+    #> 10    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #> # ℹ 710 more rows
+    #> # ℹ 4 more variables: frec_palabras <int>, frec_conflictos <int>,
+    #> #   frec_huelgas <int>, frec_actores <int>
 
 ## Los índices
 
@@ -133,9 +127,9 @@ rev_puerto$i_conf_gral <- acep_int(rev_puerto$frec_conflictos,
                                    rev_puerto$frec_palabras)
 
 # Creamos la variable con el índice de incidencia 
-# de lxs trabajadorxs del pescado
-rev_puerto$i_soip <- acep_int(rev_puerto$frec_soip, 
-                              rev_puerto$frec_palabras)
+# de actores colectivos
+rev_puerto$i_actores <- acep_int(rev_puerto$frec_actores,
+                                 rev_puerto$frec_palabras)
 
 # Creamos la variable con el índice de huelgas
 rev_puerto$i_huelgas <- acep_int(rev_puerto$frec_huelgas, 
@@ -146,33 +140,34 @@ rev_puerto$i_huelgas <- acep_int(rev_puerto$frec_huelgas,
 rev_puerto <- rev_puerto[rev_puerto$i_conf_gral > 0, ]
 
 # Filtramos para quedarnos con los índices mayores a 0
-# en el índice de incidencia de lxs trabajadorxs del pescado
-rev_puerto <- rev_puerto[rev_puerto$i_soip > 0, ]
+# en el índice de incidencia de actores colectivos
+rev_puerto <- rev_puerto[rev_puerto$i_actores > 0, ]
 
 # Imprimimos la base en consola
 rev_puerto
 ```
 
-    #> # A tibble: 77 × 13
-    #>    fecha      titulo     bajada nota  imagen link  frec_palabras frec_conflictos
-    #>    <date>     <chr>      <chr>  <chr> <chr>  <chr>         <int>           <int>
-    #>  1 2020-07-14 Se levant… El Mi… "Cua… https… http…           743               1
-    #>  2 2020-07-14 Conciliac… El di… "En … https… http…           862               5
-    #>  3 2020-03-13 Conciliac… Perte… "Un … https… http…           489               2
-    #>  4 2019-12-11 Lo que di… En la… "En … https… http…           903               1
-    #>  5 2019-03-22 Trabajado… Obrer… "Tra… https… http…           551               1
-    #>  6 2018-08-14 Devolució… Ferna… "“Ar… https… http…          1134               1
-    #>  7 2018-06-26 Dispar ac… No sa… "El … https… http…           527               5
-    #>  8 2018-02-02 70 obrero… Son t… "Los… https… http…           462               1
-    #>  9 2017-09-27 “Se paró … Duran… "Aye… https… http…          1078               1
-    #> 10 2017-04-24 Se sigue … El te… "El … https… http…           997               1
-    #> # ℹ 67 more rows
-    #> # ℹ 5 more variables: frec_huelgas <int>, frec_soip <int>, i_conf_gral <dbl>,
-    #> #   i_soip <dbl>, i_huelgas <dbl>
+    #> # A tibble: 244 × 16
+    #>       id fecha      seccion   titulo       bajada nota  nota_norm link  clas_hum
+    #>    <dbl> <date>     <fct>     <chr>        <chr>  <chr> <chr>     <chr> <lgl>   
+    #>  1     7 2016-03-03 La Ciudad Exigimos un… "Para… "En … "en el m… http… TRUE    
+    #>  2    10 2016-03-06 La Ciudad La inseguri… "A pe… "Un … "un grup… http… TRUE    
+    #>  3    16 2016-03-17 La Ciudad Cirone: Des… "El t… "El … "el titu… http… TRUE    
+    #>  4    22 2016-03-22 La Ciudad Arroyo al g… "Por … "Al … "al prin… http… TRUE    
+    #>  5    24 2016-03-24 La Ciudad Fueron plan… "En e… "En … "en el p… http… TRUE    
+    #>  6    30 2016-04-02 La Ciudad Vecinalista… "Los … "Vec… "vecinal… http… TRUE    
+    #>  7    37 2016-04-15 La Ciudad Se hace sen… "Es e… "Los… "los doc… http… TRUE    
+    #>  8    41 2016-04-20 La Ciudad Denuncian q… "Lo h… "La … "la pres… http… FALSE   
+    #>  9    43 2016-04-20 La Ciudad Frente Reno… "El p… "El … "el bloq… http… TRUE    
+    #> 10    51 2016-05-02 La Ciudad Denuncian q… "Aseg… "Los… "los tra… http… TRUE    
+    #> # ℹ 234 more rows
+    #> # ℹ 7 more variables: frec_palabras <int>, frec_conflictos <int>,
+    #> #   frec_huelgas <int>, frec_actores <int>, i_conf_gral <dbl>, i_actores <dbl>,
+    #> #   i_huelgas <dbl>
 
-Al realizar los filtros la base se redujo a 77 notas que presentan al
+Al realizar los filtros la base se redujo a 244 notas que presentan al
 menos una mención de una palabra que refiere a conflicto y al menos un
-término que refiere a lxs trabajadorxs del pescado.
+término que refiere a actores colectivos.
 
 ## Serie temporal de índices
 
@@ -211,12 +206,10 @@ conf_gral_anio |> head()
 ```
 
     #>     st frecn csn frecp frecm  intac intensidad int_notas_confl
-    #> 1 2009     2   1  1255     8 0.0122     0.0064          0.5000
-    #> 2 2010    12   2  9224    22 0.0296     0.0024          0.1667
-    #> 3 2011     5   1  3820     9 0.0118     0.0024          0.2000
-    #> 4 2012    33   4 29636    57 0.0660     0.0019          0.1212
-    #> 5 2013     5   2  5056     9 0.0095     0.0018          0.4000
-    #> 6 2014     3   1  2366     8 0.0088     0.0034          0.3333
+    #> 1 2016    60  25 36083   168 0.4820     0.0047          0.4167
+    #> 2 2017    59  27 43511   210 0.4032     0.0048          0.4576
+    #> 3 2018    54  22 29270   170 0.4341     0.0058          0.4074
+    #> 4 2019    70  40 49513   269 0.5684     0.0054          0.5714
 
 ``` r
 
@@ -231,9 +224,10 @@ datos <- data.frame(
   intensidad = rev_puerto$i_conf_gral
 )
 
-# Nos quedamos con los datos del año 2012 
-datos <-  datos[datos$fecha < "2013-01-01", ]
-datos <-  datos[datos$fecha > "2011-12-31", ]
+# Nos quedamos con un año presente en la muestra incluida
+anio_ejemplo <- names(sort(table(format(as.Date(datos$fecha), "%Y")),
+                           decreasing = TRUE))[1]
+datos <- datos[format(as.Date(datos$fecha), "%Y") == anio_ejemplo, ]
 
 # Luego construimos los vectores
 fecha <- datos$fecha
@@ -248,12 +242,12 @@ conf_gral |> head()
 ```
 
     #>        st frecn csn frecp frecm  intac intensidad int_notas_confl
-    #> 1 2012-04     4   0  2721     5 0.0073     0.0018          0.0000
-    #> 2 2012-05     4   1  3370     9 0.0108     0.0027          0.2500
-    #> 3 2012-06     7   2  7276    17 0.0158     0.0023          0.2857
-    #> 4 2012-07    11   1  9759    16 0.0202     0.0016          0.0909
-    #> 5 2012-08     4   0  4365     6 0.0054     0.0014          0.0000
-    #> 6 2012-09     1   0  1003     1 0.0010     0.0010          0.0000
+    #> 1 2019-01    10   7  9450    49 0.0750     0.0052          0.7000
+    #> 2 2019-02     5   3  2075    16 0.0410     0.0077          0.6000
+    #> 3 2019-03    12   9  8091    49 0.1249     0.0061          0.7500
+    #> 4 2019-04     7   6  5009    57 0.0812     0.0114          0.8571
+    #> 5 2019-05     7   3  3818    20 0.0522     0.0052          0.4286
+    #> 6 2019-06     5   2  2248    11 0.0340     0.0049          0.4000
 
 En la siguiente parte del código construimos la serie de tiempo para la
 conflictividad huelguística.
@@ -271,9 +265,8 @@ datosh <- data.frame(
   intensidad = rev_puerto$i_huelgas
 )
 
-# Nos quedamos con los datos del año 2012  
-datosh <-  datosh[datosh$fecha < "2013-01-01", ]
-datosh <-  datosh[datosh$fecha > "2011-12-31", ]
+# Nos quedamos con el mismo año de ejemplo
+datosh <- datosh[format(as.Date(datosh$fecha), "%Y") == anio_ejemplo, ]
 
 # Luego construimos los vectores
 fechah <- datosh$fecha
@@ -287,13 +280,13 @@ huelgas <- acep_sst(datosh)
 huelgas |> head()
 ```
 
-    #>        st frecn csn frecp frecm intac intensidad int_notas_confl
-    #> 1 2012-04     4   0  2721     5     4     0.0018          0.0000
-    #> 2 2012-05     4   1  3370     9     4     0.0027          0.2500
-    #> 3 2012-06     7   2  7276    17     7     0.0023          0.2857
-    #> 4 2012-07    11   1  9759    16    11     0.0016          0.0909
-    #> 5 2012-08     4   0  4365     6     4     0.0014          0.0000
-    #> 6 2012-09     1   0  1003     1     1     0.0010          0.0000
+    #>        st frecn csn frecp frecm  intac intensidad int_notas_confl
+    #> 1 2019-01    10   1  9450    11 2.2309     0.0012          0.1000
+    #> 2 2019-02     5   1  2075     4 0.7500     0.0019          0.2000
+    #> 3 2019-03    12   2  8091    13 2.1179     0.0016          0.1667
+    #> 4 2019-04     7   2  5009    24 2.6191     0.0048          0.2857
+    #> 5 2019-05     7   3  3818    12 3.7667     0.0031          0.4286
+    #> 6 2019-06     5   0  2248     0 0.0000     0.0000          0.0000
 
 ## Las visualizaciones
 
@@ -301,10 +294,8 @@ En este último apartado haremos uso de las funciones
 [`acep_plot_st()`](https://agusnieto77.github.io/ACEP/reference/acep_plot_st.md)
 y
 [`acep_plot_rst()`](https://agusnieto77.github.io/ACEP/reference/acep_plot_rst.md)
-para visualizar la variación anual de la conflictividad general
-protagonizada por lxs trabajadorxs del pescado entre marzo de 2009 y
-diciembre de 2020. También visualizaremos la variación mensual durante
-el año 2012, el más conflictivo de período bajo análisis.
+para visualizar la variación anual y mensual de la conflictividad
+general en la muestra incluida en el paquete.
 
 ``` r
 
@@ -357,12 +348,9 @@ acep_plot_st(
 
 ![](conflictividad_soip_files/figure-html/plot02-1.png)
 
-Las distintas métricas nos ayudan a identificar al año 2012 como el más
-conflictivo del período en el ámbito de la industria pesquera de
-procesado en tierra en la ciudad de Mar del Plata, con epicentro en los
-meses de junio, julio y agosto para la conflictividad general y con
-epicentro en los meses de mayo, junio y julio para los movimientos
-huelguísticos.
+Las distintas métricas permiten explorar la temporalidad de las
+menciones a conflictividad en el corpus de ejemplo sin depender de
+recursos externos durante la reconstrucción de la vignette.
 
 ## Comentarios finales
 

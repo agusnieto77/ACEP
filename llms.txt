@@ -12,7 +12,7 @@ de protesta.
 
 ### Instalacion de la version estable
 
-La versión estable actual de ACEP es `0.1.0` y se instala desde
+La versión estable actual de ACEP es `0.1.1` y se instala desde
 [CRAN](https://CRAN.R-project.org/package=ACEP) con:
 
 ``` r

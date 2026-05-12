@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Agustín
 Nieto</h4>
             
-            <h4 data-toc-skip class="date">2026-05-10</h4>
+            <h4 data-toc-skip class="date">2026-05-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agusnieto77/ACEP/blob/master/vignettes/extraccion_de_svo_con_acep.Rmd" class="external-link"><code>vignettes/extraccion_de_svo_con_acep.Rmd</code></a></small>
       <div class="d-none name"><code>extraccion_de_svo_con_acep.Rmd</code></div>
@@ -167,65 +167,109 @@ cada palabra es un token.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; List of 6</span></span>
-<span><span class="co">#&gt;  $ texto_tag            :Classes 'tokenIndex', 'data.table' and 'data.frame':    153 obs. of  20 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id        : int [1:153] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence      : int [1:153] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ token_id      : num [1:153] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ token         : chr [1:153] "Sindicatos" "y" "estudiantes" "marchan" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma         : chr [1:153] "Sindicatos" "y" "estudiante" "marchar" ...</span></span>
-<span><span class="co">#&gt;   ..$ pos           : chr [1:153] "PROPN" "CCONJ" "NOUN" "VERB" ...</span></span>
-<span><span class="co">#&gt;   ..$ parent        : num [1:153] 4 3 1 NA 8 8 8 4 10 8 ...</span></span>
-<span><span class="co">#&gt;   ..$ relation      : chr [1:153] "nsubj" "cc" "conj" "ROOT" ...</span></span>
+<span><span class="co">#&gt;  $ texto_tag            :Classes 'tokenIndex', 'data.table' and 'data.frame':    15 obs. of  20 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id        : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ sentence      : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ token_id      : num [1:15] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   ..$ token         : chr [1:15] "En" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ lemma         : chr [1:15] "en" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ pos           : chr [1:15] "ADP" "PROPN" "ADP" "PROPN" ...</span></span>
+<span><span class="co">#&gt;   ..$ parent        : num [1:15] 2 7 4 2 6 7 NA 9 7 13 ...</span></span>
+<span><span class="co">#&gt;   ..$ relation      : chr [1:15] "case" "obl" "case" "flat" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "levels")= chr "ROOT"</span></span>
-<span><span class="co">#&gt;   ..$ entity        : chr [1:153] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:153] "beg_root" "" "beg_root" "" ...</span></span>
-<span><span class="co">#&gt;   ..$ whitespace    : logi [1:153] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;   ..$ is_upper      : logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ is_title      : logi [1:153] TRUE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ is_quote      : logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:153] "O" "O" "O" "O" ...</span></span>
-<span><span class="co">#&gt;   ..$ ent_iob       : int [1:153] 2 2 2 2 2 2 2 2 2 3 ...</span></span>
-<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:153] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ morph         : chr [1:153] "" "" "Number=Plur" "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin" ...</span></span>
-<span><span class="co">#&gt;   ..$ sent          : chr [1:153] "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ ...</span></span>
+<span><span class="co">#&gt;   ..$ entity        : chr [1:15] "" "LOC_B" "LOC_I" "LOC_I" ...</span></span>
+<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:15] "" "beg_root" "mid" "end" ...</span></span>
+<span><span class="co">#&gt;   ..$ whitespace    : logi [1:15] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_upper      : logi [1:15] FALSE FALSE FALSE FALSE FALSE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_title      : logi [1:15] TRUE TRUE FALSE TRUE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_quote      : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:15] "O" "B" "I" "I" ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob       : int [1:15] 2 3 1 1 2 3 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ morph         : chr [1:15] "AdpType=Prep" "" "AdpType=Preppron" "" ...</span></span>
+<span><span class="co">#&gt;   ..$ sent          : chr [1:15] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: (nil)&gt; </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
-<span><span class="co">#&gt;   ..- attr(*, "index")= int(0) </span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 21 5 6 7 ...</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, "__relation")= int [1:153] 4 25 46 57 71 88 101 109 116 131 ...</span></span>
-<span><span class="co">#&gt;  $ texto_tag_entity     :Classes 'spacyr_parsed' and 'data.frame':   149 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id     : int [1:149] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence_id: int [1:149] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ token_id   : num [1:149] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ token      : chr [1:149] "Sindicatos" "y" "estudiantes" "marchan" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma      : chr [1:149] "Sindicatos" "y" "estudiante" "marchar" ...</span></span>
-<span><span class="co">#&gt;   ..$ pos        : chr [1:149] "PROPN" "CCONJ" "NOUN" "VERB" ...</span></span>
-<span><span class="co">#&gt;   ..$ entity_type: chr [1:149] "" "" "" "" ...</span></span>
-<span><span class="co">#&gt;  $ texto_only_entity    :'data.frame':   13 obs. of  4 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id     : int [1:13] 1 1 1 1 3 4 5 5 5 6 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence_id: int [1:13] 1 1 2 2 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ entity     : chr [1:13] "México" "Gobierno" "Larreta" "Ciudad_de_Buenos_Aires" ...</span></span>
-<span><span class="co">#&gt;   ..$ entity_type: chr [1:13] "LOC" "ORG" "PER" "LOC" ...</span></span>
-<span><span class="co">#&gt;  $ texto_only_entity_loc:'data.frame':   4 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id     : int [1:4] 1 1 3 6</span></span>
-<span><span class="co">#&gt;   ..$ sentence   : int [1:4] 1 2 1 1</span></span>
-<span><span class="co">#&gt;   ..$ entity_    : chr [1:4] "México" "Ciudad de Buenos Aires" "Chubut" "Tucumán"</span></span>
-<span><span class="co">#&gt;   ..$ entity     : chr [1:4] "México" "Ciudad_de_Buenos_Aires" "Chubut" "Tucumán"</span></span>
-<span><span class="co">#&gt;   ..$ entity_type: chr [1:4] "LOC" "LOC" "LOC" "LOC"</span></span>
-<span><span class="co">#&gt;   ..$ lat        : num [1:4] 23.7 -34.6 -43.7 -26.6</span></span>
-<span><span class="co">#&gt;   ..$ long       : num [1:4] -102 -58.4 -68.7 -64.9</span></span>
-<span><span class="co">#&gt;  $ texto_nounphrase     :Classes 'spacyr_parsed' and 'data.frame':   120 obs. of  6 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id     : int [1:120] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence_id: int [1:120] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ token_id   : num [1:120] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ token      : chr [1:120] "Sindicatos" "y" "estudiantes" "marchan" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma      : chr [1:120] "Sindicatos" "y" "estudiante" "marchar" ...</span></span>
-<span><span class="co">#&gt;   ..$ pos        : chr [1:120] "nounphrase" "CCONJ" "nounphrase" "VERB" ...</span></span>
-<span><span class="co">#&gt;  $ texto_only_nounphrase:'data.frame':   45 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id     : int [1:45] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence_id: int [1:45] 1 1 1 1 1 1 1 2 2 2 ...</span></span>
-<span><span class="co">#&gt;   ..$ nounphrase : chr [1:45] "Sindicatos" "estudiantes" "las_principales_ciudades" "México" ...</span></span></code></pre>
+<span><span class="co">#&gt;  $ texto_tag_entity     :Classes 'tokenIndex', 'data.table' and 'data.frame':    4 obs. of  20 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id        : int [1:4] 1 1 1 1</span></span>
+<span><span class="co">#&gt;   ..$ sentence      : int [1:4] 1 1 1 1</span></span>
+<span><span class="co">#&gt;   ..$ token_id      : num [1:4] 2 3 4 6</span></span>
+<span><span class="co">#&gt;   ..$ token         : chr [1:4] "Mar" "del" "Plata" "SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ lemma         : chr [1:4] "Mar" "del" "Plata" "SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ pos           : chr [1:4] "PROPN" "ADP" "PROPN" "PROPN"</span></span>
+<span><span class="co">#&gt;   ..$ parent        : num [1:4] 7 4 2 7</span></span>
+<span><span class="co">#&gt;   ..$ relation      : chr [1:4] "obl" "case" "flat" "nsubj"</span></span>
+<span><span class="co">#&gt;   ..$ entity        : chr [1:4] "LOC_B" "LOC_I" "LOC_I" "ORG_B"</span></span>
+<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:4] "beg_root" "mid" "end" "end_root"</span></span>
+<span><span class="co">#&gt;   ..$ whitespace    : logi [1:4] TRUE TRUE TRUE TRUE</span></span>
+<span><span class="co">#&gt;   ..$ is_upper      : logi [1:4] FALSE FALSE FALSE TRUE</span></span>
+<span><span class="co">#&gt;   ..$ is_title      : logi [1:4] TRUE FALSE TRUE FALSE</span></span>
+<span><span class="co">#&gt;   ..$ is_quote      : logi [1:4] FALSE FALSE FALSE FALSE</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:4] "B" "I" "I" "B"</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob       : int [1:4] 3 1 1 3</span></span>
+<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:4] FALSE FALSE FALSE FALSE</span></span>
+<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:4] FALSE FALSE FALSE FALSE</span></span>
+<span><span class="co">#&gt;   ..$ morph         : chr [1:4] "" "AdpType=Preppron" "" ""</span></span>
+<span><span class="co">#&gt;   ..$ sent          : chr [1:4] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial."</span></span>
+<span><span class="co">#&gt;  $ texto_only_entity    :'data.frame':   4 obs. of  4 variables:</span></span>
+<span><span class="co">#&gt;   ..$ entity     : chr [1:4] "Mar" "del" "Plata" "SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ entity_type: chr [1:4] "LOC" "LOC" "LOC" "ORG"</span></span>
+<span><span class="co">#&gt;   ..$ doc_id     : int [1:4] 1 1 1 1</span></span>
+<span><span class="co">#&gt;   ..$ sentence   : int [1:4] 1 1 1 1</span></span>
+<span><span class="co">#&gt;  $ texto_only_entity_loc:'data.frame':   1 obs. of  7 variables:</span></span>
+<span><span class="co">#&gt;   ..$ entity_    : chr "Mar del Plata"</span></span>
+<span><span class="co">#&gt;   ..$ doc_id     : int 1</span></span>
+<span><span class="co">#&gt;   ..$ sentence   : int 1</span></span>
+<span><span class="co">#&gt;   ..$ entity     : chr "Mar_del_Plata"</span></span>
+<span><span class="co">#&gt;   ..$ entity_type: chr "LOC"</span></span>
+<span><span class="co">#&gt;   ..$ lat        : num -38</span></span>
+<span><span class="co">#&gt;   ..$ long       : num -57.5</span></span>
+<span><span class="co">#&gt;  $ texto_nounphrase     :Classes 'tokenIndex', 'data.table' and 'data.frame':    15 obs. of  20 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id        : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ sentence      : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ token_id      : num [1:15] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   ..$ token         : chr [1:15] "En" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ lemma         : chr [1:15] "en" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ pos           : chr [1:15] "ADP" "PROPN" "ADP" "PROPN" ...</span></span>
+<span><span class="co">#&gt;   ..$ parent        : num [1:15] 2 7 4 2 6 7 NA 9 7 13 ...</span></span>
+<span><span class="co">#&gt;   ..$ relation      : chr [1:15] "case" "obl" "case" "flat" ...</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "levels")= chr "ROOT"</span></span>
+<span><span class="co">#&gt;   ..$ entity        : chr [1:15] "" "LOC_B" "LOC_I" "LOC_I" ...</span></span>
+<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:15] "" "beg_root" "mid" "end" ...</span></span>
+<span><span class="co">#&gt;   ..$ whitespace    : logi [1:15] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_upper      : logi [1:15] FALSE FALSE FALSE FALSE FALSE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_title      : logi [1:15] TRUE TRUE FALSE TRUE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_quote      : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:15] "O" "B" "I" "I" ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob       : int [1:15] 2 3 1 1 2 3 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ morph         : chr [1:15] "AdpType=Prep" "" "AdpType=Preppron" "" ...</span></span>
+<span><span class="co">#&gt;   ..$ sent          : chr [1:15] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: (nil)&gt; </span></span>
+<span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
+<span><span class="co">#&gt;  $ texto_only_nounphrase:Classes 'tokenIndex', 'data.table' and 'data.frame':    9 obs. of  20 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id        : int [1:9] 1 1 1 1 1 1 1 1 1</span></span>
+<span><span class="co">#&gt;   ..$ sentence      : int [1:9] 1 1 1 1 1 1 1 1 1</span></span>
+<span><span class="co">#&gt;   ..$ token_id      : num [1:9] 2 3 4 5 6 8 9 11 13</span></span>
+<span><span class="co">#&gt;   ..$ token         : chr [1:9] "Mar" "del" "Plata" "el" ...</span></span>
+<span><span class="co">#&gt;   ..$ lemma         : chr [1:9] "Mar" "del" "Plata" "el" ...</span></span>
+<span><span class="co">#&gt;   ..$ pos           : chr [1:9] "PROPN" "ADP" "PROPN" "DET" ...</span></span>
+<span><span class="co">#&gt;   ..$ parent        : num [1:9] 7 4 2 6 7 9 7 10 9</span></span>
+<span><span class="co">#&gt;   ..$ relation      : chr [1:9] "obl" "case" "flat" "det" ...</span></span>
+<span><span class="co">#&gt;   ..$ entity        : chr [1:9] "LOC_B" "LOC_I" "LOC_I" "" ...</span></span>
+<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:9] "beg_root" "mid" "end" "beg" ...</span></span>
+<span><span class="co">#&gt;   ..$ whitespace    : logi [1:9] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_upper      : logi [1:9] FALSE FALSE FALSE FALSE TRUE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_title      : logi [1:9] TRUE FALSE TRUE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_quote      : logi [1:9] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:9] "B" "I" "I" "O" ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob       : int [1:9] 3 1 1 2 3 2 2 2 2</span></span>
+<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:9] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:9] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ morph         : chr [1:9] "" "AdpType=Preppron" "" "Definite=Def|Gender=Masc|Number=Sing|PronType=Art" ...</span></span>
+<span><span class="co">#&gt;   ..$ sent          : chr [1:9] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...</span></span></code></pre>
 <p>En este resultado podemos ver cómo la función crea los seis marcos de
 datos con información relevante sobre el contenido y la forma de los
 textos ingresados. En nuestro caso, textos referidos a conflictos.</p>
@@ -238,72 +282,72 @@ creados con la función <code><a href="../reference/acep_postag.html">acep_posta
 estructurado para servir de input de la función
 <code><a href="../reference/acep_svo.html">acep_svo()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag</span><span class="op">[</span><span class="fl">43</span><span class="op">:</span><span class="fl">54</span>, <span class="op">]</span>, n <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence token_id      token     lemma   pos parent relation entity</span></span>
-<span><span class="co">#&gt; 43      2        1        1        Los        el   DET      2      det       </span></span>
-<span><span class="co">#&gt; 44      2        1        2    gremios    gremio  NOUN      4    nsubj       </span></span>
-<span><span class="co">#&gt; 45      2        1        3   docentes   docente   ADJ      2     amod       </span></span>
-<span><span class="co">#&gt; 46      2        1        4   rechazan  rechazar  VERB     NA     ROOT       </span></span>
-<span><span class="co">#&gt; 47      2        1        5     volver    volver  VERB      4    xcomp       </span></span>
-<span><span class="co">#&gt; 48      2        1        6          a         a   ADP      8     case       </span></span>
-<span><span class="co">#&gt; 49      2        1        7        las        el   DET      8      det       </span></span>
-<span><span class="co">#&gt; 50      2        1        8      aulas      aula  NOUN      5      obl       </span></span>
-<span><span class="co">#&gt; 51      2        1        9        sin       sin   ADP     10     case       </span></span>
-<span><span class="co">#&gt; 52      2        1       10  garantías  garantía  NOUN      5      obl       </span></span>
-<span><span class="co">#&gt; 53      2        1       11 sanitarias sanitario   ADJ     10     amod       </span></span>
-<span><span class="co">#&gt; 54      2        1       12          .         . PUNCT      4    punct       </span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag</span>, n <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;    doc_id sentence token_id   token    lemma   pos parent relation entity</span></span>
+<span><span class="co">#&gt; 1       1        1        1      En       en   ADP      2     case       </span></span>
+<span><span class="co">#&gt; 2       1        1        2     Mar      Mar PROPN      7      obl  LOC_B</span></span>
+<span><span class="co">#&gt; 3       1        1        3     del      del   ADP      4     case  LOC_I</span></span>
+<span><span class="co">#&gt; 4       1        1        4   Plata    Plata PROPN      2     flat  LOC_I</span></span>
+<span><span class="co">#&gt; 5       1        1        5      el       el   DET      6      det       </span></span>
+<span><span class="co">#&gt; 6       1        1        6    SOIP     SOIP PROPN      7    nsubj  ORG_B</span></span>
+<span><span class="co">#&gt; 7       1        1        7 declara declarar  VERB     NA     ROOT       </span></span>
+<span><span class="co">#&gt; 8       1        1        8      la       el   DET      9      det       </span></span>
+<span><span class="co">#&gt; 9       1        1        9  huelga   huelga  NOUN      7      obj       </span></span>
+<span><span class="co">#&gt; 10      1        1       10      en       en   ADP     13     case       </span></span>
+<span><span class="co">#&gt; 11      1        1       11 demanda  demanda  NOUN     10    fixed       </span></span>
+<span><span class="co">#&gt; 12      1        1       12      de       de   ADP     10    fixed       </span></span>
 <span><span class="co">#&gt;    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
-<span><span class="co">#&gt; 43        beg       TRUE    FALSE     TRUE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 44   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 45                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 46                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 47                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 48                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 49        beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 50   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 51                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 52   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 53                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
-<span><span class="co">#&gt; 54                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 1                   TRUE    FALSE     TRUE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 2    beg_root       TRUE    FALSE     TRUE    FALSE        B       3</span></span>
+<span><span class="co">#&gt; 3         mid       TRUE    FALSE    FALSE    FALSE        I       1</span></span>
+<span><span class="co">#&gt; 4         end       TRUE    FALSE     TRUE    FALSE        I       1</span></span>
+<span><span class="co">#&gt; 5         beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 6    end_root       TRUE     TRUE    FALSE    FALSE        B       3</span></span>
+<span><span class="co">#&gt; 7                   TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 8         beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 9    end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 10                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 11   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 12                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
 <span><span class="co">#&gt;    is_left_punct is_right_punct</span></span>
-<span><span class="co">#&gt; 43         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 44         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 45         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 46         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 47         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 48         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 49         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 50         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 51         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 52         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 53         FALSE          FALSE</span></span>
-<span><span class="co">#&gt; 54         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 1          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 2          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 3          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 4          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 5          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 6          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 7          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 8          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 9          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 10         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 11         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 12         FALSE          FALSE</span></span>
 <span><span class="co">#&gt;                                                    morph</span></span>
-<span><span class="co">#&gt; 43     Definite=Def|Gender=Masc|Number=Plur|PronType=Art</span></span>
-<span><span class="co">#&gt; 44                               Gender=Masc|Number=Plur</span></span>
-<span><span class="co">#&gt; 45                                           Number=Plur</span></span>
-<span><span class="co">#&gt; 46 Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin</span></span>
-<span><span class="co">#&gt; 47                                          VerbForm=Inf</span></span>
-<span><span class="co">#&gt; 48                                          AdpType=Prep</span></span>
-<span><span class="co">#&gt; 49      Definite=Def|Gender=Fem|Number=Plur|PronType=Art</span></span>
-<span><span class="co">#&gt; 50                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt; 51                                          AdpType=Prep</span></span>
-<span><span class="co">#&gt; 52                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt; 53                                Gender=Fem|Number=Plur</span></span>
-<span><span class="co">#&gt; 54                                        PunctType=Peri</span></span>
+<span><span class="co">#&gt; 1                                           AdpType=Prep</span></span>
+<span><span class="co">#&gt; 2                                                       </span></span>
+<span><span class="co">#&gt; 3                                       AdpType=Preppron</span></span>
+<span><span class="co">#&gt; 4                                                       </span></span>
+<span><span class="co">#&gt; 5      Definite=Def|Gender=Masc|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt; 6                                                       </span></span>
+<span><span class="co">#&gt; 7  Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin</span></span>
+<span><span class="co">#&gt; 8       Definite=Def|Gender=Fem|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt; 9                                 Gender=Fem|Number=Sing</span></span>
+<span><span class="co">#&gt; 10                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt; 11                                                      </span></span>
+<span><span class="co">#&gt; 12                                          AdpType=Prep</span></span>
 <span><span class="co">#&gt;                                                                          sent</span></span>
-<span><span class="co">#&gt; 43 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 44 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 45 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 46 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 47 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 48 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 49 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 50 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 51 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 52 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 53 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span>
-<span><span class="co">#&gt; 54 Los gremios docentes rechazan volver a las aulas sin garantías sanitarias.</span></span></code></pre>
+<span><span class="co">#&gt; 1  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 2  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 3  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 4  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 5  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 6  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 7  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 8  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 9  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 10 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 11 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 12 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_tag_entity">texto_tag_entity<a class="anchor" aria-label="anchor" href="#texto_tag_entity"></a>
@@ -315,22 +359,27 @@ más de un token, la función colapsa todos los tokens referidos a esa
 entidad en una sola celda de la columna token. Ejemplo:
 ‘Ciudad_de_Buenos_Aires’.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag_entity</span><span class="op">[</span><span class="fl">52</span><span class="op">:</span><span class="fl">65</span>, <span class="op">]</span>, n <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence_id token_id      token    lemma    pos entity_type</span></span>
-<span><span class="co">#&gt; 52      3           1        1        Los       el    DET            </span></span>
-<span><span class="co">#&gt; 53      3           1        2  estatales  estatal   NOUN            </span></span>
-<span><span class="co">#&gt; 54      3           1        3 rechazaron rechazar   VERB            </span></span>
-<span><span class="co">#&gt; 55      3           1        4         la       el    DET            </span></span>
-<span><span class="co">#&gt; 56      3           1        5     oferta   oferta   NOUN            </span></span>
-<span><span class="co">#&gt; 57      3           1        6   salarial salarial    ADJ            </span></span>
-<span><span class="co">#&gt; 58      3           1        7        que      que   PRON            </span></span>
-<span><span class="co">#&gt; 59      3           1        8        les       él   PRON            </span></span>
-<span><span class="co">#&gt; 60      3           1        9       hizo    hacer   VERB            </span></span>
-<span><span class="co">#&gt; 61      3           1       10         el       el    DET            </span></span>
-<span><span class="co">#&gt; 62      3           1       11   gobierno gobierno   NOUN            </span></span>
-<span><span class="co">#&gt; 63      3           1       12         en       en    ADP            </span></span>
-<span><span class="co">#&gt; 64      3           1       13     Chubut   Chubut ENTITY         LOC</span></span>
-<span><span class="co">#&gt; 65      3           1       14          .        .  PUNCT</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_tag_entity</span>, n <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;   doc_id sentence token_id token lemma   pos parent relation entity nounphrase</span></span>
+<span><span class="co">#&gt; 2      1        1        2   Mar   Mar PROPN      7      obl  LOC_B   beg_root</span></span>
+<span><span class="co">#&gt; 3      1        1        3   del   del   ADP      4     case  LOC_I        mid</span></span>
+<span><span class="co">#&gt; 4      1        1        4 Plata Plata PROPN      2     flat  LOC_I        end</span></span>
+<span><span class="co">#&gt; 6      1        1        6  SOIP  SOIP PROPN      7    nsubj  ORG_B   end_root</span></span>
+<span><span class="co">#&gt;   whitespace is_upper is_title is_quote ent_iob_ ent_iob is_left_punct</span></span>
+<span><span class="co">#&gt; 2       TRUE    FALSE     TRUE    FALSE        B       3         FALSE</span></span>
+<span><span class="co">#&gt; 3       TRUE    FALSE    FALSE    FALSE        I       1         FALSE</span></span>
+<span><span class="co">#&gt; 4       TRUE    FALSE     TRUE    FALSE        I       1         FALSE</span></span>
+<span><span class="co">#&gt; 6       TRUE     TRUE    FALSE    FALSE        B       3         FALSE</span></span>
+<span><span class="co">#&gt;   is_right_punct            morph</span></span>
+<span><span class="co">#&gt; 2          FALSE                 </span></span>
+<span><span class="co">#&gt; 3          FALSE AdpType=Preppron</span></span>
+<span><span class="co">#&gt; 4          FALSE                 </span></span>
+<span><span class="co">#&gt; 6          FALSE                 </span></span>
+<span><span class="co">#&gt;                                                                         sent</span></span>
+<span><span class="co">#&gt; 2 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 3 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 4 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 6 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_only_entity">texto_only_entity<a class="anchor" aria-label="anchor" href="#texto_only_entity"></a>
@@ -339,17 +388,11 @@ entidad en una sola celda de la columna token. Ejemplo:
 filtrado por el valor ‘ENTITY’ de la columna ‘pos’.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_only_entity</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence_id                 entity entity_type</span></span>
-<span><span class="co">#&gt; 1       1           1                 México         LOC</span></span>
-<span><span class="co">#&gt; 2       1           1               Gobierno         ORG</span></span>
-<span><span class="co">#&gt; 3       1           2                Larreta         PER</span></span>
-<span><span class="co">#&gt; 4       1           2 Ciudad_de_Buenos_Aires         LOC</span></span>
-<span><span class="co">#&gt; 5       3           1                 Chubut         LOC</span></span>
-<span><span class="co">#&gt; 6       4           1                    CGT         ORG</span></span>
-<span><span class="co">#&gt; 7       5           1                    CTA         ORG</span></span>
-<span><span class="co">#&gt; 8       5           1              Izquierda         ORG</span></span>
-<span><span class="co">#&gt; 9       5           1                    CGT         ORG</span></span>
-<span><span class="co">#&gt; 10      6           1                Tucumán         LOC</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   entity entity_type doc_id sentence</span></span>
+<span><span class="co">#&gt; 1    Mar         LOC      1        1</span></span>
+<span><span class="co">#&gt; 2    del         LOC      1        1</span></span>
+<span><span class="co">#&gt; 3  Plata         LOC      1        1</span></span>
+<span><span class="co">#&gt; 4   SOIP         ORG      1        1</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_only_entity_loc">texto_only_entity_loc<a class="anchor" aria-label="anchor" href="#texto_only_entity_loc"></a>
@@ -359,11 +402,8 @@ filtrado por el valor ‘LOC’ de la columna ‘entity_type’ y procesado con
 la función ‘geo()’ del paquete <em>tidygeocoder</em>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_only_entity_loc</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence                entity_       lat       long</span></span>
-<span><span class="co">#&gt; 1       1        1                 México  23.65851 -102.00771</span></span>
-<span><span class="co">#&gt; 22      1        2 Ciudad de Buenos Aires -34.60757  -58.43709</span></span>
-<span><span class="co">#&gt; 43      3        1                 Chubut -43.71284  -68.74618</span></span>
-<span><span class="co">#&gt; 57      6        1                Tucumán -26.56436  -64.88240</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;         entity_ doc_id sentence      lat     long</span></span>
+<span><span class="co">#&gt; 1 Mar del Plata      1        1 -38.0055 -57.5426</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_nounphrase">texto_nounphrase<a class="anchor" aria-label="anchor" href="#texto_nounphrase"></a>
@@ -375,17 +415,17 @@ referidos a ese sustantivo en una sola celda de la columna token.
 Ejemplo: ‘las_principales_ciudades’.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_nounphrase</span><span class="op">[</span> , <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence_id                    token        pos</span></span>
-<span><span class="co">#&gt; 1       1           1               Sindicatos nounphrase</span></span>
-<span><span class="co">#&gt; 2       1           1                        y      CCONJ</span></span>
-<span><span class="co">#&gt; 3       1           1              estudiantes nounphrase</span></span>
-<span><span class="co">#&gt; 4       1           1                  marchan       VERB</span></span>
-<span><span class="co">#&gt; 5       1           1                      por        ADP</span></span>
-<span><span class="co">#&gt; 6       1           1 las_principales_ciudades nounphrase</span></span>
-<span><span class="co">#&gt; 7       1           1                       de        ADP</span></span>
-<span><span class="co">#&gt; 8       1           1                   México nounphrase</span></span>
-<span><span class="co">#&gt; 9       1           1                     para        ADP</span></span>
-<span><span class="co">#&gt; 10      1           1                   exigir       VERB</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;    doc_id sentence   token   pos</span></span>
+<span><span class="co">#&gt; 1       1        1      En   ADP</span></span>
+<span><span class="co">#&gt; 2       1        1     Mar PROPN</span></span>
+<span><span class="co">#&gt; 3       1        1     del   ADP</span></span>
+<span><span class="co">#&gt; 4       1        1   Plata PROPN</span></span>
+<span><span class="co">#&gt; 5       1        1      el   DET</span></span>
+<span><span class="co">#&gt; 6       1        1    SOIP PROPN</span></span>
+<span><span class="co">#&gt; 7       1        1 declara  VERB</span></span>
+<span><span class="co">#&gt; 8       1        1      la   DET</span></span>
+<span><span class="co">#&gt; 9       1        1  huelga  NOUN</span></span>
+<span><span class="co">#&gt; 10      1        1      en   ADP</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="texto_only_nounphrase">texto_only_nounphrase<a class="anchor" aria-label="anchor" href="#texto_only_nounphrase"></a>
@@ -394,17 +434,56 @@ Ejemplo: ‘las_principales_ciudades’.</p>
 filtrado por el valor ‘nounphrase’ de la columna ‘pos’.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_tags</span><span class="op">$</span><span class="va">texto_only_nounphrase</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id sentence_id               nounphrase</span></span>
-<span><span class="co">#&gt; 1       1           1               Sindicatos</span></span>
-<span><span class="co">#&gt; 2       1           1              estudiantes</span></span>
-<span><span class="co">#&gt; 3       1           1 las_principales_ciudades</span></span>
-<span><span class="co">#&gt; 4       1           1                   México</span></span>
-<span><span class="co">#&gt; 5       1           1                un_cambio</span></span>
-<span><span class="co">#&gt; 6       1           1              la_política</span></span>
-<span><span class="co">#&gt; 7       1           1                 Gobierno</span></span>
-<span><span class="co">#&gt; 8       1           2              Los_gremios</span></span>
-<span><span class="co">#&gt; 9       1           2                  un_paro</span></span>
-<span><span class="co">#&gt; 10      1           2        la_presencialidad</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;    doc_id sentence token_id   token   lemma   pos parent relation entity</span></span>
+<span><span class="co">#&gt; 2       1        1        2     Mar     Mar PROPN      7      obl  LOC_B</span></span>
+<span><span class="co">#&gt; 3       1        1        3     del     del   ADP      4     case  LOC_I</span></span>
+<span><span class="co">#&gt; 4       1        1        4   Plata   Plata PROPN      2     flat  LOC_I</span></span>
+<span><span class="co">#&gt; 5       1        1        5      el      el   DET      6      det       </span></span>
+<span><span class="co">#&gt; 6       1        1        6    SOIP    SOIP PROPN      7    nsubj  ORG_B</span></span>
+<span><span class="co">#&gt; 8       1        1        8      la      el   DET      9      det       </span></span>
+<span><span class="co">#&gt; 9       1        1        9  huelga  huelga  NOUN      7      obj       </span></span>
+<span><span class="co">#&gt; 11      1        1       11 demanda demanda  NOUN     10    fixed       </span></span>
+<span><span class="co">#&gt; 13      1        1       13 aumento aumento  NOUN      9     nmod       </span></span>
+<span><span class="co">#&gt;    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
+<span><span class="co">#&gt; 2    beg_root       TRUE    FALSE     TRUE    FALSE        B       3</span></span>
+<span><span class="co">#&gt; 3         mid       TRUE    FALSE    FALSE    FALSE        I       1</span></span>
+<span><span class="co">#&gt; 4         end       TRUE    FALSE     TRUE    FALSE        I       1</span></span>
+<span><span class="co">#&gt; 5         beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 6    end_root       TRUE     TRUE    FALSE    FALSE        B       3</span></span>
+<span><span class="co">#&gt; 8         beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 9    end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 11   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 13   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;    is_left_punct is_right_punct</span></span>
+<span><span class="co">#&gt; 2          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 3          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 4          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 5          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 6          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 8          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 9          FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 11         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 13         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;                                                morph</span></span>
+<span><span class="co">#&gt; 2                                                   </span></span>
+<span><span class="co">#&gt; 3                                   AdpType=Preppron</span></span>
+<span><span class="co">#&gt; 4                                                   </span></span>
+<span><span class="co">#&gt; 5  Definite=Def|Gender=Masc|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt; 6                                                   </span></span>
+<span><span class="co">#&gt; 8   Definite=Def|Gender=Fem|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt; 9                             Gender=Fem|Number=Sing</span></span>
+<span><span class="co">#&gt; 11                                                  </span></span>
+<span><span class="co">#&gt; 13                           Gender=Masc|Number=Sing</span></span>
+<span><span class="co">#&gt;                                                                          sent</span></span>
+<span><span class="co">#&gt; 2  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 3  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 4  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 5  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 6  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 8  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 9  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 11 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 13 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -463,30 +542,30 @@ son tokenizados, es decir, cada palabra es un token.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">titulares_utags</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Classes 'tokenIndex', 'data.table' and 'data.frame': 153 obs. of  17 variables:</span></span>
-<span><span class="co">#&gt;  $ doc_id      : int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ paragraph_id: int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ sentence    : int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ sent        : chr  "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;  $ start       : int  1 12 14 26 34 38 42 54 63 66 ...</span></span>
-<span><span class="co">#&gt;  $ end         : int  10 12 24 32 36 40 52 61 64 71 ...</span></span>
-<span><span class="co">#&gt;  $ term_id     : int  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;  $ token_id    : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;  $ token       : chr  "Sindicatos" "y" "estudiantes" "marchan" ...</span></span>
-<span><span class="co">#&gt;  $ lemma       : chr  "sindicatos" "y" "estudiante" "marchar" ...</span></span>
-<span><span class="co">#&gt;  $ pos         : chr  "NOUN" "CCONJ" "NOUN" "VERB" ...</span></span>
-<span><span class="co">#&gt;  $ xpos        : chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ morph       : chr  "Gender=Masc|Number=Plur" NA "Number=Plur" "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin" ...</span></span>
-<span><span class="co">#&gt;  $ parent      : num  4 3 1 NA 8 8 8 4 10 8 ...</span></span>
-<span><span class="co">#&gt;  $ relation    : chr  "nsubj" "cc" "conj" "ROOT" ...</span></span>
+<pre><code><span><span class="co">#&gt; Classes 'tokenIndex', 'data.table' and 'data.frame': 15 obs. of  20 variables:</span></span>
+<span><span class="co">#&gt;  $ doc_id        : int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ sentence      : int  1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ token_id      : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ token         : chr  "En" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;  $ lemma         : chr  "en" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;  $ pos           : chr  "ADP" "PROPN" "ADP" "PROPN" ...</span></span>
+<span><span class="co">#&gt;  $ parent        : num  2 7 4 2 6 7 NA 9 7 13 ...</span></span>
+<span><span class="co">#&gt;  $ relation      : chr  "case" "obl" "case" "flat" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "levels")= chr "ROOT"</span></span>
-<span><span class="co">#&gt;  $ deps        : chr  NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ misc        : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ entity        : chr  "" "LOC_B" "LOC_I" "LOC_I" ...</span></span>
+<span><span class="co">#&gt;  $ nounphrase    : chr  "" "beg_root" "mid" "end" ...</span></span>
+<span><span class="co">#&gt;  $ whitespace    : logi  TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;  $ is_upper      : logi  FALSE FALSE FALSE FALSE FALSE TRUE ...</span></span>
+<span><span class="co">#&gt;  $ is_title      : logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;  $ is_quote      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;  $ ent_iob_      : chr  "O" "B" "I" "I" ...</span></span>
+<span><span class="co">#&gt;  $ ent_iob       : int  2 3 1 1 2 3 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;  $ is_left_punct : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;  $ is_right_punct: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;  $ morph         : chr  "AdpType=Prep" "" "AdpType=Preppron" "" ...</span></span>
+<span><span class="co">#&gt;  $ sent          : chr  "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...</span></span>
 <span><span class="co">#&gt;  - attr(*, ".internal.selfref")=&lt;pointer: (nil)&gt; </span></span>
-<span><span class="co">#&gt;  - attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
-<span><span class="co">#&gt;  - attr(*, "index")= int(0) </span></span>
-<span><span class="co">#&gt;   ..- attr(*, "__doc_id__sentence__parent")= int [1:153] 4 3 2 1 8 12 22 5 6 7 ...</span></span>
-<span><span class="co">#&gt;   ..- attr(*, "__relation")= int [1:153] 4 25 46 57 71 88 101 109 115 130 ...</span></span></code></pre>
+<span><span class="co">#&gt;  - attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span></code></pre>
 <p>En este resultado podemos ver cómo la función crea el input para usar
 con <code><a href="../reference/acep_svo.html">acep_svo()</a></code>. Hay que tener en cuenta que <em>udpipe</em>
 y <em>spacyr</em> usan modelos distintos para el etiquetado pos y las
@@ -535,72 +614,74 @@ las palabras lemmatizadas presentes en el corpus analizado.</p></li>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; List of 6</span></span>
-<span><span class="co">#&gt;  $ acep_annotate_svo :Classes 'tokenIndex', 'data.table' and 'data.frame':   153 obs. of  22 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id       : int [1:153] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ paragraph_id : int [1:153] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sentence     : int [1:153] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ sent         : chr [1:153] "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ "Sindicatos y estudiantes marchan por las principales ciudades de México para exigir un cambio en la política ec"| __truncated__ ...</span></span>
-<span><span class="co">#&gt;   ..$ start        : int [1:153] 1 12 14 26 34 38 42 54 63 66 ...</span></span>
-<span><span class="co">#&gt;   ..$ end          : int [1:153] 10 12 24 32 36 40 52 61 64 71 ...</span></span>
-<span><span class="co">#&gt;   ..$ term_id      : int [1:153] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ token_id     : num [1:153] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ token        : chr [1:153] "Sindicatos" "y" "estudiantes" "marchan" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma        : chr [1:153] "sindicatos" "y" "estudiante" "marchar" ...</span></span>
-<span><span class="co">#&gt;   ..$ pos          : chr [1:153] "NOUN" "CCONJ" "NOUN" "VERB" ...</span></span>
-<span><span class="co">#&gt;   ..$ xpos         : chr [1:153] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;   ..$ morph        : chr [1:153] "Gender=Masc|Number=Plur" NA "Number=Plur" "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin" ...</span></span>
-<span><span class="co">#&gt;   ..$ parent       : num [1:153] 4 3 1 NA 8 8 8 4 10 8 ...</span></span>
-<span><span class="co">#&gt;   ..$ relation     : chr [1:153] "nsubj" "cc" "conj" "ROOT" ...</span></span>
+<span><span class="co">#&gt;  $ acep_annotate_svo :Classes 'tokenIndex', 'data.table' and 'data.frame':   15 obs. of  25 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id        : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ sentence      : int [1:15] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ token_id      : num [1:15] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   ..$ token         : chr [1:15] "En" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ lemma         : chr [1:15] "en" "Mar" "del" "Plata" ...</span></span>
+<span><span class="co">#&gt;   ..$ pos           : chr [1:15] "ADP" "PROPN" "ADP" "PROPN" ...</span></span>
+<span><span class="co">#&gt;   ..$ parent        : num [1:15] 2 7 4 2 6 7 NA 9 7 13 ...</span></span>
+<span><span class="co">#&gt;   ..$ relation      : chr [1:15] "case" "obl" "case" "flat" ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "levels")= chr "ROOT"</span></span>
-<span><span class="co">#&gt;   ..$ deps         : chr [1:153] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;   ..$ misc         : chr [1:153] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;   ..$ s_v_o        : Factor w/ 3 levels "objeto","sujeto",..: 2 NA 1 3 NA NA 1 1 NA 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ s_v_o_id     : Factor w/ 10 levels "1.1.4","1.2.3",..: 1 NA 1 1 NA NA 1 1 NA 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ s_v_o_fill   : num [1:153] 0 NA 0 0 NA NA 1 0 NA 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ s_p          : chr [1:153] "sujeto" "sujeto" "sujeto" "predicado" ...</span></span>
-<span><span class="co">#&gt;   ..$ conjugaciones: chr [1:153] NA NA NA "presente" ...</span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x555d6c6deef0&gt; </span></span>
+<span><span class="co">#&gt;   ..$ entity        : chr [1:15] "" "LOC_B" "LOC_I" "LOC_I" ...</span></span>
+<span><span class="co">#&gt;   ..$ nounphrase    : chr [1:15] "" "beg_root" "mid" "end" ...</span></span>
+<span><span class="co">#&gt;   ..$ whitespace    : logi [1:15] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_upper      : logi [1:15] FALSE FALSE FALSE FALSE FALSE TRUE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_title      : logi [1:15] TRUE TRUE FALSE TRUE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_quote      : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob_      : chr [1:15] "O" "B" "I" "I" ...</span></span>
+<span><span class="co">#&gt;   ..$ ent_iob       : int [1:15] 2 3 1 1 2 3 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;   ..$ is_left_punct : logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ is_right_punct: logi [1:15] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ morph         : chr [1:15] "AdpType=Prep" "" "AdpType=Preppron" "" ...</span></span>
+<span><span class="co">#&gt;   ..$ sent          : chr [1:15] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...</span></span>
+<span><span class="co">#&gt;   ..$ s_v_o         : Factor w/ 3 levels "objeto","sujeto",..: NA 1 NA 1 NA 2 3 NA 1 NA ...</span></span>
+<span><span class="co">#&gt;   ..$ s_v_o_id      : Factor w/ 1 level "1.1.7": NA 1 NA 1 NA 1 1 NA 1 NA ...</span></span>
+<span><span class="co">#&gt;   ..$ s_v_o_fill    : num [1:15] NA 0 NA 1 NA 0 0 NA 0 NA ...</span></span>
+<span><span class="co">#&gt;   ..$ s_p           : chr [1:15] "sujeto" "sujeto" "sujeto" "sujeto" ...</span></span>
+<span><span class="co">#&gt;   ..$ conjugaciones : chr [1:15] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x558f2dedcef0&gt; </span></span>
 <span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"</span></span>
-<span><span class="co">#&gt;  $ acep_pro_svo      :'data.frame':  10 obs. of  13 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7</span></span>
-<span><span class="co">#&gt;   ..$ oracion_id: int [1:10] 1 2 1 1 1 1 1 2 3 1</span></span>
-<span><span class="co">#&gt;   ..$ eventos   : chr [1:10] "Sindicatos -&gt; marchan -&gt; ciudades cambio" "gremios -&gt; convocan -&gt; paro" "gremios -&gt; rechazan -&gt; aulas garantías" "estatales -&gt; rechazaron -&gt; oferta gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;   ..$ sujeto_svo: chr [1:10] "Sindicatos" "gremios" "gremios" "estatales" ...</span></span>
-<span><span class="co">#&gt;   ..$ root      : chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ objeto    : chr [1:10] "ciudades cambio" "paro" "aulas garantías" "oferta gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;   ..$ sujeto    : chr [1:10] "Sindicatos estudiantes" "gremios" "gremios docentes" "estatales" ...</span></span>
-<span><span class="co">#&gt;   ..$ predicado : chr [1:10] "marchan principales ciudades México exigir cambio política económica Gobierno" "convocan paro docente presencialidad Larreta Ciudad Buenos Aires" "rechazan volver aulas garantías sanitarias" "rechazaron oferta salarial gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;   ..$ verbo     : chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma_verb: chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ aux_verbos: chr [1:10] "| exigir |" "| NA |" "| volver |" "| NA |" ...</span></span>
-<span><span class="co">#&gt;   ..$ entidades : chr [1:10] "| México |" "| Larreta | Ciudad | Buenos | Aires |" "| NA |" "| Chubut |" ...</span></span>
-<span><span class="co">#&gt;   ..$ sust_pred : chr [1:10] "ciudades | México | cambio | política | Gobierno" "paro | presencialidad | Larreta | Ciudad | Buenos | Aires" "aulas | garantías" "oferta | gobierno | Chubut" ...</span></span>
-<span><span class="co">#&gt;  $ acep_list_svo     :'data.frame':  10 obs. of  6 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7</span></span>
-<span><span class="co">#&gt;   ..$ oracion_id: int [1:10] 1 2 1 1 1 1 1 2 3 1</span></span>
-<span><span class="co">#&gt;   ..$ eventos   : chr [1:10] "Sindicatos -&gt; marchan -&gt; ciudades cambio" "gremios -&gt; convocan -&gt; paro" "gremios -&gt; rechazan -&gt; aulas garantías" "estatales -&gt; rechazaron -&gt; oferta gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;   ..$ sujeto    : chr [1:10] "Sindicatos" "gremios" "gremios" "estatales" ...</span></span>
-<span><span class="co">#&gt;   ..$ verbo     : chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ objeto    : chr [1:10] "ciudades cambio" "paro" "aulas garantías" "oferta gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;  $ acep_sp           :'data.frame':  10 obs. of  9 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id    : int [1:10] 1 1 2 3 4 5 6 6 6 7</span></span>
-<span><span class="co">#&gt;   ..$ oracion_id: int [1:10] 1 2 1 1 1 1 1 2 3 1</span></span>
-<span><span class="co">#&gt;   ..$ sujeto    : chr [1:10] "Sindicatos estudiantes" "gremios" "gremios docentes" "estatales" ...</span></span>
-<span><span class="co">#&gt;   ..$ predicado : chr [1:10] "marchan principales ciudades México exigir cambio política económica Gobierno" "convocan paro docente presencialidad Larreta Ciudad Buenos Aires" "rechazan volver aulas garantías sanitarias" "rechazaron oferta salarial gobierno Chubut" ...</span></span>
-<span><span class="co">#&gt;   ..$ verbo     : chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ lemma_verb: chr [1:10] "marchan" "convocan" "rechazan" "rechazaron" ...</span></span>
-<span><span class="co">#&gt;   ..$ aux_verbos: chr [1:10] "| exigir |" "| NA |" "| volver |" "| NA |" ...</span></span>
-<span><span class="co">#&gt;   ..$ entidades : chr [1:10] "| México |" "| Larreta | Ciudad | Buenos | Aires |" "| NA |" "| Chubut |" ...</span></span>
-<span><span class="co">#&gt;   ..$ sust_pred : chr [1:10] "ciudades | México | cambio | política | Gobierno" "paro | presencialidad | Larreta | Ciudad | Buenos | Aires" "aulas | garantías" "oferta | gobierno | Chubut" ...</span></span>
-<span><span class="co">#&gt;  $ acep_lista_lemmas :'data.frame':  58 obs. of  2 variables:</span></span>
-<span><span class="co">#&gt;   ..$ lemma: Factor w/ 58 levels "acuerdo","aéreo",..: 45 7 28 52 9 13 18 27 38 1 ...</span></span>
-<span><span class="co">#&gt;   ..$ n    : int [1:58] 5 3 3 3 2 2 2 2 2 1 ...</span></span>
-<span><span class="co">#&gt;  $ acep_no_procesadas:Classes 'tokenIndex', 'data.table' and 'data.frame':   2 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   ..$ doc_id    : int [1:2] 8 9</span></span>
-<span><span class="co">#&gt;   ..$ oracion_id: int [1:2] 1 1</span></span>
-<span><span class="co">#&gt;   ..$ oracion   : chr [1:2] "Conciliación obligatoria en el conflicto del neumático." "Hola mundo."</span></span>
-<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x555d6c6deef0&gt; </span></span>
-<span><span class="co">#&gt;   ..- attr(*, "sorted")= chr [1:2] "doc_id" "oracion_id"</span></span></code></pre>
+<span><span class="co">#&gt;  $ acep_pro_svo      :'data.frame':  1 obs. of  13 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id    : int 1</span></span>
+<span><span class="co">#&gt;   ..$ oracion_id: int 1</span></span>
+<span><span class="co">#&gt;   ..$ eventos   : chr "SOIP -&gt; declara -&gt; Mar huelga"</span></span>
+<span><span class="co">#&gt;   ..$ sujeto_svo: chr "SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ root      : chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ objeto    : chr "Mar huelga"</span></span>
+<span><span class="co">#&gt;   ..$ sujeto    : chr "Mar Plata SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ predicado : chr "declara huelga demanda aumento salarial"</span></span>
+<span><span class="co">#&gt;   ..$ verbo     : chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ lemma_verb: chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ aux_verbos: chr "| NA |"</span></span>
+<span><span class="co">#&gt;   ..$ entidades : chr "| Mar | Plata | SOIP |"</span></span>
+<span><span class="co">#&gt;   ..$ sust_pred : chr "huelga | demanda | aumento"</span></span>
+<span><span class="co">#&gt;  $ acep_list_svo     :'data.frame':  1 obs. of  6 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id    : int 1</span></span>
+<span><span class="co">#&gt;   ..$ oracion_id: int 1</span></span>
+<span><span class="co">#&gt;   ..$ eventos   : chr "SOIP -&gt; declara -&gt; Mar huelga"</span></span>
+<span><span class="co">#&gt;   ..$ sujeto    : chr "SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ verbo     : chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ objeto    : chr "Mar huelga"</span></span>
+<span><span class="co">#&gt;  $ acep_sp           :'data.frame':  1 obs. of  9 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id    : int 1</span></span>
+<span><span class="co">#&gt;   ..$ oracion_id: int 1</span></span>
+<span><span class="co">#&gt;   ..$ sujeto    : chr "Mar Plata SOIP"</span></span>
+<span><span class="co">#&gt;   ..$ predicado : chr "declara huelga demanda aumento salarial"</span></span>
+<span><span class="co">#&gt;   ..$ verbo     : chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ lemma_verb: chr "declara"</span></span>
+<span><span class="co">#&gt;   ..$ aux_verbos: chr "| NA |"</span></span>
+<span><span class="co">#&gt;   ..$ entidades : chr "| Mar | Plata | SOIP |"</span></span>
+<span><span class="co">#&gt;   ..$ sust_pred : chr "huelga | demanda | aumento"</span></span>
+<span><span class="co">#&gt;  $ acep_lista_lemmas :'data.frame':  8 obs. of  2 variables:</span></span>
+<span><span class="co">#&gt;   ..$ lemma: Factor w/ 8 levels "aumento","declarar",..: 1 2 3 4 5 6 7 8</span></span>
+<span><span class="co">#&gt;   ..$ n    : int [1:8] 1 1 1 1 1 1 1 1</span></span>
+<span><span class="co">#&gt;  $ acep_no_procesadas:Classes 'tokenIndex', 'data.table' and 'data.frame':   0 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;   ..$ doc_id    : int(0) </span></span>
+<span><span class="co">#&gt;   ..$ oracion_id: int(0) </span></span>
+<span><span class="co">#&gt;   ..$ oracion   : chr(0) </span></span>
+<span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;pointer: 0x558f2dedcef0&gt;</span></span></code></pre>
 <p>Veamos con un poco más de detalle cada uno de los marcos de datos
 creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a></code>.</p>
 <div class="section level3">
@@ -609,52 +690,110 @@ creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a
 <p>Es el marco de datos inicial procesado con las funciones del paquete
 <em>rsyntax</em>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_annotate_svo</span><span class="op">[</span><span class="fl">98</span><span class="op">:</span><span class="fl">106</span>, <span class="op">]</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_annotate_svo</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Key: &lt;doc_id, sentence, token_id&gt;</span></span>
-<span><span class="co">#&gt;    doc_id paragraph_id sentence                                        sent</span></span>
-<span><span class="co">#&gt;     &lt;int&gt;        &lt;int&gt;    &lt;int&gt;                                      &lt;char&gt;</span></span>
-<span><span class="co">#&gt; 1:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 2:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 3:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 4:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 5:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 6:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 7:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 8:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt; 9:      6            1        1 Un gremio aéreo levantó el paro en Tucumán.</span></span>
-<span><span class="co">#&gt;    start   end term_id token_id   token    lemma    pos   xpos</span></span>
-<span><span class="co">#&gt;    &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;num&gt;  &lt;char&gt;   &lt;char&gt; &lt;char&gt; &lt;char&gt;</span></span>
-<span><span class="co">#&gt; 1:     1     2       1        1      Un      uno    DET   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2:     4     9       2        2  gremio   gremio   NOUN   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3:    11    15       3        3   aéreo    aéreo    ADJ   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4:    17    23       4        4 levantó levantar   VERB   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5:    25    26       5        5      el       el    DET   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6:    28    31       6        6    paro     paro   NOUN   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7:    33    34       7        7      en       en    ADP   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8:    36    42       8        8 Tucumán  tucumán  PROPN   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9:    43    43       9        9       .        .  PUNCT   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;                                                    morph parent relation   deps</span></span>
-<span><span class="co">#&gt;                                                   &lt;char&gt;  &lt;num&gt;   &lt;char&gt; &lt;char&gt;</span></span>
-<span><span class="co">#&gt; 1:     Definite=Ind|Gender=Masc|Number=Sing|PronType=Art      2      det   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2:                               Gender=Masc|Number=Sing      4    nsubj   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3:                               Gender=Masc|Number=Sing      2     amod   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4: Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin     NA     ROOT   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5:     Definite=Def|Gender=Masc|Number=Sing|PronType=Art      6      det   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6:                               Gender=Masc|Number=Sing      4      obj   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7:                                                  &lt;NA&gt;      8     case   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8:                                                  &lt;NA&gt;      6     nmod   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9:                                                  &lt;NA&gt;      4    punct   &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;             misc  s_v_o s_v_o_id s_v_o_fill       s_p conjugaciones</span></span>
-<span><span class="co">#&gt;           &lt;char&gt; &lt;fctr&gt;   &lt;fctr&gt;      &lt;num&gt;    &lt;char&gt;        &lt;char&gt;</span></span>
-<span><span class="co">#&gt; 1:          &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;         NA    sujeto          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2:          &lt;NA&gt; sujeto    6.1.4          0    sujeto          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3:          &lt;NA&gt; sujeto    6.1.4          1    sujeto          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4:          &lt;NA&gt;  verbo    6.1.4          0 predicado        pasado</span></span>
-<span><span class="co">#&gt; 5:          &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6:          &lt;NA&gt; objeto    6.1.4          0 predicado          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7:          &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8: SpaceAfter=No objeto    6.1.4          1 predicado          &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9:          &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span></code></pre>
+<span><span class="co">#&gt;     doc_id sentence token_id    token    lemma    pos parent relation entity</span></span>
+<span><span class="co">#&gt;      &lt;int&gt;    &lt;int&gt;    &lt;num&gt;   &lt;char&gt;   &lt;char&gt; &lt;char&gt;  &lt;num&gt;   &lt;char&gt; &lt;char&gt;</span></span>
+<span><span class="co">#&gt;  1:      1        1        1       En       en    ADP      2     case       </span></span>
+<span><span class="co">#&gt;  2:      1        1        2      Mar      Mar  PROPN      7      obl  LOC_B</span></span>
+<span><span class="co">#&gt;  3:      1        1        3      del      del    ADP      4     case  LOC_I</span></span>
+<span><span class="co">#&gt;  4:      1        1        4    Plata    Plata  PROPN      2     flat  LOC_I</span></span>
+<span><span class="co">#&gt;  5:      1        1        5       el       el    DET      6      det       </span></span>
+<span><span class="co">#&gt;  6:      1        1        6     SOIP     SOIP  PROPN      7    nsubj  ORG_B</span></span>
+<span><span class="co">#&gt;  7:      1        1        7  declara declarar   VERB     NA     ROOT       </span></span>
+<span><span class="co">#&gt;  8:      1        1        8       la       el    DET      9      det       </span></span>
+<span><span class="co">#&gt;  9:      1        1        9   huelga   huelga   NOUN      7      obj       </span></span>
+<span><span class="co">#&gt; 10:      1        1       10       en       en    ADP     13     case       </span></span>
+<span><span class="co">#&gt; 11:      1        1       11  demanda  demanda   NOUN     10    fixed       </span></span>
+<span><span class="co">#&gt; 12:      1        1       12       de       de    ADP     10    fixed       </span></span>
+<span><span class="co">#&gt; 13:      1        1       13  aumento  aumento   NOUN      9     nmod       </span></span>
+<span><span class="co">#&gt; 14:      1        1       14 salarial salarial    ADJ     13     amod       </span></span>
+<span><span class="co">#&gt; 15:      1        1       15        .        .  PUNCT      7    punct       </span></span>
+<span><span class="co">#&gt;     nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob</span></span>
+<span><span class="co">#&gt;         &lt;char&gt;     &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;   &lt;char&gt;   &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1:                  TRUE    FALSE     TRUE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;  2:   beg_root       TRUE    FALSE     TRUE    FALSE        B       3</span></span>
+<span><span class="co">#&gt;  3:        mid       TRUE    FALSE    FALSE    FALSE        I       1</span></span>
+<span><span class="co">#&gt;  4:        end       TRUE    FALSE     TRUE    FALSE        I       1</span></span>
+<span><span class="co">#&gt;  5:        beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;  6:   end_root       TRUE     TRUE    FALSE    FALSE        B       3</span></span>
+<span><span class="co">#&gt;  7:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;  8:        beg       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;  9:   end_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 10:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 11:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 12:                  TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 13:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 14:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt; 15:                 FALSE    FALSE    FALSE    FALSE        O       2</span></span>
+<span><span class="co">#&gt;     is_left_punct is_right_punct</span></span>
+<span><span class="co">#&gt;            &lt;lgcl&gt;         &lt;lgcl&gt;</span></span>
+<span><span class="co">#&gt;  1:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  2:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  3:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  4:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  5:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  6:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  7:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  8:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;  9:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 10:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 11:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 12:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 13:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 14:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt; 15:         FALSE          FALSE</span></span>
+<span><span class="co">#&gt;                                                     morph</span></span>
+<span><span class="co">#&gt;                                                    &lt;char&gt;</span></span>
+<span><span class="co">#&gt;  1:                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt;  2:                                                      </span></span>
+<span><span class="co">#&gt;  3:                                      AdpType=Preppron</span></span>
+<span><span class="co">#&gt;  4:                                                      </span></span>
+<span><span class="co">#&gt;  5:     Definite=Def|Gender=Masc|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt;  6:                                                      </span></span>
+<span><span class="co">#&gt;  7: Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin</span></span>
+<span><span class="co">#&gt;  8:      Definite=Def|Gender=Fem|Number=Sing|PronType=Art</span></span>
+<span><span class="co">#&gt;  9:                                Gender=Fem|Number=Sing</span></span>
+<span><span class="co">#&gt; 10:                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt; 11:                                                      </span></span>
+<span><span class="co">#&gt; 12:                                          AdpType=Prep</span></span>
+<span><span class="co">#&gt; 13:                               Gender=Masc|Number=Sing</span></span>
+<span><span class="co">#&gt; 14:                                           Number=Sing</span></span>
+<span><span class="co">#&gt; 15:                                        PunctType=Peri</span></span>
+<span><span class="co">#&gt;                                                                           sent</span></span>
+<span><span class="co">#&gt;                                                                         &lt;char&gt;</span></span>
+<span><span class="co">#&gt;  1: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  2: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  3: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  4: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  5: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  6: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  7: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  8: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;  9: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 10: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 11: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 12: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 13: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 14: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt; 15: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.</span></span>
+<span><span class="co">#&gt;      s_v_o s_v_o_id s_v_o_fill       s_p conjugaciones</span></span>
+<span><span class="co">#&gt;     &lt;fctr&gt;   &lt;fctr&gt;      &lt;num&gt;    &lt;char&gt;        &lt;char&gt;</span></span>
+<span><span class="co">#&gt;  1:   &lt;NA&gt;     &lt;NA&gt;         NA    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  2: objeto    1.1.7          0    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  3:   &lt;NA&gt;     &lt;NA&gt;         NA    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  4: objeto    1.1.7          1    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  5:   &lt;NA&gt;     &lt;NA&gt;         NA    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  6: sujeto    1.1.7          0    sujeto          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  7:  verbo    1.1.7          0 predicado      presente</span></span>
+<span><span class="co">#&gt;  8:   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;  9: objeto    1.1.7          0 predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10:   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 11: objeto    1.1.7          3 predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 12: objeto    1.1.7          3 predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 13: objeto    1.1.7          1 predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 14: objeto    1.1.7          2 predicado          &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 15:   &lt;NA&gt;     &lt;NA&gt;         NA predicado          &lt;NA&gt;</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="acep_annotate_svo-1">acep_annotate_svo<a class="anchor" aria-label="anchor" href="#acep_annotate_svo-1"></a>
@@ -663,72 +802,12 @@ creados con la función <code><a href="../reference/acep_svo.html">acep_svo()</a
 identificación y extracción de sujeto-verbo-objeto y contexto.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_pro_svo</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id oracion_id                                           eventos</span></span>
-<span><span class="co">#&gt; 1       1          1          Sindicatos -&gt; marchan -&gt; ciudades cambio</span></span>
-<span><span class="co">#&gt; 2       1          2                       gremios -&gt; convocan -&gt; paro</span></span>
-<span><span class="co">#&gt; 3       2          1            gremios -&gt; rechazan -&gt; aulas garantías</span></span>
-<span><span class="co">#&gt; 4       3          1 estatales -&gt; rechazaron -&gt; oferta gobierno Chubut</span></span>
-<span><span class="co">#&gt; 5       4          1                  CGT -&gt; presiona -&gt; indemnización</span></span>
-<span><span class="co">#&gt; 6       5          1             CTA -&gt; rechazaron -&gt; acuerdo salarios</span></span>
-<span><span class="co">#&gt; 7       6          1                         gremio -&gt; levantó -&gt; paro</span></span>
-<span><span class="co">#&gt; 8       6          2                 judiciales -&gt; ratificaron -&gt; paro</span></span>
-<span><span class="co">#&gt; 9       6          3                    CGT -&gt; marchó -&gt; críticas paro</span></span>
-<span><span class="co">#&gt; 10      7          1                     Ctera -&gt; convocó -&gt; paro país</span></span>
-<span><span class="co">#&gt;    sujeto_svo        root                 objeto                 sujeto</span></span>
-<span><span class="co">#&gt; 1  Sindicatos     marchan        ciudades cambio Sindicatos estudiantes</span></span>
-<span><span class="co">#&gt; 2     gremios    convocan                   paro                gremios</span></span>
-<span><span class="co">#&gt; 3     gremios    rechazan        aulas garantías       gremios docentes</span></span>
-<span><span class="co">#&gt; 4   estatales  rechazaron oferta gobierno Chubut              estatales</span></span>
-<span><span class="co">#&gt; 5         CGT    presiona          indemnización                    CGT</span></span>
-<span><span class="co">#&gt; 6         CTA  rechazaron       acuerdo salarios          CTA Izquierda</span></span>
-<span><span class="co">#&gt; 7      gremio     levantó                   paro           gremio aéreo</span></span>
-<span><span class="co">#&gt; 8  judiciales ratificaron                   paro             judiciales</span></span>
-<span><span class="co">#&gt; 9         CGT      marchó          críticas paro                    CGT</span></span>
-<span><span class="co">#&gt; 10      Ctera     convocó              paro país                  Ctera</span></span>
-<span><span class="co">#&gt;                                                                        predicado</span></span>
-<span><span class="co">#&gt; 1  marchan principales ciudades México exigir cambio política económica Gobierno</span></span>
-<span><span class="co">#&gt; 2               convocan paro docente presencialidad Larreta Ciudad Buenos Aires</span></span>
-<span><span class="co">#&gt; 3                                     rechazan volver aulas garantías sanitarias</span></span>
-<span><span class="co">#&gt; 4                                     rechazaron oferta salarial gobierno Chubut</span></span>
-<span><span class="co">#&gt; 5                              presiona que empleados cobren doble indemnización</span></span>
-<span><span class="co">#&gt; 6                                        rechazaron acuerdo CGT rebajar salarios</span></span>
-<span><span class="co">#&gt; 7                                                           levantó paro Tucumán</span></span>
-<span><span class="co">#&gt; 8                                                               ratificaron paro</span></span>
-<span><span class="co">#&gt; 9                                     marchó críticas economía evalúa llama paro</span></span>
-<span><span class="co">#&gt; 10                                                       convocó paro horas país</span></span>
-<span><span class="co">#&gt;          verbo  lemma_verb         aux_verbos</span></span>
-<span><span class="co">#&gt; 1      marchan     marchan         | exigir |</span></span>
-<span><span class="co">#&gt; 2     convocan    convocan             | NA |</span></span>
-<span><span class="co">#&gt; 3     rechazan    rechazan         | volver |</span></span>
-<span><span class="co">#&gt; 4   rechazaron  rechazaron             | NA |</span></span>
-<span><span class="co">#&gt; 5     presiona    presiona         | cobren |</span></span>
-<span><span class="co">#&gt; 6   rechazaron  rechazaron        | rebajar |</span></span>
-<span><span class="co">#&gt; 7      levantó     levantó             | NA |</span></span>
-<span><span class="co">#&gt; 8  ratificaron ratificaron             | NA |</span></span>
-<span><span class="co">#&gt; 9       marchó      marchó | evalúa | llama |</span></span>
-<span><span class="co">#&gt; 10     convocó     convocó             | NA |</span></span>
-<span><span class="co">#&gt;                                entidades</span></span>
-<span><span class="co">#&gt; 1                             | México |</span></span>
-<span><span class="co">#&gt; 2  | Larreta | Ciudad | Buenos | Aires |</span></span>
-<span><span class="co">#&gt; 3                                 | NA |</span></span>
-<span><span class="co">#&gt; 4                             | Chubut |</span></span>
-<span><span class="co">#&gt; 5                                | CGT |</span></span>
-<span><span class="co">#&gt; 6                          | CTA | CGT |</span></span>
-<span><span class="co">#&gt; 7                            | Tucumán |</span></span>
-<span><span class="co">#&gt; 8                                 | NA |</span></span>
-<span><span class="co">#&gt; 9                                | CGT |</span></span>
-<span><span class="co">#&gt; 10                             | Ctera |</span></span>
-<span><span class="co">#&gt;                                                    sust_pred</span></span>
-<span><span class="co">#&gt; 1           ciudades | México | cambio | política | Gobierno</span></span>
-<span><span class="co">#&gt; 2  paro | presencialidad | Larreta | Ciudad | Buenos | Aires</span></span>
-<span><span class="co">#&gt; 3                                          aulas | garantías</span></span>
-<span><span class="co">#&gt; 4                                 oferta | gobierno | Chubut</span></span>
-<span><span class="co">#&gt; 5                                  empleados | indemnización</span></span>
-<span><span class="co">#&gt; 6                                   acuerdo | CGT | salarios</span></span>
-<span><span class="co">#&gt; 7                                             paro | Tucumán</span></span>
-<span><span class="co">#&gt; 8                                                       paro</span></span>
-<span><span class="co">#&gt; 9                                 críticas | economía | paro</span></span>
-<span><span class="co">#&gt; 10                                       paro | horas | país</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   doc_id oracion_id                       eventos sujeto_svo    root     objeto</span></span>
+<span><span class="co">#&gt; 1      1          1 SOIP -&gt; declara -&gt; Mar huelga       SOIP declara Mar huelga</span></span>
+<span><span class="co">#&gt;           sujeto                               predicado   verbo lemma_verb</span></span>
+<span><span class="co">#&gt; 1 Mar Plata SOIP declara huelga demanda aumento salarial declara    declara</span></span>
+<span><span class="co">#&gt;   aux_verbos              entidades                  sust_pred</span></span>
+<span><span class="co">#&gt; 1     | NA | | Mar | Plata | SOIP | huelga | demanda | aumento</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="acep_list_svo">acep_list_svo<a class="anchor" aria-label="anchor" href="#acep_list_svo"></a>
@@ -740,28 +819,8 @@ separada (una columna para ‘sujeto’, otra para ‘verbo’ y otra para
 ‘objeto’).</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_list_svo</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id oracion_id                                           eventos</span></span>
-<span><span class="co">#&gt; 1       1          1          Sindicatos -&gt; marchan -&gt; ciudades cambio</span></span>
-<span><span class="co">#&gt; 2       1          2                       gremios -&gt; convocan -&gt; paro</span></span>
-<span><span class="co">#&gt; 3       2          1            gremios -&gt; rechazan -&gt; aulas garantías</span></span>
-<span><span class="co">#&gt; 4       3          1 estatales -&gt; rechazaron -&gt; oferta gobierno Chubut</span></span>
-<span><span class="co">#&gt; 5       4          1                  CGT -&gt; presiona -&gt; indemnización</span></span>
-<span><span class="co">#&gt; 6       5          1             CTA -&gt; rechazaron -&gt; acuerdo salarios</span></span>
-<span><span class="co">#&gt; 7       6          1                         gremio -&gt; levantó -&gt; paro</span></span>
-<span><span class="co">#&gt; 8       6          2                 judiciales -&gt; ratificaron -&gt; paro</span></span>
-<span><span class="co">#&gt; 9       6          3                    CGT -&gt; marchó -&gt; críticas paro</span></span>
-<span><span class="co">#&gt; 10      7          1                     Ctera -&gt; convocó -&gt; paro país</span></span>
-<span><span class="co">#&gt;        sujeto       verbo                 objeto</span></span>
-<span><span class="co">#&gt; 1  Sindicatos     marchan        ciudades cambio</span></span>
-<span><span class="co">#&gt; 2     gremios    convocan                   paro</span></span>
-<span><span class="co">#&gt; 3     gremios    rechazan        aulas garantías</span></span>
-<span><span class="co">#&gt; 4   estatales  rechazaron oferta gobierno Chubut</span></span>
-<span><span class="co">#&gt; 5         CGT    presiona          indemnización</span></span>
-<span><span class="co">#&gt; 6         CTA  rechazaron       acuerdo salarios</span></span>
-<span><span class="co">#&gt; 7      gremio     levantó                   paro</span></span>
-<span><span class="co">#&gt; 8  judiciales ratificaron                   paro</span></span>
-<span><span class="co">#&gt; 9         CGT      marchó          críticas paro</span></span>
-<span><span class="co">#&gt; 10      Ctera     convocó              paro país</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   doc_id oracion_id                       eventos sujeto   verbo     objeto</span></span>
+<span><span class="co">#&gt; 1      1          1 SOIP -&gt; declara -&gt; Mar huelga   SOIP declara Mar huelga</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="acep_sp">acep_sp<a class="anchor" aria-label="anchor" href="#acep_sp"></a>
@@ -772,61 +831,12 @@ identificados en cada oración y una aproximación a ‘entidades’,
 extracción de sujetos y objetos de la acción.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_sp</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    doc_id oracion_id                 sujeto</span></span>
-<span><span class="co">#&gt; 1       1          1 Sindicatos estudiantes</span></span>
-<span><span class="co">#&gt; 2       1          2                gremios</span></span>
-<span><span class="co">#&gt; 3       2          1       gremios docentes</span></span>
-<span><span class="co">#&gt; 4       3          1              estatales</span></span>
-<span><span class="co">#&gt; 5       4          1                    CGT</span></span>
-<span><span class="co">#&gt; 6       5          1          CTA Izquierda</span></span>
-<span><span class="co">#&gt; 7       6          1           gremio aéreo</span></span>
-<span><span class="co">#&gt; 8       6          2             judiciales</span></span>
-<span><span class="co">#&gt; 9       6          3                    CGT</span></span>
-<span><span class="co">#&gt; 10      7          1                  Ctera</span></span>
-<span><span class="co">#&gt;                                                                        predicado</span></span>
-<span><span class="co">#&gt; 1  marchan principales ciudades México exigir cambio política económica Gobierno</span></span>
-<span><span class="co">#&gt; 2               convocan paro docente presencialidad Larreta Ciudad Buenos Aires</span></span>
-<span><span class="co">#&gt; 3                                     rechazan volver aulas garantías sanitarias</span></span>
-<span><span class="co">#&gt; 4                                     rechazaron oferta salarial gobierno Chubut</span></span>
-<span><span class="co">#&gt; 5                              presiona que empleados cobren doble indemnización</span></span>
-<span><span class="co">#&gt; 6                                        rechazaron acuerdo CGT rebajar salarios</span></span>
-<span><span class="co">#&gt; 7                                                           levantó paro Tucumán</span></span>
-<span><span class="co">#&gt; 8                                                               ratificaron paro</span></span>
-<span><span class="co">#&gt; 9                                     marchó críticas economía evalúa llama paro</span></span>
-<span><span class="co">#&gt; 10                                                       convocó paro horas país</span></span>
-<span><span class="co">#&gt;          verbo  lemma_verb         aux_verbos</span></span>
-<span><span class="co">#&gt; 1      marchan     marchan         | exigir |</span></span>
-<span><span class="co">#&gt; 2     convocan    convocan             | NA |</span></span>
-<span><span class="co">#&gt; 3     rechazan    rechazan         | volver |</span></span>
-<span><span class="co">#&gt; 4   rechazaron  rechazaron             | NA |</span></span>
-<span><span class="co">#&gt; 5     presiona    presiona         | cobren |</span></span>
-<span><span class="co">#&gt; 6   rechazaron  rechazaron        | rebajar |</span></span>
-<span><span class="co">#&gt; 7      levantó     levantó             | NA |</span></span>
-<span><span class="co">#&gt; 8  ratificaron ratificaron             | NA |</span></span>
-<span><span class="co">#&gt; 9       marchó      marchó | evalúa | llama |</span></span>
-<span><span class="co">#&gt; 10     convocó     convocó             | NA |</span></span>
-<span><span class="co">#&gt;                                entidades</span></span>
-<span><span class="co">#&gt; 1                             | México |</span></span>
-<span><span class="co">#&gt; 2  | Larreta | Ciudad | Buenos | Aires |</span></span>
-<span><span class="co">#&gt; 3                                 | NA |</span></span>
-<span><span class="co">#&gt; 4                             | Chubut |</span></span>
-<span><span class="co">#&gt; 5                                | CGT |</span></span>
-<span><span class="co">#&gt; 6                          | CTA | CGT |</span></span>
-<span><span class="co">#&gt; 7                            | Tucumán |</span></span>
-<span><span class="co">#&gt; 8                                 | NA |</span></span>
-<span><span class="co">#&gt; 9                                | CGT |</span></span>
-<span><span class="co">#&gt; 10                             | Ctera |</span></span>
-<span><span class="co">#&gt;                                                    sust_pred</span></span>
-<span><span class="co">#&gt; 1           ciudades | México | cambio | política | Gobierno</span></span>
-<span><span class="co">#&gt; 2  paro | presencialidad | Larreta | Ciudad | Buenos | Aires</span></span>
-<span><span class="co">#&gt; 3                                          aulas | garantías</span></span>
-<span><span class="co">#&gt; 4                                 oferta | gobierno | Chubut</span></span>
-<span><span class="co">#&gt; 5                                  empleados | indemnización</span></span>
-<span><span class="co">#&gt; 6                                   acuerdo | CGT | salarios</span></span>
-<span><span class="co">#&gt; 7                                             paro | Tucumán</span></span>
-<span><span class="co">#&gt; 8                                                       paro</span></span>
-<span><span class="co">#&gt; 9                                 críticas | economía | paro</span></span>
-<span><span class="co">#&gt; 10                                       paro | horas | país</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   doc_id oracion_id         sujeto                               predicado</span></span>
+<span><span class="co">#&gt; 1      1          1 Mar Plata SOIP declara huelga demanda aumento salarial</span></span>
+<span><span class="co">#&gt;     verbo lemma_verb aux_verbos              entidades</span></span>
+<span><span class="co">#&gt; 1 declara    declara     | NA | | Mar | Plata | SOIP |</span></span>
+<span><span class="co">#&gt;                    sust_pred</span></span>
+<span><span class="co">#&gt; 1 huelga | demanda | aumento</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="acep_lista_lemmas">acep_lista_lemmas<a class="anchor" aria-label="anchor" href="#acep_lista_lemmas"></a>
@@ -835,17 +845,15 @@ extracción de sujetos y objetos de la acción.</p>
 presentes en el corpus procesado.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_lista_lemmas</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;       lemma n</span></span>
-<span><span class="co">#&gt; 45     paro 5</span></span>
-<span><span class="co">#&gt; 7       CGT 3</span></span>
-<span><span class="co">#&gt; 28   gremio 3</span></span>
-<span><span class="co">#&gt; 52 rechazar 3</span></span>
-<span><span class="co">#&gt; 9    ciudad 2</span></span>
-<span><span class="co">#&gt; 13 convocar 2</span></span>
-<span><span class="co">#&gt; 18  docente 2</span></span>
-<span><span class="co">#&gt; 27 gobierno 2</span></span>
-<span><span class="co">#&gt; 38  marchar 2</span></span>
-<span><span class="co">#&gt; 1   acuerdo 1</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;      lemma n</span></span>
+<span><span class="co">#&gt; 1  aumento 1</span></span>
+<span><span class="co">#&gt; 2 declarar 1</span></span>
+<span><span class="co">#&gt; 3  demanda 1</span></span>
+<span><span class="co">#&gt; 4   huelga 1</span></span>
+<span><span class="co">#&gt; 5      Mar 1</span></span>
+<span><span class="co">#&gt; 6    Plata 1</span></span>
+<span><span class="co">#&gt; 7 salarial 1</span></span>
+<span><span class="co">#&gt; 8     SOIP 1</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="acep_no_procesadas">acep_no_procesadas<a class="anchor" aria-label="anchor" href="#acep_no_procesadas"></a>
@@ -854,11 +862,7 @@ presentes en el corpus procesado.</p>
 procesadas por no ser posible identificar sujeto y predicado.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">titulares_svo</span><span class="op">$</span><span class="va">acep_no_procesadas</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Key: &lt;doc_id, oracion_id&gt;</span></span>
-<span><span class="co">#&gt;    doc_id oracion_id                                                 oracion</span></span>
-<span><span class="co">#&gt;     &lt;int&gt;      &lt;int&gt;                                                  &lt;char&gt;</span></span>
-<span><span class="co">#&gt; 1:      8          1 Conciliación obligatoria en el conflicto del neumático.</span></span>
-<span><span class="co">#&gt; 2:      9          1                                             Hola mundo.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Empty data.table (0 rows and 3 cols): doc_id,oracion_id,oracion</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

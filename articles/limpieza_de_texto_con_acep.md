@@ -15,9 +15,8 @@ marcado como NULL.
 Para comprender el funcionamiento de
 [`acep_clean()`](https://agusnieto77.github.io/ACEP/reference/acep_clean.md),
 repasaremos cada uno de los parámetros con ejemplos. Utilizaremos una
-base de tweets sobre el paro de trenes realizado el día 08/11/2022 que
-contienen las palabras “La Fraternidad” que refieren al sindicato
-argentino de maquinistas de locomotoras y trenes.
+base sintética de textos breves sobre protestas y reclamos para que la
+vignette pueda reconstruirse sin depender de descargas externas.
 
 ## to lower
 
@@ -37,9 +36,13 @@ En primer lugar cargamos la base de ejemplo:
 
 library(ACEP)
 
-url <- "https://observatoriodeconflictividad.org/basesdatos/la_fraternidad.rds"
-
-base <- base::subset(acep_load_base(url), select = text)$text
+base <- rep(c(
+  "La Fraternidad anunció un paro de trenes en noviembre.\nMás información en https://example.com",
+  "@usuario reclamó mejoras salariales!!! #Transporte 😊",
+  "Martes 08 de noviembre: trabajadores en paro total.",
+  "El sindicato pidió 123 respuestas al gobierno municipal.",
+  "A b c de la protesta"
+), length.out = 500)
 ```
 
 Seleccionemos ahora tan sólo un tweet:
@@ -51,7 +54,7 @@ primer_tweet <- base[2]
 primer_tweet
 ```
 
-    #> [1] "👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes\nhttps://t.co/644Ak0HZ7I"
+    #> [1] "@usuario reclamó mejoras salariales!!! #Transporte 😊"
 
 Vemos que tiene algunas letras en mayúscula. Aplicamos el parámetro
 tolower de la función
@@ -81,8 +84,7 @@ cat(paste("****SIN tolower****\n", primer_tweet, "****\n", sep=""))
 ```
 
     #> ****SIN tolower****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -90,8 +92,7 @@ cat(paste("****CON tolower****\n", minus, "****\n", sep=""))
 ```
 
     #> ****CON tolower****
-    #> 👉protesta/la fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644ak0hz7i****
+    #> @usuario reclamó mejoras salariales!!! #transporte 😊****
 
 Efectivamente, los caracteres en mayúscula pasan a minúscula.
 
@@ -127,8 +128,7 @@ cat(paste("****SIN rm_cesp****\n", primer_tweet, "****\n", sep=""))
 ```
 
     #> ****SIN rm_cesp****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -136,8 +136,7 @@ cat(paste("****CON rm_cesp****\n", cesp, "****\n", sep=""))
 ```
 
     #> ****CON rm_cesp****
-    #> 👉PROTESTA/La Fraternidad desoye conciliacion obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamo mejoras salariales!!! #Transporte 😊****
 
 En este caso hay sólo una tilde en “conciliación” y fue removida.
 
@@ -171,8 +170,7 @@ cat(paste("****SIN rm_emoji****\n", primer_tweet, "***\n", sep=""))
 ```
 
     #> ****SIN rm_emoji****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I***
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊***
 
 ``` r
 
@@ -180,8 +178,7 @@ cat(paste("****CON rm_emoji****\n", emoji, "****\n", sep=""))
 ```
 
     #> ****CON rm_emoji****
-    #>  PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte  ****
 
 ## Hashtag
 
@@ -214,8 +211,7 @@ cat(paste("****SIN rm_hashtag****\n", con_hash, "****\n", sep=""))
 ```
 
     #> ****SIN rm_hashtag****
-    #> #Transporte | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.
-    #> https://t.co/1bHDoEVS76****
+    #> A b c de la protesta****
 
 ``` r
 
@@ -223,8 +219,7 @@ cat(paste("****CON rm_hashtag****\n", hash, "****\n", sep=""))
 ```
 
     #> ****CON rm_hashtag****
-    #>  | El gremio de los ferroviarios realiza un paro desde las 00hs en el marco de un conflicto por el reclamo del pago de un bono de 50 mil pesos a jubilados y pensionados. Miles de usuarios se ven afectados.
-    #> https://t.co/1bHDoEVS76****
+    #> A b c de la protesta****
 
 NOTA: se elimina todo el \#hashtags, no sólo el símbolo (#Transporte)
 
@@ -258,7 +253,7 @@ cat(paste("****SIN rm_users****\n", con_user, "****\n", sep=""))
 ```
 
     #> ****SIN rm_users****
-    #> @TrenesArg Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -266,7 +261,7 @@ cat(paste("****CON rm_users****\n", user, "****\n", sep=""))
 ```
 
     #> ****CON rm_users****
-    #>  Estaría bueno que empiecen por corroborar las empresas tercerizadas dónde la mayoría de los principales accionistas forman parte de la fraternidad. También son tan forros que discriminan a los trabajadores que se la pasan caminando en las vías para que el servicio funcione.****
+    #>  reclamó mejoras salariales!!! #Transporte 😊****
 
 NOTA: Igual que con el \#hashtag, quita todo, no sólo el símbolo @
 
@@ -301,10 +296,7 @@ cat(paste("****SIN rm_punt****\n", punt, "****\n", sep=""))
 ```
 
     #> ****SIN rm_punt****
-    #> Sociedad: Paro de trenes: La Fraternidad no acató la conciliación y no habrá servicio en el país
-    #> ✍️por Agostina Carlesso 
-    #> 👉https://t.co/WI6mzHYM1i
-    #> #InformacionEsPoder****
+    #> Martes 08 de noviembre: trabajadores en paro total.****
 
 ``` r
 
@@ -312,10 +304,7 @@ cat(paste("****CON rm_punt****\n", s_punt, "****\n", sep=""))
 ```
 
     #> ****CON rm_punt****
-    #> Sociedad  Paro de trenes  La Fraternidad no acató la conciliación y no habrá servicio en el país
-    #> ✍ por Agostina Carlesso 
-    #> 👉https   t co WI6mzHYM1i
-    #> #InformacionEsPoder****
+    #> Martes 08 de noviembre  trabajadores en paro total ****
 
 ## Números
 
@@ -349,13 +338,7 @@ cat(paste("****SIN rm_num****\n", num, "****\n", sep=""))
 ```
 
     #> ****SIN rm_num****
-    #> Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih 
-    #> 
-    #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
+    #> A b c de la protesta****
 
 ``` r
 
@@ -363,13 +346,7 @@ cat(paste("****CON rm_num****\n", num_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_num****
-    #> Del  al  de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗https://t.co/rXOewZjih 
-    #> 
-    #> ¡Te esperamos! https://t.co/vJHkNnYFo****
+    #> A b c de la protesta****
 
 ## URLs
 
@@ -400,13 +377,7 @@ cat(paste("****SIN rm_url****\n", num, "****\n", sep=""))
 ```
 
     #> ****SIN rm_url****
-    #> Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih 
-    #> 
-    #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
+    #> A b c de la protesta****
 
 ``` r
 
@@ -414,13 +385,7 @@ cat(paste("****CON rm_url****\n", num_s,  "****\n", sep=""))
 ```
 
     #> ****CON rm_url****
-    #> Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗 
-    #> 
-    #> ¡Te esperamos! ****
+    #> A b c de la protesta****
 
 ## Meses
 
@@ -451,13 +416,7 @@ cat(paste("****SIN rm_mes****\n", meses, "****\n", sep=""))
 ```
 
     #> ****SIN rm_mes****
-    #> Del 14 al 20 de noviembre celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih 
-    #> 
-    #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
+    #> A b c de la protesta****
 
 ``` r
 
@@ -465,13 +424,7 @@ cat(paste("****CON rm_mes****\n", meses_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_mes****
-    #> Del 14 al 20 de  celebramos la V #FMSemanaSVL bajo el lema “Cede el paso a una conducción segura”. 
-    #> 
-    #> Este año contaremos con grandes profesionales en nuestras jornadas virtuales y presenciales.
-    #> 
-    #>  Consulta aquí todo el programa 🔗https://t.co/rXOewZj0ih 
-    #> 
-    #> ¡Te esperamos! https://t.co/vJHkN3nYFo****
+    #> A b c de la protesta****
 
 ## Días
 
@@ -502,7 +455,7 @@ cat(paste("****SIN rm_dias****\n", dia, "****\n", sep=""))
 ```
 
     #> ****SIN rm_dias****
-    #> Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****
+    #> El sindicato pidió 123 respuestas al gobierno municipal.****
 
 ``` r
 
@@ -510,7 +463,7 @@ cat(paste("****CON rm_dias****\n", dia_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_dias****
-    #> Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este  no habrá servicio - Infobae https://t.co/0YH6FDeGXN****
+    #> El sindicato pidió 123 respuestas al gobierno municipal.****
 
 ## Stop words
 
@@ -519,14 +472,13 @@ comprensión del texto. Sin embargo, si buscamos realizar un conteo de
 palabras, resultan contraproducentes ya que se repiten muchas veces y no
 aportan al contenido. Se pueden remover con el parámetro rm_stopwords.
 
-La lista de las palabras consideradas “stop words” puede verificarse en
-el siguiente link: stopwords \<-
-readRDS(url(“<https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds>”))
+La lista de palabras consideradas “stop words” depende del idioma y del
+dominio del corpus. En este ejemplo usamos la configuración interna de
+[`acep_clean()`](https://agusnieto77.github.io/ACEP/reference/acep_clean.md).
 
 ``` r
 
-url <- "https://github.com/HDyCSC/datos/raw/222dd7c060fabc2904c1ceffbea6958f9a275b57/stopwords.rds"
-stopwords <- acep_clean(url)
+stopwords <- c("de", "la", "el")
 stopw <- base[429]
 stopw_w <- acep_clean(base[429],
                      tolower = FALSE,
@@ -549,7 +501,7 @@ cat(paste("****SIN rm_stopwords****\n", stopw, "****\n", sep=""))
 ```
 
     #> ****SIN rm_stopwords****
-    #> Paro de trenes: el sindicato de la Fraternidad no acatará la conciliación obligatoria que dictó el ministerio de Trabajo y este martes no habrá servicio - Infobae https://t.co/0YH6FDeGXN****
+    #> El sindicato pidió 123 respuestas al gobierno municipal.****
 
 ``` r
 
@@ -557,7 +509,7 @@ cat(paste("****CON rm_stopwords****\n", stopw_w, "****\n", sep=""))
 ```
 
     #> ****CON rm_stopwords****
-    #> Paro   trenes:   sindicato     Fraternidad   acatará   conciliación obligatoria   dictó   ministerio   Trabajo     martes     servicio - Infobae https://t.co/0YH6FDeGXN****
+    #> El sindicato pidió 123 respuestas   gobierno municipal.****
 
 ## Short words
 
@@ -589,7 +541,7 @@ cat(paste("****SIN rm_shortwords****\n", short, "****\n", sep=""))
 ```
 
     #> ****SIN rm_shortwords****
-    #> @GusDeheza @PolloSobrero NO es un paro de la Fraternidad y x primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo a los JUBILADOS.para q le den un bono a fin de año...jamás nadie se acordó de apoyar a los jubilados x primera vez un gremio rompe un pacto con la CGT..ya q no querían .****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -597,7 +549,7 @@ cat(paste("****CON rm_shortwords****\n", short_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_shortwords****
-    #> @GusDeheza @PolloSobrero NO es un paro de la Fraternidad     primera vez en mi vida ESTOY DE ACUERDO ..es un apoyo   los JUBILADOS.para   le den un bono   fin de año...jamás nadie se acordó de apoyar   los jubilados   primera vez un gremio rompe un pacto con la CGT..ya   no querían .****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ## New line
 
@@ -629,8 +581,7 @@ cat(paste("****SIN rm_newline****\n",newl, "****\n", sep=""))
 ```
 
     #> ****SIN rm_newline****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -638,7 +589,7 @@ cat(paste("****CON rm_newline****\n",newl_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_newline****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ## Whitespace
 
@@ -673,9 +624,7 @@ cat(paste("****SIN rm_whitespace****\n", white, "****\n", sep=""))
 ```
 
     #> ****SIN rm_whitespace****
-    #> El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en  nuestro país. 
-    #> 
-    #> Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****
+    #> A b c de la protesta****
 
 ``` r
 
@@ -683,9 +632,7 @@ cat(paste("****CON rm_whitespace****\n", white_s, "****\n", sep=""))
 ```
 
     #> ****CON rm_whitespace****
-    #> El @INSST_MITES_GOB presenta 3 infografías con datos estadísticos sobre los accidentes de trabajo en nuestro país. 
-    #> 
-    #> Consulta toda la info en https://t.co/piMaTqoMiF https://t.co/lcJe8ed0x4****
+    #> A b c de la protesta****
 
 ## Other Stop words
 
@@ -723,8 +670,7 @@ cat(paste("****SIN other_sw****\n", osw, "****\n", sep=""))
 ```
 
     #> ****SIN other_sw****
-    #> 👉PROTESTA/La Fraternidad desoye conciliación obligatoria y mantiene paralizados los trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
 
 ``` r
 
@@ -732,5 +678,4 @@ cat(paste("****CON other_sw****\n", osw_s, "****\n", sep=""))
 ```
 
     #> ****CON other_sw****
-    #> 👉PROTESTA/La   desoye   obligatoria   mantiene paralizados   trenes
-    #> https://t.co/644Ak0HZ7I****
+    #> @usuario reclamó mejoras salariales!!! #Transporte 😊****
