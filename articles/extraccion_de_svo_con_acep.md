@@ -630,7 +630,7 @@ str(titulares_svo)
     #>   ..$ s_v_o_fill    : num [1:15] NA 0 NA 1 NA 0 0 NA 0 NA ...
     #>   ..$ s_p           : chr [1:15] "sujeto" "sujeto" "sujeto" "sujeto" ...
     #>   ..$ conjugaciones : chr [1:15] NA NA NA NA ...
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x558f2dedcef0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55ee0ab9bef0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ acep_pro_svo      :'data.frame':  1 obs. of  13 variables:
     #>   ..$ doc_id    : int 1
@@ -670,7 +670,7 @@ str(titulares_svo)
     #>   ..$ doc_id    : int(0) 
     #>   ..$ oracion_id: int(0) 
     #>   ..$ oracion   : chr(0) 
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x558f2dedcef0>
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55ee0ab9bef0>
 
 Veamos con un poco más de detalle cada uno de los marcos de datos
 creados con la función
