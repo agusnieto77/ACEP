@@ -1,6 +1,11 @@
 ## R CMD check results
 
-Pending final `R CMD check --as-cran` before submission.
+GitHub Actions completed successfully for commit
+`891054e14811ad758df4a37c7527535436c9217f`:
+
+* `R-CMD-check`: success, Ubuntu latest, R release
+* `test-coverage`: success, Ubuntu latest, R release
+* `pkgdown`: success, Ubuntu latest, R release
 
 Local lightweight verification for this patch:
 
