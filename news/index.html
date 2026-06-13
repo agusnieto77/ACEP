@@ -59,8 +59,7 @@
 <ul><li>
 <code><a href="../reference/acep_token_plot.html">acep_token_plot()</a></code>: restaura el estado gráfico <code><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par()</a></code> al salir (<code><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit()</a></code>), cumpliendo con la política de CRAN.</li>
 <li>Proveedores de IA en la nube (<code><a href="../reference/acep_gpt.html">acep_gpt()</a></code>, <code><a href="../reference/acep_claude.html">acep_claude()</a></code>, <code><a href="../reference/acep_gemini.html">acep_gemini()</a></code>, <code><a href="../reference/acep_together.html">acep_together()</a></code>, <code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>): se agregó el parámetro <code>timeout</code> (120 s por defecto) y un timeout HTTP efectivo, evitando que una conexión estancada bloquee la sesión de R indefinidamente.</li>
-<li>
-<code><a href="../reference/acep_gpt.html">acep_gpt()</a></code>: el manejo de errores HTTP ya no falla cuando el cuerpo de error no tiene el campo <code>error$message</code> (p. ej. respuestas 429/5xx).</li>
+<li>Todos los proveedores de IA comparten ahora un extractor de mensajes de error HTTP robusto (<code><a href="../reference/dot-acep_provider_http_error_message.html">.acep_provider_http_error_message()</a></code>) que no falla cuando el cuerpo de error es atómico, de texto plano (HTML 5xx) o no tiene el campo <code>error$message</code> (p. ej. respuestas 429/5xx).</li>
 <li>
 <code><a href="../reference/acep_gemini.html">acep_gemini()</a></code> y <code><a href="../reference/acep_claude.html">acep_claude()</a></code>: se elimina <code>additionalProperties</code> de forma recursiva en los esquemas anidados (antes solo se quitaba del nivel raíz).</li>
 <li>

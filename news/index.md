@@ -49,9 +49,12 @@
   se agregó el parámetro `timeout` (120 s por defecto) y un timeout HTTP
   efectivo, evitando que una conexión estancada bloquee la sesión de R
   indefinidamente.
-- [`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md):
-  el manejo de errores HTTP ya no falla cuando el cuerpo de error no
-  tiene el campo `error$message` (p. ej. respuestas 429/5xx).
+- Todos los proveedores de IA comparten ahora un extractor de mensajes
+  de error HTTP robusto
+  ([`.acep_provider_http_error_message()`](https://agusnieto77.github.io/ACEP/reference/dot-acep_provider_http_error_message.md))
+  que no falla cuando el cuerpo de error es atómico, de texto plano
+  (HTML 5xx) o no tiene el campo `error$message` (p. ej. respuestas
+  429/5xx).
 - [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md)
   y
   [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md):
