@@ -29,6 +29,7 @@ Local `R CMD check --as-cran` (R 4.5.2, Windows) completed with:
 
 * Local, Windows 10, R 4.5.2, `R CMD check --as-cran`
 * GitHub Actions, R-CMD-check, Ubuntu latest, R release
+* win-builder, R-devel (`devtools::check_win_devel()`)
 
 ## Downstream dependencies
 
