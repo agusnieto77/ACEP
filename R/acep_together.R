@@ -225,14 +225,9 @@ acep_together <- function(texto,
 
     # Verificar codigo HTTP
     if (httr::status_code(output) != 200) {
-      error_content <- httr::content(output, as = "parsed")
-      error_msg <- if (!is.null(error_content$error$message)) {
-        error_content$error$message
-      } else if (!is.null(error_content$error)) {
-        as.character(error_content$error)
-      } else {
-        "Error desconocido"
-      }
+      error_content <- tryCatch(httr::content(output, as = "parsed"),
+                                error = function(e) NULL)
+      error_msg <- .acep_provider_http_error_message(error_content)
       stop(sprintf("Error HTTP %d: %s", httr::status_code(output), error_msg))
     }
 

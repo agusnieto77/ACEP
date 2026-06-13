@@ -155,3 +155,19 @@ test_that("plot.acep_result on a serie_temporal calls acep_plot_st without error
   on.exit(grDevices::dev.off())
   expect_no_error(plot(res))
 })
+
+# ---------------------------------------------------------------------------
+# Shared provider HTTP error-message extractor (robust against atomic/string bodies)
+# ---------------------------------------------------------------------------
+test_that(".acep_provider_http_error_message handles all error body shapes", {
+  f <- getFromNamespace(".acep_provider_http_error_message", "ACEP")
+  expect_equal(f(list(error = list(message = "rate limited"))), "rate limited")
+  # atomic error field must not trigger '$ operator is invalid for atomic vectors'
+  expect_equal(f(list(error = "quota exceeded")), "quota exceeded")
+  # plain-text / HTML gateway body
+  expect_equal(f("<html>502 Bad Gateway</html>"), "<html>502 Bad Gateway</html>")
+  # null / empty content
+  expect_equal(f(NULL), "Error desconocido")
+  expect_equal(f(list()), "Error desconocido")
+})
+

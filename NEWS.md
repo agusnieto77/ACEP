@@ -26,8 +26,10 @@
   `acep_together()`, `acep_openrouter()`): se agregó el parámetro `timeout`
   (120 s por defecto) y un timeout HTTP efectivo, evitando que una conexión
   estancada bloquee la sesión de R indefinidamente.
-* `acep_gpt()`: el manejo de errores HTTP ya no falla cuando el cuerpo de error
-  no tiene el campo `error$message` (p. ej. respuestas 429/5xx).
+* Todos los proveedores de IA comparten ahora un extractor de mensajes de error
+  HTTP robusto (`.acep_provider_http_error_message()`) que no falla cuando el
+  cuerpo de error es atómico, de texto plano (HTML 5xx) o no tiene el campo
+  `error$message` (p. ej. respuestas 429/5xx).
 * `acep_gemini()` y `acep_claude()`: se elimina `additionalProperties` de forma
   recursiva en los esquemas anidados (antes solo se quitaba del nivel raíz).
 * `acep_load_base()`: maneja fallos de red/URL con `tryCatch`, agrega timeout y

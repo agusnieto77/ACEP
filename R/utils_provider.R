@@ -146,6 +146,27 @@ proteger_arrays_schema <- function(schema) {
   respuesta_json
 }
 
+#' Extraer un mensaje de error legible de una respuesta HTTP de error
+#'
+#' Maneja de forma robusta los distintos cuerpos de error que puede devolver una
+#' API: una lista con `error$message`, un campo `error` atomico (una cadena en
+#' lugar de un objeto), un cuerpo de texto plano (p. ej. una pagina HTML de un
+#' gateway 5xx) o un contenido nulo. Nunca falla con
+#' "$ operator is invalid for atomic vectors".
+#' @keywords internal
+.acep_provider_http_error_message <- function(error_content) {
+  err <- if (is.list(error_content)) error_content$error else NULL
+  if (is.list(err) && !is.null(err$message)) {
+    err$message
+  } else if (!is.null(err)) {
+    paste(as.character(err), collapse = " ")
+  } else if (is.character(error_content)) {
+    substr(error_content, 1, 500)
+  } else {
+    "Error desconocido"
+  }
+}
+
 .acep_provider_clean_json_response <- function(respuesta_json) {
   respuesta_json <- gsub("^```json\\s*", "", respuesta_json, perl = TRUE)
   respuesta_json <- gsub("^```\\s*", "", respuesta_json, perl = TRUE)

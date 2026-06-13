@@ -453,14 +453,9 @@ acep_openrouter <- function(texto,
     status_code <- httr::status_code(output)
 
     if (status_code != 200) {
-      error_content <- httr::content(output, as = "parsed")
-      error_msg <- if (!is.null(error_content$error$message)) {
-        error_content$error$message
-      } else if (!is.null(error_content$error)) {
-        as.character(error_content$error)
-      } else {
-        "Error desconocido"
-      }
+      error_content <- tryCatch(httr::content(output, as = "parsed"),
+                                error = function(e) NULL)
+      error_msg <- .acep_provider_http_error_message(error_content)
       detalle_status <- sprintf("Error HTTP %d: %s", status_code, error_msg)
       registrar_error(modelo_actual, detalle_status)
       ultimo_error <- detalle_status

@@ -184,16 +184,7 @@ acep_gpt <- function(texto,
     if (httr::status_code(output) != 200) {
       error_content <- tryCatch(httr::content(output, as = "parsed"),
                                 error = function(e) NULL)
-      err <- if (is.list(error_content)) error_content$error else NULL
-      error_msg <- if (is.list(err) && !is.null(err$message)) {
-        err$message
-      } else if (!is.null(err)) {
-        paste(as.character(err), collapse = " ")
-      } else if (is.character(error_content)) {
-        substr(error_content, 1, 500)
-      } else {
-        "Error desconocido"
-      }
+      error_msg <- .acep_provider_http_error_message(error_content)
       stop(sprintf("Error HTTP %d: %s",
                    httr::status_code(output),
                    error_msg))
