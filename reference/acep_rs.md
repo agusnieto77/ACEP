@@ -11,15 +11,16 @@ data(acep_rs)
 
 ## Format
 
-Son cadenas de caracteres.
+Es un objeto de clase 'list' con 14 componentes (cadenas de caracteres y
+expresiones regulares).
 
 - sw1:
 
   es un string de palabras vacias.
 
-- sw1:
+- sw2:
 
-  es un string de palabras vacias.
+  es un string de palabras vacias (complemento de sw1).
 
 - dias:
 
@@ -29,7 +30,7 @@ Son cadenas de caracteres.
 
   es un string de meses.
 
-- emoji:
+- emojis:
 
   es un string con expresiones regulares para emojis.
 

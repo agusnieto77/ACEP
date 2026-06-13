@@ -13,7 +13,7 @@ data(acep_prompt_gpt)
 
 ## Format
 
-Es un objeto de clase 'list' con 4 componentes.
+Es un objeto de clase 'list' con 6 componentes.
 
 - instruccion_breve_sao_es:
 
@@ -40,6 +40,16 @@ Es un objeto de clase 'list' con 4 componentes.
   protesta y codificarlos con las siguientes claves: 'id', 'chronicle',
   'date', 'subject', 'organization', 'participation', 'action',
   'object', 'place'.
+
+- system_prompt_01_es:
+
+  es el prompt de sistema en castellano que utiliza
+  [`acep_ollama`](https://agusnieto77.github.io/ACEP/reference/acep_ollama.md)
+  para guiar el análisis de texto.
+
+- system_prompt_01_en:
+
+  es el prompt de sistema en inglés equivalente a system_prompt_01_es.
 
 ## Examples
 

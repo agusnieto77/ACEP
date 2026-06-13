@@ -20,7 +20,8 @@ acep_claude(
   temperature = 0,
   max_tokens = 2000,
   top_p = 0.2,
-  top_k = NULL
+  top_k = NULL,
+  timeout = 120
 )
 ```
 
@@ -91,6 +92,11 @@ acep_claude(
 
   Parametro top-k (solo disponible en Claude). Limita la seleccion a los
   K tokens mas probables. Por defecto: NULL (deshabilitado).
+
+- timeout:
+
+  Tiempo maximo de espera de la peticion HTTP en segundos. Por
+  defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 
 ## Value
 

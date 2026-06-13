@@ -140,6 +140,7 @@ str(titulares_tags)
     #>   ..$ pos           : chr [1:4] "PROPN" "ADP" "PROPN" "PROPN"
     #>   ..$ parent        : num [1:4] 7 4 2 7
     #>   ..$ relation      : chr [1:4] "obl" "case" "flat" "nsubj"
+    #>   .. ..- attr(*, "levels")= chr "ROOT"
     #>   ..$ entity        : chr [1:4] "LOC_B" "LOC_I" "LOC_I" "ORG_B"
     #>   ..$ nounphrase    : chr [1:4] "beg_root" "mid" "end" "end_root"
     #>   ..$ whitespace    : logi [1:4] TRUE TRUE TRUE TRUE
@@ -152,6 +153,8 @@ str(titulares_tags)
     #>   ..$ is_right_punct: logi [1:4] FALSE FALSE FALSE FALSE
     #>   ..$ morph         : chr [1:4] "" "AdpType=Preppron" "" ""
     #>   ..$ sent          : chr [1:4] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial."
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x559bf53a0ee0> 
+    #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ texto_only_entity    :'data.frame':   4 obs. of  4 variables:
     #>   ..$ entity     : chr [1:4] "Mar" "del" "Plata" "SOIP"
     #>   ..$ entity_type: chr [1:4] "LOC" "LOC" "LOC" "ORG"
@@ -198,6 +201,7 @@ str(titulares_tags)
     #>   ..$ pos           : chr [1:9] "PROPN" "ADP" "PROPN" "DET" ...
     #>   ..$ parent        : num [1:9] 7 4 2 6 7 9 7 10 9
     #>   ..$ relation      : chr [1:9] "obl" "case" "flat" "det" ...
+    #>   .. ..- attr(*, "levels")= chr "ROOT"
     #>   ..$ entity        : chr [1:9] "LOC_B" "LOC_I" "LOC_I" "" ...
     #>   ..$ nounphrase    : chr [1:9] "beg_root" "mid" "end" "beg" ...
     #>   ..$ whitespace    : logi [1:9] TRUE TRUE TRUE TRUE TRUE TRUE ...
@@ -210,6 +214,8 @@ str(titulares_tags)
     #>   ..$ is_right_punct: logi [1:9] FALSE FALSE FALSE FALSE FALSE FALSE ...
     #>   ..$ morph         : chr [1:9] "" "AdpType=Preppron" "" "Definite=Def|Gender=Masc|Number=Sing|PronType=Art" ...
     #>   ..$ sent          : chr [1:9] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x559bf53a0ee0> 
+    #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
 
 En este resultado podemos ver cómo la función crea los seis marcos de
 datos con información relevante sobre el contenido y la forma de los
@@ -230,71 +236,77 @@ estructurado para servir de input de la función
 head(titulares_tags$texto_tag, n = 12)
 ```
 
-    #>    doc_id sentence token_id   token    lemma   pos parent relation entity
-    #> 1       1        1        1      En       en   ADP      2     case       
-    #> 2       1        1        2     Mar      Mar PROPN      7      obl  LOC_B
-    #> 3       1        1        3     del      del   ADP      4     case  LOC_I
-    #> 4       1        1        4   Plata    Plata PROPN      2     flat  LOC_I
-    #> 5       1        1        5      el       el   DET      6      det       
-    #> 6       1        1        6    SOIP     SOIP PROPN      7    nsubj  ORG_B
-    #> 7       1        1        7 declara declarar  VERB     NA     ROOT       
-    #> 8       1        1        8      la       el   DET      9      det       
-    #> 9       1        1        9  huelga   huelga  NOUN      7      obj       
-    #> 10      1        1       10      en       en   ADP     13     case       
-    #> 11      1        1       11 demanda  demanda  NOUN     10    fixed       
-    #> 12      1        1       12      de       de   ADP     10    fixed       
-    #>    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
-    #> 1                   TRUE    FALSE     TRUE    FALSE        O       2
-    #> 2    beg_root       TRUE    FALSE     TRUE    FALSE        B       3
-    #> 3         mid       TRUE    FALSE    FALSE    FALSE        I       1
-    #> 4         end       TRUE    FALSE     TRUE    FALSE        I       1
-    #> 5         beg       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 6    end_root       TRUE     TRUE    FALSE    FALSE        B       3
-    #> 7                   TRUE    FALSE    FALSE    FALSE        O       2
-    #> 8         beg       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 9    end_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 10                  TRUE    FALSE    FALSE    FALSE        O       2
-    #> 11   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 12                  TRUE    FALSE    FALSE    FALSE        O       2
-    #>    is_left_punct is_right_punct
-    #> 1          FALSE          FALSE
-    #> 2          FALSE          FALSE
-    #> 3          FALSE          FALSE
-    #> 4          FALSE          FALSE
-    #> 5          FALSE          FALSE
-    #> 6          FALSE          FALSE
-    #> 7          FALSE          FALSE
-    #> 8          FALSE          FALSE
-    #> 9          FALSE          FALSE
-    #> 10         FALSE          FALSE
-    #> 11         FALSE          FALSE
-    #> 12         FALSE          FALSE
-    #>                                                    morph
-    #> 1                                           AdpType=Prep
-    #> 2                                                       
-    #> 3                                       AdpType=Preppron
-    #> 4                                                       
-    #> 5      Definite=Def|Gender=Masc|Number=Sing|PronType=Art
-    #> 6                                                       
-    #> 7  Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin
-    #> 8       Definite=Def|Gender=Fem|Number=Sing|PronType=Art
-    #> 9                                 Gender=Fem|Number=Sing
-    #> 10                                          AdpType=Prep
-    #> 11                                                      
-    #> 12                                          AdpType=Prep
-    #>                                                                          sent
-    #> 1  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 2  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 3  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 4  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 5  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 6  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 7  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 8  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 9  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 10 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 11 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 12 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> Key: <doc_id, sentence, token_id>
+    #>     doc_id sentence token_id   token    lemma    pos parent relation entity
+    #>      <int>    <int>    <num>  <char>   <char> <char>  <num>   <char> <char>
+    #>  1:      1        1        1      En       en    ADP      2     case       
+    #>  2:      1        1        2     Mar      Mar  PROPN      7      obl  LOC_B
+    #>  3:      1        1        3     del      del    ADP      4     case  LOC_I
+    #>  4:      1        1        4   Plata    Plata  PROPN      2     flat  LOC_I
+    #>  5:      1        1        5      el       el    DET      6      det       
+    #>  6:      1        1        6    SOIP     SOIP  PROPN      7    nsubj  ORG_B
+    #>  7:      1        1        7 declara declarar   VERB     NA     ROOT       
+    #>  8:      1        1        8      la       el    DET      9      det       
+    #>  9:      1        1        9  huelga   huelga   NOUN      7      obj       
+    #> 10:      1        1       10      en       en    ADP     13     case       
+    #> 11:      1        1       11 demanda  demanda   NOUN     10    fixed       
+    #> 12:      1        1       12      de       de    ADP     10    fixed       
+    #>     nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
+    #>         <char>     <lgcl>   <lgcl>   <lgcl>   <lgcl>   <char>   <int>
+    #>  1:                  TRUE    FALSE     TRUE    FALSE        O       2
+    #>  2:   beg_root       TRUE    FALSE     TRUE    FALSE        B       3
+    #>  3:        mid       TRUE    FALSE    FALSE    FALSE        I       1
+    #>  4:        end       TRUE    FALSE     TRUE    FALSE        I       1
+    #>  5:        beg       TRUE    FALSE    FALSE    FALSE        O       2
+    #>  6:   end_root       TRUE     TRUE    FALSE    FALSE        B       3
+    #>  7:                  TRUE    FALSE    FALSE    FALSE        O       2
+    #>  8:        beg       TRUE    FALSE    FALSE    FALSE        O       2
+    #>  9:   end_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 10:                  TRUE    FALSE    FALSE    FALSE        O       2
+    #> 11:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 12:                  TRUE    FALSE    FALSE    FALSE        O       2
+    #>     is_left_punct is_right_punct
+    #>            <lgcl>         <lgcl>
+    #>  1:         FALSE          FALSE
+    #>  2:         FALSE          FALSE
+    #>  3:         FALSE          FALSE
+    #>  4:         FALSE          FALSE
+    #>  5:         FALSE          FALSE
+    #>  6:         FALSE          FALSE
+    #>  7:         FALSE          FALSE
+    #>  8:         FALSE          FALSE
+    #>  9:         FALSE          FALSE
+    #> 10:         FALSE          FALSE
+    #> 11:         FALSE          FALSE
+    #> 12:         FALSE          FALSE
+    #>                                                     morph
+    #>                                                    <char>
+    #>  1:                                          AdpType=Prep
+    #>  2:                                                      
+    #>  3:                                      AdpType=Preppron
+    #>  4:                                                      
+    #>  5:     Definite=Def|Gender=Masc|Number=Sing|PronType=Art
+    #>  6:                                                      
+    #>  7: Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin
+    #>  8:      Definite=Def|Gender=Fem|Number=Sing|PronType=Art
+    #>  9:                                Gender=Fem|Number=Sing
+    #> 10:                                          AdpType=Prep
+    #> 11:                                                      
+    #> 12:                                          AdpType=Prep
+    #>                                                                           sent
+    #>                                                                         <char>
+    #>  1: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  2: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  3: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  4: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  5: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  6: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  7: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  8: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>  9: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 10: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 11: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 12: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
 
 ### texto_tag_entity
 
@@ -310,26 +322,31 @@ entidad en una sola celda de la columna token. Ejemplo:
 head(titulares_tags$texto_tag_entity, n = 14)
 ```
 
-    #>   doc_id sentence token_id token lemma   pos parent relation entity nounphrase
-    #> 2      1        1        2   Mar   Mar PROPN      7      obl  LOC_B   beg_root
-    #> 3      1        1        3   del   del   ADP      4     case  LOC_I        mid
-    #> 4      1        1        4 Plata Plata PROPN      2     flat  LOC_I        end
-    #> 6      1        1        6  SOIP  SOIP PROPN      7    nsubj  ORG_B   end_root
-    #>   whitespace is_upper is_title is_quote ent_iob_ ent_iob is_left_punct
-    #> 2       TRUE    FALSE     TRUE    FALSE        B       3         FALSE
-    #> 3       TRUE    FALSE    FALSE    FALSE        I       1         FALSE
-    #> 4       TRUE    FALSE     TRUE    FALSE        I       1         FALSE
-    #> 6       TRUE     TRUE    FALSE    FALSE        B       3         FALSE
-    #>   is_right_punct            morph
-    #> 2          FALSE                 
-    #> 3          FALSE AdpType=Preppron
-    #> 4          FALSE                 
-    #> 6          FALSE                 
-    #>                                                                         sent
-    #> 2 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 3 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 4 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 6 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> Key: <doc_id, sentence, token_id>
+    #>    doc_id sentence token_id  token  lemma    pos parent relation entity
+    #>     <int>    <int>    <num> <char> <char> <char>  <num>   <char> <char>
+    #> 1:      1        1        2    Mar    Mar  PROPN      7      obl  LOC_B
+    #> 2:      1        1        3    del    del    ADP      4     case  LOC_I
+    #> 3:      1        1        4  Plata  Plata  PROPN      2     flat  LOC_I
+    #> 4:      1        1        6   SOIP   SOIP  PROPN      7    nsubj  ORG_B
+    #>    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
+    #>        <char>     <lgcl>   <lgcl>   <lgcl>   <lgcl>   <char>   <int>
+    #> 1:   beg_root       TRUE    FALSE     TRUE    FALSE        B       3
+    #> 2:        mid       TRUE    FALSE    FALSE    FALSE        I       1
+    #> 3:        end       TRUE    FALSE     TRUE    FALSE        I       1
+    #> 4:   end_root       TRUE     TRUE    FALSE    FALSE        B       3
+    #>    is_left_punct is_right_punct            morph
+    #>           <lgcl>         <lgcl>           <char>
+    #> 1:         FALSE          FALSE                 
+    #> 2:         FALSE          FALSE AdpType=Preppron
+    #> 3:         FALSE          FALSE                 
+    #> 4:         FALSE          FALSE                 
+    #>                                                                          sent
+    #>                                                                        <char>
+    #> 1: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 2: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 3: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 4: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
 
 ### texto_only_entity
 
@@ -374,17 +391,19 @@ Ejemplo: ‘las_principales_ciudades’.
 head(titulares_tags$texto_nounphrase[ , c(1:2, 4, 6)], n = 10)
 ```
 
-    #>    doc_id sentence   token   pos
-    #> 1       1        1      En   ADP
-    #> 2       1        1     Mar PROPN
-    #> 3       1        1     del   ADP
-    #> 4       1        1   Plata PROPN
-    #> 5       1        1      el   DET
-    #> 6       1        1    SOIP PROPN
-    #> 7       1        1 declara  VERB
-    #> 8       1        1      la   DET
-    #> 9       1        1  huelga  NOUN
-    #> 10      1        1      en   ADP
+    #> Key: <doc_id, sentence>
+    #>     doc_id sentence   token    pos
+    #>      <int>    <int>  <char> <char>
+    #>  1:      1        1      En    ADP
+    #>  2:      1        1     Mar  PROPN
+    #>  3:      1        1     del    ADP
+    #>  4:      1        1   Plata  PROPN
+    #>  5:      1        1      el    DET
+    #>  6:      1        1    SOIP  PROPN
+    #>  7:      1        1 declara   VERB
+    #>  8:      1        1      la    DET
+    #>  9:      1        1  huelga   NOUN
+    #> 10:      1        1      en    ADP
 
 ### texto_only_nounphrase
 
@@ -396,56 +415,62 @@ filtrado por el valor ‘nounphrase’ de la columna ‘pos’.
 head(titulares_tags$texto_only_nounphrase, n = 10)
 ```
 
-    #>    doc_id sentence token_id   token   lemma   pos parent relation entity
-    #> 2       1        1        2     Mar     Mar PROPN      7      obl  LOC_B
-    #> 3       1        1        3     del     del   ADP      4     case  LOC_I
-    #> 4       1        1        4   Plata   Plata PROPN      2     flat  LOC_I
-    #> 5       1        1        5      el      el   DET      6      det       
-    #> 6       1        1        6    SOIP    SOIP PROPN      7    nsubj  ORG_B
-    #> 8       1        1        8      la      el   DET      9      det       
-    #> 9       1        1        9  huelga  huelga  NOUN      7      obj       
-    #> 11      1        1       11 demanda demanda  NOUN     10    fixed       
-    #> 13      1        1       13 aumento aumento  NOUN      9     nmod       
+    #> Key: <doc_id, sentence, token_id>
+    #>    doc_id sentence token_id   token   lemma    pos parent relation entity
+    #>     <int>    <int>    <num>  <char>  <char> <char>  <num>   <char> <char>
+    #> 1:      1        1        2     Mar     Mar  PROPN      7      obl  LOC_B
+    #> 2:      1        1        3     del     del    ADP      4     case  LOC_I
+    #> 3:      1        1        4   Plata   Plata  PROPN      2     flat  LOC_I
+    #> 4:      1        1        5      el      el    DET      6      det       
+    #> 5:      1        1        6    SOIP    SOIP  PROPN      7    nsubj  ORG_B
+    #> 6:      1        1        8      la      el    DET      9      det       
+    #> 7:      1        1        9  huelga  huelga   NOUN      7      obj       
+    #> 8:      1        1       11 demanda demanda   NOUN     10    fixed       
+    #> 9:      1        1       13 aumento aumento   NOUN      9     nmod       
     #>    nounphrase whitespace is_upper is_title is_quote ent_iob_ ent_iob
-    #> 2    beg_root       TRUE    FALSE     TRUE    FALSE        B       3
-    #> 3         mid       TRUE    FALSE    FALSE    FALSE        I       1
-    #> 4         end       TRUE    FALSE     TRUE    FALSE        I       1
-    #> 5         beg       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 6    end_root       TRUE     TRUE    FALSE    FALSE        B       3
-    #> 8         beg       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 9    end_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 11   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
-    #> 13   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #>        <char>     <lgcl>   <lgcl>   <lgcl>   <lgcl>   <char>   <int>
+    #> 1:   beg_root       TRUE    FALSE     TRUE    FALSE        B       3
+    #> 2:        mid       TRUE    FALSE    FALSE    FALSE        I       1
+    #> 3:        end       TRUE    FALSE     TRUE    FALSE        I       1
+    #> 4:        beg       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 5:   end_root       TRUE     TRUE    FALSE    FALSE        B       3
+    #> 6:        beg       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 7:   end_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 8:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
+    #> 9:   beg_root       TRUE    FALSE    FALSE    FALSE        O       2
     #>    is_left_punct is_right_punct
-    #> 2          FALSE          FALSE
-    #> 3          FALSE          FALSE
-    #> 4          FALSE          FALSE
-    #> 5          FALSE          FALSE
-    #> 6          FALSE          FALSE
-    #> 8          FALSE          FALSE
-    #> 9          FALSE          FALSE
-    #> 11         FALSE          FALSE
-    #> 13         FALSE          FALSE
+    #>           <lgcl>         <lgcl>
+    #> 1:         FALSE          FALSE
+    #> 2:         FALSE          FALSE
+    #> 3:         FALSE          FALSE
+    #> 4:         FALSE          FALSE
+    #> 5:         FALSE          FALSE
+    #> 6:         FALSE          FALSE
+    #> 7:         FALSE          FALSE
+    #> 8:         FALSE          FALSE
+    #> 9:         FALSE          FALSE
     #>                                                morph
-    #> 2                                                   
-    #> 3                                   AdpType=Preppron
-    #> 4                                                   
-    #> 5  Definite=Def|Gender=Masc|Number=Sing|PronType=Art
-    #> 6                                                   
-    #> 8   Definite=Def|Gender=Fem|Number=Sing|PronType=Art
-    #> 9                             Gender=Fem|Number=Sing
-    #> 11                                                  
-    #> 13                           Gender=Masc|Number=Sing
+    #>                                               <char>
+    #> 1:                                                  
+    #> 2:                                  AdpType=Preppron
+    #> 3:                                                  
+    #> 4: Definite=Def|Gender=Masc|Number=Sing|PronType=Art
+    #> 5:                                                  
+    #> 6:  Definite=Def|Gender=Fem|Number=Sing|PronType=Art
+    #> 7:                            Gender=Fem|Number=Sing
+    #> 8:                                                  
+    #> 9:                           Gender=Masc|Number=Sing
     #>                                                                          sent
-    #> 2  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 3  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 4  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 5  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 6  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 8  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 9  En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 11 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
-    #> 13 En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #>                                                                        <char>
+    #> 1: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 2: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 3: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 4: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 5: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 6: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 7: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 8: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
+    #> 9: En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial.
 
 ## Función `acep_upos()`
 
@@ -630,7 +655,7 @@ str(titulares_svo)
     #>   ..$ s_v_o_fill    : num [1:15] NA 0 NA 1 NA 0 0 NA 0 NA ...
     #>   ..$ s_p           : chr [1:15] "sujeto" "sujeto" "sujeto" "sujeto" ...
     #>   ..$ conjugaciones : chr [1:15] NA NA NA NA ...
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55f59db70ef0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x559bf53a0ee0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ acep_pro_svo      :'data.frame':  1 obs. of  13 variables:
     #>   ..$ doc_id    : int 1
@@ -670,7 +695,7 @@ str(titulares_svo)
     #>   ..$ doc_id    : int(0) 
     #>   ..$ oracion_id: int(0) 
     #>   ..$ oracion   : chr(0) 
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55f59db70ef0>
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x559bf53a0ee0>
 
 Veamos con un poco más de detalle cada uno de los marcos de datos
 creados con la función

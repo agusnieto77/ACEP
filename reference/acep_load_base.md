@@ -20,8 +20,10 @@ acep_load_base(tag)
 
 ## Value
 
-Si todas las entradas son correctas, la salida sera una base de datos en
-formato tabular con un corpus de notas.
+Si la descarga es exitosa, devuelve una base de datos en formato tabular
+con un corpus de notas. Ante un fallo de red, una URL inexistente o un
+error de lectura, informa el problema con un \`message()\` y devuelve
+\`NULL\` de forma invisible.
 
 ## Examples
 

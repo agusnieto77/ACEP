@@ -22,7 +22,8 @@ acep_together(
   top_k = 50,
   repetition_penalty = 1,
   stop = NULL,
-  prompt_system = "json"
+  prompt_system = "json",
+  timeout = 120
 )
 ```
 
@@ -114,6 +115,11 @@ acep_together(
   automaticamente el contenido de pensamiento (\<think\>...\</think\>)
   de modelos como Qwen3-Thinking - String personalizado: Cualquier texto
   que definas como prompt del sistema
+
+- timeout:
+
+  Tiempo maximo de espera de la peticion HTTP en segundos. Por
+  defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 
 ## Value
 

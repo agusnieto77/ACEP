@@ -20,7 +20,8 @@ acep_gemini(
   temperature = 0,
   max_tokens = 2000,
   top_p = 0.95,
-  top_k = 40
+  top_k = 40,
+  timeout = 120
 )
 ```
 
@@ -85,6 +86,11 @@ acep_gemini(
 
   Parametro top-k. Limita la seleccion a los K tokens mas probables. Por
   defecto: 40 (valor tipico para Gemini).
+
+- timeout:
+
+  Tiempo maximo de espera de la peticion HTTP en segundos. Por
+  defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 
 ## Value
 

@@ -1,7 +1,7 @@
 # Colección de diccionarios.
 
 Colección de diccionarios que reúne diccionarios de diferentes orígenes.
-El diccionario dicc_confl_acep fueron construidos en el marco del
+El diccionario dicc_confl_sismos fue construido en el marco del
 Observatorio de Conflictividad de la UNMdP. Los diccionarios
 dicc_confl_gp y dicc_viol_gp fueron extraídos de Albrieu y Palazzo
 (2020).
@@ -14,22 +14,23 @@ data(acep_diccionarios)
 
 ## Format
 
-Es un objeto de clase 'list' con 3 componentes.
+Es un objeto de clase 'list' con 3 componentes. Cada componente es una
+cadena de caracteres de longitud 1 con la URL de un diccionario \`.rds\`
+descargable; usá
+[`acep_load_base`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md)
+para obtener el vector de palabras correspondiente.
 
 - dicc_confl_gp:
 
-  es un vector con palabras de un diccionario de términos que refieren a
-  conflictos
+  URL al diccionario de términos que refieren a conflictos
 
 - dicc_viol_gp:
 
-  es un vector con palabras de un diccionario de términos que refieren a
-  violencia
+  URL al diccionario de términos que refieren a violencia
 
 - dicc_confl_sismos:
 
-  es un vector con palabras de un diccionario de términos que refieren a
-  conflictos
+  URL al diccionario de términos que refieren a conflictos
 
 ## Source
 

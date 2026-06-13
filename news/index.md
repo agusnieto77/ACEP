@@ -1,6 +1,107 @@
 # Changelog
 
+## ACEP 0.1.2
+
+### Correcciones (cambian resultados)
+
+- [`acep_clean()`](https://agusnieto77.github.io/ACEP/reference/acep_clean.md):
+  ahora remueve correctamente las stopwords acentuadas escritas en
+  MAYÚSCULA (p. ej. “MÁS”, “SÍ”). Antes el plegado de tildes corría
+  después de la remoción de stopwords y esas palabras quedaban sin
+  filtrar.
+- [`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md)
+  /
+  [`acep_detect()`](https://agusnieto77.github.io/ACEP/reference/acep_detect.md):
+  los términos del diccionario que contienen metacaracteres de
+  expresiones regulares (`(`, `)`, `.`, `$`, etc.) ahora se tratan como
+  texto literal. Antes podían producir coincidencias erróneas o abortar
+  con un error de regex. Además,
+  [`acep_detect()`](https://agusnieto77.github.io/ACEP/reference/acep_detect.md)
+  aplica los límites de palabra (`\b`) de la misma forma que
+  [`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md)
+  cuando el término viene rodeado de espacios (antes el `\b` se
+  insertaba como una “b” literal).
+- [`acep_token_table()`](https://agusnieto77.github.io/ACEP/reference/acep_token_table.md)
+  y
+  [`acep_token_plot()`](https://agusnieto77.github.io/ACEP/reference/acep_token_plot.md):
+  la proporción (`prop`) se calcula sobre el total del corpus y no sobre
+  el subconjunto de las `u` palabras más frecuentes, coincidiendo con la
+  definición documentada en la viñeta.
+- [`acep_extract()`](https://agusnieto77.github.io/ACEP/reference/acep_extract.md):
+  una entrada `NA` ahora devuelve `NA` real en lugar de la cadena
+  literal `"NA"`.
+- [`acep_token()`](https://agusnieto77.github.io/ACEP/reference/acep_token.md):
+  descarta entradas `NA` en vez de generar filas de tokens `NA`.
+
+### Correcciones (sin cambios de comportamiento esperados)
+
+- [`acep_token_plot()`](https://agusnieto77.github.io/ACEP/reference/acep_token_plot.md):
+  restaura el estado gráfico
+  [`par()`](https://rdrr.io/r/graphics/par.html) al salir
+  ([`on.exit()`](https://rdrr.io/r/base/on.exit.html)), cumpliendo con
+  la política de CRAN.
+- Proveedores de IA en la nube
+  ([`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md),
+  [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md),
+  [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md),
+  [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md),
+  [`acep_openrouter()`](https://agusnieto77.github.io/ACEP/reference/acep_openrouter.md)):
+  se agregó el parámetro `timeout` (120 s por defecto) y un timeout HTTP
+  efectivo, evitando que una conexión estancada bloquee la sesión de R
+  indefinidamente.
+- [`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md):
+  el manejo de errores HTTP ya no falla cuando el cuerpo de error no
+  tiene el campo `error$message` (p. ej. respuestas 429/5xx).
+- [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md)
+  y
+  [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md):
+  se elimina `additionalProperties` de forma recursiva en los esquemas
+  anidados (antes solo se quitaba del nivel raíz).
+- [`acep_load_base()`](https://agusnieto77.github.io/ACEP/reference/acep_load_base.md):
+  maneja fallos de red/URL con `tryCatch`, agrega timeout y devuelve
+  `NULL` de forma controlada en lugar de propagar errores crudos.
+- `plot.acep_result()`: el gráfico de serie temporal ahora pasa los
+  vectores correctos a
+  [`acep_plot_st()`](https://agusnieto77.github.io/ACEP/reference/acep_plot_st.md)
+  (antes le pasaba un data frame y fallaba).
+- [`acep_corpus()`](https://agusnieto77.github.io/ACEP/reference/acep_corpus.md):
+  valida que `id` tenga la misma longitud que `texto` y que `metadata`
+  sea una lista.
+- [`acep_upos()`](https://agusnieto77.github.io/ACEP/reference/acep_upos.md)
+  y
+  [`acep_svo()`](https://agusnieto77.github.io/ACEP/reference/acep_svo.md):
+  las validaciones de entrada ahora usan
+  [`stop()`](https://rdrr.io/r/base/stop.html) en vez de devolver `NULL`
+  silenciosamente.
+
+### CRAN y dependencias
+
+- Se declara `grDevices` en `Imports` (se usaba vía `::` sin declarar).
+- Se eliminaron los campos redundantes `Author`/`Maintainer` del
+  `DESCRIPTION` (se derivan de `Authors@R`).
+- Se excluyen del build los artefactos `vignettes/geocode_cache.json` y
+  demás archivos `geocode_cache.json`/`Rplots.pdf` (y se quitaron del
+  repositorio).
+
+### Documentación
+
+- Se corrigió la documentación de los datos `acep_diccionarios` (son
+  URLs, no vectores de palabras), `acep_rs` (tipo, `sw2`, `emojis`) y
+  `acep_prompt_gpt` (6 componentes, incluyendo los prompts de sistema).
+- [`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md):
+  la descripción refleja todos los modelos soportados.
+
+### Tests
+
+- Se reemplazaron los tests tautológicos y los stubs vacíos por
+  aserciones reales y deterministas (offline), incluyendo cobertura del
+  subsistema de pipeline (`acep_corpus`, `pipe_*`, `acep_pipeline`) y de
+  las correcciones de esta versión. Las pruebas del núcleo ahora se
+  ejecutan también en CRAN.
+
 ## ACEP 0.1.1
+
+CRAN release: 2026-05-14
 
 ### Hotfix CRAN
 

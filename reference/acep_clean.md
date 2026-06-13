@@ -105,8 +105,8 @@ normalizados.
 ## Examples
 
 ``` r
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = FALSE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = FALSE)
 #> [1] "el suteba fue al paro reclaman mejoras salariales"
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = TRUE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = TRUE)
 #> [1] "suteba paro reclaman mejoras salariales"
 ```

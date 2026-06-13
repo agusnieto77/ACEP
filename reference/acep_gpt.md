@@ -4,8 +4,9 @@ Funcion para interactuar con la API de OpenAI utilizando Structured
 Outputs, una funcionalidad que garantiza respuestas en formato JSON que
 cumplen estrictamente con un esquema predefinido. Esto elimina la
 necesidad de parseo y validacion manual, haciendo las respuestas mas
-confiables y estructuradas. Compatible con modelos \`gpt-4o\` y
-\`gpt-4o-mini\`.
+confiables y estructuradas. Compatible con los modelos de OpenAI que
+soportan Structured Outputs: series \`gpt-4o\`, \`gpt-4.1\`, \`gpt-5\`,
+\`o1\` y \`o4\` (ver \`@details\`).
 
 ## Usage
 
@@ -21,7 +22,8 @@ acep_gpt(
   max_tokens = 2000,
   top_p = 0.2,
   frequency_penalty = 0.2,
-  seed = 123456
+  seed = 123456,
+  timeout = 120
 )
 ```
 
@@ -93,6 +95,11 @@ acep_gpt(
   Semilla numerica para reproducibilidad. Usar el mismo seed con los
   mismos parametros genera respuestas identicas. Por defecto: 123456.
   NOTA: Ignorado en modelos gpt-5, o1 y o4.
+
+- timeout:
+
+  Tiempo maximo de espera de la peticion HTTP en segundos. Por
+  defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 
 ## Value
 

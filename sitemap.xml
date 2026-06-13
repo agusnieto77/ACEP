@@ -50,6 +50,10 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_token_plot.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_token_table.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/acep_upos.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_count_cache_key.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_count_pattern.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_escape_regex.html</loc></url>
+<url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_provider_strip_key.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/dot-acep_regex_cache.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/index.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe.html</loc></url>
@@ -57,6 +61,5 @@
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_count.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_intensity.html</loc></url>
 <url><loc>https://agusnieto77.github.io/ACEP/reference/pipe_timeseries.html</loc></url>
-<url><loc>https://agusnieto77.github.io/ACEP/reference/proteger_arrays_schema.html</loc></url>
 </urlset>
 
