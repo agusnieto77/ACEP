@@ -5,7 +5,7 @@
 \alias{acep_prompt_gpt}
 \title{Colección de instrucciones para GPT.}
 \format{
-Es un objeto de clase 'list' con 4 componentes.
+Es un objeto de clase 'list' con 6 componentes.
 \describe{
 \item{instruccion_breve_sao_es}{es un texto en castellano con instrucciones breves para
  extraer eventos de protesta y codificarlos con las siguientes claves: 'fecha',
@@ -21,6 +21,10 @@ Es un objeto de clase 'list' con 4 componentes.
  extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
  'chronicle', 'date', 'subject', 'organization', 'participation', 'action',
  'object', 'place'.}
+\item{system_prompt_01_es}{es el prompt de sistema en castellano que utiliza
+ \code{\link{acep_ollama}} para guiar el análisis de texto.}
+\item{system_prompt_01_en}{es el prompt de sistema en inglés equivalente a
+ system_prompt_01_es.}
 }
 }
 \usage{

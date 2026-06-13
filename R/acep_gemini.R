@@ -31,6 +31,8 @@
 #' @param top_k Parametro top-k. Limita la seleccion a los K tokens mas probables.
 #'   Por defecto: 40 (valor tipico para Gemini).
 #'
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -76,7 +78,8 @@ acep_gemini <- function(texto,
                         temperature = 0,
                         max_tokens = 2000,
                         top_p = 0.95,
-                        top_k = 40) {
+                        top_k = 40,
+                        timeout = 120) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "GEMINI_API_KEY")
 
@@ -106,8 +109,9 @@ acep_gemini <- function(texto,
   }
 
   # Convertir esquema al formato de Gemini (OpenAPI 3.0 Schema)
-  # Gemini no requiere additionalProperties: false
-  schema$additionalProperties <- NULL
+  # Gemini no requiere additionalProperties: false; se elimina de forma
+  # recursiva porque el responseSchema tampoco lo admite en objetos anidados.
+  schema <- .acep_provider_strip_key(schema, "additionalProperties")
 
   # Construir el prompt combinado (sistema + usuario)
   # Gemini no tiene roles separados en la misma manera que OpenAI/Anthropic
@@ -145,7 +149,8 @@ acep_gemini <- function(texto,
       url = url,
       do.call(httr::add_headers, .acep_provider_auth_headers("gemini", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw"
+      encode = "raw",
+      httr::timeout(timeout)
     )
 
     # Verificar codigo HTTP

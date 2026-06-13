@@ -18,7 +18,8 @@ acep_openrouter(
   site_url = NULL,
   use_fallback = FALSE,
   fallback_provider_order = NULL,
-  fallback_models = NULL
+  fallback_models = NULL,
+  timeout = 120
 )
 }
 \arguments{
@@ -70,6 +71,9 @@ un orden especifico de enrutamiento (ej.: `c("openai", "anthropic")`). Requiere
 `"proveedor/modelo"`) que se probaran en orden si el modelo principal devuelve un
 error recuperable (429, 5xx, timeouts). Ideal para definir variantes pagas cuando
 la version `:free` alcance su limite.}
+
+\item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
+Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta

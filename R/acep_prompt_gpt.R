@@ -3,7 +3,7 @@
 #' de OpenAI. Las instrucciones fueron testeadas en el marco de las tareas
 #' que realizamos en el Observatorio de Conflictividad Social de la
 #' Universidad Nacional de Mar del Plata.
-#' @format Es un objeto de clase 'list' con 4 componentes.
+#' @format Es un objeto de clase 'list' con 6 componentes.
 #'\describe{
 #' \item{instruccion_breve_sao_es}{es un texto en castellano con instrucciones breves para
 #'  extraer eventos de protesta y codificarlos con las siguientes claves: 'fecha',
@@ -19,6 +19,10 @@
 #'  extraer eventos de protesta y codificarlos con las siguientes claves: 'id',
 #'  'chronicle', 'date', 'subject', 'organization', 'participation', 'action',
 #'  'object', 'place'.}
+#' \item{system_prompt_01_es}{es el prompt de sistema en castellano que utiliza
+#'  \code{\link{acep_ollama}} para guiar el análisis de texto.}
+#' \item{system_prompt_01_en}{es el prompt de sistema en inglés equivalente a
+#'  system_prompt_01_es.}
 #'}
 #' @docType data
 #' @usage data(acep_prompt_gpt)

@@ -69,8 +69,8 @@ la salida sera un vector de textos normalizados.
 Función que limpia y normaliza las notas/textos.
 }
 \examples{
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = FALSE)
-acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = TRUE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = FALSE)
+acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = TRUE)
 }
 \keyword{limpieza}
 \keyword{normalización}

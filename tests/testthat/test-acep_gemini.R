@@ -1,8 +1,12 @@
+# Offline validation tests (no network).
+test_that("acep_gemini valida texto e instrucciones no vacios", {
+  expect_error(acep_gemini("", "instrucciones", api_key = "fake"),
+               "cadena de caracteres no vacia")
+  expect_error(acep_gemini("texto", "", api_key = "fake"),
+               "cadena de caracteres no vacia")
+})
 
-test_that("ACEP gemini", {
-  skip_if_offline()
-  skip_on_cran()
-  texto <- 1:10
-  dimensiones <- length(texto)
-  expect_equal(dimensiones, length(texto))
+test_that("acep_gemini exige una API key", {
+  expect_error(acep_gemini("texto", "instrucciones", api_key = ""),
+               "API key no encontrada")
 })

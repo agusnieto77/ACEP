@@ -23,8 +23,8 @@
 #' la salida sera un vector de textos normalizados.
 #' @keywords limpieza normalización
 #' @examples
-#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = FALSE)
-#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopword = TRUE)
+#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = FALSE)
+#' acep_clean("El SUTEBA fue al paro. Reclaman mejoras salariales.", rm_stopwords = TRUE)
 #' @export
 acep_clean <- function(x,
                        tolower = TRUE,
@@ -61,6 +61,11 @@ acep_clean <- function(x,
       if (tolower) {
         x <- gsub(pattern = "([[:upper:]])", perl = TRUE,
                   replacement = "\\L\\1", x)
+        # Las mayúsculas acentuadas (Á, É, Ñ, ...) no las baja \\L (solo ASCII),
+        # así que el plegado de tildes a minúscula debe correr ANTES de remover
+        # stopwords; de lo contrario "MÁS" no coincide con la stopword "más".
+        x <- chartr(ACEP::acep_rs$tildes,
+                    tolower(ACEP::acep_rs$tildes), x)
       }
       if (rm_stopwords) {
         if (is.null(other_sw)) {
@@ -82,10 +87,6 @@ acep_clean <- function(x,
             " ", x, perl = FALSE)
         }
       }
-      if (tolower) {
-        x <- chartr(ACEP::acep_rs$tildes,
-                    tolower(ACEP::acep_rs$tildes), x)
-        }
       if (rm_cesp) {
         x <- chartr(ACEP::acep_rs$tildes,
                     ACEP::acep_rs$sintildes, x)

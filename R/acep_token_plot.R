@@ -15,7 +15,9 @@
 #' acep_token_plot(tokens)
 #' @export
 acep_token_plot <- function(x, u = 10, frec = TRUE) {
-  par(mar=c(6,9,4,1))
+  oldpar <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))
+  graphics::par(mar = c(6, 9, 4, 1))
   if(!is.character(x) | is.list(x)){
     return(message("No ingresaste un vector en el par\u00e1metro x.
            Vuelve a intentarlo ingresando un vector!"))
@@ -31,13 +33,12 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
           tabla_token <- as.data.frame(table(x))
           tabla_token$x <- as.character(tabla_token$x)
           tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
-          tabla_token <- utils::head(tabla_token, n = u)
           tabla_token$prop <- tabla_token$Freq / sum(tabla_token$Freq)
+          tabla_token <- utils::head(tabla_token, n = u)
           tabla_token <- data.frame(
             token = tabla_token$x,
             frec = tabla_token$Freq,
             prop = tabla_token$prop)
-          tabla_token <- utils::head(tabla_token, n = u)
           tabla_token <- tabla_token[order(tabla_token$frec,
                                            decreasing = FALSE), ]
           graphics::barplot(
@@ -57,12 +58,11 @@ acep_token_plot <- function(x, u = 10, frec = TRUE) {
     tabla_token <- as.data.frame(table(x))
     tabla_token$x <- as.character(tabla_token$x)
     tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
-    tabla_token <- utils::head(tabla_token, n = u)
     tabla_token$prop <- tabla_token$Freq / sum(tabla_token$Freq)
+    tabla_token <- utils::head(tabla_token, n = u)
     tabla_token <- data.frame(token = tabla_token$x,
                               frec = tabla_token$Freq,
                               prop = tabla_token$prop)
-    tabla_token <- utils::head(tabla_token, n = u)
     tabla_token <- tabla_token[order(tabla_token$frec, decreasing = FALSE), ]
     graphics::barplot(
       height = tabla_token$prop,

@@ -9,18 +9,34 @@
   paste0(nchar(dic, type = "chars"), ":", dic, collapse = "\r")
 }
 
+#' Escapar metacaracteres de expresiones regulares en términos literales
+#' @keywords internal
+.acep_escape_regex <- function(x) {
+  gsub("([][{}()*+?.\\\\^$|])", "\\\\\\1", x)
+}
+
 #' Crear patrón regex para diccionarios de conteo
+#'
+#' Escapa los metacaracteres de cada término (para tratarlos como texto literal,
+#' evitando coincidencias accidentales o errores de regex) y convierte un espacio
+#' inicial o final en un límite de palabra (\\b), de modo que " paro " coincida
+#' solo con la palabra completa.
 #' @keywords internal
 .acep_count_pattern <- function(dic) {
-  paste0(gsub("^ | $", "\\\\b", unique(dic)), collapse = "|")
+  dic <- .acep_escape_regex(unique(dic))
+  paste0(gsub("^ | $", "\\\\b", dic), collapse = "|")
 }
 
 #' @title Conteo de menciones de palabras de un diccionario
 #' @description
 #' Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
-#' Utiliza expresiones regulares con límites de palabra (word boundaries) para
-#' evitar coincidencias parciales. Incluye un sistema de caché que almacena los
-#' patrones regex compilados para acelerar ejecuciones repetidas con el mismo diccionario.
+#' Los términos se tratan como texto literal: sus metacaracteres de expresiones
+#' regulares se escapan automáticamente. De forma predeterminada también cuenta
+#' coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
+#' exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
+#' rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
+#' caché que almacena los patrones regex compilados para acelerar ejecuciones
+#' repetidas con el mismo diccionario.
 #' @param texto vector de textos al que se le aplica la función de conteo.
 #' @param dic vector de palabras del diccionario utilizado.
 #' @param use_cache logical, usar caché de regex (default TRUE).

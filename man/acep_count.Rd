@@ -18,9 +18,13 @@ Vector con frecuencia de palabras del diccionario.
 }
 \description{
 Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
-Utiliza expresiones regulares con límites de palabra (word boundaries) para
-evitar coincidencias parciales. Incluye un sistema de caché que almacena los
-patrones regex compilados para acelerar ejecuciones repetidas con el mismo diccionario.
+Los términos se tratan como texto literal: sus metacaracteres de expresiones
+regulares se escapan automáticamente. De forma predeterminada también cuenta
+coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
+exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
+rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
+caché que almacena los patrones regex compilados para acelerar ejecuciones
+repetidas con el mismo diccionario.
 }
 \examples{
 df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",

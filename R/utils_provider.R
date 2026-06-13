@@ -1,3 +1,18 @@
+#' Eliminar recursivamente una clave de un esquema con estructura anidada
+#'
+#' Recorre el esquema (objetos anidados, items de arrays) y elimina todas las
+#' apariciones de `key`, no solo la del nivel raiz. Util para proveedores cuyo
+#' formato de esquema no admite ciertas claves (por ejemplo `additionalProperties`
+#' en el responseSchema de Gemini).
+#' @keywords internal
+.acep_provider_strip_key <- function(schema, key) {
+  if (is.list(schema)) {
+    schema[[key]] <- NULL
+    schema <- lapply(schema, .acep_provider_strip_key, key = key)
+  }
+  schema
+}
+
 #' @keywords internal
 proteger_arrays_schema <- function(schema) {
   if (is.list(schema)) {

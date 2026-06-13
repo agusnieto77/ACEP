@@ -29,7 +29,7 @@ acep_detect <- function(x, y, u = 1, tolower = TRUE) {
   }
 
   out <- tryCatch({
-    dicc <- paste0(gsub("^ | $", "\\b", y), collapse = "|")
+    dicc <- .acep_count_pattern(y)
     detect <- stringr::str_count(x, dicc)
     ifelse(as.numeric(detect) >= u, 1, 0)
   })

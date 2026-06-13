@@ -61,24 +61,20 @@ acep_svo <- function(acep_tokenindex,
   rel_evs = "nsubj"
   rel_evp = "obj"
   if (class(acep_tokenindex)[1] != "tokenIndex") {
-    return(
-      message(
-        "El par\u00e1metro 'acep_tokenindex' debe ser de clase 'tokenIndex'"))
+    stop("El par\u00e1metro 'acep_tokenindex' debe ser de clase 'tokenIndex'",
+         call. = FALSE)
   }
   if (!is.numeric(prof_s) | prof_s > 5 | prof_s < 1) {
-    return(
-      message(
-        "El par\u00e1metro 'prof_s' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+    stop("El par\u00e1metro 'prof_s' debe ser un n\u00famero entero positivo entre 1 y 5",
+         call. = FALSE)
   }
   if (!is.numeric(prof_o) | prof_o > 5 | prof_o < 1) {
-    return(
-      message(
-        "El par\u00e1metro 'prof_o' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+    stop("El par\u00e1metro 'prof_o' debe ser un n\u00famero entero positivo entre 1 y 5",
+         call. = FALSE)
   }
   if (!is.numeric(u) | u > 5 | u < 1) {
-    return(
-      message(
-        "El par\u00e1metro 'u' debe ser de un n\u00famero entero positivo entre 1 y 5"))
+    stop("El par\u00e1metro 'u' debe ser un n\u00famero entero positivo entre 1 y 5",
+         call. = FALSE)
   }
   acep_require_namespace("rsyntax", "acep_svo")
 

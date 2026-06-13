@@ -39,6 +39,13 @@ acep_corpus <- function(texto, metadata = NULL, id = NULL) {
 
   if (is.null(id)) {
     id <- seq_along(texto)
+  } else if (length(id) != length(texto)) {
+    stop("El parametro 'id' debe tener la misma longitud que 'texto'.",
+         call. = FALSE)
+  }
+
+  if (!is.null(metadata) && !is.list(metadata)) {
+    stop("El parametro 'metadata' debe ser una lista o NULL.", call. = FALSE)
   }
 
   estructura <- structure(
@@ -168,9 +175,14 @@ summary.acep_result <- function(object, ...) {
   }
 
   if (object$tipo == "intensidad" && "intensidad" %in% names(object$data)) {
+    vals <- object$data$intensidad[!is.na(object$data$intensidad)]
     cat("Estadisticas de intensidad:\n")
-    cat("  Promedio:", mean(object$data$intensidad, na.rm = TRUE), "\n")
-    cat("  Maximo:", max(object$data$intensidad, na.rm = TRUE), "\n")
+    if (length(vals) > 0) {
+      cat("  Promedio:", mean(vals), "\n")
+      cat("  Maximo:", max(vals), "\n")
+    } else {
+      cat("  (sin valores numericos disponibles)\n")
+    }
   }
 
   invisible(object)
@@ -184,7 +196,7 @@ as.data.frame.acep_result <- function(x, ...) {
 #' @export
 plot.acep_result <- function(x, ...) {
   if (x$tipo == "serie_temporal" && all(c("st", "frecn") %in% names(x$data))) {
-    acep_plot_st(x$data, ...)
+    acep_plot_st(x$data$st, x$data$frecn, ...)
   } else if ("intensidad" %in% names(x$data)) {
     barplot(x$data$intensidad,
             main = paste("Intensidad -", x$tipo),

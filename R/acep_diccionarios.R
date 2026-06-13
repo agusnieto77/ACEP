@@ -1,17 +1,17 @@
 #' @title Colección de diccionarios.
 #' @description Colección de diccionarios que reúne diccionarios
-#' de diferentes orígenes. El diccionario dicc_confl_acep fueron construidos
+#' de diferentes orígenes. El diccionario dicc_confl_sismos fue construido
 #' en el marco del Observatorio de Conflictividad de la UNMdP.
 #' Los diccionarios dicc_confl_gp y dicc_viol_gp fueron extraídos de
 #' Albrieu y Palazzo (2020).
-#' @format Es un objeto de clase 'list' con 3 componentes.
+#' @format Es un objeto de clase 'list' con 3 componentes. Cada componente es
+#' una cadena de caracteres de longitud 1 con la URL de un diccionario `.rds`
+#' descargable; usá \code{\link{acep_load_base}} para obtener el vector de
+#' palabras correspondiente.
 #'\describe{
-#' \item{dicc_confl_gp}{es un vector con palabras de un diccionario
-#' de términos que refieren a conflictos}
-#' \item{dicc_viol_gp}{es un  vector con palabras de un diccionario
-#' de términos que refieren a violencia}
-#' \item{dicc_confl_sismos}{es un  vector con palabras de un diccionario
-#' de términos que refieren a conflictos}
+#' \item{dicc_confl_gp}{URL al diccionario de términos que refieren a conflictos}
+#' \item{dicc_viol_gp}{URL al diccionario de términos que refieren a violencia}
+#' \item{dicc_confl_sismos}{URL al diccionario de términos que refieren a conflictos}
 #'}
 #' @docType data
 #' @usage data(acep_diccionarios)

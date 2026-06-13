@@ -45,6 +45,8 @@
 #'     Elimina automaticamente el contenido de pensamiento (<think>...</think>) de modelos como Qwen3-Thinking
 #'   - String personalizado: Cualquier texto que definas como prompt del sistema
 #'
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -142,7 +144,8 @@ acep_together <- function(texto,
                           top_k = 50,
                           repetition_penalty = 1,
                           stop = NULL,
-                          prompt_system = "json") {
+                          prompt_system = "json",
+                          timeout = 120) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "TOGETHER_API_KEY")
 
@@ -216,7 +219,8 @@ acep_together <- function(texto,
       url = .acep_provider_endpoint("together"),
       do.call(httr::add_headers, headers_call),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw"
+      encode = "raw",
+      httr::timeout(timeout)
     )
 
     # Verificar codigo HTTP

@@ -251,6 +251,8 @@
 #'   error recuperable (429, 5xx, timeouts). Ideal para definir variantes pagas cuando
 #'   la version `:free` alcance su limite.
 #' 
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -315,7 +317,8 @@ acep_openrouter <- function(texto,
                             site_url = NULL,
                             use_fallback = FALSE,
                             fallback_provider_order = NULL,
-                            fallback_models = NULL) {
+                            fallback_models = NULL,
+                            timeout = 120) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENROUTER_API_KEY")
   if (!is.logical(use_fallback) || length(use_fallback) != 1 || is.na(use_fallback)) {
@@ -427,7 +430,8 @@ acep_openrouter <- function(texto,
           url = .acep_provider_endpoint("openrouter"),
           do.call(httr::add_headers, headers_call),
           body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-          encode = "raw"
+          encode = "raw",
+          httr::timeout(timeout)
         )
       )
     }, error = function(e) {

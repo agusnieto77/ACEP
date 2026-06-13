@@ -3,8 +3,9 @@
 #' Funcion para interactuar con la API de OpenAI utilizando Structured Outputs,
 #' una funcionalidad que garantiza respuestas en formato JSON que cumplen estrictamente
 #' con un esquema predefinido. Esto elimina la necesidad de parseo y validacion manual,
-#' haciendo las respuestas mas confiables y estructuradas. Compatible con modelos
-#' `gpt-4o` y `gpt-4o-mini`.
+#' haciendo las respuestas mas confiables y estructuradas. Compatible con los modelos
+#' de OpenAI que soportan Structured Outputs: series `gpt-4o`, `gpt-4.1`, `gpt-5`,
+#' `o1` y `o4` (ver `@details`).
 #'
 #' @param texto Texto a analizar con GPT. Puede ser una noticia, tweet, documento, etc.
 #' @param instrucciones Instrucciones en lenguaje natural que indican al modelo que hacer
@@ -33,6 +34,8 @@
 #' @param seed Semilla numerica para reproducibilidad. Usar el mismo seed con los
 #'   mismos parametros genera respuestas identicas. Por defecto: 123456.
 #'   NOTA: Ignorado en modelos gpt-5, o1 y o4.
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 #'
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
@@ -81,7 +84,8 @@ acep_gpt <- function(texto,
                       max_tokens = 2000,
                       top_p = 0.2,
                       frequency_penalty = 0.2,
-                      seed = 123456) {
+                      seed = 123456,
+                      timeout = 120) {
   
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENAI_API_KEY")
   
@@ -172,15 +176,27 @@ acep_gpt <- function(texto,
       url = .acep_provider_endpoint("openai"),
       do.call(httr::add_headers, .acep_provider_auth_headers("openai", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw"
+      encode = "raw",
+      httr::timeout(timeout)
     )
 
     # Verificar codigo HTTP
     if (httr::status_code(output) != 200) {
-      error_content <- httr::content(output, as = "parsed")
+      error_content <- tryCatch(httr::content(output, as = "parsed"),
+                                error = function(e) NULL)
+      err <- if (is.list(error_content)) error_content$error else NULL
+      error_msg <- if (is.list(err) && !is.null(err$message)) {
+        err$message
+      } else if (!is.null(err)) {
+        paste(as.character(err), collapse = " ")
+      } else if (is.character(error_content)) {
+        substr(error_content, 1, 500)
+      } else {
+        "Error desconocido"
+      }
       stop(sprintf("Error HTTP %d: %s",
                    httr::status_code(output),
-                   error_content$error$message))
+                   error_msg))
     }
 
     # Extraer respuesta

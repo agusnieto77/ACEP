@@ -7,3 +7,7 @@
 .DS_Store
 docs
 inst/doc
+geocode_cache.json
+**/geocode_cache.json
+Rplots.pdf
+**/Rplots.pdf

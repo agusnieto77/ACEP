@@ -222,7 +222,7 @@ Una vez que tenemos la lista, con 6 marcos de datos, creada a partir de la funci
 
 - acep_no_procesadas: es un marco de datos con tres variables ('doc_id', 'oracion_id', 'oracion') que ofrece la frecuencia absoluta de las palabras lemmatizadas presentes en el corpus analizado.
 
-```{r svo01}
+```{r svo01, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 titulares_svo <- acep_svo(titulares_utags)
 
 str(titulares_svo)
@@ -234,7 +234,7 @@ Veamos con un poco más de detalle cada uno de los marcos de datos creados con l
 
 Es el marco de datos inicial procesado con las funciones del paquete *rsyntax*.
 
-```{r svo02, eval=require("tibble")}
+```{r svo02, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_annotate_svo, n=20)
 ```
 
@@ -242,7 +242,7 @@ head(titulares_svo$acep_annotate_svo, n=20)
 
 Este marco de datos contiene las oraciones procesables con la identificación y extracción de sujeto-verbo-objeto y contexto.
 
-```{r svo03, eval=require("tibble")}
+```{r svo03, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_pro_svo, n=10)
 ```
 
@@ -250,7 +250,7 @@ head(titulares_svo$acep_pro_svo, n=10)
 
 Este marco de datos es una versión reducida del data.frame 'acep_pro_svo'. Solo contiene los tripletes sujeto-verbo-objeto en versión colapsada ('gremios -> convocan -> paro') y en versión separada (una columna para 'sujeto', otra para 'verbo' y otra para 'objeto').
 
-```{r svo04, eval=require("tibble")}
+```{r svo04, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_list_svo, n=10)
 ```
 
@@ -258,7 +258,7 @@ head(titulares_svo$acep_list_svo, n=10)
 
 Este marco de datos contiene los 'sujetos' y los 'predicados' identificados en cada oración y una aproximación a 'entidades', 'sustantivos' y 'verbos auxiliares' como contexto que ayuda a mejorar la extracción de sujetos y objetos de la acción.
 
-```{r svo05, eval=require("tibble")}
+```{r svo05, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_sp, n=10)
 ```
 
@@ -266,7 +266,7 @@ head(titulares_svo$acep_sp, n=10)
 
 Este marco de datos es un análisis de frecuencias absolutas de lemmas presentes en el corpus procesado.
 
-```{r svo06, eval=require("tibble")}
+```{r svo06, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_lista_lemmas, n=10)
 ```
 
@@ -274,7 +274,7 @@ head(titulares_svo$acep_lista_lemmas, n=10)
 
 Este marco de datos contiene las oraciones que no pudieron ser procesadas por no ser posible identificar sujeto y predicado.
 
-```{r svo07, eval=require("tibble")}
+```{r svo07, eval=requireNamespace("rsyntax", quietly = TRUE) && require("tibble")}
 head(titulares_svo$acep_no_procesadas, n=10)
 ```
 

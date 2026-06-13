@@ -14,7 +14,8 @@ acep_gemini(
   temperature = 0,
   max_tokens = 2000,
   top_p = 0.95,
-  top_k = 40
+  top_k = 40,
+  timeout = 120
 )
 }
 \arguments{
@@ -51,6 +52,9 @@ de la respuesta. Por defecto: 0.95 (valor tipico para Gemini).}
 
 \item{top_k}{Parametro top-k. Limita la seleccion a los K tokens mas probables.
 Por defecto: 40 (valor tipico para Gemini).}
+
+\item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
+Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta

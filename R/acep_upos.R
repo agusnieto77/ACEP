@@ -21,13 +21,14 @@
 acep_upos <- function(texto, modelo = "spanish"
 ){
   if (!is.character(texto)) {
-    return(message("El par\u00e1metro 'texto' debe ser una cadena de caracteres"))
+    stop("El parametro 'texto' debe ser una cadena de caracteres",
+         call. = FALSE)
   }
   available_models <- c('english', 'portuguese', 'spanish')
   if (!modelo %in% available_models) {
-    return(
-      message(
-        "El par\u00e1metro 'core' debe ser un modelo 'udpipe' v\u00e1lido del espa\u00f1ol, ingl\u00e9s o portugu\u00e9s"))
+    stop(
+      "El parametro 'modelo' debe ser un modelo 'udpipe' valido del espanol, ingles o portugues",
+      call. = FALSE)
   }
   acep_require_namespace("udpipe", "acep_upos")
   acep_require_namespace("rsyntax", "acep_upos")

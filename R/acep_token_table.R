@@ -24,13 +24,14 @@ acep_token_table <- function(x, u = 10) {
   tabla_token <- as.data.frame(table(x))
   tabla_token$x <- as.character(tabla_token$x)
   tabla_token <- tabla_token[order(tabla_token$Freq, decreasing = TRUE), ]
-  tabla_token <- utils::head(tabla_token, n = u)
+  # La proporción se calcula sobre el total del corpus (antes de truncar),
+  # no sobre el subconjunto top-u.
   tabla_token$prop <- tabla_token$Freq / sum(tabla_token$Freq)
-  tabla_token <- data.frame(
+  tabla_token <- utils::head(tabla_token, n = u)
+  data.frame(
     token = tabla_token$x,
     frec = tabla_token$Freq,
     prop = tabla_token$prop)
-  utils::head(tabla_token, n = u)
       }
       )
   }

@@ -1,13 +1,14 @@
 #' @title Cadenas de caracteres para limpiar y normalizar textos.
 #' @description Cadenas de caracteres y expresiones regulares
 #' para limpiar y normalizar textos.
-#' @format Son cadenas de caracteres.
+#' @format Es un objeto de clase 'list' con 14 componentes (cadenas de
+#' caracteres y expresiones regulares).
 #'\describe{
 #' \item{sw1}{es un string de palabras vacias.}
-#' \item{sw1}{es un string de palabras vacias.}
+#' \item{sw2}{es un string de palabras vacias (complemento de sw1).}
 #' \item{dias}{es un string de dias.}
 #' \item{meses}{es un string de meses.}
-#' \item{emoji}{es un string con expresiones regulares para emojis.}
+#' \item{emojis}{es un string con expresiones regulares para emojis.}
 #' \item{sintildes}{es un string de letras sin tildes.}
 #' \item{tildes}{es un string de letras con tildes.}
 #' \item{punt}{es un string de puntuación.}

@@ -126,6 +126,8 @@ pipe_intensity <- function(result, decimales = 4) {
   result$data$n_palabras <- freq_total
   result$data$intensidad <- acep_int(result$data$frecuencia, freq_total, decimales)
   result$tipo <- "intensidad"
+  # Mantener el vector de clase sincronizado con $tipo para el despacho S3.
+  class(result) <- c("acep_result_intensidad", "acep_result", "list")
 
   result
 }

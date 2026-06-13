@@ -1,8 +1,6 @@
-
-test_that("ACEP svo", {
-  skip_if_offline()
-  skip_on_cran()
-  spacy_postag <- acep_svo(acep_bases$spacy_postag)
-  dimensiones <- length(spacy_postag)
-  expect_equal(dimensiones, length(spacy_postag))
+# Offline validation test (no network, no optional deps). The happy path is
+# characterized end-to-end in test-optimization-safety.R using a bundled fixture.
+test_that("acep_svo rechaza entradas que no son tokenIndex", {
+  expect_error(acep_svo("no es un tokenindex"), "tokenIndex")
+  expect_error(acep_svo(data.frame(a = 1)), "tokenIndex")
 })

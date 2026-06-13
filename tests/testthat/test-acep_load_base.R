@@ -1,18 +1,8 @@
-
-test_that("ACEP LOAD", {
-  skip_if_offline()
-  skip_on_cran()
-  bd_sismos <- acep_bases$rev_puerto
-  base <- acep_load_base(tag = bd_sismos) |> head()
-  dimensiones <- length(base)
-  expect_equal(dimensiones, length(base))
-})
-
-test_that("ACEP LOAD", {
-  skip_if_offline()
-  skip_on_cran()
-  bd_sismos <- "https://observatoriodeconflictividad.org/basesdatos/sintildestyy"
-  acep_load_base(tag = bd_sismos)
-  dimensiones <- 12
-  expect_equal(dimensiones, 12)
+# Offline tests (no network). acep_load_base downloads remote datasets, so its
+# successful-download path is intentionally not exercised here (CRAN policy:
+# tests must not require internet access). We test the input-validation contract.
+test_that("acep_load_base valida el argumento tag", {
+  expect_error(acep_load_base(123), "URL")
+  expect_error(acep_load_base(c("a", "b")), "URL")
+  expect_error(acep_load_base(NA_character_), "URL")
 })

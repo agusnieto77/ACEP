@@ -17,7 +17,8 @@ acep_together(
   top_k = 50,
   repetition_penalty = 1,
   stop = NULL,
-  prompt_system = "json"
+  prompt_system = "json",
+  timeout = 120
 )
 }
 \arguments{
@@ -71,6 +72,9 @@ Por defecto: NULL.}
 - `"texto"`: Usa un prompt simple para respuestas en texto plano sin estructura.
   Elimina automaticamente el contenido de pensamiento (<think>...</think>) de modelos como Qwen3-Thinking
 - String personalizado: Cualquier texto que definas como prompt del sistema}
+
+\item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
+Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta

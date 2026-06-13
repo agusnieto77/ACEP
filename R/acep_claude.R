@@ -36,6 +36,8 @@
 #' @param top_k Parametro top-k (solo disponible en Claude). Limita la seleccion a los
 #'   K tokens mas probables. Por defecto: NULL (deshabilitado).
 #'
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -81,7 +83,8 @@ acep_claude <- function(texto,
                         temperature = 0,
                         max_tokens = 2000,
                         top_p = 0.2,
-                        top_k = NULL) {
+                        top_k = NULL,
+                        timeout = 120) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "ANTHROPIC_API_KEY")
 
@@ -116,8 +119,9 @@ acep_claude <- function(texto,
     schema <- .acep_provider_default_schema()
   }
 
-  # Remover additionalProperties si existe (no es necesario para Anthropic)
-  schema$additionalProperties <- NULL
+  # Remover additionalProperties si existe (no es necesario para Anthropic),
+  # incluyendo apariciones anidadas dentro de objetos/arrays.
+  schema <- .acep_provider_strip_key(schema, "additionalProperties")
 
   # Construir prompt del sistema
   system_prompt <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE usando la herramienta proporcionada siguiendo exactamente el esquema especificado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
@@ -188,7 +192,8 @@ acep_claude <- function(texto,
       url = .acep_provider_endpoint("anthropic"),
       do.call(httr::add_headers, .acep_provider_auth_headers("anthropic", api_key)),
       body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw"
+      encode = "raw",
+      httr::timeout(timeout)
     )
 
     # Verificar codigo HTTP

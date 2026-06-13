@@ -27,7 +27,7 @@ acep_token <- function(x, tolower = TRUE, cleaning = TRUE) {
   texto_id <- seq_along(x)
   tokens <- lapply(x, function(texto) {
     tokens <- unlist(strsplit(texto, "\\W+"))
-    tokens <- tokens[tokens != ""]
+    tokens <- tokens[!is.na(tokens) & tokens != ""]
     return(tokens)
   })
 
