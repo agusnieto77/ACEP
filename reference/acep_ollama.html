@@ -17,7 +17,7 @@ cumplen con un esquema predefinido."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,9 @@ cumplen con un esquema predefinido.</p>
 <span>  max_tokens <span class="op">=</span> <span class="fl">4000</span>,</span>
 <span>  host <span class="op">=</span> <span class="st">"http://localhost:11434"</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"OLLAMA_API_KEY"</span><span class="op">)</span>,</span>
-<span>  seed <span class="op">=</span> <span class="fl">123456</span></span>
+<span>  seed <span class="op">=</span> <span class="fl">123456</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  system <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -130,6 +132,18 @@ Por defecto busca la variable de entorno OLLAMA_API_KEY. Para uso local (localho
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
 <dd><p>Semilla numerica para reproducibilidad. Por defecto: 123456.</p></dd>
+
+
+<dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
+<dd><p>Tiempo maximo de espera de la peticion HTTP en segundos.
+Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.</p></dd>
+
+
+<dt id="arg-system">system<a class="anchor" aria-label="anchor" href="#arg-system"></a></dt>
+<dd><p>Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP (ACEP::acep_prompt_gpt$system_prompt_01_es);
+si pasas una cadena, reemplaza la persona del asistente. El esquema de
+salida estructurada se mantiene.</p></dd>
 
 </dl></div>
     <div class="section level2">

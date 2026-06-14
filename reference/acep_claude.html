@@ -15,7 +15,7 @@ herramienta y forzando al modelo a usarla. Compatible con todos los modelos Clau
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,8 @@ herramienta y forzando al modelo a usarla. Compatible con todos los modelos Clau
 <span>  max_tokens <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  top_p <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  top_k <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  timeout <span class="op">=</span> <span class="fl">120</span></span>
+<span>  timeout <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  system <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -139,6 +140,12 @@ K tokens mas probables. Por defecto: NULL (deshabilitado).</p></dd>
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
 <dd><p>Tiempo maximo de espera de la peticion HTTP en segundos.
 Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.</p></dd>
+
+
+<dt id="arg-system">system<a class="anchor" aria-label="anchor" href="#arg-system"></a></dt>
+<dd><p>Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+persona del asistente. El esquema de salida estructurada se mantiene.</p></dd>
 
 </dl></div>
     <div class="section level2">

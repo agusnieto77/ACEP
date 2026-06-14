@@ -15,7 +15,7 @@ Ideal para comparar modelos o usar fallbacks automaticos."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,8 @@ Ideal para comparar modelos o usar fallbacks automaticos.</p>
 <span>  use_fallback <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  fallback_provider_order <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fallback_models <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  timeout <span class="op">=</span> <span class="fl">120</span></span>
+<span>  timeout <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  system <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -161,6 +162,13 @@ la version `:free` alcance su limite.</p></dd>
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
 <dd><p>Tiempo maximo de espera de la peticion HTTP en segundos.
 Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.</p></dd>
+
+
+<dt id="arg-system">system<a class="anchor" aria-label="anchor" href="#arg-system"></a></dt>
+<dd><p>Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+persona del asistente en ambos modos (structured y JSON). El esquema de
+salida se mantiene.</p></dd>
 
 </dl></div>
     <div class="section level2">

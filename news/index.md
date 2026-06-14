@@ -1,6 +1,57 @@
 # Changelog
 
+## ACEP 0.2.0
+
+### Nuevas funcionalidades
+
+- Todas las funciones de IA
+  ([`acep_gpt()`](https://agusnieto77.github.io/ACEP/reference/acep_gpt.md),
+  [`acep_claude()`](https://agusnieto77.github.io/ACEP/reference/acep_claude.md),
+  [`acep_gemini()`](https://agusnieto77.github.io/ACEP/reference/acep_gemini.md),
+  [`acep_ollama()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama.md),
+  [`acep_openrouter()`](https://agusnieto77.github.io/ACEP/reference/acep_openrouter.md),
+  [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md))
+  aceptan ahora un argumento `system` para sobreescribir la persona
+  (prompt de sistema) del analista. Por defecto (`NULL`) usa la persona
+  estándar de ACEP, así que el comportamiento previo no cambia. El
+  esquema de salida estructurada se mantiene siempre, sin importar la
+  persona.
+  - En
+    [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md),
+    `system` es ortogonal a `prompt_system`: este último sigue
+    controlando el modo (`"json"`/`"texto"`/personalizado) y `system`
+    solo reemplaza la persona; si se pasan ambos, `system` tiene
+    prioridad para la persona.
+- [`acep_ollama()`](https://agusnieto77.github.io/ACEP/reference/acep_ollama.md)
+  incorpora el argumento `timeout` (120 s por defecto), igualando a los
+  demás proveedores. Es aditivo: el valor por defecto coincide con el
+  timeout fijo anterior.
+
+### Internos
+
+- Nuevos helpers internos en `utils_provider.R`:
+  [`.acep_provider_resolve_system()`](https://agusnieto77.github.io/ACEP/reference/dot-acep_provider_resolve_system.md)
+  (resuelve la persona con override opcional) y
+  [`.acep_provider_json_system_prompt()`](https://agusnieto77.github.io/ACEP/reference/dot-acep_provider_json_system_prompt.md)
+  (arma el prompt de modo JSON compartido por
+  [`acep_together()`](https://agusnieto77.github.io/ACEP/reference/acep_together.md)
+  y
+  [`acep_openrouter()`](https://agusnieto77.github.io/ACEP/reference/acep_openrouter.md)).
+
+### Notas
+
+- Cambio aditivo y retrocompatible: `system` es el último parámetro de
+  cada función y por defecto reproduce **byte a byte** el prompt de
+  versiones anteriores (validado con tests). No se renombró ni reordenó
+  ningún argumento.
+- La unificación del resto de argumentos específicos de cada proveedor
+  (seed/top_k/penalties/fallback) y la normalización de la forma de
+  retorno quedan como trabajo futuro, para no introducir cambios de
+  comportamiento.
+
 ## ACEP 0.1.2
+
+CRAN release: 2026-06-14
 
 ### Correcciones (cambian resultados)
 

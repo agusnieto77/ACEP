@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ACEP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,27 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.2" id="acep-012">ACEP 0.1.2<a class="anchor" aria-label="anchor" href="#acep-012"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="acep-020">ACEP 0.2.0<a class="anchor" aria-label="anchor" href="#acep-020"></a></h2>
+<div class="section level3">
+<h3 id="nuevas-funcionalidades-0-2-0">Nuevas funcionalidades<a class="anchor" aria-label="anchor" href="#nuevas-funcionalidades-0-2-0"></a></h3>
+<ul><li>Todas las funciones de IA (<code><a href="../reference/acep_gpt.html">acep_gpt()</a></code>, <code><a href="../reference/acep_claude.html">acep_claude()</a></code>, <code><a href="../reference/acep_gemini.html">acep_gemini()</a></code>, <code><a href="../reference/acep_ollama.html">acep_ollama()</a></code>, <code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>, <code><a href="../reference/acep_together.html">acep_together()</a></code>) aceptan ahora un argumento <code>system</code> para sobreescribir la persona (prompt de sistema) del analista. Por defecto (<code>NULL</code>) usa la persona estándar de ACEP, así que el comportamiento previo no cambia. El esquema de salida estructurada se mantiene siempre, sin importar la persona.
+<ul><li>En <code><a href="../reference/acep_together.html">acep_together()</a></code>, <code>system</code> es ortogonal a <code>prompt_system</code>: este último sigue controlando el modo (<code>"json"</code>/<code>"texto"</code>/personalizado) y <code>system</code> solo reemplaza la persona; si se pasan ambos, <code>system</code> tiene prioridad para la persona.</li>
+</ul></li>
+<li>
+<code><a href="../reference/acep_ollama.html">acep_ollama()</a></code> incorpora el argumento <code>timeout</code> (120 s por defecto), igualando a los demás proveedores. Es aditivo: el valor por defecto coincide con el timeout fijo anterior.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internos-0-2-0">Internos<a class="anchor" aria-label="anchor" href="#internos-0-2-0"></a></h3>
+<ul><li>Nuevos helpers internos en <code>utils_provider.R</code>: <code><a href="../reference/dot-acep_provider_resolve_system.html">.acep_provider_resolve_system()</a></code> (resuelve la persona con override opcional) y <code><a href="../reference/dot-acep_provider_json_system_prompt.html">.acep_provider_json_system_prompt()</a></code> (arma el prompt de modo JSON compartido por <code><a href="../reference/acep_together.html">acep_together()</a></code> y <code><a href="../reference/acep_openrouter.html">acep_openrouter()</a></code>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="notas-0-2-0">Notas<a class="anchor" aria-label="anchor" href="#notas-0-2-0"></a></h3>
+<ul><li>Cambio aditivo y retrocompatible: <code>system</code> es el último parámetro de cada función y por defecto reproduce <strong>byte a byte</strong> el prompt de versiones anteriores (validado con tests). No se renombró ni reordenó ningún argumento.</li>
+<li>La unificación del resto de argumentos específicos de cada proveedor (seed/top_k/penalties/fallback) y la normalización de la forma de retorno quedan como trabajo futuro, para no introducir cambios de comportamiento.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.2" id="acep-012">ACEP 0.1.2<a class="anchor" aria-label="anchor" href="#acep-012"></a></h2><p class="text-muted">CRAN release: 2026-06-14</p>
 <div class="section level3">
 <h3 id="correcciones-cambian-resultados-0-1-2">Correcciones (cambian resultados)<a class="anchor" aria-label="anchor" href="#correcciones-cambian-resultados-0-1-2"></a></h3>
 <ul><li>

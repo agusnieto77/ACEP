@@ -20,7 +20,9 @@ acep_ollama(
   max_tokens = 4000,
   host = "http://localhost:11434",
   api_key = Sys.getenv("OLLAMA_API_KEY"),
-  seed = 123456
+  seed = 123456,
+  timeout = 120,
+  system = NULL
 )
 ```
 
@@ -83,6 +85,19 @@ acep_ollama(
 - seed:
 
   Semilla numerica para reproducibilidad. Por defecto: 123456.
+
+- timeout:
+
+  Tiempo maximo de espera de la peticion HTTP en segundos. Por
+  defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+
+- system:
+
+  Prompt de sistema (persona) opcional. Si es NULL (por defecto) se usa
+  la persona estandar de ACEP
+  (ACEP::acep_prompt_gpt\$system_prompt_01_es); si pasas una cadena,
+  reemplaza la persona del asistente. El esquema de salida estructurada
+  se mantiene.
 
 ## Value
 

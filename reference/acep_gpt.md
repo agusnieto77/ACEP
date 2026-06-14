@@ -23,7 +23,8 @@ acep_gpt(
   top_p = 0.2,
   frequency_penalty = 0.2,
   seed = 123456,
-  timeout = 120
+  timeout = 120,
+  system = NULL
 )
 ```
 
@@ -100,6 +101,12 @@ acep_gpt(
 
   Tiempo maximo de espera de la peticion HTTP en segundos. Por
   defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+
+- system:
+
+  Prompt de sistema (persona) opcional. Si es NULL (por defecto) se usa
+  la persona estandar de ACEP; si pasas una cadena, reemplaza la persona
+  del asistente. El esquema de salida estructurada se mantiene.
 
 ## Value
 
