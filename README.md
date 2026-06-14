@@ -153,7 +153,7 @@ Event Data Project.
 
 [GDELT](https://www.gdeltproject.org/): The GDELT Project About.
 
-[GPT](https://carnegieendowment.org/publications/interactive/protest-tracker#):
+[GPT](https://carnegieendowment.org/features/global-protest-tracker):
 Global Protest Tracker.
 
 MMPD: Mass Mobilization Protest Data Project.
