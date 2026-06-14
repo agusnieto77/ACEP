@@ -153,7 +153,7 @@ str(titulares_tags)
     #>   ..$ is_right_punct: logi [1:4] FALSE FALSE FALSE FALSE
     #>   ..$ morph         : chr [1:4] "" "AdpType=Preppron" "" ""
     #>   ..$ sent          : chr [1:4] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial."
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55fd8aae7ee0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55d41020bee0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ texto_only_entity    :'data.frame':   4 obs. of  4 variables:
     #>   ..$ entity     : chr [1:4] "Mar" "del" "Plata" "SOIP"
@@ -214,7 +214,7 @@ str(titulares_tags)
     #>   ..$ is_right_punct: logi [1:9] FALSE FALSE FALSE FALSE FALSE FALSE ...
     #>   ..$ morph         : chr [1:9] "" "AdpType=Preppron" "" "Definite=Def|Gender=Masc|Number=Sing|PronType=Art" ...
     #>   ..$ sent          : chr [1:9] "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." "En Mar del Plata el SOIP declara la huelga en demanda de aumento salarial." ...
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55fd8aae7ee0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55d41020bee0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
 
 En este resultado podemos ver cómo la función crea los seis marcos de
@@ -655,7 +655,7 @@ str(titulares_svo)
     #>   ..$ s_v_o_fill    : num [1:15] NA 0 NA 1 NA 0 0 NA 0 NA ...
     #>   ..$ s_p           : chr [1:15] "sujeto" "sujeto" "sujeto" "sujeto" ...
     #>   ..$ conjugaciones : chr [1:15] NA NA NA NA ...
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55fd8aae7ee0> 
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55d41020bee0> 
     #>   ..- attr(*, "sorted")= chr [1:3] "doc_id" "sentence" "token_id"
     #>  $ acep_pro_svo      :'data.frame':  1 obs. of  13 variables:
     #>   ..$ doc_id    : int 1
@@ -695,7 +695,7 @@ str(titulares_svo)
     #>   ..$ doc_id    : int(0) 
     #>   ..$ oracion_id: int(0) 
     #>   ..$ oracion   : chr(0) 
-    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55fd8aae7ee0>
+    #>   ..- attr(*, ".internal.selfref")=<pointer: 0x55d41020bee0>
 
 Veamos con un poco más de detalle cada uno de los marcos de datos
 creados con la función
