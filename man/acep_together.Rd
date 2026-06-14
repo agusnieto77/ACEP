@@ -18,7 +18,8 @@ acep_together(
   repetition_penalty = 1,
   stop = NULL,
   prompt_system = "json",
-  timeout = 120
+  timeout = 120,
+  system = NULL
 )
 }
 \arguments{
@@ -75,6 +76,12 @@ Por defecto: NULL.}
 
 \item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
 Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
+
+\item{system}{Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP. A diferencia de `prompt_system` (que
+controla el modo: "json"/"texto"/personalizado), `system` solo reemplaza la
+persona del analista. Si pasas ambos, `system` tiene prioridad para la
+persona.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta

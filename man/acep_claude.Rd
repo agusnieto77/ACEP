@@ -15,7 +15,8 @@ acep_claude(
   max_tokens = 2000,
   top_p = 0.2,
   top_k = NULL,
-  timeout = 120
+  timeout = 120,
+  system = NULL
 )
 }
 \arguments{
@@ -60,6 +61,10 @@ K tokens mas probables. Por defecto: NULL (deshabilitado).}
 
 \item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
 Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
+
+\item{system}{Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+persona del asistente. El esquema de salida estructurada se mantiene.}
 }
 \value{
 Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta

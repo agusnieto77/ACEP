@@ -30,6 +30,12 @@
 #' @param api_key API key para Ollama API remota. Solo requerido si usas un servidor remoto.
 #'   Por defecto busca la variable de entorno OLLAMA_API_KEY. Para uso local (localhost) no es necesario.
 #' @param seed Semilla numerica para reproducibilidad. Por defecto: 123456.
+#' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
+#'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+#' @param system Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+#'   se usa la persona estandar de ACEP (ACEP::acep_prompt_gpt$system_prompt_01_es);
+#'   si pasas una cadena, reemplaza la persona del asistente. El esquema de
+#'   salida estructurada se mantiene.
 #'
 #' @return Si parse_json=TRUE, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si parse_json=FALSE, devuelve un string JSON.
@@ -75,7 +81,9 @@ acep_ollama <- function(texto,
                         max_tokens = 4000,
                         host = "http://localhost:11434",
                         api_key = Sys.getenv("OLLAMA_API_KEY"),
-                        seed = 123456) {
+                        seed = 123456,
+                        timeout = 120,
+                        system = NULL) {
 
   # Validaciones
   if (!is.character(texto) || nchar(texto) == 0) {
@@ -127,8 +135,11 @@ acep_ollama <- function(texto,
     )
   }
 
-  # Construir prompt del sistema
-  system_prompt <- ACEP::acep_prompt_gpt$system_prompt_01_es
+  # Construir prompt del sistema (persona; override opcional via `system`)
+  system_prompt <- .acep_provider_resolve_system(
+    system,
+    ACEP::acep_prompt_gpt$system_prompt_01_es
+  )
 
   # Construir prompt del usuario con el esquema
   user_prompt <- sprintf(
@@ -170,7 +181,7 @@ acep_ollama <- function(texto,
             "Content-Type" = "application/json",
             "Authorization" = paste("Bearer", api_key)
           ),
-          httr::timeout(120)
+          httr::timeout(timeout)
         )
       } else {
         # Sin API key (servidor remoto sin auth)
@@ -178,7 +189,7 @@ acep_ollama <- function(texto,
           url = api_url,
           body = jsonlite::toJSON(body, auto_unbox = TRUE),
           httr::content_type_json(),
-          httr::timeout(120)
+          httr::timeout(timeout)
         )
       }
 
@@ -251,7 +262,7 @@ acep_ollama <- function(texto,
         url = api_url,
         body = jsonlite::toJSON(body, auto_unbox = TRUE),
         httr::content_type_json(),
-        httr::timeout(120)
+        httr::timeout(timeout)
       )
 
       # Verificar codigo HTTP

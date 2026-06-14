@@ -33,6 +33,9 @@
 #'
 #' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
 #'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+#' @param system Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+#'   se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+#'   persona del asistente. El esquema de salida estructurada se mantiene.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -79,7 +82,8 @@ acep_gemini <- function(texto,
                         max_tokens = 2000,
                         top_p = 0.95,
                         top_k = 40,
-                        timeout = 120) {
+                        timeout = 120,
+                        system = NULL) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "GEMINI_API_KEY")
 
@@ -115,8 +119,13 @@ acep_gemini <- function(texto,
 
   # Construir el prompt combinado (sistema + usuario)
   # Gemini no tiene roles separados en la misma manera que OpenAI/Anthropic
+  persona <- .acep_provider_resolve_system(
+    system,
+    "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+  )
   prompt_completo <- sprintf(
-    "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado.\n\nTexto a analizar:\n%s\n\nInstrucciones:\n%s",
+    "%s\n\nTexto a analizar:\n%s\n\nInstrucciones:\n%s",
+    persona,
     texto,
     instrucciones
   )

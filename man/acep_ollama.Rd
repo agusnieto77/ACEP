@@ -14,7 +14,9 @@ acep_ollama(
   max_tokens = 4000,
   host = "http://localhost:11434",
   api_key = Sys.getenv("OLLAMA_API_KEY"),
-  seed = 123456
+  seed = 123456,
+  timeout = 120,
+  system = NULL
 )
 }
 \arguments{
@@ -50,6 +52,14 @@ Para usar Ollama Cloud API, especificar "https://ollama.com" (sin /api, se agreg
 Por defecto busca la variable de entorno OLLAMA_API_KEY. Para uso local (localhost) no es necesario.}
 
 \item{seed}{Semilla numerica para reproducibilidad. Por defecto: 123456.}
+
+\item{timeout}{Tiempo maximo de espera de la peticion HTTP en segundos.
+Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.}
+
+\item{system}{Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+se usa la persona estandar de ACEP (ACEP::acep_prompt_gpt$system_prompt_01_es);
+si pasas una cadena, reemplaza la persona del asistente. El esquema de
+salida estructurada se mantiene.}
 }
 \value{
 Si parse_json=TRUE, devuelve una lista o data frame con la respuesta

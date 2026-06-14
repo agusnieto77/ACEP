@@ -1,3 +1,37 @@
+# ACEP 0.2.0
+
+## Nuevas funcionalidades
+
+* Todas las funciones de IA (`acep_gpt()`, `acep_claude()`, `acep_gemini()`,
+  `acep_ollama()`, `acep_openrouter()`, `acep_together()`) aceptan ahora un
+  argumento `system` para sobreescribir la persona (prompt de sistema) del
+  analista. Por defecto (`NULL`) usa la persona estándar de ACEP, así que el
+  comportamiento previo no cambia. El esquema de salida estructurada se mantiene
+  siempre, sin importar la persona.
+  - En `acep_together()`, `system` es ortogonal a `prompt_system`: este último
+    sigue controlando el modo (`"json"`/`"texto"`/personalizado) y `system` solo
+    reemplaza la persona; si se pasan ambos, `system` tiene prioridad para la
+    persona.
+* `acep_ollama()` incorpora el argumento `timeout` (120 s por defecto),
+  igualando a los demás proveedores. Es aditivo: el valor por defecto coincide
+  con el timeout fijo anterior.
+
+## Internos
+
+* Nuevos helpers internos en `utils_provider.R`:
+  `.acep_provider_resolve_system()` (resuelve la persona con override opcional) y
+  `.acep_provider_json_system_prompt()` (arma el prompt de modo JSON compartido
+  por `acep_together()` y `acep_openrouter()`).
+
+## Notas
+
+* Cambio aditivo y retrocompatible: `system` es el último parámetro de cada
+  función y por defecto reproduce **byte a byte** el prompt de versiones
+  anteriores (validado con tests). No se renombró ni reordenó ningún argumento.
+* La unificación del resto de argumentos específicos de cada proveedor
+  (seed/top_k/penalties/fallback) y la normalización de la forma de retorno
+  quedan como trabajo futuro, para no introducir cambios de comportamiento.
+
 # ACEP 0.1.2
 
 ## Correcciones (cambian resultados)

@@ -47,6 +47,11 @@
 #'
 #' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
 #'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+#' @param system Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+#'   se usa la persona estandar de ACEP. A diferencia de `prompt_system` (que
+#'   controla el modo: "json"/"texto"/personalizado), `system` solo reemplaza la
+#'   persona del analista. Si pasas ambos, `system` tiene prioridad para la
+#'   persona.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -145,7 +150,8 @@ acep_together <- function(texto,
                           repetition_penalty = 1,
                           stop = NULL,
                           prompt_system = "json",
-                          timeout = 120) {
+                          timeout = 120,
+                          system = NULL) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "TOGETHER_API_KEY")
 
@@ -166,18 +172,22 @@ acep_together <- function(texto,
     # Prompt del sistema con instrucciones para JSON
     # TogetherAI usa JSON mode basico (type: json_object), no Structured Outputs estrictos
     # NO incluimos el esquema completo para evitar que el modelo lo devuelva como respuesta
-    system_prompt <- sprintf(
-      "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE en formato JSON valido con los siguientes campos:\n\n%s\n\nSe preciso, conciso y basa tus respuestas unicamente en el texto proporcionado. Responde UNICAMENTE con el JSON de datos, sin texto adicional antes o despues.",
-      campos_texto
+    persona <- .acep_provider_resolve_system(
+      system,
+      "Eres un asistente experto en analisis de texto."
     )
+    system_prompt <- .acep_provider_json_system_prompt(persona, campos_texto)
 
   } else if (prompt_system == "texto") {
     # Modo texto plano: Respuestas sin estructura especifica
-    system_prompt <- "Eres un asistente experto en analisis de texto. Responde de manera clara, precisa y concisa. Basa tus respuestas unicamente en el texto proporcionado."
+    system_prompt <- .acep_provider_resolve_system(
+      system,
+      "Eres un asistente experto en analisis de texto. Responde de manera clara, precisa y concisa. Basa tus respuestas unicamente en el texto proporcionado."
+    )
 
   } else {
-    # Prompt personalizado: Usa el string proporcionado directamente
-    system_prompt <- prompt_system
+    # Prompt personalizado: `prompt_system` es la persona; `system` la sobreescribe
+    system_prompt <- .acep_provider_resolve_system(system, prompt_system)
   }
 
   # Construir prompt del usuario
