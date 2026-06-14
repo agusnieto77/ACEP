@@ -171,3 +171,16 @@ test_that(".acep_provider_http_error_message handles all error body shapes", {
   expect_equal(f(list()), "Error desconocido")
 })
 
+# ---------------------------------------------------------------------------
+# acep_count regex cache is bounded (no unbounded memory growth)
+# ---------------------------------------------------------------------------
+test_that("acep_count regex cache stays within its size cap", {
+  acep_clear_regex_cache()
+  on.exit(acep_clear_regex_cache(), add = TRUE)
+  cap <- getFromNamespace(".acep_regex_cache_max", "ACEP")
+  for (i in seq_len(cap + 5L)) {
+    acep_count("texto de prueba", paste0("termino", i))
+  }
+  expect_lte(acep_regex_cache_size(), cap)
+})
+
