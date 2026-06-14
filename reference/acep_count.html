@@ -6,14 +6,20 @@ coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
 exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
 rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
 caché que almacena los patrones regex compilados para acelerar ejecuciones
-repetidas con el mismo diccionario.'><meta property="og:description" content='Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
+repetidas con el mismo diccionario. El caché se acota automáticamente
+(máximo 1000 patrones) para evitar crecimiento de memoria sin límite en
+sesiones largas; también podés vaciarlo manualmente con
+`acep_clear_regex_cache()`.'><meta property="og:description" content='Cuenta el número de veces que aparecen palabras de un diccionario en cada texto.
 Los términos se tratan como texto literal: sus metacaracteres de expresiones
 regulares se escapan automáticamente. De forma predeterminada también cuenta
 coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
 exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
 rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
 caché que almacena los patrones regex compilados para acelerar ejecuciones
-repetidas con el mismo diccionario.'><meta property="og:image" content="https://agusnieto77.github.io/ACEP/logo.svg"></head><body>
+repetidas con el mismo diccionario. El caché se acota automáticamente
+(máximo 1000 patrones) para evitar crecimiento de memoria sin límite en
+sesiones largas; también podés vaciarlo manualmente con
+`acep_clear_regex_cache()`.'><meta property="og:image" content="https://agusnieto77.github.io/ACEP/logo.svg"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -62,7 +68,10 @@ coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
 exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
 rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
 caché que almacena los patrones regex compilados para acelerar ejecuciones
-repetidas con el mismo diccionario.</p>
+repetidas con el mismo diccionario. El caché se acota automáticamente
+(máximo 1000 patrones) para evitar crecimiento de memoria sin límite en
+sesiones largas; también podés vaciarlo manualmente con
+`acep_clear_regex_cache()`.</p>
     </div>
 
     <div class="section level2">

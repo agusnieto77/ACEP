@@ -8,7 +8,10 @@ ejemplo, "paro" coincide dentro de "paros"); para exigir límites de
 palabra (word boundaries) y evitar coincidencias parciales, rodeá cada
 término con espacios (por ejemplo, " paro "). Incluye un sistema de
 caché que almacena los patrones regex compilados para acelerar
-ejecuciones repetidas con el mismo diccionario.
+ejecuciones repetidas con el mismo diccionario. El caché se acota
+automáticamente (máximo 1000 patrones) para evitar crecimiento de
+memoria sin límite en sesiones largas; también podés vaciarlo
+manualmente con \`acep_clear_regex_cache()\`.
 
 ## Usage
 
