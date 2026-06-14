@@ -70,6 +70,9 @@
 <code><a href="../reference/acep_corpus.html">acep_corpus()</a></code>: valida que <code>id</code> tenga la misma longitud que <code>texto</code> y que <code>metadata</code> sea una lista.</li>
 <li>
 <code><a href="../reference/acep_upos.html">acep_upos()</a></code> y <code><a href="../reference/acep_svo.html">acep_svo()</a></code>: las validaciones de entrada ahora usan <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code> en vez de devolver <code>NULL</code> silenciosamente.</li>
+<li>Los proveedores de IA en la nube comparten un helper interno (<code><a href="../reference/dot-acep_provider_post.html">.acep_provider_post()</a></code>) para construir la petición HTTP, eliminando duplicación (refactor interno, sin cambios de comportamiento).</li>
+<li>
+<code><a href="../reference/acep_count.html">acep_count()</a></code>: el caché de expresiones regulares ahora está acotado (máximo 1000 patrones; se vacía al alcanzarlo) para evitar crecimiento de memoria sin límite en sesiones largas con muchos diccionarios distintos.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="cran-y-dependencias-0-1-2">CRAN y dependencias<a class="anchor" aria-label="anchor" href="#cran-y-dependencias-0-1-2"></a></h3>

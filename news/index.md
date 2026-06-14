@@ -76,6 +76,14 @@
   las validaciones de entrada ahora usan
   [`stop()`](https://rdrr.io/r/base/stop.html) en vez de devolver `NULL`
   silenciosamente.
+- Los proveedores de IA en la nube comparten un helper interno
+  ([`.acep_provider_post()`](https://agusnieto77.github.io/ACEP/reference/dot-acep_provider_post.md))
+  para construir la petición HTTP, eliminando duplicación (refactor
+  interno, sin cambios de comportamiento).
+- [`acep_count()`](https://agusnieto77.github.io/ACEP/reference/acep_count.md):
+  el caché de expresiones regulares ahora está acotado (máximo 1000
+  patrones; se vacía al alcanzarlo) para evitar crecimiento de memoria
+  sin límite en sesiones largas con muchos diccionarios distintos.
 
 ### CRAN y dependencias
 
