@@ -40,6 +40,12 @@
   `metadata` sea una lista.
 * `acep_upos()` y `acep_svo()`: las validaciones de entrada ahora usan `stop()`
   en vez de devolver `NULL` silenciosamente.
+* Los proveedores de IA en la nube comparten un helper interno
+  (`.acep_provider_post()`) para construir la petición HTTP, eliminando
+  duplicación (refactor interno, sin cambios de comportamiento).
+* `acep_count()`: el caché de expresiones regulares ahora está acotado (máximo
+  1000 patrones; se vacía al alcanzarlo) para evitar crecimiento de memoria sin
+  límite en sesiones largas con muchos diccionarios distintos.
 
 ## CRAN y dependencias
 
