@@ -215,12 +215,11 @@ acep_together <- function(texto,
 
   # Realizar peticion a la API
   tryCatch({
-    output <- httr::POST(
+    output <- .acep_provider_post(
       url = .acep_provider_endpoint("together"),
-      do.call(httr::add_headers, headers_call),
-      body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw",
-      httr::timeout(timeout)
+      headers = headers_call,
+      body = body,
+      timeout = timeout
     )
 
     # Verificar codigo HTTP

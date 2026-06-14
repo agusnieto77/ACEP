@@ -145,12 +145,11 @@ acep_gemini <- function(texto,
 
   # Realizar peticion a la API
   tryCatch({
-    output <- httr::POST(
+    output <- .acep_provider_post(
       url = url,
-      do.call(httr::add_headers, .acep_provider_auth_headers("gemini", api_key)),
-      body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw",
-      httr::timeout(timeout)
+      headers = .acep_provider_auth_headers("gemini", api_key),
+      body = body,
+      timeout = timeout
     )
 
     # Verificar codigo HTTP

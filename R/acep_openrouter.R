@@ -426,12 +426,11 @@ acep_openrouter <- function(texto,
     respuesta_http <- tryCatch({
       list(
         ok = TRUE,
-        result = httr::POST(
+        result = .acep_provider_post(
           url = .acep_provider_endpoint("openrouter"),
-          do.call(httr::add_headers, headers_call),
-          body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-          encode = "raw",
-          httr::timeout(timeout)
+          headers = headers_call,
+          body = body,
+          timeout = timeout
         )
       )
     }, error = function(e) {

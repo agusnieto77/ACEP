@@ -172,12 +172,11 @@ acep_gpt <- function(texto,
   
   # Realizar peticion a la API
   tryCatch({
-    output <- httr::POST(
+    output <- .acep_provider_post(
       url = .acep_provider_endpoint("openai"),
-      do.call(httr::add_headers, .acep_provider_auth_headers("openai", api_key)),
-      body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
-      encode = "raw",
-      httr::timeout(timeout)
+      headers = .acep_provider_auth_headers("openai", api_key),
+      body = body,
+      timeout = timeout
     )
 
     # Verificar codigo HTTP
