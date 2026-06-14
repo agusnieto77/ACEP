@@ -24,7 +24,10 @@ coincidencias parciales (por ejemplo, "paro" coincide dentro de "paros"); para
 exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
 rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
 caché que almacena los patrones regex compilados para acelerar ejecuciones
-repetidas con el mismo diccionario.
+repetidas con el mismo diccionario. El caché se acota automáticamente
+(máximo 1000 patrones) para evitar crecimiento de memoria sin límite en
+sesiones largas; también podés vaciarlo manualmente con
+`acep_clear_regex_cache()`.
 }
 \examples{
 df <- data.frame(texto = c("El SUTEBA fue al paro. Reclaman mejoras salariales.",

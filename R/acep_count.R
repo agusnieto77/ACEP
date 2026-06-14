@@ -2,6 +2,15 @@
 #' @keywords internal
 .acep_regex_cache <- new.env(parent = emptyenv())
 
+#' Tope de entradas del caché de regex
+#'
+#' Cuando el caché alcanza este tamaño se vacía antes de agregar una nueva
+#' entrada, evitando crecimiento de memoria sin límite en sesiones largas que
+#' usan muchos diccionarios distintos. Un fallo de caché solo recompila el
+#' patrón, por lo que la cota no afecta la correctitud de los conteos.
+#' @keywords internal
+.acep_regex_cache_max <- 1000L
+
 #' Crear una clave de caché estable para diccionarios de conteo
 #' @keywords internal
 .acep_count_cache_key <- function(dic) {
@@ -36,7 +45,10 @@
 #' exigir límites de palabra (word boundaries) y evitar coincidencias parciales,
 #' rodeá cada término con espacios (por ejemplo, " paro "). Incluye un sistema de
 #' caché que almacena los patrones regex compilados para acelerar ejecuciones
-#' repetidas con el mismo diccionario.
+#' repetidas con el mismo diccionario. El caché se acota automáticamente
+#' (máximo 1000 patrones) para evitar crecimiento de memoria sin límite en
+#' sesiones largas; también podés vaciarlo manualmente con
+#' `acep_clear_regex_cache()`.
 #' @param texto vector de textos al que se le aplica la función de conteo.
 #' @param dic vector de palabras del diccionario utilizado.
 #' @param use_cache logical, usar caché de regex (default TRUE).
@@ -62,8 +74,11 @@ acep_count <- function(texto, dic, use_cache = TRUE) {
     if (exists(dic_hash, envir = .acep_regex_cache)) {
       dicc <- get(dic_hash, envir = .acep_regex_cache)
     } else {
-      # Compilar y guardar en caché
+      # Compilar y guardar en caché (con tope de tamaño para acotar memoria)
       dicc <- .acep_count_pattern(dic)
+      if (length(ls(envir = .acep_regex_cache)) >= .acep_regex_cache_max) {
+        rm(list = ls(envir = .acep_regex_cache), envir = .acep_regex_cache)
+      }
       assign(dic_hash, dicc, envir = .acep_regex_cache)
     }
   } else {
