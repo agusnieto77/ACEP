@@ -67,6 +67,37 @@ proteger_arrays_schema <- function(schema) {
   sprintf("Texto a analizar:\n%s\n\nInstrucciones:\n%s", texto, instrucciones)
 }
 
+#' Resolver el prompt de sistema (persona) de un proveedor
+#'
+#' Si `system` es NULL devuelve `default` (la persona por defecto del proveedor,
+#' preservando el comportamiento previo). Si es una cadena no vacia la usa como
+#' persona. Cualquier otro valor (no caracter, vacio, NA o longitud != 1) es un
+#' error.
+#' @keywords internal
+.acep_provider_resolve_system <- function(system, default) {
+  if (is.null(system)) {
+    return(default)
+  }
+  if (!is.character(system) || length(system) != 1L ||
+      is.na(system) || nchar(system) == 0L) {
+    stop("El parametro 'system' debe ser NULL o una cadena de caracteres no vacia.",
+         call. = FALSE)
+  }
+  system
+}
+
+#' Construir el prompt de sistema para modo JSON (together / openrouter)
+#'
+#' Antepone la `persona` al bloque de instrucciones de esquema compartido, de
+#' modo que una persona personalizada nunca elimine la lista de campos.
+#' @keywords internal
+.acep_provider_json_system_prompt <- function(persona, campos_texto) {
+  sprintf(
+    "%s Debes responder SIEMPRE en formato JSON valido con los siguientes campos:\n\n%s\n\nSe preciso, conciso y basa tus respuestas unicamente en el texto proporcionado. Responde UNICAMENTE con el JSON de datos, sin texto adicional antes o despues.",
+    persona, campos_texto
+  )
+}
+
 .acep_provider_schema_field_descriptions <- function(schema) {
   vapply(names(schema$properties), function(campo) {
     desc <- schema$properties[[campo]]$description

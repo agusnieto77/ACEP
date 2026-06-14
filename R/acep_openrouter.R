@@ -253,6 +253,10 @@
 #' 
 #' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
 #'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+#' @param system Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+#'   se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+#'   persona del asistente en ambos modos (structured y JSON). El esquema de
+#'   salida se mantiene.
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
 #'
@@ -318,7 +322,8 @@ acep_openrouter <- function(texto,
                             use_fallback = FALSE,
                             fallback_provider_order = NULL,
                             fallback_models = NULL,
-                            timeout = 120) {
+                            timeout = 120,
+                            system = NULL) {
 
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENROUTER_API_KEY")
   if (!is.logical(use_fallback) || length(use_fallback) != 1 || is.na(use_fallback)) {
@@ -353,12 +358,16 @@ acep_openrouter <- function(texto,
     schema <- .acep_provider_default_schema()
   }
 
-  # Prompts predefinidos (structured vs JSON mode basico)
-  system_prompt_structured <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+  # Prompts predefinidos (structured vs JSON mode basico).
+  # `system` (si no es NULL) reemplaza la persona en ambos modos.
+  system_prompt_structured <- .acep_provider_resolve_system(
+    system,
+    "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+  )
   campos_descripciones <- .acep_provider_schema_field_descriptions(schema)
   campos_texto <- paste(campos_descripciones, collapse = "\n")
-  system_prompt_json <- sprintf(
-    "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE en formato JSON valido con los siguientes campos:\n\n%s\n\nSe preciso, conciso y basa tus respuestas unicamente en el texto proporcionado. Responde UNICAMENTE con el JSON de datos, sin texto adicional antes o despues.",
+  system_prompt_json <- .acep_provider_json_system_prompt(
+    .acep_provider_resolve_system(system, "Eres un asistente experto en analisis de texto."),
     campos_texto
   )
 

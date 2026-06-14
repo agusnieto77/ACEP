@@ -36,6 +36,9 @@
 #'   NOTA: Ignorado en modelos gpt-5, o1 y o4.
 #' @param timeout Tiempo maximo de espera de la peticion HTTP en segundos.
 #'   Por defecto: 120. Evita que una conexion estancada bloquee la sesion de R.
+#' @param system Prompt de sistema (persona) opcional. Si es NULL (por defecto)
+#'   se usa la persona estandar de ACEP; si pasas una cadena, reemplaza la
+#'   persona del asistente. El esquema de salida estructurada se mantiene.
 #'
 #' @return Si `parse_json=TRUE`, devuelve una lista o data frame con la respuesta
 #'   estructurada segun el esquema. Si `parse_json=FALSE`, devuelve un string JSON.
@@ -85,7 +88,8 @@ acep_gpt <- function(texto,
                       top_p = 0.2,
                       frequency_penalty = 0.2,
                       seed = 123456,
-                      timeout = 120) {
+                      timeout = 120,
+                      system = NULL) {
   
   .acep_provider_validate_request_inputs(texto, instrucciones, api_key, "OPENAI_API_KEY")
   
@@ -131,8 +135,11 @@ acep_gpt <- function(texto,
     schema <- .acep_provider_default_schema()
   }
   
-  # Construir prompt del sistema
-  system_prompt <- "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+  # Construir prompt del sistema (persona; override opcional via `system`)
+  system_prompt <- .acep_provider_resolve_system(
+    system,
+    "Eres un asistente experto en analisis de texto. Debes responder SIEMPRE siguiendo exactamente el esquema JSON proporcionado. Se preciso, conciso y basa tus respuestas unicamente en el texto proporcionado."
+  )
 
   # Construir prompt del usuario
   user_prompt <- .acep_provider_user_prompt(texto, instrucciones)
