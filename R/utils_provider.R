@@ -135,6 +135,23 @@ proteger_arrays_schema <- function(schema) {
   headers
 }
 
+#' Ejecutar una peticion POST a un proveedor de IA
+#'
+#' Centraliza la construccion de la peticion HTTP comun a los proveedores en la
+#' nube: serializa el cuerpo a JSON con `auto_unbox = TRUE`, arma las cabeceras,
+#' aplica un timeout y realiza el POST. El ensamblado del `body` y el parseo de
+#' la respuesta siguen siendo especificos de cada proveedor.
+#' @keywords internal
+.acep_provider_post <- function(url, headers, body, timeout = 120, encode = "raw") {
+  httr::POST(
+    url = url,
+    do.call(httr::add_headers, headers),
+    body = jsonlite::toJSON(body, auto_unbox = TRUE, pretty = FALSE),
+    encode = encode,
+    httr::timeout(timeout)
+  )
+}
+
 .acep_provider_extract_chat_content <- function(respuesta_parsed) {
   if (is.null(respuesta_parsed$choices) || length(respuesta_parsed$choices) == 0) {
     stop("La API devolvio una respuesta vacia. Verifica tu prompt y esquema.")
