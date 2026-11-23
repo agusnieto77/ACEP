@@ -1,5 +1,5 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   conflictividad_soip: conflictividad_soip.html
@@ -7,7 +7,7 @@ articles:
   extraccion_palabras_clave: extraccion_palabras_clave.html
   limpieza_de_texto_con_acep: limpieza_de_texto_con_acep.html
   tokenizar_con_acep: tokenizar_con_acep.html
-last_built: 2026-06-14T23:25Z
+last_built: 2026-11-23T23:02Z
 urls:
   reference: https://agusnieto77.github.io/ACEP/reference
   article: https://agusnieto77.github.io/ACEP/articles
